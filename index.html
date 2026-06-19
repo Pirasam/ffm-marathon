@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marathon Trainingsplan – Frankfurt 25.10.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0e0f0d;--surface:#161714;--surface2:#1e1f1c;--border:#2a2b27;--text:#e8e6df;--text-dim:#7a7870;--accent:#c8f542;--accent-dim:#8aaa1f;--warn:#f5a742;--danger:#f54242;--blue:#42a8f5;--run:#c8f542;--bike:#42a8f5;--kraft:#f5a742;--rest:#3a3b37;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;font-size:13px;min-height:100vh;}
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:20px 24px 16px;position:sticky;top:0;z-index:100;}
+  .header-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;gap:12px;}
+  .title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--accent);letter-spacing:-0.5px;}
+  .countdown{font-size:11px;color:var(--text-dim);letter-spacing:0.05em;text-align:right;}
+  .countdown span{color:var(--accent);font-weight:500;}
+  .week-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;}
+  .week-tab{padding:5px 14px;border:1px solid var(--border);background:transparent;color:var(--text-dim);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;white-space:nowrap;transition:all 0.15s;letter-spacing:0.05em;}
+  .week-tab:hover{border-color:var(--accent-dim);color:var(--text);}
+  .week-tab.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:500;}
+  .week-tab.current-week{border-color:var(--accent-dim);}
+  .main{padding:20px 24px;max-width:720px;margin:0 auto;}
+  .week-meta{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;flex-wrap:wrap;}
+  .week-name{font-family:'Fraunces',serif;font-size:18px;font-weight:300;font-style:italic;}
+  .week-focus{font-size:11px;color:var(--text-dim);letter-spacing:0.04em;}
+  .week-dates{font-size:10px;color:var(--text-dim);}
+  .week-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;}
+  .stat{background:var(--surface);border:1px solid var(--border);padding:10px 12px;}
+  .stat-label{font-size:10px;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+  .stat-val{font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--accent);}
+  .days{display:flex;flex-direction:column;gap:1px;}
+  .day-row{background:var(--surface);border:1px solid var(--border);padding:14px 16px;transition:border-color 0.15s;}
+  .day-row.today{border-left:3px solid var(--accent);}
+  .day-top{display:grid;grid-template-columns:110px 1fr auto;align-items:start;gap:12px;margin-bottom:8px;}
+  .day-name{font-size:11px;color:var(--text-dim);letter-spacing:0.06em;text-transform:uppercase;padding-top:2px;}
+  .day-name.today-label{color:var(--accent);}
+  .day-title{font-family:'Fraunces',serif;font-size:15px;font-weight:300;line-height:1.3;}
+  .badges{display:flex;gap:4px;flex-wrap:wrap;}
+  .badge{font-size:9px;padding:2px 7px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
+  .badge-run{background:#1a2a08;color:var(--run);border:1px solid #2d4a0f;}
+  .badge-bike{background:#081a2a;color:var(--blue);border:1px solid #0f2d4a;}
+  .badge-kraft{background:#2a1a08;color:var(--warn);border:1px solid #4a2d0f;}
+  .badge-rest{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);}
+  .badge-z2{background:#1a2a08;color:#8aaa1f;border:1px solid #1d2e0a;}
+  .badge-lt{background:#2a1a08;color:var(--warn);border:1px solid #4a2d0f;}
+  .day-desc{font-size:12px;color:var(--text-dim);line-height:1.6;padding-left:122px;}
+  .day-status{display:flex;align-items:center;gap:6px;margin-top:10px;padding-left:122px;}
+  .status-btn{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;letter-spacing:0.05em;transition:all 0.15s;}
+  .status-btn:hover{border-color:var(--text-dim);color:var(--text);}
+  .status-btn.done{background:#1a2a08;color:var(--run);border-color:#2d4a0f;}
+  .status-btn.skip{background:#2a0808;color:var(--danger);border-color:#4a0f0f;}
+  .status-btn.modified{background:#2a1a08;color:var(--warn);border-color:#4a2d0f;}
+  .checkin-bar{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:14px 16px;margin-bottom:20px;}
+  .checkin-title{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+  .checkin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .checkin-item label{font-size:10px;color:var(--text-dim);letter-spacing:0.06em;display:block;margin-bottom:5px;text-transform:uppercase;}
+  .slider-wrap{display:flex;align-items:center;gap:8px;}
+  input[type=range]{-webkit-appearance:none;width:100%;height:2px;background:var(--border);outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;background:var(--accent);cursor:pointer;}
+  .slider-val{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--accent);min-width:16px;text-align:right;}
+  .adapt-banner{background:#1a1a08;border:1px solid #3a3a0f;padding:12px 16px;margin-bottom:16px;display:none;}
+  .adapt-banner.visible{display:block;}
+  .adapt-title{font-size:10px;color:var(--warn);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;}
+  .adapt-text{font-size:12px;color:var(--text-dim);line-height:1.5;}
+  .note-box{margin-top:20px;border-left:2px solid var(--border);padding-left:14px;font-size:12px;color:var(--text-dim);line-height:1.7;}
+  .progress-section{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);}
+  .progress-title{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;}
+  .progress-bars{display:flex;flex-direction:column;gap:8px;}
+  .prog-row{display:grid;grid-template-columns:80px 1fr 50px;align-items:center;gap:10px;}
+  .prog-label{font-size:11px;color:var(--text-dim);}
+  .prog-bar-bg{height:3px;background:var(--border);}
+  .prog-bar-fill{height:100%;background:var(--accent);transition:width 0.5s;}
+  .prog-val{font-size:11px;color:var(--text);text-align:right;}
+  @media(max-width:600px){.week-stats{grid-template-columns:repeat(2,1fr);}.day-top{grid-template-columns:90px 1fr;}.day-top .badges{grid-column:1/-1;}.day-desc{padding-left:0;}.day-status{padding-left:0;}.checkin-grid{grid-template-columns:1fr;}.main{padding:16px;}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <div class="title">Marathon Frankfurt</div>
+    <div class="countdown">25. Oktober 2026 · <span id="days-left">–</span> Tage<br><span id="phase-label" style="color:var(--text-dim)"></span></div>
+  </div>
+  <div class="week-tabs" id="tabs"></div>
+</div>
+<div class="main">
+  <div class="checkin-bar">
+    <div class="checkin-title">Tages-Check-in</div>
+    <div class="checkin-grid">
+      <div class="checkin-item"><label>Schlaf (Std.)</label><div class="slider-wrap"><input type="range" id="sleep" min="4" max="10" step="0.5" value="7.5" oninput="updateCheckin()"><span class="slider-val" id="sleep-val">7.5</span></div></div>
+      <div class="checkin-item"><label>Wohlbefinden</label><div class="slider-wrap"><input type="range" id="wellbeing" min="1" max="5" step="1" value="3" oninput="updateCheckin()"><span class="slider-val" id="wellbeing-val">3</span></div></div>
+      <div class="checkin-item"><label>HFV-Status</label><div class="slider-wrap"><input type="range" id="hrv" min="1" max="3" step="1" value="2" oninput="updateCheckin()"><span class="slider-val" id="hrv-val" style="font-size:11px">Ok</span></div></div>
+    </div>
+  </div>
+  <div class="adapt-banner" id="adapt-banner"><div class="adapt-title">⚡ Plan angepasst</div><div class="adapt-text" id="adapt-text"></div></div>
+  <div id="week-content"></div>
+</div>
+<script>
+const weeks = [
+  {
+    "label": "Reha",
+    "name": "Wiedereinstieg",
+    "focus": "Infekt auskurieren · erst symptomfrei trainieren",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "0–5 km"
+      },
+      {
+        "l": "Rad",
+        "v": "0–20 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Zone 1"
+      },
+      {
+        "l": "Longrun",
+        "v": "–"
+      }
+    ],
+    "days": [
+      {
+        "id": "cbmo",
+        "name": "Mo",
+        "title": "Pause / Spaziergang",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Infekt-Wiedereinstieg. Nur Spaziergang, kein Training. Brust muss komplett frei sein."
+      },
+      {
+        "id": "cbdi",
+        "name": "Di",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Weiter erholen. Erst wieder Training, wenn Brust frei, kein Fieber, Schlaf erholt."
+      },
+      {
+        "id": "cbmi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Ruhe. Bei anhaltender Brustenge ärztlich abklären (Myokarditis-Risiko)."
+      },
+      {
+        "id": "cbdo",
+        "name": "Do",
+        "title": "Test: lockeres Rad · 20 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Nur wenn symptomfrei. Puls <120, Belastung abbrechen bei Engegefühl."
+      },
+      {
+        "id": "cbfr",
+        "name": "Fr",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Erholung. Wie fühlt sich die Brust nach dem Rad an?"
+      },
+      {
+        "id": "cbsa",
+        "name": "Sa",
+        "title": "Test: lockerer Lauf · 5 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Nur wenn Rad gestern problemlos war. 8:30/km, Puls ≤140. Bei Engegefühl sofort stoppen."
+      },
+      {
+        "id": "cbso",
+        "name": "So",
+        "title": "Pause / leichte Mobilität",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Bilanz: wenn alles gut war, normaler Aufbau ab W1. Sonst Woche wiederholen."
+      }
+    ],
+    "note": "⚠️ Brustenge nach Belastung ist ein Stopp-Signal. Kein Training bis Brust frei. Bei anhaltenden Symptomen oder Fieber zum Arzt – Belastung mit Infekt kann das Herz schädigen."
+  },
+  {
+    "label": "W1",
+    "name": "Woche 1",
+    "focus": "Basis · alles Zone 2",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~38 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~60 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Zone 2"
+      },
+      {
+        "l": "Longrun",
+        "v": "16 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w1mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w1di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 12 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w1mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w1do",
+        "name": "Do · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker. Kein Laufen – Beine für den Longrun sammeln."
+      },
+      {
+        "id": "w1fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w1sa",
+        "name": "Sa",
+        "title": "Longrun · 16 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Strikt Zone 2, Pace 8:00+/km starten, Puls ≤150. Gel ab km 12 testen.",
+        "longrun": true
+      },
+      {
+        "id": "w1so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Longrun wirklich langsam starten, auch wenn es lächerlich langsam wirkt."
+  },
+  {
+    "label": "W2",
+    "name": "Woche 2",
+    "focus": "Volumen aufbauen · 1. Tempo",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~44 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~60 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "18 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w2mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w2di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 13 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w2mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w2do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w2fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w2sa",
+        "name": "Sa",
+        "title": "Longrun · 18 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Langsam, Puls ≤150. 2× Gel, Wasser alle 5 km.",
+        "longrun": true
+      },
+      {
+        "id": "w2so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Tempolauf Do ist optional – bei Müdigkeit zuerst streichen."
+  },
+  {
+    "label": "W3",
+    "name": "Woche 3",
+    "focus": "Belastung · längerer Lauf",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~48 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~60 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "20 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w3mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w3di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 14 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w3mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w3do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w3fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w3sa",
+        "name": "Sa",
+        "title": "Longrun · 20 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Ab km 15 wird's mental. Gel alle 45 min, Puls ≤150.",
+        "longrun": true
+      },
+      {
+        "id": "w3so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Bei Schmerzen (nicht Müdigkeit) nach dem Longrun → nächste Woche reduzieren."
+  },
+  {
+    "label": "W4",
+    "name": "Woche 4",
+    "focus": "Entlastung · Volumen –35%",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~30 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~40 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Zone 2"
+      },
+      {
+        "l": "Longrun",
+        "v": "14 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w4mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w4di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 10 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w4mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w4do",
+        "name": "Do · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker. Kein Laufen – Beine für den Longrun sammeln."
+      },
+      {
+        "id": "w4fr",
+        "name": "Fr",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Echter Ruhetag. Beine frisch machen für Sa."
+      },
+      {
+        "id": "w4sa",
+        "name": "Sa",
+        "title": "Longrun · 14 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Zurück auf leichtes Niveau. Soll sich leicht anfühlen.",
+        "longrun": true
+      },
+      {
+        "id": "w4so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Deload-Woche. Auch wenn du dich gut fühlst – nicht mehr machen."
+  },
+  {
+    "label": "W5",
+    "name": "Woche 5",
+    "focus": "Aufbau · Distanz steigern",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~48 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~60 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "21 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w5mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w5di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 13 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w5mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w5do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w5fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w5sa",
+        "name": "Sa",
+        "title": "Longrun · 21 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "HM-Distanz, langsam. Puls ≤150, 2 Gels.",
+        "longrun": true
+      },
+      {
+        "id": "w5so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Vergleiche Laufpuls Di mit W1 – niedriger bei gleicher Pace = Adaption läuft."
+  },
+  {
+    "label": "W6",
+    "name": "Woche 6",
+    "focus": "Aufbau · Longrun-Fokus",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~54 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~60 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "24 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w6mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w6di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 14 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w6mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w6do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w6fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w6sa",
+        "name": "Sa",
+        "title": "Longrun · 24 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Neue Distanz. Verpflegung wie im Rennen üben.",
+        "longrun": true
+      },
+      {
+        "id": "w6so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Longrun ist der wichtigste Lauf der Woche – Tempo opfern, nie die Distanz."
+  },
+  {
+    "label": "W7",
+    "name": "Woche 7",
+    "focus": "Belastungsspitze Block 2",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~58 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~60 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "26 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w7mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w7di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 15 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w7mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w7do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w7fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w7sa",
+        "name": "Sa",
+        "title": "Longrun · 26 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Ab km 18 Marathon-Kopf trainieren. Gels alle 40 min.",
+        "longrun": true
+      },
+      {
+        "id": "w7so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Wenn der Schlaf leidet → Do-Tempo streichen, Longrun behalten."
+  },
+  {
+    "label": "W8",
+    "name": "Woche 8",
+    "focus": "Entlastung",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~34 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~40 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Zone 2"
+      },
+      {
+        "l": "Longrun",
+        "v": "16 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w8mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w8di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 10 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w8mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w8do",
+        "name": "Do · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker. Kein Laufen – Beine für den Longrun sammeln."
+      },
+      {
+        "id": "w8fr",
+        "name": "Fr",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Echter Ruhetag. Beine frisch machen für Sa."
+      },
+      {
+        "id": "w8sa",
+        "name": "Sa",
+        "title": "Longrun · 16 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Leicht und locker, Beine erholen.",
+        "longrun": true
+      },
+      {
+        "id": "w8so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Deload. Puls bei 7:30/km sollte spürbar niedriger sein als in W1."
+  },
+  {
+    "label": "W9",
+    "name": "Woche 9",
+    "focus": "Peak-Block · Aufbau",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~58 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~60 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "27 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w9mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w9di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 14 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w9mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w9do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w9fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w9sa",
+        "name": "Sa",
+        "title": "Longrun · 27 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Lang und ruhig. Verpflegungsstrategie festklopfen.",
+        "longrun": true
+      },
+      {
+        "id": "w9so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Ab hier zählt Konstanz mehr als einzelne Spitzen. Erholung ernst nehmen."
+  },
+  {
+    "label": "W10",
+    "name": "Woche 10",
+    "focus": "Peak-Block",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~62 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~60 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "29 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w10mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w10di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 15 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w10mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w10do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w10fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w10sa",
+        "name": "Sa",
+        "title": "Longrun · 29 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Fast 30 km. Renntempo am Ende 2–3 km antesten (optional).",
+        "longrun": true
+      },
+      {
+        "id": "w10so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Schuhe für den Wettkampf jetzt final einlaufen."
+  },
+  {
+    "label": "W11",
+    "name": "Woche 11",
+    "focus": "Longrun-Peak · 32 km",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~66 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~50 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "32 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w11mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w11di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 14 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w11mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w11do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w11fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w11sa",
+        "name": "Sa",
+        "title": "Longrun · 32 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Längster Lauf des Plans. Komplette Renn-Verpflegung durchspielen. Puls ≤150.",
+        "longrun": true
+      },
+      {
+        "id": "w11so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Nach 32 km gut erholen. Das ist die Schlüsseleinheit – danach wird getapert/entlastet."
+  },
+  {
+    "label": "W12",
+    "name": "Woche 12",
+    "focus": "Entlastung",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~38 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~40 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Zone 2"
+      },
+      {
+        "l": "Longrun",
+        "v": "18 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w12mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w12di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 10 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w12mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w12do",
+        "name": "Do · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker. Kein Laufen – Beine für den Longrun sammeln."
+      },
+      {
+        "id": "w12fr",
+        "name": "Fr",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Echter Ruhetag. Beine frisch machen für Sa."
+      },
+      {
+        "id": "w12sa",
+        "name": "Sa",
+        "title": "Longrun · 18 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Bewusst kurz. Körper verarbeitet den 32er.",
+        "longrun": true
+      },
+      {
+        "id": "w12so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Deload nach Peak. Widerstehe dem Drang, mehr zu machen."
+  },
+  {
+    "label": "W13",
+    "name": "Woche 13",
+    "focus": "Letzter Aufbau",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~60 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~50 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "30 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w13mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w13di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 14 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w13mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w13do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w13fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w13sa",
+        "name": "Sa",
+        "title": "Longrun · 30 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Lang, ruhig, kontrolliert. Renntempo-Abschnitt optional.",
+        "longrun": true
+      },
+      {
+        "id": "w13so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Vorletzter großer Block. Kleine Wehwehchen jetzt ernst nehmen."
+  },
+  {
+    "label": "W14",
+    "name": "Woche 14",
+    "focus": "2. Longrun-Peak · 32 km",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~64 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~50 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + 1× LT"
+      },
+      {
+        "l": "Longrun",
+        "v": "32 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w14mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w14di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 14 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w14mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w14do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w14fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w14sa",
+        "name": "Sa",
+        "title": "Longrun · 32 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Zweiter 32er. Generalprobe für Verpflegung, Schuhe, Kleidung.",
+        "longrun": true
+      },
+      {
+        "id": "w14so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Letzter sehr langer Lauf. Ab jetzt geht das Volumen runter."
+  },
+  {
+    "label": "W15",
+    "name": "Woche 15",
+    "focus": "Übergang in Taper",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~54 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~50 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + kurzes Tempo"
+      },
+      {
+        "l": "Longrun",
+        "v": "26 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w15mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w15di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 13 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w15mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w15do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w15fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w15sa",
+        "name": "Sa",
+        "title": "Longrun · 26 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Letzter mittel-langer Lauf. Locker, Beine nicht leeren.",
+        "longrun": true
+      },
+      {
+        "id": "w15so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Ab hier Volumen senken, Intensität kurz halten. Frische sammeln."
+  },
+  {
+    "label": "W16",
+    "name": "Woche 16",
+    "focus": "Taper · Volumen –30%",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~42 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~40 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + Renntempo"
+      },
+      {
+        "l": "Longrun",
+        "v": "20 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w16mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w16di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 11 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w16mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w16do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w16fr",
+        "name": "Fr · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+      },
+      {
+        "id": "w16sa",
+        "name": "Sa",
+        "title": "Longrun · 20 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Kürzerer Longrun, letzte 3 km im Renntempo (~7:05/km) als Gefühl.",
+        "longrun": true
+      },
+      {
+        "id": "w16so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Taper-Beginn. Beine fühlen sich evtl. komisch/zappelig an – normal."
+  },
+  {
+    "label": "W17",
+    "name": "Woche 17",
+    "focus": "Taper · Spritzigkeit",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~32 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~30 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Z2 + Strides"
+      },
+      {
+        "l": "Longrun",
+        "v": "14 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w17mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 30 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
+      },
+      {
+        "id": "w17di",
+        "name": "Di · Büro",
+        "title": "Rücklauf · 9 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+      },
+      {
+        "id": "w17mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Pflichtruhetag. Schlaf und Mobilität priorisieren."
+      },
+      {
+        "id": "w17do",
+        "name": "Do · Büro",
+        "title": "Tempolauf · 10–12 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+      },
+      {
+        "id": "w17fr",
+        "name": "Fr",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Echter Ruhetag. Beine frisch machen für Sa."
+      },
+      {
+        "id": "w17sa",
+        "name": "Sa",
+        "title": "Longrun · 14 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Kurzer ruhiger Lauf. Ein paar Steigerungsläufe für die Beine.",
+        "longrun": true
+      },
+      {
+        "id": "w17so",
+        "name": "So",
+        "title": "Krafttraining + Pause",
+        "badges": [
+          "kraft",
+          "rest"
+        ],
+        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+      }
+    ],
+    "note": "Vertraue dem Training. Jetzt kommt keine Form mehr dazu – nur Erholung."
+  },
+  {
+    "label": "W18",
+    "name": "Renn-Woche",
+    "focus": "Taper-Ende · MARATHON",
+    "stats": [
+      {
+        "l": "Laufen",
+        "v": "~50 km"
+      },
+      {
+        "l": "Rad",
+        "v": "~20 km"
+      },
+      {
+        "l": "Intensität",
+        "v": "Locker + Rennen"
+      },
+      {
+        "l": "Longrun",
+        "v": "42,2 km"
+      }
+    ],
+    "days": [
+      {
+        "id": "w18mo",
+        "name": "Mo · Büro",
+        "title": "Pendeln Rad · 20 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Sehr locker. Beine wachhalten, nicht belasten."
+      },
+      {
+        "id": "w18di",
+        "name": "Di · Büro",
+        "title": "Lockerer Lauf · 8 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Ruhig, mit 3–4 Steigerungen. Puls ≤145."
+      },
+      {
+        "id": "w18mi",
+        "name": "Mi",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Ruhe. Carb-Loading vorbereiten."
+      },
+      {
+        "id": "w18do",
+        "name": "Do",
+        "title": "Lockerer Lauf · 5 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Kurz, locker, ein paar Strides. Letzte Beine-Aktivierung."
+      },
+      {
+        "id": "w18fr",
+        "name": "Fr",
+        "title": "Pause",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Komplett ruhen. Carb-Loading, viel trinken, früh schlafen."
+      },
+      {
+        "id": "w18sa",
+        "name": "Sa",
+        "title": "Pause / 15 min lockern",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Optional 15 min sehr locker traben. Ausrüstung bereitlegen, Startunterlagen checken."
+      },
+      {
+        "id": "w18so",
+        "name": "So",
+        "title": "🏁 MARATHON · 42,2 km",
+        "badges": [
+          "run"
+        ],
+        "desc": "Frankfurt Marathon. Start konservativ ~7:15/km, gleichmäßig, Verpflegung wie geübt. Ab km 30 entscheidet der Kopf. Ziel ~5h, ankommen."
+      }
+    ],
+    "note": "🏁 25.10. Frankfurt Marathon. Diese Woche: kurz und locker, Carbs hochfahren, Schlaf priorisieren."
+  }
+];
+const weekStarts = ["2026-06-15", "2026-06-22", "2026-06-29", "2026-07-06", "2026-07-13", "2026-07-20", "2026-07-27", "2026-08-03", "2026-08-10", "2026-08-17", "2026-08-24", "2026-08-31", "2026-09-07", "2026-09-14", "2026-09-21", "2026-09-28", "2026-10-05", "2026-10-12", "2026-10-19"];
+const MARATHON = new Date('2026-10-25');
+
+let activeWeek = 0;
+let dayStatus = JSON.parse(localStorage.getItem('dayStatus')||'{}');
+let checkin = JSON.parse(localStorage.getItem('checkin')||'{"sleep":7.5,"wellbeing":3,"hrv":2}');
+function saveState(){localStorage.setItem('dayStatus',JSON.stringify(dayStatus));localStorage.setItem('checkin',JSON.stringify(checkin));}
+
+function daysUntilMarathon(){const t=new Date();t.setHours(0,0,0,0);return Math.ceil((MARATHON-t)/(864e5));}
+function getCurrentWeek(){
+  const t=new Date();t.setHours(0,0,0,0);
+  let cur=0;
+  for(let i=0;i<weekStarts.length;i++){const ws=new Date(weekStarts[i]);ws.setHours(0,0,0,0);if(t>=ws)cur=i;}
+  return cur;
+}
+function isTodayRow(dayId,wIdx){
+  if(wIdx!==getCurrentWeek())return false;
+  const today=new Date().getDay();const map={mo:1,di:2,mi:3,do:4,fr:5,sa:6,so:0};
+  const m=dayId.match(/(mo|di|mi|do|fr|sa|so)$/);if(!m)return false;return map[m[1]]===today;
+}
+function fmtDate(iso){const d=new Date(iso);return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'});}
+function weekRange(i){const a=new Date(weekStarts[i]);const b=new Date(a);b.setDate(b.getDate()+6);return fmtDate(weekStarts[i])+'–'+b.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'});}
+function badgeClass(b){return 'badge badge-'+b;}
+function badgeLabel(b){return {run:'Laufen',bike:'Rad',kraft:'Kraft',rest:'Pause',z2:'Zone 2',lt:'Tempo/LT'}[b]||b;}
+
+function getAdaptation(){
+  const s=parseFloat(document.getElementById('sleep').value);
+  const w=parseInt(document.getElementById('wellbeing').value);
+  const h=parseInt(document.getElementById('hrv').value);
+  const m=[];
+  if(s<6)m.push("Schlaf <6h: Heute keinen Longrun – max. 10 km Zone 1. Kein Tempolauf.");
+  else if(s<7)m.push("Schlaf <7h: Longrun-Pace um 15–20 sek/km reduzieren.");
+  if(w<=2)m.push("Wohlbefinden niedrig: Intensität streichen, nur Zone 1–2. Bei Schmerzen Ruhetag.");
+  else if(w===3)m.push("Wohlbefinden ok: Plan wie vorgesehen, Puls im Auge behalten.");
+  if(h===1)m.push("HFV rot: Kein Tempolauf. Longrun um 3–5 km kürzen.");
+  else if(h===2)m.push("HFV ok: Plan wie vorgesehen.");
+  else m.push("HFV grün: Alles gut – Plan vollständig durchführen.");
+  return m;
+}
+
+function renderTabs(){
+  const cur=getCurrentWeek();
+  document.getElementById('tabs').innerHTML=weeks.map((w,i)=>
+    `<button class="week-tab ${i===activeWeek?'active':''} ${i===cur?'current-week':''}" onclick="selectWeek(${i})">${w.label}${i===cur?' ●':''}</button>`).join('');
+}
+function renderWeek(){
+  const w=weeks[activeWeek];
+  const stats=w.stats.map(s=>`<div class="stat"><div class="stat-label">${s.l}</div><div class="stat-val">${s.v}</div></div>`).join('');
+  const days=w.days.map(d=>{
+    const st=dayStatus[d.id]||'none';
+    const isToday=isTodayRow(d.id,activeWeek);
+    const badges=d.badges.map(b=>`<span class="${badgeClass(b)}">${badgeLabel(b)}</span>`).join('');
+    return `<div class="day-row${isToday?' today':''}" id="row-${d.id}">
+      <div class="day-top">
+        <div class="day-name${isToday?' today-label':''}">${d.name}${isToday?' · heute':''}</div>
+        <div class="day-title">${d.title}</div>
+        <div class="badges">${badges}</div>
+      </div>
+      <div class="day-desc">${d.desc}</div>
+      <div class="day-status">
+        <button class="status-btn ${st==='done'?'done':''}" onclick="setStatus('${d.id}','done',event)">✓ done</button>
+        <button class="status-btn ${st==='skip'?'skip':''}" onclick="setStatus('${d.id}','skip',event)">✗ skip</button>
+        <button class="status-btn ${st==='modified'?'modified':''}" onclick="setStatus('${d.id}','modified',event)">≈ angepasst</button>
+      </div></div>`;
+  }).join('');
+  const done=w.days.filter(d=>dayStatus[d.id]==='done').length;
+  document.getElementById('week-content').innerHTML=`
+    <div class="week-meta"><span class="week-name">${w.name}</span><span class="week-focus">${w.focus}</span><span class="week-dates">${weekRange(activeWeek)}</span></div>
+    <div class="week-stats">${stats}</div>
+    <div class="days">${days}</div>
+    <div class="note-box">${w.note}</div>
+    <div class="progress-section"><div class="progress-title">Wochenfortschritt</div>
+    <div class="progress-bars"><div class="prog-row"><span class="prog-label">Einheiten</span>
+    <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${Math.round(done/w.days.length*100)}%"></div></div>
+    <span class="prog-val">${done}/${w.days.length}</span></div></div></div>`;
+}
+function renderAdaptation(){
+  const banner=document.getElementById('adapt-banner');
+  const s=parseFloat(document.getElementById('sleep').value);
+  const w=parseInt(document.getElementById('wellbeing').value);
+  const h=parseInt(document.getElementById('hrv').value);
+  banner.className='adapt-banner '+((s<7||w<=2||h===1)?'visible':'');
+  document.getElementById('adapt-text').innerHTML=getAdaptation().join('<br>');
+}
+window.selectWeek=function(i){activeWeek=i;renderTabs();renderWeek();};
+window.setStatus=function(id,status,e){e.stopPropagation();dayStatus[id]=dayStatus[id]===status?'none':status;saveState();renderWeek();};
+function updateCheckin(){
+  const s=document.getElementById('sleep').value,w=document.getElementById('wellbeing').value,h=document.getElementById('hrv').value;
+  document.getElementById('sleep-val').textContent=s;document.getElementById('wellbeing-val').textContent=w;
+  document.getElementById('hrv-val').textContent={1:'Rot',2:'Ok',3:'Grün'}[h];
+  checkin={sleep:parseFloat(s),wellbeing:parseInt(w),hrv:parseInt(h)};saveState();renderAdaptation();
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('days-left').textContent=daysUntilMarathon();
+  const cur=getCurrentWeek();
+  document.getElementById('phase-label').textContent='Aktuell: '+weeks[cur].label+' · '+weeks[cur].name;
+  activeWeek=cur;
+  document.getElementById('sleep').value=checkin.sleep;
+  document.getElementById('wellbeing').value=checkin.wellbeing;
+  document.getElementById('hrv').value=checkin.hrv;
+  updateCheckin();renderTabs();renderWeek();
+});
+</script>
+</body>
+</html>
