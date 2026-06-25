@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)file:///Users/samuelpirard/Downloads/trainingsplan.html -->
+<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marathon Trainingsplan – Frankfurt 25.10.</title>
+<link href="./trainingsplan_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f0d;
+    --surface: #161714;
+    --surface2: #1e1f1c;
+    --border: #2a2b27;
+    --text: #e8e6df;
+    --text-dim: #7a7870;
+    --accent: #c8f542;
+    --accent-dim: #8aaa1f;
+    --warn: #f5a742;
+    --danger: #f54242;
+    --blue: #42a8f5;
+    --run: #c8f542;
+    --bike: #42a8f5;
+    --kraft: #f5a742;
+    --rest: #3a3b37;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .countdown {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .countdown span {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* WEEK TABS */
+  .week-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .week-tab {
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+
+  .week-tab:hover { border-color: var(--accent-dim); color: var(--text); }
+  .week-tab.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 500; }
+
+  /* MAIN LAYOUT */
+  .main { padding: 20px 24px; max-width: 720px; margin: 0 auto; }
+
+  /* WEEK HEADER */
+  .week-header {
+    margin-bottom: 16px;
+  }
+
+  .week-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .week-name {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .week-focus {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  .week-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+  }
+
+  .stat-label { font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .stat-val { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; color: var(--accent); }
+
+  /* DAYS */
+  .days { display: flex; flex-direction: column; gap: 1px; }
+
+  .day-row {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    transition: border-color 0.15s;
+    cursor: pointer;
+  }
+
+  .day-row:hover { border-color: var(--border); }
+  .day-row.today { border-left: 3px solid var(--accent); }
+
+  .day-top {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    align-items: start;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .day-name {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+
+  .day-name.today-label { color: var(--accent); }
+
+  .day-title {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.3;
+  }
+
+  .badges { display: flex; gap: 4px; flex-wrap: wrap; }
+  .badge {
+    font-size: 9px;
+    padding: 2px 7px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .badge-run { background: #1a2a08; color: var(--run); border: 1px solid #2d4a0f; }
+  .badge-bike { background: #081a2a; color: var(--blue); border: 1px solid #0f2d4a; }
+  .badge-kraft { background: #2a1a08; color: var(--warn); border: 1px solid #4a2d0f; }
+  .badge-rest { background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border); }
+  .badge-z2 { background: #1a2a08; color: #8aaa1f; border: 1px solid #1d2e0a; }
+  .badge-lt { background: #2a1a08; color: var(--warn); border: 1px solid #4a2d0f; }
+
+  .day-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    padding-left: 112px;
+  }
+
+  /* STATUS INDICATOR */
+  .day-status { display: flex; align-items: center; gap: 6px; margin-top: 10px; padding-left: 112px; }
+
+  .status-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+  }
+
+  .status-btn:hover { border-color: var(--text-dim); color: var(--text); }
+  .status-btn.done { background: #1a2a08; color: var(--run); border-color: #2d4a0f; }
+  .status-btn.skip { background: #2a0808; color: var(--danger); border-color: #4a0f0f; }
+  .status-btn.modified { background: #2a1a08; color: var(--warn); border-color: #4a2d0f; }
+
+  /* DAILY CHECK-IN */
+  .checkin-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+
+  .checkin-title {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .checkin-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .checkin-item label {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  .slider-wrap { display: flex; align-items: center; gap: 8px; }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    outline: none;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    cursor: pointer;
+  }
+
+  .slider-val {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 16px;
+    text-align: right;
+  }
+
+  /* ADAPTATION BANNER */
+  .adapt-banner {
+    background: #1a1a08;
+    border: 1px solid #3a3a0f;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    display: none;
+  }
+
+  .adapt-banner.visible { display: block; }
+  .adapt-title { font-size: 10px; color: var(--warn); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .adapt-text { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+  /* NOTE BOX */
+  .note-box {
+    margin-top: 20px;
+    border-left: 2px solid var(--border);
+    padding-left: 14px;
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* PROGRESS */
+  .progress-section {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .progress-title {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+  }
+
+  .progress-bars { display: flex; flex-direction: column; gap: 8px; }
+
+  .prog-row { display: grid; grid-template-columns: 80px 1fr 50px; align-items: center; gap: 10px; }
+  .prog-label { font-size: 11px; color: var(--text-dim); }
+  .prog-bar-bg { height: 3px; background: var(--border); }
+  .prog-bar-fill { height: 100%; background: var(--accent); transition: width 0.5s; }
+  .prog-val { font-size: 11px; color: var(--text); text-align: right; }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .week-stats { grid-template-columns: repeat(2, 1fr); }
+    .day-top { grid-template-columns: 80px 1fr; }
+    .day-top .badges { grid-column: 1 / -1; }
+    .day-desc { padding-left: 0; }
+    .day-status { padding-left: 0; }
+    .checkin-grid { grid-template-columns: 1fr; }
+    .main { padding: 16px; }
+  }
+
+  .separator { height: 1px; background: var(--border); margin: 20px 0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="title">Marathon Frankfurt</div>
+    <div class="countdown">25. Oktober · <span id="days-left">142</span> Tage</div>
+  </div>
+  <div class="week-tabs" id="tabs"><button class="week-tab active" onclick="selectWeek(0)">W1 · Woche 1</button><button class="week-tab " onclick="selectWeek(1)">W2 · Woche 2</button><button class="week-tab " onclick="selectWeek(2)">W3 · Woche 3</button><button class="week-tab " onclick="selectWeek(3)">W4 · Woche 4</button></div>
+</div>
+
+<div class="main">
+  <!-- DAILY CHECK-IN -->
+  <div class="checkin-bar">
+    <div class="checkin-title">Tages-Check-in</div>
+    <div class="checkin-grid">
+      <div class="checkin-item">
+        <label>Schlaf (Std.)</label>
+        <div class="slider-wrap">
+          <input type="range" id="sleep" min="4" max="10" step="0.5" value="7.5" oninput="updateCheckin()">
+          <span class="slider-val" id="sleep-val">7.5</span>
+        </div>
+      </div>
+      <div class="checkin-item">
+        <label>Wohlbefinden</label>
+        <div class="slider-wrap">
+          <input type="range" id="wellbeing" min="1" max="5" step="1" value="3" oninput="updateCheckin()">
+          <span class="slider-val" id="wellbeing-val">3</span>
+        </div>
+      </div>
+      <div class="checkin-item">
+        <label>HFV-Status</label>
+        <div class="slider-wrap">
+          <input type="range" id="hrv" min="1" max="3" step="1" value="2" oninput="updateCheckin()">
+          <span class="slider-val" id="hrv-val" style="font-size:11px">Ok</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADAPTATION BANNER -->
+  <div class="adapt-banner " id="adapt-banner">
+    <div class="adapt-title">⚡ Plan angepasst</div>
+    <div class="adapt-text" id="adapt-text">Wohlbefinden ok: Plan wie vorgesehen, Puls im Auge behalten.<br>HFV ausbalanciert: Plan wie vorgesehen.</div>
+  </div>
+
+  <!-- WEEK CONTENT -->
+  <div id="week-content">
+    <div class="week-meta">
+      <span class="week-name">Woche 1</span>
+      <span class="week-focus">Grundlage · alles Zone 2</span>
+    </div>
+    <div class="week-stats"><div class="stat"><div class="stat-label">Laufen</div><div class="stat-val">~38 km</div></div><div class="stat"><div class="stat-label">Rad</div><div class="stat-val">~60 km</div></div><div class="stat"><div class="stat-label">Intensität</div><div class="stat-val">Zone 2</div></div><div class="stat"><div class="stat-label">Longrun</div><div class="stat-val">16–18 km</div></div></div>
+    <div class="days">
+      <div class="day-row" id="row-w1mo">
+        <div class="day-top">
+          <div class="day-name">Mo · Büro</div>
+          <div class="day-title">Pendeln Rad · 15 km je Richtung</div>
+          <div class="badges"><span class="badge badge-bike">Rad</span><span class="badge badge-z2">Zone 2</span></div>
+        </div>
+        <div class="day-desc">30 km gesamt, locker, Puls &lt;130 bpm. Heute ist Transporttag – keine Selbstüberwürzung.</div>
+        <div class="day-status"><button class="status-btn " onclick="setStatus(&#39;w1mo&#39;,&#39;done&#39;,event)">✓ done</button><button class="status-btn " onclick="setStatus(&#39;w1mo&#39;,&#39;skip&#39;,event)">✗ skip</button><button class="status-btn " onclick="setStatus(&#39;w1mo&#39;,&#39;modified&#39;,event)">≈ angepasst</button></div>
+      </div>
+      <div class="day-row" id="row-w1di">
+        <div class="day-top">
+          <div class="day-name">Di · Büro</div>
+          <div class="day-title">Abend-Rücklauf · 10–12 km</div>
+          <div class="badges"><span class="badge badge-run">Laufen</span><span class="badge badge-z2">Zone 2</span></div>
+        </div>
+        <div class="day-desc">UBahn hin, abends laufen. Pace 7:45–8:30/km, Puls 145–158 bpm. Wenn Puls steigt → Tempo raus.</div>
+        <div class="day-status"><button class="status-btn " onclick="setStatus(&#39;w1di&#39;,&#39;done&#39;,event)">✓ done</button><button class="status-btn " onclick="setStatus(&#39;w1di&#39;,&#39;skip&#39;,event)">✗ skip</button><button class="status-btn " onclick="setStatus(&#39;w1di&#39;,&#39;modified&#39;,event)">≈ angepasst</button></div>
+      </div>
+      <div class="day-row" id="row-w1mi">
+        <div class="day-top">
+          <div class="day-name">Mi</div>
+          <div class="day-title">Aktive Erholung</div>
+          <div class="badges"><span class="badge badge-rest">Pause</span></div>
+        </div>
+        <div class="day-desc">Kein strukturiertes Training. Spaziergang, Mobilität, Schlafen priorisieren.</div>
+        <div class="day-status"><button class="status-btn " onclick="setStatus(&#39;w1mi&#39;,&#39;done&#39;,event)">✓ done</button><button class="status-btn " onclick="setStatus(&#39;w1mi&#39;,&#39;skip&#39;,event)">✗ skip</button><button class="status-btn " onclick="setStatus(&#39;w1mi&#39;,&#39;modified&#39;,event)">≈ angepasst</button></div>
+      </div>
+      <div class="day-row" id="row-w1do">
+        <div class="day-top">
+          <div class="day-name">Do · Büro</div>
+          <div class="day-title">Pendeln Rad · 30 km</div>
+          <div class="badges"><span class="badge badge-bike">Rad</span><span class="badge badge-z2">Zone 2</span></div>
+        </div>
+        <div class="day-desc">Locker. Alternativ: Rad hin, kurzer 10 km Rücklauf wenn Beine frisch.</div>
+        <div class="day-status"><button class="status-btn " onclick="setStatus(&#39;w1do&#39;,&#39;done&#39;,event)">✓ done</button><button class="status-btn " onclick="setStatus(&#39;w1do&#39;,&#39;skip&#39;,event)">✗ skip</button><button class="status-btn " onclick="setStatus(&#39;w1do&#39;,&#39;modified&#39;,event)">≈ angepasst</button></div>
+      </div>
+      <div class="day-row" id="row-w1fr">
+        <div class="day-top">
+          <div class="day-name">Fr · Büro</div>
+          <div class="day-title">Rücklauf · 10 km</div>
+          <div class="badges"><span class="badge badge-run">Laufen</span><span class="badge badge-z2">Zone 2</span></div>
+        </div>
+        <div class="day-desc">UBahn hin, Rücklauf. Kürzere Variante, bewusst kürzer als Di.</div>
+        <div class="day-status"><button class="status-btn " onclick="setStatus(&#39;w1fr&#39;,&#39;done&#39;,event)">✓ done</button><button class="status-btn " onclick="setStatus(&#39;w1fr&#39;,&#39;skip&#39;,event)">✗ skip</button><button class="status-btn " onclick="setStatus(&#39;w1fr&#39;,&#39;modified&#39;,event)">≈ angepasst</button></div>
+      </div>
+      <div class="day-row today" id="row-w1sa">
+        <div class="day-top">
+          <div class="day-name today-label">Sa · heute</div>
+          <div class="day-title">Longrun · 16–18 km</div>
+          <div class="badges"><span class="badge badge-run">Laufen</span><span class="badge badge-z2">Zone 2</span></div>
+        </div>
+        <div class="day-desc">Der wichtigste Lauf. Strikt Zone 2, Pace 7:30–8:30/km, Puls max. 162 bpm. Gel ab km 12 testen.</div>
+        <div class="day-status"><button class="status-btn " onclick="setStatus(&#39;w1sa&#39;,&#39;done&#39;,event)">✓ done</button><button class="status-btn " onclick="setStatus(&#39;w1sa&#39;,&#39;skip&#39;,event)">✗ skip</button><button class="status-btn " onclick="setStatus(&#39;w1sa&#39;,&#39;modified&#39;,event)">≈ angepasst</button></div>
+      </div>
+      <div class="day-row" id="row-w1so">
+        <div class="day-top">
+          <div class="day-name">So</div>
+          <div class="day-title">Krafttraining + Pause</div>
+          <div class="badges"><span class="badge badge-kraft">Kraft</span><span class="badge badge-rest">Pause</span></div>
+        </div>
+        <div class="day-desc">Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad.</div>
+        <div class="day-status"><button class="status-btn " onclick="setStatus(&#39;w1so&#39;,&#39;done&#39;,event)">✓ done</button><button class="status-btn " onclick="setStatus(&#39;w1so&#39;,&#39;skip&#39;,event)">✗ skip</button><button class="status-btn " onclick="setStatus(&#39;w1so&#39;,&#39;modified&#39;,event)">≈ angepasst</button></div>
+      </div></div>
+    <div class="note-box">⚠️ Pendelläufe bei 150 bpm laufen lassen – das ist dein natürlicher Arbeitspuls. Longrun Sa wirklich langsam starten (8:15/km), auch wenn es lächerlich langsam wirkt.</div>
+    <div class="progress-section">
+      <div class="progress-title">Wochenfortschritt</div>
+      <div class="progress-bars">
+        <div class="prog-row">
+          <span class="prog-label">Einheiten</span>
+          <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:0%"></div></div>
+          <span class="prog-val">0/7</span>
+        </div>
+      </div>
+    </div></div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const weeks = [
+  {
+    label: "W1", name: "Woche 1", focus: "Grundlage · alles Zone 2",
+    stats: [{l:"Laufen",v:"~38 km"},{l:"Rad",v:"~60 km"},{l:"Intensität",v:"Zone 2"},{l:"Longrun",v:"16–18 km"}],
+    days: [
+      { id:"w1mo", name:"Mo · Büro", title:"Pendeln Rad · 15 km je Richtung", badges:["bike","z2"],
+        desc:"30 km gesamt, locker, Puls <130 bpm. Heute ist Transporttag – keine Selbstüberwürzung." },
+      { id:"w1di", name:"Di · Büro", title:"Abend-Rücklauf · 10–12 km", badges:["run","z2"],
+        desc:"UBahn hin, abends laufen. Pace 7:45–8:30/km, Puls 145–158 bpm. Wenn Puls steigt → Tempo raus." },
+      { id:"w1mi", name:"Mi", title:"Aktive Erholung", badges:["rest"],
+        desc:"Kein strukturiertes Training. Spaziergang, Mobilität, Schlafen priorisieren." },
+      { id:"w1do", name:"Do · Büro", title:"Pendeln Rad · 30 km", badges:["bike","z2"],
+        desc:"Locker. Alternativ: Rad hin, kurzer 10 km Rücklauf wenn Beine frisch." },
+      { id:"w1fr", name:"Fr · Büro", title:"Rücklauf · 10 km", badges:["run","z2"],
+        desc:"UBahn hin, Rücklauf. Kürzere Variante, bewusst kürzer als Di." },
+      { id:"w1sa", name:"Sa", title:"Longrun · 16–18 km", badges:["run","z2"],
+        desc:"Der wichtigste Lauf. Strikt Zone 2, Pace 7:30–8:30/km, Puls max. 162 bpm. Gel ab km 12 testen.", longrun:true },
+      { id:"w1so", name:"So", title:"Krafttraining + Pause", badges:["kraft","rest"],
+        desc:"Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad." },
+    ],
+    note:"⚠️ Pendelläufe bei 150 bpm laufen lassen – das ist dein natürlicher Arbeitspuls. Longrun Sa wirklich langsam starten (8:15/km), auch wenn es lächerlich langsam wirkt."
+  },
+  {
+    label: "W2", name: "Woche 2", focus: "Volumen aufbauen · erster Tempolauf",
+    stats: [{l:"Laufen",v:"~44 km"},{l:"Rad",v:"~60 km"},{l:"Intensität",v:"Z2 + 1× LT"},{l:"Longrun",v:"21 km"}],
+    days: [
+      { id:"w2mo", name:"Mo · Büro", title:"Pendeln Rad · 30 km", badges:["bike","z2"],
+        desc:"Wie Woche 1. Beine schonen für Di." },
+      { id:"w2di", name:"Di · Büro", title:"Rücklauf · 12–13 km", badges:["run","z2"],
+        desc:"Etwas länger als W1. Pace und Puls gleich halten (7:30–8:00/km, max. 158 bpm)." },
+      { id:"w2mi", name:"Mi", title:"Pause", badges:["rest"],
+        desc:"Pflichtruhetag. Wenn Beine schwer – gut so, das zeigt dass das Pendeltraining wirkt." },
+      { id:"w2do", name:"Do · Büro", title:"Tempolauf · 10 km (5 km Tempo)", badges:["run","lt"],
+        desc:"UBahn hin. 2 km einlaufen, 5 km bei 6:30–6:45/km (~168–172 bpm), 3 km auslaufen." },
+      { id:"w2fr", name:"Fr · Büro", title:"Pendeln Rad · 30 km", badges:["bike","z2"],
+        desc:"Locker. Kein Laufen nach dem gestrigen Tempolauf." },
+      { id:"w2sa", name:"Sa", title:"Longrun · 21 km", badges:["run","z2"],
+        desc:"Halbmarathon-Distanz, aber langsam. Puls unter 162. Ernährung: 2× Gel, Wasser alle 5 km.", longrun:true },
+      { id:"w2so", name:"So", title:"Krafttraining", badges:["kraft","rest"],
+        desc:"Gleiche Übungen wie W1. Protokolliere Gewichte für Progression." },
+    ],
+    note:"📊 Vergleiche Laufpuls Di mit W1. Wenn gleich oder niedriger bei gleicher Pace → Aerobic-Adaption läuft."
+  },
+  {
+    label: "W3", name: "Woche 3", focus: "Spitzenbelastung · längster Lauf",
+    stats: [{l:"Laufen",v:"~50 km"},{l:"Rad",v:"~60 km"},{l:"Intensität",v:"Z2 + 1× LT"},{l:"Longrun",v:"25 km"}],
+    days: [
+      { id:"w3mo", name:"Mo · Büro", title:"Pendeln Rad · 30 km", badges:["bike","z2"],
+        desc:"Locker. Bewusst Tempo halten – Beine für Sa schonen beginnt heute." },
+      { id:"w3di", name:"Di · Büro", title:"Rücklauf · 13–15 km", badges:["run","z2"],
+        desc:"Volle Streckenlänge wenn Beine frisch. Bei Anstieg auf >162 bpm → Pace reduzieren." },
+      { id:"w3mi", name:"Mi", title:"Pause", badges:["rest"],
+        desc:"W3 ist die belastendste Woche. Mittwoch Ruhe ist nicht optional." },
+      { id:"w3do", name:"Do · Büro", title:"Tempolauf · 12 km (6 km Tempo)", badges:["run","lt"],
+        desc:"2 km ein, 6 km bei 6:30–6:45/km, 4 km aus. Gleiche Pace wie W2, mehr Volumen." },
+      { id:"w3fr", name:"Fr · Büro", title:"Pendeln Rad · 30 km", badges:["bike","z2"],
+        desc:"Pflicht-Erholung. Kein Laufen. Beine für Sa bereit machen." },
+      { id:"w3sa", name:"Sa", title:"Longrun · 25 km", badges:["run","z2"],
+        desc:"Neue Bestdistanz. Ab km 18 wird's mental – hier lernst du wie du beim Marathon denkst. Gel alle 45 min.", longrun:true },
+      { id:"w3so", name:"So", title:"Leichtes Krafttraining", badges:["kraft","rest"],
+        desc:"Etwas weniger Volumen als üblich. Dehnen, Foam Rolling." },
+    ],
+    note:"🔋 Wenn nach dem Longrun Sa Schmerzen (nicht Müdigkeit) → Woche 4 Belastung reduzieren."
+  },
+  {
+    label: "W4", name: "Woche 4", focus: "Erholung & Reset · Volumen –30%",
+    stats: [{l:"Laufen",v:"~32 km"},{l:"Rad",v:"~40 km"},{l:"Intensität",v:"Zone 2"},{l:"Longrun",v:"16 km"}],
+    days: [
+      { id:"w4mo", name:"Mo · Büro", title:"Pendeln Rad · 15 km einfach", badges:["bike","z2"],
+        desc:"Nur einfache Strecke oder UBahn. W4 beginnt mit bewusstem Rückzug." },
+      { id:"w4di", name:"Di · Büro", title:"Rücklauf · 10 km", badges:["run","z2"],
+        desc:"Kürzeste Variante. Puls beobachten: nach Erholung sollte er bei gleicher Pace niedriger liegen als W3." },
+      { id:"w4mi", name:"Mi", title:"Pause", badges:["rest"],
+        desc:"Regeneration. Wenn du dich gut fühlst – trotzdem nicht laufen." },
+      { id:"w4do", name:"Do · Büro", title:"Pendeln Rad · 30 km", badges:["bike","z2"],
+        desc:"Normal pendeln. Kein Tempolauf diese Woche." },
+      { id:"w4fr", name:"Fr", title:"Pause", badges:["rest"],
+        desc:"Echter Ruhetag in W4. Kein Pendeltraining." },
+      { id:"w4sa", name:"Sa", title:"Longrun · 16 km", badges:["run","z2"],
+        desc:"Zurück auf W1-Niveau. Fühlt sich leicht an – das ist der Punkt. Beine testen, nicht fordern.", longrun:true },
+      { id:"w4so", name:"So", title:"Leichtes Krafttraining", badges:["kraft","rest"],
+        desc:"Mobilität, kein neues Gewicht. Vorbereitung auf W5." },
+    ],
+    note:"✅ Nach W4: Laufpuls bei 7:30/km sollte spürbar niedriger sein als zu Beginn. Das ist der Beweis der Adaption."
+  }
+];
+
+// ── STATE ──────────────────────────────────────────────────────────────────────
+let activeWeek = 0;
+let dayStatus = JSON.parse(localStorage.getItem('dayStatus') || '{}');
+let checkin = JSON.parse(localStorage.getItem('checkin') || '{"sleep":7.5,"wellbeing":3,"hrv":2}');
+
+function saveState() {
+  localStorage.setItem('dayStatus', JSON.stringify(dayStatus));
+  localStorage.setItem('checkin', JSON.stringify(checkin));
+}
+
+// ── HELPERS ────────────────────────────────────────────────────────────────────
+function daysUntilMarathon() {
+  const marathon = new Date('2026-10-25');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  return Math.ceil((marathon - today) / (1000 * 60 * 60 * 24));
+}
+
+function isTodayRow(dayId) {
+  const today = new Date().getDay(); // 0=So,1=Mo...6=Sa
+  const dayMap = {mo:1,di:2,mi:3,do:4,fr:5,sa:6,so:0};
+  const key = dayId.replace(/w\d/,'');
+  return dayMap[key] === today && activeWeek === getCurrentWeek();
+}
+
+function getCurrentWeek() {
+  // Simple: return 0 for now, can be made dynamic
+  return 0;
+}
+
+function badgeClass(b) {
+  return `badge badge-${b}`;
+}
+
+function badgeLabel(b) {
+  return {run:'Laufen',bike:'Rad',kraft:'Kraft',rest:'Pause',z2:'Zone 2',lt:'Tempo/LT'}[b] || b;
+}
+
+// ── ADAPTATION LOGIC ──────────────────────────────────────────────────────────
+function getAdaptation() {
+  const s = parseFloat(document.getElementById('sleep').value);
+  const w = parseInt(document.getElementById('wellbeing').value);
+  const h = parseInt(document.getElementById('hrv').value);
+
+  const msgs = [];
+
+  if (s < 6) msgs.push("Schlaf unter 6h: Heute keinen Longrun – max. 10 km Zone 1. Kein Tempolauf.");
+  else if (s < 7) msgs.push("Schlaf unter 7h: Pace beim Longrun um 15–20 sek/km reduzieren.");
+
+  if (w <= 2) msgs.push("Wohlbefinden niedrig: Intensität streichen, nur Zone 1–2. Bei Schmerzen: Ruhetag.");
+  else if (w === 3) msgs.push("Wohlbefinden ok: Plan wie vorgesehen, Puls im Auge behalten.");
+
+  if (h === 1) msgs.push("HFV niedrig/rot: Kein Tempolauf heute. Longrun um 3–5 km kürzen.");
+  else if (h === 2) msgs.push("HFV ausbalanciert: Plan wie vorgesehen.");
+  else msgs.push("HFV hoch/grün: Alles grün – Plan vollständig durchführen.");
+
+  return msgs;
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function renderTabs() {
+  const el = document.getElementById('tabs');
+  el.innerHTML = weeks.map((w,i) =>
+    `<button class="week-tab ${i===activeWeek?'active':''}" onclick="selectWeek(${i})">${w.label} · ${w.name}</button>`
+  ).join('');
+}
+
+function renderWeek() {
+  const w = weeks[activeWeek];
+  const statsHtml = w.stats.map(s =>
+    `<div class="stat"><div class="stat-label">${s.l}</div><div class="stat-val">${s.v}</div></div>`
+  ).join('');
+
+  const daysHtml = w.days.map(d => {
+    const st = dayStatus[d.id] || 'none';
+    const todayClass = isTodayRow(d.id) ? ' today' : '';
+    const badges = d.badges.map(b => `<span class="${badgeClass(b)}">${badgeLabel(b)}</span>`).join('');
+    const doneBtn = `<button class="status-btn ${st==='done'?'done':''}" onclick="setStatus('${d.id}','done',event)">✓ done</button>`;
+    const skipBtn = `<button class="status-btn ${st==='skip'?'skip':''}" onclick="setStatus('${d.id}','skip',event)">✗ skip</button>`;
+    const modBtn  = `<button class="status-btn ${st==='modified'?'modified':''}" onclick="setStatus('${d.id}','modified',event)">≈ angepasst</button>`;
+
+    return `
+      <div class="day-row${todayClass}" id="row-${d.id}">
+        <div class="day-top">
+          <div class="day-name${isTodayRow(d.id)?' today-label':''}">${d.name}${isTodayRow(d.id)?' · heute':''}</div>
+          <div class="day-title">${d.title}</div>
+          <div class="badges">${badges}</div>
+        </div>
+        <div class="day-desc">${d.desc}</div>
+        <div class="day-status">${doneBtn}${skipBtn}${modBtn}</div>
+      </div>`;
+  }).join('');
+
+  // Progress
+  const completed = w.days.filter(d => dayStatus[d.id] === 'done').length;
+  const total = w.days.length;
+  const pct = Math.round((completed/total)*100);
+
+  document.getElementById('week-content').innerHTML = `
+    <div class="week-meta">
+      <span class="week-name">${w.name}</span>
+      <span class="week-focus">${w.focus}</span>
+    </div>
+    <div class="week-stats">${statsHtml}</div>
+    <div class="days">${daysHtml}</div>
+    <div class="note-box">${w.note}</div>
+    <div class="progress-section">
+      <div class="progress-title">Wochenfortschritt</div>
+      <div class="progress-bars">
+        <div class="prog-row">
+          <span class="prog-label">Einheiten</span>
+          <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${pct}%"></div></div>
+          <span class="prog-val">${completed}/${total}</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderAdaptation() {
+  const msgs = getAdaptation();
+  const banner = document.getElementById('adapt-banner');
+  const text = document.getElementById('adapt-text');
+
+  const s = parseFloat(document.getElementById('sleep').value);
+  const w = parseInt(document.getElementById('wellbeing').value);
+  const h = parseInt(document.getElementById('hrv').value);
+
+  const showBanner = s < 7 || w <= 2 || h === 1;
+  banner.className = `adapt-banner ${showBanner ? 'visible' : ''}`;
+  text.innerHTML = msgs.join('<br>');
+}
+
+// ── EVENTS ────────────────────────────────────────────────────────────────────
+window.selectWeek = function(i) {
+  activeWeek = i;
+  renderTabs();
+  renderWeek();
+};
+
+window.setStatus = function(id, status, e) {
+  e.stopPropagation();
+  dayStatus[id] = dayStatus[id] === status ? 'none' : status;
+  saveState();
+  renderWeek();
+};
+
+function updateCheckin() {
+  const s = document.getElementById('sleep').value;
+  const w = document.getElementById('wellbeing').value;
+  const h = document.getElementById('hrv').value;
+  const hrvLabels = {1:'Rot',2:'Ok',3:'Grün'};
+
+  document.getElementById('sleep-val').textContent = s;
+  document.getElementById('wellbeing-val').textContent = w;
+  document.getElementById('hrv-val').textContent = hrvLabels[h];
+
+  checkin = {sleep:parseFloat(s), wellbeing:parseInt(w), hrv:parseInt(h)};
+  saveState();
+  renderAdaptation();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('days-left').textContent = daysUntilMarathon();
+
+  // Restore checkin
+  document.getElementById('sleep').value = checkin.sleep;
+  document.getElementById('wellbeing').value = checkin.wellbeing;
+  document.getElementById('hrv').value = checkin.hrv;
+  updateCheckin();
+
+  renderTabs();
+  renderWeek();
+});
+</script>
+
+
+</body></html>
