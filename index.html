@@ -71,8 +71,23 @@
   .prog-bar-bg{height:3px;background:var(--border);}
   .prog-bar-fill{height:100%;background:var(--accent);transition:width 0.5s;}
   .prog-val{font-size:11px;color:var(--text);text-align:right;}
-  @media(max-width:600px){.week-stats{grid-template-columns:repeat(2,1fr);}.day-top{grid-template-columns:90px 1fr;}.day-top .badges{grid-column:1/-1;}.day-desc{padding-left:0;}.day-status{padding-left:0;}.checkin-grid{grid-template-columns:1fr;}.main{padding:16px;}}
+  .garmin-bar{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);padding:14px 16px;margin-bottom:12px;display:none;}
+  .garmin-bar.loaded{display:block;}
+  .garmin-title{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px;}
+  .garmin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:0;}
+  .garmin-item .garmin-label{font-size:10px;color:var(--text-dim);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px;}
+  .garmin-item .garmin-val{font-family:'Fraunces',serif;font-size:16px;font-weight:700;}
+  .garmin-val.good{color:var(--run);}
+  .garmin-val.ok{color:var(--warn);}
+  .garmin-val.bad{color:var(--danger);}
+  .garmin-val.neutral{color:var(--text);}
+  .garmin-rec{font-size:12px;color:var(--text-dim);line-height:1.5;padding-top:10px;border-top:1px solid var(--border);margin-top:10px;}
+  .garmin-updated{font-size:10px;color:var(--text-dim);margin-top:4px;opacity:0.5;}
+  @media(max-width:600px){.week-stats{grid-template-columns:repeat(2,1fr);}.day-top{grid-template-columns:90px 1fr;}.day-top .badges{grid-column:1/-1;}.day-desc{padding-left:0;}.day-status{padding-left:0;}.checkin-grid{grid-template-columns:1fr;}.garmin-grid{grid-template-columns:repeat(2,1fr);}.main{padding:16px;}}
 </style>
+<!-- GARMIN:START -->
+<script>window.GARMIN_DATA = null;</script>
+<!-- GARMIN:END -->
 </head>
 <body>
 <div class="header">
@@ -90,6 +105,17 @@
       <div class="checkin-item"><label>Wohlbefinden</label><div class="slider-wrap"><input type="range" id="wellbeing" min="1" max="5" step="1" value="3" oninput="updateCheckin()"><span class="slider-val" id="wellbeing-val">3</span></div></div>
       <div class="checkin-item"><label>HFV-Status</label><div class="slider-wrap"><input type="range" id="hrv" min="1" max="3" step="1" value="2" oninput="updateCheckin()"><span class="slider-val" id="hrv-val" style="font-size:11px">Ok</span></div></div>
     </div>
+  </div>
+  <div class="garmin-bar" id="garmin-bar">
+    <div class="garmin-title">⌚ Garmin · heute</div>
+    <div class="garmin-grid">
+      <div class="garmin-item"><div class="garmin-label">Schlaf</div><div class="garmin-val neutral" id="g-sleep">–</div></div>
+      <div class="garmin-item"><div class="garmin-label">HRV</div><div class="garmin-val neutral" id="g-hrv">–</div></div>
+      <div class="garmin-item"><div class="garmin-label">Body Battery</div><div class="garmin-val neutral" id="g-bb">–</div></div>
+      <div class="garmin-item"><div class="garmin-label">Readiness</div><div class="garmin-val neutral" id="g-ready">–</div></div>
+    </div>
+    <div class="garmin-rec" id="garmin-rec"></div>
+    <div class="garmin-updated" id="garmin-updated"></div>
   </div>
   <div class="adapt-banner" id="adapt-banner"><div class="adapt-title">⚡ Plan angepasst</div><div class="adapt-text" id="adapt-text"></div></div>
   <div id="week-content"></div>
@@ -2009,6 +2035,46 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('wellbeing').value=checkin.wellbeing;
   document.getElementById('hrv').value=checkin.hrv;
   updateCheckin();renderTabs();renderWeek();
+
+  // Garmin-Daten einlesen (täglich per GitHub Action injiziert)
+  if(window.GARMIN_DATA){
+    const g=window.GARMIN_DATA;
+    const today=new Date().toISOString().split('T')[0];
+    const bar=document.getElementById('garmin-bar');
+    bar.classList.add('loaded');
+
+    const cls=(v,good,ok)=>v==null?'neutral':v>=good?'good':v>=ok?'ok':'bad';
+
+    const sleepEl=document.getElementById('g-sleep');
+    if(g.sleep_hours!=null){sleepEl.textContent=g.sleep_hours+'h';sleepEl.className='garmin-val '+cls(g.sleep_hours,7,6);}
+
+    const hrvEl=document.getElementById('g-hrv');
+    const hrvMap={BALANCED:['Grün','good'],UNBALANCED:['Gelb','ok'],LOW:['Rot','bad'],POOR:['Rot','bad'],NONE:['–','neutral']};
+    if(g.hrv_status&&hrvMap[g.hrv_status]){
+      const[lbl,c]=hrvMap[g.hrv_status];
+      hrvEl.textContent=lbl+(g.hrv_value?' · '+g.hrv_value+' ms':'');
+      hrvEl.className='garmin-val '+c;
+    }
+
+    const bbEl=document.getElementById('g-bb');
+    if(g.body_battery!=null){bbEl.textContent=g.body_battery;bbEl.className='garmin-val '+cls(g.body_battery,70,40);}
+
+    const readyEl=document.getElementById('g-ready');
+    if(g.training_readiness!=null){readyEl.textContent=g.training_readiness;readyEl.className='garmin-val '+cls(g.training_readiness,70,40);}
+
+    if(g.recommendation)document.getElementById('garmin-rec').textContent=g.recommendation;
+    if(g.updated)document.getElementById('garmin-updated').textContent='Stand: '+g.updated;
+
+    // Slider einmalig pro Tag auto-setzen (nur wenn Daten von heute)
+    if(g.updated===today&&localStorage.getItem('garminAutoSet')!==today){
+      document.getElementById('sleep').value=g.slider_sleep;
+      document.getElementById('wellbeing').value=g.slider_wellbeing;
+      document.getElementById('hrv').value=g.slider_hrv;
+      checkin={sleep:g.slider_sleep,wellbeing:g.slider_wellbeing,hrv:g.slider_hrv};
+      saveState();updateCheckin();
+      localStorage.setItem('garminAutoSet',today);
+    }
+  }
 });
 </script>
 </body>

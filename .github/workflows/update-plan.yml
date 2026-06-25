@@ -1,0 +1,47 @@
+name: Tägliches Trainingsupdate
+
+on:
+  schedule:
+    - cron: "0 5 * * *"   # 06:00 Uhr MEZ / 07:00 MESZ
+  workflow_dispatch:        # manuell auslösbar
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Garmin-Session cachen
+        uses: actions/cache@v4
+        with:
+          path: ~/.garmin_session
+          key: garmin-session-${{ github.run_number }}
+          restore-keys: |
+            garmin-session-
+
+      - name: Abhängigkeiten installieren
+        run: pip install -r requirements.txt
+
+      - name: Plan aktualisieren
+        run: python update_plan.py
+        env:
+          GARMIN_EMAIL: ${{ secrets.GARMIN_EMAIL }}
+          GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Änderungen pushen
+        run: |
+          git config user.name "Marathon Bot"
+          git config user.email "marathon-bot@users.noreply.github.com"
+          git add index.html
+          git diff --staged --quiet || (
+            git commit -m "Tagesupdate: $(date +%Y-%m-%d)" &&
+            git push
+          )
