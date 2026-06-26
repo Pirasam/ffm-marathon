@@ -243,6 +243,22 @@ window.GARMIN_DATA = {
       </div>
     </div>
 
+    <!-- Letzter Lauf -->
+    <div id="gd-lastrun" style="display:none;background:#fff;border:1px solid #e5e0f0;border-left:3px solid #8b5cf6;border-radius:10px;padding:12px 14px;margin-bottom:12px;">
+      <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;">Letzter Lauf · Analyse</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div id="gd-lr-name" style="font-size:11px;font-weight:600;color:#1a1a2e;"></div>
+        <div id="gd-lr-date" style="font-size:10px;color:#999;"></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-bottom:8px;">
+        <div><span id="gd-lr-km" style="font-size:16px;font-weight:700;color:#8b5cf6;"></span><span style="font-size:10px;color:#999;margin-left:2px;">km</span></div>
+        <div><span id="gd-lr-time" style="font-size:16px;font-weight:700;color:#1a1a2e;"></span><span style="font-size:10px;color:#999;margin-left:2px;">min</span></div>
+        <div id="gd-lr-pace-wrap"><span id="gd-lr-pace" style="font-size:16px;font-weight:700;color:#1a1a2e;"></span><span style="font-size:10px;color:#999;margin-left:2px;">/km</span></div>
+        <div id="gd-lr-hr-wrap" style="display:none;"><span id="gd-lr-hr" style="font-size:16px;font-weight:700;color:#ff6b57;"></span><span style="font-size:10px;color:#999;margin-left:2px;">bpm</span></div>
+      </div>
+      <div id="gd-lr-feedback" style="font-size:12px;color:#333;line-height:1.6;border-top:1px solid #f0eef8;padding-top:7px;"></div>
+    </div>
+
     <!-- Status Cards -->
     <div id="gd-cards" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;">
       <div style="background:#fff;border:1px solid #e5e0f0;border-radius:8px;padding:10px;">
@@ -2248,6 +2264,21 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(g.training_readiness!=null){const el=document.getElementById('gd-ready');el.textContent=g.training_readiness;el.style.color=clr(g.training_readiness,70,40);}
     if(g.resting_hr!=null){document.getElementById('gd-rhr').textContent=g.resting_hr+' bpm';}
     if(g.weight_kg!=null){const el=document.getElementById('gd-weight');el.textContent=g.weight_kg.toFixed(1)+' kg';const diff=g.weight_kg-87;el.style.color=diff<=0?'#00c96a':diff<=2?VIO:COR;document.getElementById('gd-weight-sub').textContent=diff<=0?'✓ Zielgewicht erreicht':`${diff>0?'+':''}${diff.toFixed(1)} kg bis Ziel`;}
+
+    // Letzter Lauf
+    const lr=g.last_run;
+    if(lr&&lr.distance_km){
+      document.getElementById('gd-lastrun').style.display='block';
+      document.getElementById('gd-lr-name').textContent=lr.name||'Lauf';
+      const rd=new Date(lr.date);const dn2=['So','Mo','Di','Mi','Do','Fr','Sa'];
+      document.getElementById('gd-lr-date').textContent=dn2[rd.getDay()]+', '+rd.getDate()+'.'+(rd.getMonth()+1)+'.';
+      document.getElementById('gd-lr-km').textContent=lr.distance_km;
+      document.getElementById('gd-lr-time').textContent=lr.duration_min;
+      if(lr.pace_min_km){const pm=Math.floor(lr.pace_min_km),ps=Math.round((lr.pace_min_km%1)*60);document.getElementById('gd-lr-pace').textContent=pm+':'+ps.toString().padStart(2,'0');}
+      else{document.getElementById('gd-lr-pace-wrap').style.display='none';}
+      if(lr.avg_hr){document.getElementById('gd-lr-hr-wrap').style.display='';document.getElementById('gd-lr-hr').textContent=Math.round(lr.avg_hr);}
+      document.getElementById('gd-lr-feedback').textContent=g.run_feedback||'';
+    }
 
     // Charts
     if(typeof Chart==='undefined')return;

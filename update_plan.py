@@ -114,6 +114,11 @@ def fetch_garmin_metrics(api):
     # Activities last 14 days (for weekly volume)
     try:
         acts = api.get_activities_by_date(two_weeks_ago, today_str, "")
+        def _pace(dist_m, dur_s):
+            if not dist_m or not dur_s:
+                return None
+            p = (dur_s / 60) / (dist_m / 1000)
+            return round(p, 2)
         metrics["recent_activities"] = [
             {
                 "name": a.get("activityName", ""),
@@ -121,9 +126,17 @@ def fetch_garmin_metrics(api):
                 "date": (a.get("startTimeLocal") or "")[:10],
                 "distance_km": round((a.get("distance") or 0) / 1000, 1),
                 "duration_min": round((a.get("duration") or 0) / 60),
+                "pace_min_km": _pace(a.get("distance"), a.get("duration")),
+                "avg_hr": a.get("averageHR"),
             }
             for a in acts[:14]
         ]
+        # Last run (for feedback section)
+        metrics["last_run"] = next(
+            (a for a in metrics["recent_activities"]
+             if "running" in a.get("type", "") or "trail" in a.get("type", "")),
+            None
+        )
         # Weekly running km grouped by ISO week
         weekly = defaultdict(float)
         for a in acts:
@@ -136,6 +149,7 @@ def fetch_garmin_metrics(api):
     except Exception as e:
         print(f"Activities error: {e}"); _errors.append(f"activities: {e}")
         metrics["recent_activities"] = []
+        metrics["last_run"] = None
         metrics["weekly_running"] = {}
 
     # Weight
@@ -325,6 +339,16 @@ def call_claude(metrics, plan_context):
            and c["pct"] < 100
     ]
 
+    last_run = metrics.get("last_run")
+    last_run_str = ""
+    if last_run:
+        lr = last_run
+        d, t = lr.get("distance_km", 0), lr.get("duration_min", 0)
+        pace = lr.get("pace_min_km")
+        pace_str = f"{int(pace)}:{int((pace % 1) * 60):02d} min/km" if pace else "?"
+        last_run_str = (f"\n- Letzter Lauf: {lr['date']}, {d} km, {t} min, Pace {pace_str}"
+                        + (f", ∅HR {lr['avg_hr']} bpm" if lr.get("avg_hr") else ""))
+
     prompt = f"""Du bist Laufcoach. Analysiere diese Garmin-Morgendaten für einen Läufer (Ziel: Frankfurt Marathon 25.10.2026, ~5h, aktuell 91 kg → Ziel 87 kg).
 
 Garmin-Daten:
@@ -335,7 +359,7 @@ Garmin-Daten:
 - Ruhepuls: {metrics.get("resting_hr")} bpm
 - Stresslevel gestern: {metrics.get("stress")}/100
 - Gewicht: {metrics.get("weight_kg")} kg
-- VO₂max: {metrics.get("vo2max")}
+- VO₂max: {metrics.get("vo2max")}{last_run_str}
 - Letzte Aktivitäten (14 Tage): {json.dumps(metrics.get("recent_activities", [])[:7], ensure_ascii=False)}
 - Planposition: {plan_context}
 - Bald ablaufende Challenges: {json.dumps(soon_challenges, ensure_ascii=False)}
@@ -355,7 +379,8 @@ Antworte NUR mit diesem JSON (kein Markdown, kein Text):
   "factor_hrv": <0–100>,
   "factor_vo2max": <0–100>,
   "factor_weight": <0–100>,
-  "challenge_alert": "<leer ODER 1 Satz zu bald endender Challenge auf Deutsch>"
+  "challenge_alert": "<leer ODER 1 Satz zu bald endender Challenge auf Deutsch>",
+  "run_feedback": "<falls letzter Lauf vorhanden: 2 Sätze direktes Feedback zu Pace/Effort/Erholung auf Deutsch, sonst leer>"
 }}"""
 
     response = client.messages.create(
@@ -386,6 +411,7 @@ def inject_garmin_data(html_content, metrics, claude_result):
         "factor_vo2max": claude_result.get("factor_vo2max", 50),
         "factor_weight": claude_result.get("factor_weight", 50),
         "challenge_alert": claude_result.get("challenge_alert", ""),
+        "run_feedback": claude_result.get("run_feedback", ""),
         "updated": date.today().isoformat(),
     }
     payload.pop("weekly_running", None)
