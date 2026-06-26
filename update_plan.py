@@ -172,20 +172,16 @@ def fetch_garmin_metrics(api):
         metrics["last_run"] = None
         metrics["weekly_running"] = {}
 
-    # Weight — fetch 90 days for full history
+    # Weight — get_body_composition liefert die volle Historie (dateWeightList,
+    # Top-Level weight in Gramm). get_weigh_ins gibt für Ranges nur 1 Tag zurück.
     ninety_days_ago = (today - timedelta(days=90)).isoformat()
     try:
-        wi = api.get_weigh_ins(ninety_days_ago, today_str)
-        entries = (wi or {}).get("dailyWeightSummaries") or (wi or {}).get("dateWeightList") or []
-        # fallback: get_body_composition
-        if not entries:
-            comp = api.get_body_composition(ninety_days_ago, today_str)
-            entries = (comp or {}).get("dateWeightList") or []
+        comp = api.get_body_composition(ninety_days_ago, today_str)
+        entries = (comp or {}).get("dateWeightList") or []
         weight_by_date = {}
         for e in entries:
             d_str = e.get("calendarDate") or e.get("date") or ""
-            # weight in grams → kg
-            raw = e.get("weight") or e.get("allWeightMetrics", [{}])[0].get("weight") if isinstance(e.get("allWeightMetrics"), list) else e.get("weight")
+            raw = e.get("weight")  # Gramm
             if d_str and raw:
                 weight_by_date[d_str] = round(raw / 1000, 1)
         if weight_by_date:
@@ -293,6 +289,44 @@ def load_history(html_content):
         return json.loads(m.group(1))
     except Exception:
         return {"hrv": [], "rhr": [], "weight": [], "weekly_km": []}
+
+
+def backfill_history(api, history, today, days=30):
+    """Fülle fehlende HRV- und Ruhepuls-Tage aus Garmin (einmalig beim ersten Lauf,
+    danach nur der jeweils neue Tag). So sind die 30-Tage-Charts sofort gefüllt."""
+    have_hrv = {x["d"] for x in history.get("hrv", [])}
+    have_rhr = {x["d"] for x in history.get("rhr", [])}
+    new_hrv, new_rhr = 0, 0
+
+    for i in range(1, days + 1):
+        d = (today - timedelta(days=i)).isoformat()
+
+        if d not in have_hrv:
+            try:
+                hrv = api.get_hrv_data(d)
+                s = (hrv or {}).get("hrvSummary", {})
+                v = s.get("lastNight5MinHigh") or s.get("lastNightAvg")
+                if v:
+                    history.setdefault("hrv", []).append({"d": d, "v": v})
+                    new_hrv += 1
+            except Exception:
+                pass
+
+        if d not in have_rhr:
+            try:
+                stats = api.get_stats(d)
+                v = stats.get("restingHeartRate") or stats.get("restingHeartRateValue")
+                if v:
+                    history.setdefault("rhr", []).append({"d": d, "v": v})
+                    new_rhr += 1
+            except Exception:
+                pass
+
+    # Sortieren (neueste zuerst) und kappen
+    history["hrv"] = sorted(history.get("hrv", []), key=lambda x: x["d"], reverse=True)[:30]
+    history["rhr"] = sorted(history.get("rhr", []), key=lambda x: x["d"], reverse=True)[:30]
+    print(f"Backfill: {new_hrv} neue HRV-Tage, {new_rhr} neue Ruhepuls-Tage")
+    return history
 
 
 def update_history(history, metrics, today_str, weekly_running):
@@ -535,6 +569,7 @@ def main():
         html = f.read()
 
     print("Garmin-Daten abrufen …")
+    api = None
     try:
         api = garmin_login()
         metrics = fetch_garmin_metrics(api)
@@ -547,6 +582,11 @@ def main():
 
     # Update history
     history = load_history(html)
+    if api is not None:
+        try:
+            history = backfill_history(api, history, date.today())
+        except Exception as e:
+            print(f"Backfill fehlgeschlagen: {e}")
     history = update_history(history, metrics, date.today().isoformat(), metrics.get("weekly_running", {}))
     html = save_history(html, history)
 
