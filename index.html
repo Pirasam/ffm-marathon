@@ -296,13 +296,13 @@ const weeks = [
       },
       {
         "id": "w1so",
-        "name": "So",
+        "name": "So · Urlaubsbeginn",
         "title": "Lauf nach Gefühl · 10–14 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Nur wenn Beine wirklich erholt. Z2, Puls ≤150, Pace egal. Bei Hitze früh morgens. Kein Druck – 10 km reicht."
+        "desc": "Urlaub startet + Abkühlung. Erster entspannter Lauf wenn Beine bereit. Z2, Puls ≤150, früh morgens. 10 km reicht – kein Druck."
       }
     ],
     "note": "Hitzewoche ohne echten Ruhetag + Hamstring-Krampf (Natriummangel). Fr+Sa komplett Pause (kein Rad). Longrun verschoben. Elektrolyte ab jetzt bei Läufen >60 Min."
@@ -310,45 +310,45 @@ const weeks = [
   {
     "label": "W2",
     "name": "Woche 2",
-    "focus": "Volumen aufbauen · 1. Tempo",
+    "focus": "Urlaub · Wiedereinstieg · Longrun nachholen",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~44 km"
+        "v": "~38 km"
       },
       {
         "l": "Rad",
-        "v": "~60 km"
+        "v": "~90 km"
       },
       {
         "l": "Intensität",
-        "v": "Z2 + 1× LT"
+        "v": "Zone 2"
       },
       {
         "l": "Longrun",
-        "v": "18 km"
+        "v": "16 km"
       }
     ],
     "days": [
       {
         "id": "w2mo",
-        "name": "Mo · Büro",
-        "title": "Pendeln Rad · 30 km",
-        "badges": [
-          "bike",
-          "z2"
-        ],
-        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
-      },
-      {
-        "id": "w2di",
-        "name": "Di · Büro",
-        "title": "Rücklauf · 13 km",
+        "name": "Mo · Urlaub",
+        "title": "Lauf · 10 km Z2",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+        "desc": "Erster Lauf nach zwei Ruhetagen. Früh morgens, Puls ≤150, Pace egal. Beine beobachten – kein Druck."
+      },
+      {
+        "id": "w2di",
+        "name": "Di · Urlaub",
+        "title": "Rad locker · 40–50 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Freizeittour, kein Pendeln. ~100 W, Puls <130. Genießen."
       },
       {
         "id": "w2mi",
@@ -361,18 +361,18 @@ const weeks = [
       },
       {
         "id": "w2do",
-        "name": "Do · Büro",
-        "title": "Tempolauf · 10–12 km",
+        "name": "Do · Urlaub",
+        "title": "Lauf · 12 km Z2",
         "badges": [
           "run",
-          "lt"
+          "z2"
         ],
-        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+        "desc": "Ruhiger Mittenwochenlauf. Puls ≤150, Pace ~8:00/km. Wenn sich die Beine gut anfühlen – gut. Wenn zäh – kürzer."
       },
       {
         "id": "w2fr",
-        "name": "Fr · Büro",
-        "title": "Pendeln Rad · 30 km",
+        "name": "Fr · Urlaub",
+        "title": "Rad locker · 40 km",
         "badges": [
           "bike",
           "z2"
@@ -382,39 +382,39 @@ const weeks = [
       {
         "id": "w2sa",
         "name": "Sa",
-        "title": "Longrun · 18 km",
+        "title": "Longrun · 16 km Z2",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Langsam, Puls ≤150. 2× Gel, Wasser alle 5 km.",
+        "desc": "Nachgeholt von W1. Strikt Zone 2, Start 8:00+/km. 1× Gel ab km 12, Elektrolytgetränk mitnehmen (Natrium!). Früh morgens.",
         "longrun": true
       },
       {
         "id": "w2so",
         "name": "So",
-        "title": "Krafttraining + Pause",
+        "title": "Gym · Hamstring-Fokus",
         "badges": [
           "kraft",
           "rest"
         ],
-        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+        "desc": "Nordic Curl, Romanian Deadlift, Step-ups, Rumpf. Hamstring-Kräftigung gegen Quad-Dominanz – Pflicht diese 3 Wochen."
       }
     ],
-    "note": "Tempolauf Do ist optional – bei Müdigkeit zuerst streichen."
+    "note": "Urlaubswoche 1. Kein Pendeln – Rad ist Erholung, nicht Pflicht. Longrun nachgeholt. Gym ab jetzt 1×/Woche mit Hamstring-Fokus."
   },
   {
     "label": "W3",
     "name": "Woche 3",
-    "focus": "Belastung · längerer Lauf",
+    "focus": "Urlaub · Aufbau · erste 20er",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~48 km"
+        "v": "~44 km"
       },
       {
         "l": "Rad",
-        "v": "~60 km"
+        "v": "~90 km"
       },
       {
         "l": "Intensität",
@@ -428,23 +428,23 @@ const weeks = [
     "days": [
       {
         "id": "w3mo",
-        "name": "Mo · Büro",
-        "title": "Pendeln Rad · 30 km",
-        "badges": [
-          "bike",
-          "z2"
-        ],
-        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
-      },
-      {
-        "id": "w3di",
-        "name": "Di · Büro",
-        "title": "Rücklauf · 14 km",
+        "name": "Mo · Urlaub",
+        "title": "Lauf · 12 km Z2",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+        "desc": "Solider Wochenstart. Puls ≤150, früh morgens. Wenn Longrun Sa gut war → normal. Wenn Sa zäh war → 10 km."
+      },
+      {
+        "id": "w3di",
+        "name": "Di · Urlaub",
+        "title": "Rad locker · 50 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Freizeittour. ~100 W, Puls <130. Aktive Erholung, kein Trainingsreiz."
       },
       {
         "id": "w3mi",
@@ -457,56 +457,56 @@ const weeks = [
       },
       {
         "id": "w3do",
-        "name": "Do · Büro",
+        "name": "Do · Urlaub",
         "title": "Tempolauf · 10–12 km",
         "badges": [
           "run",
           "lt"
         ],
-        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Optional – bei Müdigkeit streichen."
+        "desc": "2 km ein, 5–6 km bei 6:30–6:50/km (~165–172 bpm), Rest aus. Nur wenn HFV ok und Beine frisch. Sonst Z2-Lauf."
       },
       {
         "id": "w3fr",
-        "name": "Fr · Büro",
-        "title": "Pendeln Rad · 30 km",
+        "name": "Fr · Urlaub",
+        "title": "Rad locker · 40 km",
         "badges": [
           "bike",
           "z2"
         ],
-        "desc": "Locker, Erholung. Kein Laufen vor dem Longrun."
+        "desc": "Locker. Kein Laufen vor dem Longrun."
       },
       {
         "id": "w3sa",
         "name": "Sa",
-        "title": "Longrun · 20 km",
+        "title": "Longrun · 20 km Z2",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Ab km 15 wird's mental. Gel alle 45 min, Puls ≤150.",
+        "desc": "Erste 20er. Strikt Zone 2, Start 8:00+/km. Gel alle 45 min + Elektrolyte. Ab km 15 mental bleiben – Pace egal, Puls entscheidet.",
         "longrun": true
       },
       {
         "id": "w3so",
         "name": "So",
-        "title": "Krafttraining + Pause",
+        "title": "Gym · Hamstring-Fokus",
         "badges": [
           "kraft",
           "rest"
         ],
-        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+        "desc": "Nordic Curl, Romanian Deadlift, Step-ups, Rumpf. Kein Laufen, kein Rad."
       }
     ],
-    "note": "Bei Schmerzen (nicht Müdigkeit) nach dem Longrun → nächste Woche reduzieren."
+    "note": "Urlaubswoche 2. Erste 20er – kein Tempo-PR, nur ankommen. Bei Schmerzen (nicht Müdigkeit) nach Sa → W4 reduzieren."
   },
   {
     "label": "W4",
     "name": "Woche 4",
-    "focus": "Entlastung · Volumen –35%",
+    "focus": "Urlaub endet · Deload",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~30 km"
+        "v": "~32 km"
       },
       {
         "l": "Rad",
@@ -524,23 +524,23 @@ const weeks = [
     "days": [
       {
         "id": "w4mo",
-        "name": "Mo · Büro",
-        "title": "Pendeln Rad · 30 km",
-        "badges": [
-          "bike",
-          "z2"
-        ],
-        "desc": "Locker pendeln, Puls <130 bpm. Reine Erholung – Beine für Di schonen."
-      },
-      {
-        "id": "w4di",
-        "name": "Di · Büro",
-        "title": "Rücklauf · 10 km",
+        "name": "Mo · Urlaub",
+        "title": "Lauf · 10 km Z2",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "UBahn hin, abends laufen. Pace 7:30–8:00/km, Puls ≤150. Wenn Puls steigt → Tempo raus."
+        "desc": "Bewusst kürzer. Deload-Woche – auch wenn du dich gut fühlst, nicht mehr machen."
+      },
+      {
+        "id": "w4di",
+        "name": "Di · Urlaub",
+        "title": "Rad locker · 40 km",
+        "badges": [
+          "bike",
+          "z2"
+        ],
+        "desc": "Letzte Radtour im Urlaub. Locker, Puls <130."
       },
       {
         "id": "w4mi",
@@ -553,46 +553,46 @@ const weeks = [
       },
       {
         "id": "w4do",
-        "name": "Do · Büro",
-        "title": "Pendeln Rad · 30 km",
-        "badges": [
-          "bike",
-          "z2"
-        ],
-        "desc": "Locker. Kein Laufen – Beine für den Longrun sammeln."
-      },
-      {
-        "id": "w4fr",
-        "name": "Fr",
-        "title": "Pause",
-        "badges": [
-          "rest"
-        ],
-        "desc": "Echter Ruhetag. Beine frisch machen für Sa."
-      },
-      {
-        "id": "w4sa",
-        "name": "Sa",
-        "title": "Longrun · 14 km",
+        "name": "Do · Urlaub",
+        "title": "Lauf · 10 km Z2",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Zurück auf leichtes Niveau. Soll sich leicht anfühlen.",
+        "desc": "Kein Tempo diese Woche. Ruhig, Puls ≤145. Deload bedeutet auch mental loslassen."
+      },
+      {
+        "id": "w4fr",
+        "name": "Fr · Heimreise",
+        "title": "Pause / Anreise",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Urlaub endet. Reise, ausruhen, ankommen. Kein Sport."
+      },
+      {
+        "id": "w4sa",
+        "name": "Sa",
+        "title": "Longrun · 14 km Z2",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Erster Lauf zurück zuhause. Reduziert – soll sich leicht anfühlen. Puls ≤150.",
         "longrun": true
       },
       {
         "id": "w4so",
         "name": "So",
-        "title": "Krafttraining + Pause",
+        "title": "Gym · Hamstring + Pause",
         "badges": [
           "kraft",
           "rest"
         ],
-        "desc": "Rumpf, Hüftbeuger, Lunges, Step-ups. Kein Laufen, kein Rad."
+        "desc": "Nordic Curl, Romanian Deadlift, Rumpf. Kein Laufen, kein Rad."
       }
     ],
-    "note": "Deload-Woche. Auch wenn du dich gut fühlst – nicht mehr machen."
+    "note": "Urlaubswoche 3 / Deload. Volumen –30% gegenüber W3. Urlaub endet Fr – entspannt ankommen, kein Stress."
   },
   {
     "label": "W5",
