@@ -244,7 +244,7 @@ window.GARMIN_DATA = {
     </div>
 
     <!-- Status Cards -->
-    <div id="gd-cards" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;">
+    <div id="gd-cards" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;">
       <div style="background:#fff;border:1px solid #e5e0f0;border-radius:8px;padding:10px;">
         <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">HRV</div>
         <div id="gd-hrv" style="font-size:18px;font-weight:700;color:#1a1a2e;">–</div>
@@ -264,6 +264,11 @@ window.GARMIN_DATA = {
         <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Ruhepuls</div>
         <div id="gd-rhr" style="font-size:18px;font-weight:700;color:#1a1a2e;">–</div>
         <div id="gd-rhr-sub" style="font-size:10px;color:#999;"></div>
+      </div>
+      <div style="background:#fff;border:1px solid #e5e0f0;border-radius:8px;padding:10px;">
+        <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px;">Gewicht</div>
+        <div id="gd-weight" style="font-size:18px;font-weight:700;color:#1a1a2e;">–</div>
+        <div id="gd-weight-sub" style="font-size:10px;color:#999;">Ziel 87 kg</div>
       </div>
     </div>
 
@@ -2242,6 +2247,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(g.body_battery!=null){const el=document.getElementById('gd-bb');el.textContent=g.body_battery;el.style.color=clr(g.body_battery,70,40);}
     if(g.training_readiness!=null){const el=document.getElementById('gd-ready');el.textContent=g.training_readiness;el.style.color=clr(g.training_readiness,70,40);}
     if(g.resting_hr!=null){document.getElementById('gd-rhr').textContent=g.resting_hr+' bpm';}
+    if(g.weight_kg!=null){const el=document.getElementById('gd-weight');el.textContent=g.weight_kg.toFixed(1)+' kg';const diff=g.weight_kg-87;el.style.color=diff<=0?'#00c96a':diff<=2?VIO:COR;document.getElementById('gd-weight-sub').textContent=diff<=0?'✓ Zielgewicht erreicht':`${diff>0?'+':''}${diff.toFixed(1)} kg bis Ziel`;}
 
     // Charts
     if(typeof Chart==='undefined')return;
@@ -2253,7 +2259,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(hist.hrv.length>1){const{labels,data}=ph(hist.hrv);new Chart(document.getElementById('gd-c1'),{type:'line',data:{labels,datasets:[{data,borderColor:NEO,backgroundColor:NEO2,borderWidth:1.5,tension:0.35,fill:true,pointRadius:data.map(v=>v<=38?3.5:1.5),pointBackgroundColor:data.map(v=>v<=38?COR:NEO),pointBorderColor:data.map(v=>v<=38?COR:NEO)}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+' ms'}}},scales:{x:{grid:{color:grid},ticks:{maxTicksLimit:6,maxRotation:0}},y:{grid:{color:grid},ticks:{callback:v=>v+'ms'}}}}});}
     if(hist.rhr.length>1){const{labels,data}=ph(hist.rhr);new Chart(document.getElementById('gd-c2'),{type:'line',data:{labels,datasets:[{data,borderColor:VIO,backgroundColor:VIO2,borderWidth:1.5,tension:0.35,fill:true,pointRadius:data.map(v=>v>=56?3.5:1.5),pointBackgroundColor:data.map(v=>v>=56?COR:VIO),pointBorderColor:data.map(v=>v>=56?COR:VIO)}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+' bpm'}}},scales:{x:{grid:{color:grid},ticks:{maxTicksLimit:6,maxRotation:0}},y:{grid:{color:grid},ticks:{callback:v=>v+' bpm'}}}}});}
     if(hist.weekly_km.length>0){const wk=[...hist.weekly_km].reverse();new Chart(document.getElementById('gd-c3'),{type:'bar',data:{labels:wk.map(x=>x.w.replace(/\d{4}-/,'')),datasets:[{data:wk.map(x=>x.v),backgroundColor:wk.map(x=>x.v<20?'rgba(255,107,87,0.75)':'rgba(0,230,118,0.75)'),borderWidth:0,borderRadius:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+' km'}}},scales:{x:{grid:{color:grid}},y:{min:0,grid:{color:grid},ticks:{callback:v=>v+'km',maxTicksLimit:4}}}}});}
-    if(hist.weight.length>1){const{labels,data}=ph(hist.weight);new Chart(document.getElementById('gd-c4'),{type:'line',data:{labels,datasets:[{label:'Gewicht',data,borderColor:VIO,backgroundColor:VIO2,borderWidth:2,pointRadius:3,tension:0.3,fill:true},{label:'Ziel 87 kg',data:data.map(()=>87),borderColor:COR,borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',align:'end',labels:{boxWidth:10,font:{size:9},color:'#aaa'}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.raw+' kg'}}},scales:{x:{grid:{color:grid}},y:{min:85,max:95,grid:{color:grid},ticks:{callback:v=>v+' kg'}}}}});}
+    if(hist.weight.length>0){const{labels,data}=ph(hist.weight);new Chart(document.getElementById('gd-c4'),{type:'line',data:{labels,datasets:[{label:'Gewicht',data,borderColor:VIO,backgroundColor:VIO2,borderWidth:2,pointRadius:3,tension:0.3,fill:true},{label:'Ziel 87 kg',data:data.map(()=>87),borderColor:COR,borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',align:'end',labels:{boxWidth:10,font:{size:9},color:'#aaa'}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.raw+' kg'}}},scales:{x:{grid:{color:grid}},y:{min:85,max:95,grid:{color:grid},ticks:{callback:v=>v+' kg'}}}}});}
 
     // Challenges
     const ch=g.challenges||[];
