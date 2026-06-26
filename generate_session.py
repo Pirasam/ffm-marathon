@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """
-Garmin-Session-Tokens generieren und als GitHub Secret speichern.
+Garmin-Session generieren und als GitHub Secret speichern.
 
-Lokal ausführen:
+Ausführen:
     python3 generate_session.py
 
-Oder im Browser via GitHub Codespaces:
-    github.com/Pirasam/ffm-marathon → Code → Codespaces → Create codespace on main
-    Dann im Terminal: python3 generate_session.py
+Dann den Inhalt von garmin_secret.txt als GitHub Secret 'GARMIN_SESSION_DATA' speichern.
 """
 import os, sys
 
@@ -21,83 +19,86 @@ except ImportError:
 email = os.environ.get("GARMIN_EMAIL") or input("Garmin E-Mail: ")
 password = os.environ.get("GARMIN_PASSWORD") or input("Garmin Passwort: ")
 
+print("\nAnmelden bei Garmin Connect …")
+api = Garmin(email, password)
+
 def get_mfa():
     print("\nGarmin hat einen Verifizierungscode per E-Mail gesendet.")
     return input("Code eingeben: ").strip()
 
-print("\nAnmelden bei Garmin Connect …")
-api = Garmin(email, password)
-
 try:
     api.login(prompt_mfa=get_mfa)
 except TypeError:
-    # Ältere Version ohne prompt_mfa-Parameter
     api.login()
 except Exception as e:
     print(f"\nFEHLER beim Login: {e}")
-    print("\nMögliche Ursachen:")
-    print("- E-Mail oder Passwort falsch")
-    print("- Garmin Connect nicht erreichbar")
-    print("- Verifizierungscode falsch eingegeben")
     sys.exit(1)
 
-try:
-    print(f"\nErfolgreich angemeldet als: {api.display_name}")
-except Exception:
-    print("\nAngemeldet (Display-Name nicht abrufbar)")
+print("Login erfolgreich!")
 
 session_data = api.garth.dumps()
 
-# Lokal speichern für Tests
-import os
+# Prüfen ob gültige Tokens vorhanden
+import base64, json
+decoded = json.loads(base64.b64decode(session_data).decode())
+if decoded[1] is None:
+    print("\nFEHLER: Login hat keine Tokens geliefert (oauth2_token ist leer).")
+    print("Bitte nochmal versuchen.")
+    sys.exit(1)
+
+print(f"Session-Tokens OK (oauth2_token vorhanden, {len(session_data)} Zeichen)")
+
+# Lokal speichern
 session_path = os.path.expanduser("~/.garmin_session")
 with open(session_path, "w") as f:
     f.write(session_data)
 print(f"Session lokal gespeichert: {session_path}")
 
-# Schneller API-Test
+# In separate Datei schreiben (für GitHub Secret)
+secret_file = os.path.join(os.path.dirname(__file__), "garmin_secret.txt")
+with open(secret_file, "w") as f:
+    f.write(session_data)
+print(f"Secret-Datei: {secret_file}")
+
+# API-Test
 print("\nTeste Garmin API-Calls …")
 from datetime import date, timedelta
 yesterday = (date.today() - timedelta(days=1)).isoformat()
 today_str = date.today().isoformat()
 
-try:
-    hrv = api.get_hrv_data(yesterday)
-    s = hrv.get("hrvSummary", {})
-    print(f"  HRV: {s.get('lastNight')} ms, Status: {s.get('status')}")
-except Exception as e:
-    print(f"  HRV FEHLER: {e}")
+ok_count = 0
+for label, call in [
+    ("HRV", lambda: api.get_hrv_data(yesterday).get("hrvSummary", {}).get("lastNight")),
+    ("Body Battery", lambda: api.get_stats(today_str).get("bodyBatteryMostRecentValue")),
+    ("Ruhepuls", lambda: api.get_stats(today_str).get("restingHeartRateValue")),
+    ("Schlaf", lambda: round((api.get_sleep_data(yesterday).get("dailySleepDTO", {}).get("sleepTimeSeconds") or 0) / 3600, 1)),
+]:
+    try:
+        val = call()
+        print(f"  {label}: {val}")
+        if val is not None:
+            ok_count += 1
+    except Exception as e:
+        print(f"  {label}: FEHLER – {e}")
 
-try:
-    stats = api.get_stats(today_str)
-    print(f"  Body Battery: {stats.get('bodyBatteryMostRecentValue')}, RHR: {stats.get('restingHeartRateValue')}")
-except Exception as e:
-    print(f"  Stats FEHLER: {e}")
+print(f"\n{ok_count}/4 API-Calls erfolgreich.")
 
-try:
-    sleep = api.get_sleep_data(yesterday)
-    dto = sleep.get("dailySleepDTO", {})
-    h = (dto.get("sleepTimeSeconds") or 0) // 3600
-    print(f"  Schlaf: {h}h")
-except Exception as e:
-    print(f"  Schlaf FEHLER: {e}")
+print(f"""
+{'='*60}
+NÄCHSTE SCHRITTE:
+{'='*60}
+1. Öffne: {secret_file}
+   (enthält NUR den Token-String, nichts anderes)
 
-print("\n" + "=" * 60)
-print("GARMIN_SESSION_DATA — als GitHub Secret speichern:")
-print("=" * 60)
-print(session_data)
-print("=" * 60)
+2. Inhalt komplett kopieren (eine lange Zeile)
 
-print("""
-Nächste Schritte:
-1. Den Text oben komplett kopieren
-2. github.com/Pirasam/ffm-marathon
+3. GitHub → github.com/Pirasam/ffm-marathon
    → Settings → Secrets and variables → Actions
-   → "New repository secret"
-3. Name:  GARMIN_SESSION_DATA
-   Value: (kopierten Text einfügen)
-4. "Add secret" speichern
-5. Actions → "Run workflow" triggern
+   → Secret 'GARMIN_SESSION_DATA' updaten/erstellen
+   → Inhalt aus Datei einfügen → Speichern
+
+4. Actions → 'Run workflow' → Daten sollten erscheinen!
 
 Die Session ist ~60 Tage gültig.
+{'='*60}
 """)

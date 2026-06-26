@@ -25,12 +25,14 @@ def garmin_login():
 
     # 1. GitHub Secret — kein Fresh-Login in CI (Garmin 429 auf CI-IPs)
     if session_secret:
+        preview = session_secret[:40].replace('\n', '\\n')
+        print(f"Garmin: Secret-Preview: {preview!r}")
         try:
             api.garth.loads(session_secret)
             print("Garmin: Session aus Secret geladen OK")
             return api
         except Exception as e:
-            raise RuntimeError(f"GARMIN_SESSION_DATA vorhanden aber ungueltig: {e}")
+            raise RuntimeError(f"GARMIN_SESSION_DATA ungueltig (erste 40 Zeichen: {preview!r}): {e}")
 
     # 2. Gecachte Session
     if os.path.exists(TOKENSTORE_PATH):
