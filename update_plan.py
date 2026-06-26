@@ -29,7 +29,8 @@ def garmin_login():
         print(f"Garmin: Secret-Preview: {preview!r}")
         try:
             api.garth.loads(session_secret)
-            print("Garmin: Session aus Secret geladen OK")
+            api.display_name = api.garth.profile.get("displayName")
+            print(f"Garmin: Session OK, Nutzer: {api.display_name}")
             return api
         except Exception as e:
             raise RuntimeError(f"GARMIN_SESSION_DATA ungueltig (erste 40 Zeichen: {preview!r}): {e}")
@@ -39,7 +40,8 @@ def garmin_login():
         try:
             with open(TOKENSTORE_PATH) as f:
                 api.garth.loads(f.read())
-            print("Garmin: gecachte Session verwendet")
+            api.display_name = api.garth.profile.get("displayName")
+            print(f"Garmin: gecachte Session OK, Nutzer: {api.display_name}")
             return api
         except Exception as e:
             print(f"Garmin: gecachte Session ungueltig: {e}")
