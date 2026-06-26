@@ -43,5 +43,6 @@ jobs:
           git add index.html
           git diff --staged --quiet || (
             git commit -m "Tagesupdate: $(date +%Y-%m-%d)" &&
+            git pull --rebase origin main &&
             git push
           )
