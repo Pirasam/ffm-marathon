@@ -376,14 +376,17 @@ def get_plan_context(html_content):
                     badges = day.get("badges", [])
                     desc = day.get("desc", "")
                     is_rest = "rest" in badges
+                    is_longrun = bool(day.get("longrun")) or "longrun" in title.lower()
                     base += f"\nHEUTE GEPLANT: {title}"
                     if is_rest:
                         base += " (RUHETAG — KEIN LAUFEN, KEIN TRAINING empfehlen)"
+                    elif is_longrun:
+                        base += " (LONGRUN — langer Dauerlauf, Verpflegung und Regeneration wichtig)"
                     elif "run" in badges:
                         base += f" (Lauftag — Zone 2, {desc[:80]})"
                     elif "bike" in badges:
                         base += f" (Radtag — {desc[:80]})"
-                    base += f"\nBeschreibung: {desc[:120]}"
+                    base += f"\nBeschreibung: {desc[:160]}"
     except Exception as e:
         print(f"Plan-Kontext-Fehler: {e}")
 
@@ -418,6 +421,18 @@ def call_claude(metrics, plan_context):
         pace_str = f"{int(pace)}:{int((pace % 1) * 60):02d} min/km" if pace else "?"
         last_run_str = (f"\n- Letzter Lauf: {lr['date']}, {d} km, {t} min, Pace {pace_str}"
                         + (f", ∅HR {lr['avg_hr']} bpm" if lr.get("avg_hr") else ""))
+
+    is_longrun = "LONGRUN" in plan_context
+    longrun_field = ""
+    if is_longrun:
+        longrun_field = (
+            ',\n  "long_run_tips": {\n'
+            '    "hydration": "<1-2 Sätze: Trinkstrategie für heute. Bei >60 Min: alle 15-20 Min trinken, Natrium/Elektrolyte (er hatte Hamstring-Krampf durch Natriummangel!). Mengen je nach Hitze nennen.>",\n'
+            '    "nutrition": "<1-2 Sätze: Verpflegung. Vor dem Lauf Kohlenhydrate, während Lauf >75 Min ein Gel ab km 12-14. Bei Gewichtsabnahme-Ziel: nicht überessen, aber Longrun braucht Energie.>",\n'
+            '    "stretching": "<1-2 Sätze: Vorher dynamisch (Beinpendel, Ausfallschritte), nachher statisch mit Fokus Hamstrings/Waden. Konkret benennen.>",\n'
+            '    "recovery": "<1-2 Sätze: Nach dem Lauf — Protein+Carbs binnen 30-60 Min, Elektrolyte auffüllen, lockeres Auslaufen/Gehen, Schlaf priorisieren.>"\n'
+            '  }'
+        )
 
     prompt = f"""Du bist Laufcoach. Analysiere diese Garmin-Morgendaten für einen Läufer (Ziel: Frankfurt Marathon 25.10.2026, ~5h, aktuell 91 kg → Ziel 87 kg).
 
@@ -457,12 +472,12 @@ Antworte NUR mit diesem JSON (kein Markdown, kein Text):
   "factor_vo2max": <0–100>,
   "factor_weight": <0–100>,
   "challenge_alert": "<leer ODER 1 Satz zu bald endender Challenge auf Deutsch>",
-  "run_feedback": "<falls letzter Lauf vorhanden: 2 Sätze Feedback auf Deutsch. Wenn Puls zu hoch war: empfehle LANGSAMERE Pace (höhere min/km-Zahl). Zone-2 für diesen Läufer = ca. 8:00–9:30 min/km bei 130–135 bpm. Realistisch und motivierend formulieren. Sonst leer.>"
+  "run_feedback": "<falls letzter Lauf vorhanden: 2 Sätze Feedback auf Deutsch. Wenn Puls zu hoch war: empfehle LANGSAMERE Pace (höhere min/km-Zahl). Zone-2 für diesen Läufer = ca. 8:00–9:30 min/km bei 130–135 bpm. Realistisch und motivierend formulieren. Sonst leer.>"{longrun_field}
 }}"""
 
     response = client.messages.create(
         model="claude-haiku-4-5-20251001",
-        max_tokens=500,
+        max_tokens=900,
         messages=[{"role": "user", "content": prompt}],
     )
     text = response.content[0].text.strip()
@@ -489,6 +504,7 @@ def inject_garmin_data(html_content, metrics, claude_result):
         "factor_weight": claude_result.get("factor_weight", 50),
         "challenge_alert": claude_result.get("challenge_alert", ""),
         "run_feedback": claude_result.get("run_feedback", ""),
+        "long_run_tips": claude_result.get("long_run_tips") or None,
         "updated": date.today().isoformat(),
     }
     payload.pop("weekly_running", None)

@@ -77,6 +77,7 @@
   #gd-cards>div>div:nth-child(2){font-size:22px!important;}
   #gd-charts-1,#gd-charts-2{grid-template-columns:1fr!important;}
   #gd-challenges-grid{grid-template-columns:1fr!important;}
+  #gd-longrun-grid{grid-template-columns:1fr!important;}
   #gd-hero-inner{flex-direction:column!important;}
   #gd-ftime{font-size:42px!important;}}
 </style>
@@ -274,6 +275,32 @@ window.GARMIN_DATA = {
         </div>
         <div id="gd-rec-text" style="font-size:12px;color:#333;line-height:1.6;"></div>
         <div id="gd-updated" style="font-size:10px;color:#bbb;margin-top:5px;"></div>
+      </div>
+    </div>
+
+    <!-- Longrun Tipps -->
+    <div id="gd-longrun" style="display:none;background:linear-gradient(135deg,#fff 0%,#faf8ff 100%);border:1px solid #e5e0f0;border-left:3px solid #ff6b57;border-radius:10px;padding:14px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:18px;">🏔️</span>
+        <div style="font-size:11px;font-weight:700;color:#1a1a2e;text-transform:uppercase;letter-spacing:.06em;">Longrun-Strategie heute</div>
+      </div>
+      <div id="gd-longrun-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div id="gd-lt-hydration-wrap" style="background:#fff;border:1px solid #f0eef8;border-radius:8px;padding:10px;">
+          <div style="font-size:9px;font-weight:700;color:#0096c7;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">💧 Flüssigkeit</div>
+          <div id="gd-lt-hydration" style="font-size:11px;color:#444;line-height:1.5;"></div>
+        </div>
+        <div id="gd-lt-nutrition-wrap" style="background:#fff;border:1px solid #f0eef8;border-radius:8px;padding:10px;">
+          <div style="font-size:9px;font-weight:700;color:#00a855;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">🍌 Verpflegung</div>
+          <div id="gd-lt-nutrition" style="font-size:11px;color:#444;line-height:1.5;"></div>
+        </div>
+        <div id="gd-lt-stretching-wrap" style="background:#fff;border:1px solid #f0eef8;border-radius:8px;padding:10px;">
+          <div style="font-size:9px;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">🤸 Dehnen</div>
+          <div id="gd-lt-stretching" style="font-size:11px;color:#444;line-height:1.5;"></div>
+        </div>
+        <div id="gd-lt-recovery-wrap" style="background:#fff;border:1px solid #f0eef8;border-radius:8px;padding:10px;">
+          <div style="font-size:9px;font-weight:700;color:#d94f38;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">🔋 Regeneration</div>
+          <div id="gd-lt-recovery" style="font-size:11px;color:#444;line-height:1.5;"></div>
+        </div>
       </div>
     </div>
 
@@ -2291,6 +2318,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     const b=document.getElementById('gd-rec-badge');b.textContent=g.training_intensity||'Mittel';b.style.background=bgc;b.style.color=tc;
     document.getElementById('gd-rec-text').textContent=g.recommendation||'';
     if(g.updated)document.getElementById('gd-updated').textContent=`Aktualisiert ${g.updated} 06:02 · Basierend auf Garmin-Daten`;
+
+    // Longrun-Tipps
+    const lt=g.long_run_tips;
+    if(lt&&typeof lt==='object'){
+      document.getElementById('gd-longrun').style.display='block';
+      const fld=[['hydration','gd-lt-hydration'],['nutrition','gd-lt-nutrition'],['stretching','gd-lt-stretching'],['recovery','gd-lt-recovery']];
+      fld.forEach(([k,id])=>{const v=lt[k];const el=document.getElementById(id);if(v){el.textContent=v;}else{document.getElementById(id+'-wrap').style.display='none';}});
+    }
 
     // Status cards
     if(g.hrv_value!=null){const el=document.getElementById('gd-hrv');el.textContent=g.hrv_value+' ms';el.style.color=clr(g.hrv_value,45,35);const hMap={BALANCED:'Ausgeglichen',UNBALANCED:'Unausgeglichen',LOW:'Niedrig',POOR:'Schlecht'};const sub=document.getElementById('gd-hrv-sub');sub.textContent=hMap[g.hrv_status]||'';sub.style.color=clr(g.hrv_value,45,35);}
