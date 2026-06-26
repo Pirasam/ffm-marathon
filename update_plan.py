@@ -17,40 +17,36 @@ def garmin_login():
     from garminconnect import Garmin
     email = os.environ.get("GARMIN_EMAIL", "")
     password = os.environ.get("GARMIN_PASSWORD", "")
-    session_secret = os.environ.get("GARMIN_SESSION_DATA", "")
+    session_secret = os.environ.get("GARMIN_SESSION_DATA", "").strip()
+
+    print(f"Garmin: GARMIN_SESSION_DATA gesetzt={bool(session_secret)}, Laenge={len(session_secret)}")
 
     api = Garmin(email, password)
 
-    # 1. GitHub Secret (most reliable in CI — no fresh login needed)
+    # 1. GitHub Secret — kein Fresh-Login in CI (Garmin 429 auf CI-IPs)
     if session_secret:
         try:
             api.garth.loads(session_secret)
-            print("Garmin: session from GARMIN_SESSION_DATA secret")
-            with open(TOKENSTORE_PATH, "w") as f:
-                f.write(api.garth.dumps())
+            print("Garmin: Session aus Secret geladen OK")
             return api
         except Exception as e:
-            print(f"Garmin: secret session failed: {e}")
+            raise RuntimeError(f"GARMIN_SESSION_DATA vorhanden aber ungueltig: {e}")
 
-    # 2. Cached file from previous run
+    # 2. Gecachte Session
     if os.path.exists(TOKENSTORE_PATH):
         try:
             with open(TOKENSTORE_PATH) as f:
                 api.garth.loads(f.read())
-            print("Garmin: cached session used")
+            print("Garmin: gecachte Session verwendet")
             return api
         except Exception as e:
-            print(f"Garmin: cached session failed: {e}, trying fresh login")
+            print(f"Garmin: gecachte Session ungueltig: {e}")
 
-    # 3. Fresh login (requires interactive MFA on new IPs — usually fails in CI)
-    if not email or not password:
-        raise RuntimeError("Keine Session verfügbar und GARMIN_EMAIL/PASSWORD fehlen")
-    print("Garmin: fresh login …")
-    api.login()
-    with open(TOKENSTORE_PATH, "w") as f:
-        f.write(api.garth.dumps())
-    print("Garmin: fresh login OK, session saved")
-    return api
+    # 3. Kein Fresh-Login — wuerde in CI mit 429 scheitern
+    raise RuntimeError(
+        "Keine gueltige Garmin-Session. Bitte generate_session.py lokal ausfuehren "
+        "und GARMIN_SESSION_DATA als GitHub Secret setzen."
+    )
 
 
 # ── Garmin data ───────────────────────────────────────────────────────────────
