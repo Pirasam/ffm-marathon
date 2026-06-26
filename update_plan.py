@@ -80,7 +80,7 @@ def fetch_garmin_metrics(api):
         hrv = api.get_hrv_data(yesterday)
         s = hrv.get("hrvSummary", {})
         metrics["hrv_status"] = s.get("status")
-        metrics["hrv_value"] = s.get("lastNight")
+        metrics["hrv_value"] = s.get("lastNight5MinHigh") or s.get("lastNightAvg")
         metrics["hrv_weekly_avg"] = s.get("weeklyAvg")
     except Exception as e:
         print(f"HRV error: {e}"); _errors.append(f"hrv: {e}")
@@ -93,7 +93,7 @@ def fetch_garmin_metrics(api):
         stats = api.get_stats(today_str)
         metrics["body_battery"] = stats.get("bodyBatteryMostRecentValue")
         metrics["stress"] = stats.get("averageStressLevel")
-        metrics["resting_hr"] = stats.get("restingHeartRateValue")
+        metrics["resting_hr"] = stats.get("restingHeartRate") or stats.get("restingHeartRateValue")
     except Exception as e:
         print(f"Stats error: {e}"); _errors.append(f"stats: {e}")
         metrics["body_battery"] = None
@@ -104,7 +104,7 @@ def fetch_garmin_metrics(api):
     try:
         tr = api.get_training_readiness(today_str)
         if isinstance(tr, list) and tr:
-            metrics["training_readiness"] = tr[0].get("trainingReadinessScore")
+            metrics["training_readiness"] = tr[0].get("score") or tr[0].get("trainingReadinessScore")
         else:
             metrics["training_readiness"] = None
     except Exception as e:
@@ -153,9 +153,11 @@ def fetch_garmin_metrics(api):
 
     # VO2max
     try:
-        perf = api.get_max_metrics(today_str)
-        if isinstance(perf, list) and perf:
-            metrics["vo2max"] = perf[0].get("generic", {}).get("vo2MaxPreciseValue")
+        for d in [today_str, yesterday]:
+            perf = api.get_max_metrics(d)
+            if isinstance(perf, list) and perf:
+                metrics["vo2max"] = perf[0].get("generic", {}).get("vo2MaxPreciseValue")
+                break
         else:
             metrics["vo2max"] = None
     except Exception as e:
