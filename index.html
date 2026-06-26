@@ -85,17 +85,20 @@
 window.GARMIN_DATA = {
   "challenges": [],
   "recent_activities": [],
-  "recommendation": "Datenlage unvollständig – Garmin-Synchronisation prüfen. Fokus: regelmäßige Zone-2-Einheiten (80% des Volumens) + 1× wöchentlich Tempo/Intervall zur VO₂max-Entwicklung.",
+  "_errors": [
+    "login: Error in request: 429 Client Error: Too Many Requests for url: https://sso.garmin.com/mobile/api/login?clientId=GCM_ANDROID_DARK&locale=en-US&service=https%3A%2F%2Fmobile.integration.garmin.com%2Fgcm%2Fandroid"
+  ],
+  "recommendation": "Daten unvollständig – Garmin-Synchronisation prüfen und manuell nachtragen (Schlaf, Gewicht, HRV, Ruhepuls). Erst dann aussagekräftige Trainingsplanung möglich.",
   "training_intensity": "Leicht",
   "slider_sleep": 5.0,
   "slider_wellbeing": 2,
   "slider_hrv": 2,
-  "predicted_finish_h": 5.15,
-  "on_track_score": 45,
-  "factor_volume": 40,
-  "factor_hrv": 35,
-  "factor_vo2max": 50,
-  "factor_weight": 60,
+  "predicted_finish_h": 5.25,
+  "on_track_score": 15,
+  "factor_volume": 20,
+  "factor_hrv": 0,
+  "factor_vo2max": 0,
+  "factor_weight": 85,
   "challenge_alert": "",
   "updated": "2026-06-26"
 };
