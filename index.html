@@ -50,18 +50,6 @@
   .status-btn.done{background:#1a2a08;color:var(--run);border-color:#2d4a0f;}
   .status-btn.skip{background:#2a0808;color:var(--danger);border-color:#4a0f0f;}
   .status-btn.modified{background:#2a1a08;color:var(--warn);border-color:#4a2d0f;}
-  .checkin-bar{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);padding:14px 16px;margin-bottom:20px;}
-  .checkin-title{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
-  .checkin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-  .checkin-item label{font-size:10px;color:var(--text-dim);letter-spacing:0.06em;display:block;margin-bottom:5px;text-transform:uppercase;}
-  .slider-wrap{display:flex;align-items:center;gap:8px;}
-  input[type=range]{-webkit-appearance:none;width:100%;height:2px;background:var(--border);outline:none;}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;background:var(--accent);cursor:pointer;}
-  .slider-val{font-family:'Fraunces',serif;font-size:16px;font-weight:700;color:var(--accent);min-width:16px;text-align:right;}
-  .adapt-banner{background:#1a1a08;border:1px solid #3a3a0f;padding:12px 16px;margin-bottom:16px;display:none;}
-  .adapt-banner.visible{display:block;}
-  .adapt-title{font-size:10px;color:var(--warn);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;}
-  .adapt-text{font-size:12px;color:var(--text-dim);line-height:1.5;}
   .note-box{margin-top:20px;border-left:2px solid var(--border);padding-left:14px;font-size:12px;color:var(--text-dim);line-height:1.7;}
   .progress-section{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);}
   .progress-title{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;}
@@ -83,7 +71,7 @@
   .garmin-val.neutral{color:var(--text);}
   .garmin-rec{font-size:12px;color:var(--text-dim);line-height:1.5;padding-top:10px;border-top:1px solid var(--border);margin-top:10px;}
   .garmin-updated{font-size:10px;color:var(--text-dim);margin-top:4px;opacity:0.5;}
-  @media(max-width:600px){.week-stats{grid-template-columns:repeat(2,1fr);}.day-top{grid-template-columns:90px 1fr;}.day-top .badges{grid-column:1/-1;}.day-desc{padding-left:0;}.day-status{padding-left:0;}.checkin-grid{grid-template-columns:1fr;}.garmin-grid{grid-template-columns:repeat(2,1fr);}.main{padding:16px;}}
+  @media(max-width:600px){.week-stats{grid-template-columns:repeat(2,1fr);}.day-top{grid-template-columns:90px 1fr;}.day-top .badges{grid-column:1/-1;}.day-desc{padding-left:0;}.day-status{padding-left:0;}.garmin-grid{grid-template-columns:repeat(2,1fr);}.main{padding:16px;}}
 </style>
 <!-- GARMIN:START -->
 <script>window.GARMIN_DATA = null;</script>
@@ -98,14 +86,6 @@
   <div class="week-tabs" id="tabs"></div>
 </div>
 <div class="main">
-  <div class="checkin-bar">
-    <div class="checkin-title">Tages-Check-in</div>
-    <div class="checkin-grid">
-      <div class="checkin-item"><label>Schlaf (Std.)</label><div class="slider-wrap"><input type="range" id="sleep" min="4" max="10" step="0.5" value="7.5" oninput="updateCheckin()"><span class="slider-val" id="sleep-val">7.5</span></div></div>
-      <div class="checkin-item"><label>Wohlbefinden</label><div class="slider-wrap"><input type="range" id="wellbeing" min="1" max="5" step="1" value="3" oninput="updateCheckin()"><span class="slider-val" id="wellbeing-val">3</span></div></div>
-      <div class="checkin-item"><label>HFV-Status</label><div class="slider-wrap"><input type="range" id="hrv" min="1" max="3" step="1" value="2" oninput="updateCheckin()"><span class="slider-val" id="hrv-val" style="font-size:11px">Ok</span></div></div>
-    </div>
-  </div>
   <div class="garmin-bar" id="garmin-bar">
     <div class="garmin-title">⌚ Garmin · heute</div>
     <div class="garmin-grid">
@@ -117,7 +97,6 @@
     <div class="garmin-rec" id="garmin-rec"></div>
     <div class="garmin-updated" id="garmin-updated"></div>
   </div>
-  <div class="adapt-banner" id="adapt-banner"><div class="adapt-title">⚡ Plan angepasst</div><div class="adapt-text" id="adapt-text"></div></div>
   <div id="week-content"></div>
 </div>
 <script>
@@ -1937,8 +1916,7 @@ const MARATHON = new Date('2026-10-25');
 
 let activeWeek = 0;
 let dayStatus = JSON.parse(localStorage.getItem('dayStatus')||'{}');
-let checkin = JSON.parse(localStorage.getItem('checkin')||'{"sleep":7.5,"wellbeing":3,"hrv":2}');
-function saveState(){localStorage.setItem('dayStatus',JSON.stringify(dayStatus));localStorage.setItem('checkin',JSON.stringify(checkin));}
+function saveState(){localStorage.setItem('dayStatus',JSON.stringify(dayStatus));}
 
 function daysUntilMarathon(){const t=new Date();t.setHours(0,0,0,0);return Math.ceil((MARATHON-t)/(864e5));}
 function getCurrentWeek(){
@@ -1957,20 +1935,6 @@ function weekRange(i){const a=new Date(weekStarts[i]);const b=new Date(a);b.setD
 function badgeClass(b){return 'badge badge-'+b;}
 function badgeLabel(b){return {run:'Laufen',bike:'Rad',kraft:'Kraft',rest:'Pause',z2:'Zone 2',lt:'Tempo/LT'}[b]||b;}
 
-function getAdaptation(){
-  const s=parseFloat(document.getElementById('sleep').value);
-  const w=parseInt(document.getElementById('wellbeing').value);
-  const h=parseInt(document.getElementById('hrv').value);
-  const m=[];
-  if(s<6)m.push("Schlaf <6h: Heute keinen Longrun – max. 10 km Zone 1. Kein Tempolauf.");
-  else if(s<7)m.push("Schlaf <7h: Longrun-Pace um 15–20 sek/km reduzieren.");
-  if(w<=2)m.push("Wohlbefinden niedrig: Intensität streichen, nur Zone 1–2. Bei Schmerzen Ruhetag.");
-  else if(w===3)m.push("Wohlbefinden ok: Plan wie vorgesehen, Puls im Auge behalten.");
-  if(h===1)m.push("HFV rot: Kein Tempolauf. Longrun um 3–5 km kürzen.");
-  else if(h===2)m.push("HFV ok: Plan wie vorgesehen.");
-  else m.push("HFV grün: Alles gut – Plan vollständig durchführen.");
-  return m;
-}
 
 function renderTabs(){
   const cur=getCurrentWeek();
@@ -2008,31 +1972,16 @@ function renderWeek(){
     <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${Math.round(done/w.days.length*100)}%"></div></div>
     <span class="prog-val">${done}/${w.days.length}</span></div></div></div>`;
 }
-function renderAdaptation(){
-  const banner=document.getElementById('adapt-banner');
-  const s=parseFloat(document.getElementById('sleep').value);
-  const w=parseInt(document.getElementById('wellbeing').value);
-  const h=parseInt(document.getElementById('hrv').value);
-  banner.className='adapt-banner '+((s<7||w<=2||h===1)?'visible':'');
-  document.getElementById('adapt-text').innerHTML=getAdaptation().join('<br>');
-}
+
 window.selectWeek=function(i){activeWeek=i;renderTabs();renderWeek();};
 window.setStatus=function(id,status,e){e.stopPropagation();dayStatus[id]=dayStatus[id]===status?'none':status;saveState();renderWeek();};
-function updateCheckin(){
-  const s=document.getElementById('sleep').value,w=document.getElementById('wellbeing').value,h=document.getElementById('hrv').value;
-  document.getElementById('sleep-val').textContent=s;document.getElementById('wellbeing-val').textContent=w;
-  document.getElementById('hrv-val').textContent={1:'Rot',2:'Ok',3:'Grün'}[h];
-  checkin={sleep:parseFloat(s),wellbeing:parseInt(w),hrv:parseInt(h)};saveState();renderAdaptation();
-}
+
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('days-left').textContent=daysUntilMarathon();
   const cur=getCurrentWeek();
   document.getElementById('phase-label').textContent='Aktuell: '+weeks[cur].label+' · '+weeks[cur].name;
   activeWeek=cur;
-  document.getElementById('sleep').value=checkin.sleep;
-  document.getElementById('wellbeing').value=checkin.wellbeing;
-  document.getElementById('hrv').value=checkin.hrv;
-  updateCheckin();renderTabs();renderWeek();
+  renderTabs();renderWeek();
 
   // Garmin-Daten einlesen (täglich per GitHub Action injiziert)
   if(window.GARMIN_DATA){
@@ -2063,15 +2012,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(g.recommendation)document.getElementById('garmin-rec').textContent=g.recommendation;
     if(g.updated)document.getElementById('garmin-updated').textContent='Stand: '+g.updated;
 
-    // Slider einmalig pro Tag auto-setzen (nur wenn Daten von heute)
-    if(g.updated===today&&localStorage.getItem('garminAutoSet')!==today){
-      document.getElementById('sleep').value=g.slider_sleep;
-      document.getElementById('wellbeing').value=g.slider_wellbeing;
-      document.getElementById('hrv').value=g.slider_hrv;
-      checkin={sleep:g.slider_sleep,wellbeing:g.slider_wellbeing,hrv:g.slider_hrv};
-      saveState();updateCheckin();
-      localStorage.setItem('garminAutoSet',today);
-    }
   }
 });
 </script>
