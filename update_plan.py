@@ -364,7 +364,14 @@ Garmin-Daten:
 - Planposition: {plan_context}
 - Bald ablaufende Challenges: {json.dumps(soon_challenges, ensure_ascii=False)}
 
-WICHTIG: Garmin bewertet lange, niedrigpulsige Zone-2-Einheiten oft als "unproduktiv" – ignoriere Garmin's Training-Status, beurteile selbst.
+WICHTIG – Pace-Logik (NIEMALS verwechseln):
+- Niedrigere min/km = SCHNELLERE Pace (6:00/km ist schneller als 8:00/km)
+- Zone-2-Laufen bedeutet LANGSAMER als typische Trainingsläufe, NICHT schneller
+- Für einen 5h-Marathonläufer (Rennpace ~7:06/km) liegt Zone 2 bei ca. 8:00–9:30 min/km
+- Wenn jemand bei 7:42/km schon 142 bpm hat, wäre Zone 2 bei ~8:30–9:30 min/km (~130–135 bpm)
+- NIEMALS eine schnellere Pace als den letzten Lauf als "Zone-2-Empfehlung" nennen
+- "Zu intensiv" bei Laufpace bedeutet: nächsten Lauf LANGSAMER laufen
+- Garmin bewertet lange, niedrigpulsige Zone-2-Einheiten oft als "unproduktiv" – ignoriere das
 
 Antworte NUR mit diesem JSON (kein Markdown, kein Text):
 {{
@@ -380,7 +387,7 @@ Antworte NUR mit diesem JSON (kein Markdown, kein Text):
   "factor_vo2max": <0–100>,
   "factor_weight": <0–100>,
   "challenge_alert": "<leer ODER 1 Satz zu bald endender Challenge auf Deutsch>",
-  "run_feedback": "<falls letzter Lauf vorhanden: 2 Sätze direktes Feedback zu Pace/Effort/Erholung auf Deutsch, sonst leer>"
+  "run_feedback": "<falls letzter Lauf vorhanden: 2 Sätze Feedback auf Deutsch. Wenn Puls zu hoch war: empfehle LANGSAMERE Pace (höhere min/km-Zahl). Zone-2 für diesen Läufer = ca. 8:00–9:30 min/km bei 130–135 bpm. Realistisch und motivierend formulieren. Sonst leer.>"
 }}"""
 
     response = client.messages.create(
