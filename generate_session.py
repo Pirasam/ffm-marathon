@@ -26,9 +26,12 @@ def get_mfa():
     return input("Code eingeben: ").strip()
 
 print("\nAnmelden bei Garmin Connect …")
-api = Garmin(email, password, prompt_mfa=get_mfa)
+api = Garmin(email, password)
 
 try:
+    api.login(prompt_mfa=get_mfa)
+except TypeError:
+    # Ältere Version ohne prompt_mfa-Parameter
     api.login()
 except Exception as e:
     print(f"\nFEHLER beim Login: {e}")
@@ -44,6 +47,40 @@ except Exception:
     print("\nAngemeldet (Display-Name nicht abrufbar)")
 
 session_data = api.garth.dumps()
+
+# Lokal speichern für Tests
+import os
+session_path = os.path.expanduser("~/.garmin_session")
+with open(session_path, "w") as f:
+    f.write(session_data)
+print(f"Session lokal gespeichert: {session_path}")
+
+# Schneller API-Test
+print("\nTeste Garmin API-Calls …")
+from datetime import date, timedelta
+yesterday = (date.today() - timedelta(days=1)).isoformat()
+today_str = date.today().isoformat()
+
+try:
+    hrv = api.get_hrv_data(yesterday)
+    s = hrv.get("hrvSummary", {})
+    print(f"  HRV: {s.get('lastNight')} ms, Status: {s.get('status')}")
+except Exception as e:
+    print(f"  HRV FEHLER: {e}")
+
+try:
+    stats = api.get_stats(today_str)
+    print(f"  Body Battery: {stats.get('bodyBatteryMostRecentValue')}, RHR: {stats.get('restingHeartRateValue')}")
+except Exception as e:
+    print(f"  Stats FEHLER: {e}")
+
+try:
+    sleep = api.get_sleep_data(yesterday)
+    dto = sleep.get("dailySleepDTO", {})
+    h = (dto.get("sleepTimeSeconds") or 0) // 3600
+    print(f"  Schlaf: {h}h")
+except Exception as e:
+    print(f"  Schlaf FEHLER: {e}")
 
 print("\n" + "=" * 60)
 print("GARMIN_SESSION_DATA — als GitHub Secret speichern:")

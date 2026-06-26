@@ -61,6 +61,7 @@ def fetch_garmin_metrics(api):
     two_weeks_ago = (today - timedelta(days=14)).isoformat()
     today_str = today.isoformat()
     metrics = {}
+    _errors = []
 
     # Sleep
     try:
@@ -70,7 +71,7 @@ def fetch_garmin_metrics(api):
         metrics["sleep_hours"] = round(secs / 3600, 1) if secs else None
         metrics["sleep_score"] = ((dto.get("sleepScores") or {}).get("overall") or {}).get("value")
     except Exception as e:
-        print(f"Sleep error: {e}")
+        print(f"Sleep error: {e}"); _errors.append(f"sleep: {e}")
         metrics["sleep_hours"] = None
         metrics["sleep_score"] = None
 
@@ -82,7 +83,7 @@ def fetch_garmin_metrics(api):
         metrics["hrv_value"] = s.get("lastNight")
         metrics["hrv_weekly_avg"] = s.get("weeklyAvg")
     except Exception as e:
-        print(f"HRV error: {e}")
+        print(f"HRV error: {e}"); _errors.append(f"hrv: {e}")
         metrics["hrv_status"] = None
         metrics["hrv_value"] = None
         metrics["hrv_weekly_avg"] = None
@@ -94,7 +95,7 @@ def fetch_garmin_metrics(api):
         metrics["stress"] = stats.get("averageStressLevel")
         metrics["resting_hr"] = stats.get("restingHeartRateValue")
     except Exception as e:
-        print(f"Stats error: {e}")
+        print(f"Stats error: {e}"); _errors.append(f"stats: {e}")
         metrics["body_battery"] = None
         metrics["stress"] = None
         metrics["resting_hr"] = None
@@ -107,7 +108,7 @@ def fetch_garmin_metrics(api):
         else:
             metrics["training_readiness"] = None
     except Exception as e:
-        print(f"Training readiness error: {e}")
+        print(f"Training readiness error: {e}"); _errors.append(f"readiness: {e}")
         metrics["training_readiness"] = None
 
     # Activities last 14 days (for weekly volume)
@@ -133,7 +134,7 @@ def fetch_garmin_metrics(api):
                 weekly[wk] += (a.get("distance") or 0) / 1000
         metrics["weekly_running"] = {k: round(v, 1) for k, v in weekly.items()}
     except Exception as e:
-        print(f"Activities error: {e}")
+        print(f"Activities error: {e}"); _errors.append(f"activities: {e}")
         metrics["recent_activities"] = []
         metrics["weekly_running"] = {}
 
@@ -147,7 +148,7 @@ def fetch_garmin_metrics(api):
         else:
             metrics["weight_kg"] = None
     except Exception as e:
-        print(f"Weight error: {e}")
+        print(f"Weight error: {e}"); _errors.append(f"weight: {e}")
         metrics["weight_kg"] = None
 
     # VO2max
@@ -158,12 +159,13 @@ def fetch_garmin_metrics(api):
         else:
             metrics["vo2max"] = None
     except Exception as e:
-        print(f"VO2max error: {e}")
+        print(f"VO2max error: {e}"); _errors.append(f"vo2max: {e}")
         metrics["vo2max"] = None
 
     # Challenges
     metrics["challenges"] = fetch_challenges(api, today)
 
+    metrics["_errors"] = _errors
     return metrics
 
 
@@ -384,8 +386,8 @@ def inject_garmin_data(html_content, metrics, claude_result):
         "challenge_alert": claude_result.get("challenge_alert", ""),
         "updated": date.today().isoformat(),
     }
-    # Remove non-serialisable / redundant keys
     payload.pop("weekly_running", None)
+    # keep _errors in payload for live debugging
 
     start, end = GARMIN_MARKER
     block = (
@@ -414,10 +416,12 @@ def main():
     try:
         api = garmin_login()
         metrics = fetch_garmin_metrics(api)
-        print(json.dumps({k: v for k, v in metrics.items() if k != "recent_activities"}, ensure_ascii=False))
+        print(json.dumps({k: v for k, v in metrics.items() if k not in ("recent_activities", "_errors")}, ensure_ascii=False))
+        if metrics.get("_errors"):
+            print(f"API-Fehler: {metrics['_errors']}")
     except Exception as e:
         print(f"Garmin fehlgeschlagen: {e}")
-        metrics = {"challenges": [], "weekly_running": {}, "recent_activities": []}
+        metrics = {"challenges": [], "weekly_running": {}, "recent_activities": [], "_errors": [f"login: {e}"]}
 
     # Update history
     history = load_history(html)
