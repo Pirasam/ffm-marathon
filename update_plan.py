@@ -15,22 +15,41 @@ HISTORY_MARKER = ("<!-- HISTORY:START -->", "<!-- HISTORY:END -->")
 
 def garmin_login():
     from garminconnect import Garmin
-    email = os.environ["GARMIN_EMAIL"]
-    password = os.environ["GARMIN_PASSWORD"]
+    email = os.environ.get("GARMIN_EMAIL", "")
+    password = os.environ.get("GARMIN_PASSWORD", "")
+    session_secret = os.environ.get("GARMIN_SESSION_DATA", "")
+
     api = Garmin(email, password)
+
+    # 1. GitHub Secret (most reliable in CI — no fresh login needed)
+    if session_secret:
+        try:
+            api.garth.loads(session_secret)
+            print("Garmin: session from GARMIN_SESSION_DATA secret")
+            with open(TOKENSTORE_PATH, "w") as f:
+                f.write(api.garth.dumps())
+            return api
+        except Exception as e:
+            print(f"Garmin: secret session failed: {e}")
+
+    # 2. Cached file from previous run
     if os.path.exists(TOKENSTORE_PATH):
         try:
             with open(TOKENSTORE_PATH) as f:
                 api.garth.loads(f.read())
-            _ = api.display_name
             print("Garmin: cached session used")
             return api
-        except Exception:
-            print("Garmin: cached session expired, re-login")
+        except Exception as e:
+            print(f"Garmin: cached session failed: {e}, trying fresh login")
+
+    # 3. Fresh login (requires interactive MFA on new IPs — usually fails in CI)
+    if not email or not password:
+        raise RuntimeError("Keine Session verfügbar und GARMIN_EMAIL/PASSWORD fehlen")
+    print("Garmin: fresh login …")
     api.login()
     with open(TOKENSTORE_PATH, "w") as f:
         f.write(api.garth.dumps())
-    print("Garmin: fresh login, session saved")
+    print("Garmin: fresh login OK, session saved")
     return api
 
 
