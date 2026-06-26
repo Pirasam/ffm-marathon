@@ -88,17 +88,37 @@ def fetch_garmin_metrics(api):
         metrics["hrv_value"] = None
         metrics["hrv_weekly_avg"] = None
 
-    # Daily stats (Body Battery, Stress, RHR)
+    # Daily stats (Stress, RHR)
     try:
         stats = api.get_stats(today_str)
-        metrics["body_battery"] = stats.get("bodyBatteryMostRecentValue")
         metrics["stress"] = stats.get("averageStressLevel")
         metrics["resting_hr"] = stats.get("restingHeartRate") or stats.get("restingHeartRateValue")
     except Exception as e:
         print(f"Stats error: {e}"); _errors.append(f"stats: {e}")
-        metrics["body_battery"] = None
         metrics["stress"] = None
         metrics["resting_hr"] = None
+
+    # Body Battery — peak value of today (morning after sleep = highest)
+    try:
+        bb_data = api.get_body_battery(yesterday, today_str)
+        bb_values = []
+        for entry in (bb_data or []):
+            # entry is either [timestamp_ms, value] or a dict
+            if isinstance(entry, list) and len(entry) >= 2:
+                bb_values.append(entry[1])
+            elif isinstance(entry, dict):
+                v = entry.get("bodyBatteryLevel") or entry.get("value") or entry.get("bodyBatteryMostRecentValue")
+                if v is not None:
+                    bb_values.append(v)
+        metrics["body_battery"] = max(bb_values) if bb_values else None
+        print(f"Body Battery peak: {metrics['body_battery']} (aus {len(bb_values)} Werten)")
+    except Exception as e:
+        print(f"Body Battery error: {e}"); _errors.append(f"body_battery: {e}")
+        # fallback to stats
+        try:
+            metrics["body_battery"] = api.get_stats(today_str).get("bodyBatteryMostRecentValue")
+        except Exception:
+            metrics["body_battery"] = None
 
     # Training Readiness
     try:
@@ -152,18 +172,34 @@ def fetch_garmin_metrics(api):
         metrics["last_run"] = None
         metrics["weekly_running"] = {}
 
-    # Weight
+    # Weight — fetch 90 days for full history
+    ninety_days_ago = (today - timedelta(days=90)).isoformat()
     try:
-        comp = api.get_body_composition(two_weeks_ago, today_str)
-        entries = comp.get("dateWeightList") or []
-        if entries:
-            latest = max(entries, key=lambda x: x.get("calendarDate", ""))
-            metrics["weight_kg"] = round((latest.get("weight") or 0) / 1000, 1) or None
+        wi = api.get_weigh_ins(ninety_days_ago, today_str)
+        entries = (wi or {}).get("dailyWeightSummaries") or (wi or {}).get("dateWeightList") or []
+        # fallback: get_body_composition
+        if not entries:
+            comp = api.get_body_composition(ninety_days_ago, today_str)
+            entries = (comp or {}).get("dateWeightList") or []
+        weight_by_date = {}
+        for e in entries:
+            d_str = e.get("calendarDate") or e.get("date") or ""
+            # weight in grams → kg
+            raw = e.get("weight") or e.get("allWeightMetrics", [{}])[0].get("weight") if isinstance(e.get("allWeightMetrics"), list) else e.get("weight")
+            if d_str and raw:
+                weight_by_date[d_str] = round(raw / 1000, 1)
+        if weight_by_date:
+            latest_date = max(weight_by_date)
+            metrics["weight_kg"] = weight_by_date[latest_date]
+            metrics["weight_history"] = {k: v for k, v in sorted(weight_by_date.items(), reverse=True)[:60]}
+            print(f"Gewicht: {metrics['weight_kg']} kg ({len(weight_by_date)} Einträge)")
         else:
             metrics["weight_kg"] = None
+            metrics["weight_history"] = {}
     except Exception as e:
         print(f"Weight error: {e}"); _errors.append(f"weight: {e}")
         metrics["weight_kg"] = None
+        metrics["weight_history"] = {}
 
     # VO2max
     try:
@@ -272,7 +308,13 @@ def update_history(history, metrics, today_str, weekly_running):
         history["rhr"] = prepend_dedup(
             history.get("rhr", []), {"d": today_str, "v": metrics["resting_hr"]}, 30
         )
-    if metrics.get("weight_kg"):
+    # Weight: use full history from Garmin if available (90 days)
+    if metrics.get("weight_history"):
+        existing = {x["d"]: x for x in history.get("weight", [])}
+        for d_str, kg in metrics["weight_history"].items():
+            existing[d_str] = {"d": d_str, "v": kg}
+        history["weight"] = sorted(existing.values(), key=lambda x: x["d"], reverse=True)[:60]
+    elif metrics.get("weight_kg"):
         history["weight"] = prepend_dedup(
             history.get("weight", []), {"d": today_str, "v": metrics["weight_kg"]}, 60
         )
@@ -317,7 +359,35 @@ def get_plan_context(html_content):
         if today >= date.fromisoformat(ws):
             cur = i
     day_de = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
-    return f"Woche {cur + 1} von {len(week_starts)}, heute {day_de[today.weekday()]} ({today.isoformat()})"
+    base = f"Woche {cur + 1} von {len(week_starts)}, heute {day_de[today.weekday()]} ({today.isoformat()})"
+
+    # Extract today's planned training from the weeks array
+    try:
+        wm = re.search(r"const weeks = (\[.*?\n\]\s*;)", html_content, re.DOTALL)
+        if wm:
+            weeks_data = json.loads(wm.group(1).rstrip(";"))
+            if cur < len(weeks_data):
+                week = weeks_data[cur]
+                days = week.get("days", [])
+                dow = today.weekday()  # 0=Mo … 6=So
+                if dow < len(days):
+                    day = days[dow]
+                    title = day.get("title", "")
+                    badges = day.get("badges", [])
+                    desc = day.get("desc", "")
+                    is_rest = "rest" in badges
+                    base += f"\nHEUTE GEPLANT: {title}"
+                    if is_rest:
+                        base += " (RUHETAG — KEIN LAUFEN, KEIN TRAINING empfehlen)"
+                    elif "run" in badges:
+                        base += f" (Lauftag — Zone 2, {desc[:80]})"
+                    elif "bike" in badges:
+                        base += f" (Radtag — {desc[:80]})"
+                    base += f"\nBeschreibung: {desc[:120]}"
+    except Exception as e:
+        print(f"Plan-Kontext-Fehler: {e}")
+
+    return base
 
 
 # ── Claude ────────────────────────────────────────────────────────────────────
@@ -422,6 +492,7 @@ def inject_garmin_data(html_content, metrics, claude_result):
         "updated": date.today().isoformat(),
     }
     payload.pop("weekly_running", None)
+    payload.pop("weight_history", None)
     # keep _errors in payload for live debugging
 
     start, end = GARMIN_MARKER
