@@ -2321,7 +2321,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const[bgc,tc]=iMap[g.training_intensity]||iMap.Mittel;
     const b=document.getElementById('gd-rec-badge');b.textContent=g.training_intensity||'Mittel';b.style.background=bgc;b.style.color=tc;
     document.getElementById('gd-rec-text').textContent=g.recommendation||'';
-    if(g.updated)document.getElementById('gd-updated').textContent=`Aktualisiert ${g.updated} 06:02 · Basierend auf Garmin-Daten`;
+    if(g.updated)document.getElementById('gd-updated').textContent=`Aktualisiert ${g.updated} 07:00 · Basierend auf Garmin-Daten`;
 
     // Longrun-Tipps
     const lt=g.long_run_tips;

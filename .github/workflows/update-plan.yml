@@ -2,7 +2,7 @@ name: Tägliches Trainingsupdate
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # 06:00 Uhr MEZ / 07:00 MESZ
+    - cron: "0 5 * * *"   # 05:00 UTC = 07:00 MESZ (Sommer/Trainingsphase) bzw. 06:00 MEZ (Winter)
   workflow_dispatch:        # manuell auslösbar
 
 jobs:
