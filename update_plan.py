@@ -75,18 +75,24 @@ def fetch_garmin_metrics(api):
         metrics["sleep_hours"] = None
         metrics["sleep_score"] = None
 
-    # HRV
+    # HRV — lastNightAvg ist der von Garmin angezeigte Nachtwert (40–50er-Bereich).
+    # lastNight5MinHigh ist nur der Spitzenwert und liegt deutlich höher.
     try:
         hrv = api.get_hrv_data(yesterday)
         s = hrv.get("hrvSummary", {})
         metrics["hrv_status"] = s.get("status")
-        metrics["hrv_value"] = s.get("lastNight5MinHigh") or s.get("lastNightAvg")
+        metrics["hrv_value"] = s.get("lastNightAvg") or s.get("lastNight5MinHigh")
         metrics["hrv_weekly_avg"] = s.get("weeklyAvg")
+        bl = s.get("baseline") or {}
+        metrics["hrv_balanced_low"] = bl.get("balancedLow")
+        metrics["hrv_balanced_high"] = bl.get("balancedUpper")
     except Exception as e:
         print(f"HRV error: {e}"); _errors.append(f"hrv: {e}")
         metrics["hrv_status"] = None
         metrics["hrv_value"] = None
         metrics["hrv_weekly_avg"] = None
+        metrics["hrv_balanced_low"] = None
+        metrics["hrv_balanced_high"] = None
 
     # Daily stats (Stress, RHR)
     try:
@@ -98,23 +104,24 @@ def fetch_garmin_metrics(api):
         metrics["stress"] = None
         metrics["resting_hr"] = None
 
-    # Body Battery — peak value of today (morning after sleep = highest)
+    # Body Battery — Tages-Höchstwert (morgens nach dem Schlaf am höchsten).
+    # get_body_battery liefert Tagesobjekte mit verschachteltem bodyBatteryValuesArray [[ts, level], …].
     try:
         bb_data = api.get_body_battery(yesterday, today_str)
-        bb_values = []
-        for entry in (bb_data or []):
-            # entry is either [timestamp_ms, value] or a dict
-            if isinstance(entry, list) and len(entry) >= 2:
-                bb_values.append(entry[1])
-            elif isinstance(entry, dict):
-                v = entry.get("bodyBatteryLevel") or entry.get("value") or entry.get("bodyBatteryMostRecentValue")
-                if v is not None:
-                    bb_values.append(v)
-        metrics["body_battery"] = max(bb_values) if bb_values else None
-        print(f"Body Battery peak: {metrics['body_battery']} (aus {len(bb_values)} Werten)")
+        today_levels, all_levels = [], []
+        for day in (bb_data or []):
+            d_date = day.get("date") if isinstance(day, dict) else None
+            for pair in (day.get("bodyBatteryValuesArray") or []):
+                if isinstance(pair, list) and len(pair) >= 2 and pair[1] is not None:
+                    all_levels.append(pair[1])
+                    if d_date == today_str:
+                        today_levels.append(pair[1])
+        # Bevorzuge den heutigen Peak; sonst den jüngsten verfügbaren Tag
+        peak = max(today_levels) if today_levels else (max(all_levels) if all_levels else None)
+        metrics["body_battery"] = peak
+        print(f"Body Battery Peak: {peak} (heute {len(today_levels)} Werte, gesamt {len(all_levels)})")
     except Exception as e:
         print(f"Body Battery error: {e}"); _errors.append(f"body_battery: {e}")
-        # fallback to stats
         try:
             metrics["body_battery"] = api.get_stats(today_str).get("bodyBatteryMostRecentValue")
         except Exception:
@@ -305,7 +312,7 @@ def backfill_history(api, history, today, days=30):
             try:
                 hrv = api.get_hrv_data(d)
                 s = (hrv or {}).get("hrvSummary", {})
-                v = s.get("lastNight5MinHigh") or s.get("lastNightAvg")
+                v = s.get("lastNightAvg") or s.get("lastNight5MinHigh")
                 if v:
                     history.setdefault("hrv", []).append({"d": d, "v": v})
                     new_hrv += 1
@@ -468,50 +475,60 @@ def call_claude(metrics, plan_context):
             '  }'
         )
 
-    prompt = f"""Du bist Laufcoach. Analysiere diese Garmin-Morgendaten für einen Läufer (Ziel: Frankfurt Marathon 25.10.2026, ~5h, aktuell 91 kg → Ziel 87 kg).
+    hrv_lo = metrics.get("hrv_balanced_low")
+    hrv_hi = metrics.get("hrv_balanced_high")
+    hrv_range = f" (sein ausgeglichener Bereich: {hrv_lo}–{hrv_hi} ms)" if hrv_lo and hrv_hi else ""
 
-Garmin-Daten:
+    prompt = f"""Du bist sein persönlicher Laufcoach. Ziel: Frankfurt Marathon 25.10.2026 unter 5:00 h, aktuell {metrics.get("weight_kg")} kg → Ziel 87 kg.
+
+Garmin-Daten heute:
 - Schlaf: {metrics.get("sleep_hours")} h (Score {metrics.get("sleep_score")}/100)
-- HRV: {hrv_display} | Wert letzte Nacht: {metrics.get("hrv_value")} ms | Wochenschnitt: {metrics.get("hrv_weekly_avg")} ms
+- HRV: {hrv_display} | letzte Nacht: {metrics.get("hrv_value")} ms | Wochenschnitt: {metrics.get("hrv_weekly_avg")} ms{hrv_range}
 - Body Battery: {metrics.get("body_battery")}/100
 - Training Readiness: {metrics.get("training_readiness")}/100
 - Ruhepuls: {metrics.get("resting_hr")} bpm
 - Stresslevel gestern: {metrics.get("stress")}/100
-- Gewicht: {metrics.get("weight_kg")} kg
 - VO₂max: {metrics.get("vo2max")}{last_run_str}
 - Letzte Aktivitäten (14 Tage): {json.dumps(metrics.get("recent_activities", [])[:7], ensure_ascii=False)}
-- Planposition: {plan_context}
+- {plan_context}
 - Bald ablaufende Challenges: {json.dumps(soon_challenges, ensure_ascii=False)}
 
-WICHTIG – Pace-Logik (NIEMALS verwechseln):
-- Niedrigere min/km = SCHNELLERE Pace (6:00/km ist schneller als 8:00/km)
-- Zone-2-Laufen bedeutet LANGSAMER als typische Trainingsläufe, NICHT schneller
-- Für einen 5h-Marathonläufer (Rennpace ~7:06/km) liegt Zone 2 bei ca. 8:00–9:30 min/km
-- Wenn jemand bei 7:42/km schon 142 bpm hat, wäre Zone 2 bei ~8:30–9:30 min/km (~130–135 bpm)
-- NIEMALS eine schnellere Pace als den letzten Lauf als "Zone-2-Empfehlung" nennen
-- "Zu intensiv" bei Laufpace bedeutet: nächsten Lauf LANGSAMER laufen
-- Garmin bewertet lange, niedrigpulsige Zone-2-Einheiten oft als "unproduktiv" – ignoriere das
+REGEL 1 — Plan ist bindend: Die Empfehlung MUSS zum heute geplanten Training (Zeile "HEUTE GEPLANT") passen.
+- Steht dort RUHETAG: empfiehl KEIN Laufen/Radfahren. Empfiehl Erholung, Mobilität, ggf. Spaziergang. Erkläre kurz warum Ruhe heute wichtig ist.
+- Steht dort ein Lauf/Rad: bestätige oder passe an Tagesform an (z.B. bei schlechter Erholung kürzer/langsamer).
+- Erfinde NIEMALS ein Training, das nicht im Plan steht.
 
-Antworte NUR mit diesem JSON (kein Markdown, kein Text):
+REGEL 2 — Pace-Logik (niedrigere min/km = SCHNELLER):
+- Zone 2 für diesen Läufer (5h-Marathon, Rennpace ~7:06/km) = ca. 8:00–9:30 min/km bei 130–135 bpm — also LANGSAM.
+- "Puls zu hoch" → nächster Lauf LANGSAMER (höhere min/km-Zahl). NIE eine schnellere Pace als Zone-2-Tipp nennen.
+
+REGEL 3 — On-Track ehrlich: on_track_score (0–100) und predicted_finish_h müssen zusammenpassen.
+- Wenn Finish > 5:00 h, darf on_track_score nicht "grün/gut" wirken (also < 70). Wenn Finish < 5:00 h, dann ≥ 70.
+- on_track_note erklärt den Status in 1 Satz und nennt den größten Hebel.
+
+REGEL 4 — Laufanalyse konkret & motivierend: Beziehe dich auf echte Zahlen (Pace, Puls, Distanz), sag was gut war UND den einen wichtigsten nächsten Schritt. Kein Fachjargon-Geschwurbel, kein unrealistischer Ratschlag.
+
+Antworte NUR mit diesem JSON (kein Markdown):
 {{
-  "recommendation": "<max. 2 prägnante Sätze auf Deutsch>",
-  "training_intensity": "<Leicht|Mittel|Hart>",
+  "recommendation": "<2 Sätze auf Deutsch, passend zum HEUTE GEPLANTEN Training>",
+  "training_intensity": "<Leicht|Mittel|Hart|Ruhe>",
   "slider_sleep": <4–10 Schritte 0.5>,
   "slider_wellbeing": <1–5: 1=erschöpft 5=top>,
   "slider_hrv": <1–3: 1=Rot 2=Ok 3=Grün>,
   "predicted_finish_h": <Zahl z.B. 4.97, realistisch aus VO2max+Volumen+Gewicht>,
-  "on_track_score": <0–100>,
+  "on_track_score": <0–100, konsistent mit predicted_finish_h>,
+  "on_track_note": "<1 Satz: erklärt on_track_score + Finishzeit zusammen, nennt größten Hebel (z.B. Laufumfang)>",
   "factor_volume": <0–100>,
   "factor_hrv": <0–100>,
   "factor_vo2max": <0–100>,
   "factor_weight": <0–100>,
-  "challenge_alert": "<leer ODER 1 Satz zu bald endender Challenge auf Deutsch>",
-  "run_feedback": "<falls letzter Lauf vorhanden: 2 Sätze Feedback auf Deutsch. Wenn Puls zu hoch war: empfehle LANGSAMERE Pace (höhere min/km-Zahl). Zone-2 für diesen Läufer = ca. 8:00–9:30 min/km bei 130–135 bpm. Realistisch und motivierend formulieren. Sonst leer.>"{longrun_field}
+  "challenge_alert": "<leer ODER 1 Satz zu bald endender Challenge>",
+  "run_feedback": "<falls letzter Lauf vorhanden: 2 konkrete, motivierende Sätze mit echten Zahlen. Sonst leer.>"{longrun_field}
 }}"""
 
     response = client.messages.create(
-        model="claude-haiku-4-5-20251001",
-        max_tokens=900,
+        model="claude-sonnet-4-6",
+        max_tokens=1100,
         messages=[{"role": "user", "content": prompt}],
     )
     text = response.content[0].text.strip()
@@ -532,6 +549,7 @@ def inject_garmin_data(html_content, metrics, claude_result):
         "slider_hrv": claude_result.get("slider_hrv", 2),
         "predicted_finish_h": claude_result.get("predicted_finish_h"),
         "on_track_score": claude_result.get("on_track_score", 65),
+        "on_track_note": claude_result.get("on_track_note", ""),
         "factor_volume": claude_result.get("factor_volume", 50),
         "factor_hrv": claude_result.get("factor_hrv", 50),
         "factor_vo2max": claude_result.get("factor_vo2max", 50),
@@ -607,6 +625,7 @@ def main():
             "slider_hrv": 2,
             "predicted_finish_h": None,
             "on_track_score": 65,
+            "on_track_note": "",
             "factor_volume": 50,
             "factor_hrv": 50,
             "factor_vo2max": 50,
