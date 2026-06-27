@@ -210,18 +210,21 @@ def fetch_garmin_metrics(api):
         metrics["weight_kg"] = None
         metrics["weight_history"] = {}
 
-    # VO2max
+    # VO2max — bis zu 7 Tage zurückblicken (an Ruhetagen liefert der Endpoint oft nichts).
+    # Nur abbrechen, wenn wirklich ein Wert vorliegt.
+    metrics["vo2max"] = None
     try:
-        for d in [today_str, yesterday]:
+        for i in range(0, 7):
+            d = (today - timedelta(days=i)).isoformat()
             perf = api.get_max_metrics(d)
             if isinstance(perf, list) and perf:
-                metrics["vo2max"] = perf[0].get("generic", {}).get("vo2MaxPreciseValue")
-                break
-        else:
-            metrics["vo2max"] = None
+                val = (perf[0].get("generic") or {}).get("vo2MaxPreciseValue") \
+                      or (perf[0].get("generic") or {}).get("vo2MaxValue")
+                if val:
+                    metrics["vo2max"] = round(val, 1)
+                    break
     except Exception as e:
         print(f"VO2max error: {e}"); _errors.append(f"vo2max: {e}")
-        metrics["vo2max"] = None
 
     # Challenges
     metrics["challenges"] = fetch_challenges(api, today)
@@ -421,6 +424,10 @@ def update_history(history, metrics, today_str, weekly_running):
         history["rhr"] = prepend_dedup(
             history.get("rhr", []), {"d": today_str, "v": metrics["resting_hr"]}, 30
         )
+    if metrics.get("vo2max"):
+        history["vo2max"] = prepend_dedup(
+            history.get("vo2max", []), {"d": today_str, "v": metrics["vo2max"]}, 60
+        )
     # Weight: use full history from Garmin if available (90 days)
     if metrics.get("weight_history"):
         existing = {x["d"]: x for x in history.get("weight", [])}
@@ -568,7 +575,7 @@ Garmin-Daten heute:
 - Training Readiness: {metrics.get("training_readiness")}/100
 - Ruhepuls: {metrics.get("resting_hr")} bpm
 - Stresslevel gestern: {metrics.get("stress")}/100
-- VO₂max: {metrics.get("vo2max")}{last_run_str}
+- VO₂max: {metrics.get("vo2max")}{" (letzter bekannter Wert, heute keine Messung – NICHT als Verschlechterung werten, factor_vo2max normal bewerten)" if metrics.get("vo2max_carried") else ""}{last_run_str}
 - Letzte Aktivitäten (14 Tage): {json.dumps(metrics.get("recent_activities", [])[:7], ensure_ascii=False)}
 - {plan_context}
 - Bald ablaufende Challenges: {json.dumps(soon_challenges, ensure_ascii=False)}
@@ -688,6 +695,16 @@ def main():
             history = backfill_history(api, history, date.today())
         except Exception as e:
             print(f"Backfill fehlgeschlagen: {e}")
+
+    # VO2max-Lücke füllen: fehlt der Tageswert (z.B. an Ruhetagen), den letzten
+    # bekannten Wert aus der Historie übernehmen, damit der Score nicht einbricht.
+    if not metrics.get("vo2max"):
+        hv = history.get("vo2max", [])
+        if hv:
+            metrics["vo2max"] = hv[0]["v"]
+            metrics["vo2max_carried"] = True
+            print(f"VO2max aus Historie übernommen: {metrics['vo2max']} (Stand {hv[0]['d']})")
+
     history = update_history(history, metrics, date.today().isoformat(), metrics.get("weekly_running", {}))
     html = save_history(html, history)
 
