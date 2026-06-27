@@ -166,18 +166,24 @@ def fetch_garmin_metrics(api):
         )
         # Weekly running km grouped by ISO week
         weekly = defaultdict(float)
+        running_acts = []
         for a in acts:
             atype = (a.get("activityType") or {}).get("typeKey", "")
             if "running" in atype or "trail" in atype:
                 d = date.fromisoformat((a.get("startTimeLocal") or today_str)[:10])
                 wk = f"{d.year}-W{d.isocalendar()[1]:02d}"
                 weekly[wk] += (a.get("distance") or 0) / 1000
+                running_acts.append(a)
         metrics["weekly_running"] = {k: round(v, 1) for k, v in weekly.items()}
+
+        # Laufdynamik des jüngsten Laufs (+ Historie der Kernwerte)
+        metrics["run_dynamics"] = fetch_run_dynamics(api, running_acts)
     except Exception as e:
         print(f"Activities error: {e}"); _errors.append(f"activities: {e}")
         metrics["recent_activities"] = []
         metrics["last_run"] = None
         metrics["weekly_running"] = {}
+        metrics["run_dynamics"] = None
 
     # Weight — get_body_composition liefert die volle Historie (dateWeightList,
     # Top-Level weight in Gramm). get_weigh_ins gibt für Ranges nur 1 Tag zurück.
@@ -222,6 +228,72 @@ def fetch_garmin_metrics(api):
 
     metrics["_errors"] = _errors
     return metrics
+
+
+def _dynamics_from_activity(a):
+    """Extrahiere Laufdynamik-Kennzahlen aus einem Garmin-Aktivitäts-Summary."""
+    def r(v, n=0):
+        return round(v, n) if isinstance(v, (int, float)) else None
+    return {
+        "date": (a.get("startTimeLocal") or "")[:10],
+        "distance_km": r((a.get("distance") or 0) / 1000, 1),
+        "cadence": r(a.get("averageRunningCadenceInStepsPerMinute")),
+        "stride_length": r(a.get("avgStrideLength")),  # cm
+        "vertical_oscillation": r(a.get("avgVerticalOscillation"), 1),  # cm
+        "vertical_ratio": r(a.get("avgVerticalRatio"), 1),  # %
+        "ground_contact_time": r(a.get("avgGroundContactTime")),  # ms
+        "ground_contact_balance": r(a.get("avgGroundContactBalance"), 1),  # % links
+        "avg_power": r(a.get("avgPower")),  # W
+    }
+
+
+def fetch_run_dynamics(api, running_acts):
+    """Laufdynamik des jüngsten Laufs + Historie der Kernwerte (Frequenz,
+    vertikales Verhältnis, Bodenkontaktzeit) für die Trend-Charts."""
+    if not running_acts:
+        return None
+    # jüngster Lauf zuerst
+    runs = sorted(running_acts, key=lambda a: a.get("startTimeLocal") or "", reverse=True)
+    latest = runs[0]
+    dyn = _dynamics_from_activity(latest)
+
+    # Anreichern mit Geschwindigkeitsverlust + Leistungszustand (aus Detail)
+    try:
+        aid = latest.get("activityId")
+        det = api.get_activity_details(aid)
+        descs = det.get("metricDescriptors", [])
+        idx = {d.get("key"): d.get("metricsIndex") for d in descs}
+        rows = det.get("activityDetailMetrics", [])
+        def series(key):
+            i = idx.get(key)
+            if i is None:
+                return []
+            return [row["metrics"][i] for row in rows
+                    if row.get("metrics") and len(row["metrics"]) > i and row["metrics"][i] is not None]
+        pc = series("directPerformanceCondition")
+        sl = series("directStepSpeedLossPercent")
+        ev = api.get_activity_evaluation(aid).get("summaryDTO", {})
+        dyn["performance_condition"] = round(pc[-1]) if pc else None
+        dyn["step_speed_loss_pct"] = round(ev.get("stepSpeedLossPercent"), 1) if ev.get("stepSpeedLossPercent") is not None else (round(sum(sl)/len(sl), 1) if sl else None)
+    except Exception as e:
+        print(f"Run-Dynamics-Detail-Fehler: {e}")
+        dyn["performance_condition"] = None
+        dyn["step_speed_loss_pct"] = None
+
+    # Historie der Kernwerte aus allen vorliegenden Läufen
+    history = {}
+    for a in runs:
+        d = _dynamics_from_activity(a)
+        if d["date"] and d["cadence"]:
+            history[d["date"]] = {
+                "cadence": d["cadence"],
+                "vertical_ratio": d["vertical_ratio"],
+                "gct": d["ground_contact_time"],
+            }
+    dyn["history"] = history
+    print(f"Laufdynamik: Frequenz {dyn.get('cadence')} spm, vert. Verhältnis "
+          f"{dyn.get('vertical_ratio')}%, Bodenkontakt {dyn.get('ground_contact_time')} ms")
+    return dyn
 
 
 def fetch_challenges(api, today):
@@ -291,11 +363,11 @@ def load_history(html_content):
         html_content, re.DOTALL
     )
     if not m:
-        return {"hrv": [], "rhr": [], "weight": [], "weekly_km": []}
+        return {"hrv": [], "rhr": [], "weight": [], "weekly_km": [], "run_dyn": []}
     try:
         return json.loads(m.group(1))
     except Exception:
-        return {"hrv": [], "rhr": [], "weight": [], "weekly_km": []}
+        return {"hrv": [], "rhr": [], "weight": [], "weekly_km": [], "run_dyn": []}
 
 
 def backfill_history(api, history, today, days=30):
@@ -366,6 +438,14 @@ def update_history(history, metrics, today_str, weekly_running):
         existing_wk[wk] = {"w": wk, "v": km}
     sorted_weeks = sorted(existing_wk.values(), key=lambda x: x["w"], reverse=True)
     history["weekly_km"] = sorted_weeks[:12]
+
+    # Laufdynamik-Historie (Frequenz, vert. Verhältnis, Bodenkontakt je Lauf)
+    rd = metrics.get("run_dynamics") or {}
+    if rd.get("history"):
+        existing_rd = {x["d"]: x for x in history.get("run_dyn", [])}
+        for d_str, vals in rd["history"].items():
+            existing_rd[d_str] = {"d": d_str, **vals}
+        history["run_dyn"] = sorted(existing_rd.values(), key=lambda x: x["d"], reverse=True)[:40]
 
     return history
 
@@ -561,6 +641,9 @@ def inject_garmin_data(html_content, metrics, claude_result):
     }
     payload.pop("weekly_running", None)
     payload.pop("weight_history", None)
+    # run_dynamics behalten, aber die Historie liegt in GARMIN_HISTORY
+    if isinstance(payload.get("run_dynamics"), dict):
+        payload["run_dynamics"] = {k: v for k, v in payload["run_dynamics"].items() if k != "history"}
     # keep _errors in payload for live debugging
 
     start, end = GARMIN_MARKER
