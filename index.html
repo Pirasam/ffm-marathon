@@ -336,9 +336,15 @@ window.GARMIN_DATA = {
         <div><span id="gd-lr-km" style="font-size:16px;font-weight:700;color:#8b5cf6;"></span><span style="font-size:10px;color:#999;margin-left:2px;">km</span></div>
         <div><span id="gd-lr-time" style="font-size:16px;font-weight:700;color:#1a1a2e;"></span><span style="font-size:10px;color:#999;margin-left:2px;">min</span></div>
         <div id="gd-lr-pace-wrap"><span id="gd-lr-pace" style="font-size:16px;font-weight:700;color:#1a1a2e;"></span><span style="font-size:10px;color:#999;margin-left:2px;">/km</span></div>
-        <div id="gd-lr-hr-wrap" style="display:none;"><span id="gd-lr-hr" style="font-size:16px;font-weight:700;color:#ff6b57;"></span><span style="font-size:10px;color:#999;margin-left:2px;">bpm</span></div>
+        <div id="gd-lr-hr-wrap" style="display:none;"><span id="gd-lr-hr" style="font-size:16px;font-weight:700;color:#1a1a2e;"></span><span style="font-size:10px;color:#999;margin-left:2px;">bpm</span> <span id="gd-lr-hr-zone" style="font-size:9px;font-weight:600;padding:1px 6px;border-radius:20px;"></span></div>
       </div>
       <div id="gd-lr-feedback" style="font-size:12px;color:#333;line-height:1.6;border-top:1px solid #f0eef8;padding-top:7px;"></div>
+    </div>
+
+    <!-- HF-Zonen Referenz -->
+    <div id="gd-hrzones" style="background:#fff;border:1px solid #e5e0f0;border-radius:10px;padding:12px 14px;margin-bottom:12px;">
+      <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;">Deine HF-Zonen · Max 201 · Schwelle 175 · Ruhe 57</div>
+      <div id="gd-hrzones-grid" style="display:flex;flex-direction:column;gap:4px;"></div>
     </div>
 
     <!-- Status Cards -->
@@ -2336,6 +2342,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const NEO='#00e676',VIO='#8b5cf6',COR='#ff6b57';
     const NEO2='rgba(0,230,118,0.09)',VIO2='rgba(139,92,246,0.09)';
     const clr=(v,hi,mid)=>v==null?'#999':v>=hi?'#00c96a':v>=mid?VIO:COR;
+    const hrZone=hr=>hr<142?{n:'Sehr locker',c:'#00c96a'}:hr<=156?{n:'Lockerer DL',c:'#00c96a'}:hr<=166?{n:'Tempo',c:VIO}:hr<=175?{n:'Schwelle',c:'#e8a33d'}:{n:'VO₂max',c:COR};
 
     // Countdown
     const marathon=new Date('2026-10-25');const now2=new Date();now2.setHours(0,0,0,0);
@@ -2409,9 +2416,21 @@ document.addEventListener('DOMContentLoaded',()=>{
       document.getElementById('gd-lr-time').textContent=lr.duration_min;
       if(lr.pace_min_km){const pm=Math.floor(lr.pace_min_km),ps=Math.round((lr.pace_min_km%1)*60);document.getElementById('gd-lr-pace').textContent=pm+':'+ps.toString().padStart(2,'0');}
       else{document.getElementById('gd-lr-pace-wrap').style.display='none';}
-      if(lr.avg_hr){document.getElementById('gd-lr-hr-wrap').style.display='';document.getElementById('gd-lr-hr').textContent=Math.round(lr.avg_hr);}
+      if(lr.avg_hr){const hr=Math.round(lr.avg_hr);document.getElementById('gd-lr-hr-wrap').style.display='';document.getElementById('gd-lr-hr').textContent=hr;const z=hrZone(hr);const zt=document.getElementById('gd-lr-hr-zone');zt.textContent=z.n;zt.style.background=z.c+'22';zt.style.color=z.c;}
       document.getElementById('gd-lr-feedback').textContent=g.run_feedback||'';
     }
+
+    // HF-Zonen Referenz
+    const zones=[
+      {n:'Sehr locker · Recovery',r:'<142',c:'#00c96a'},
+      {n:'Lockerer Dauerlauf · GA1',r:'142–156',c:'#00c96a'},
+      {n:'Marathon-Tempo / Tempo',r:'157–166',c:VIO},
+      {n:'Schwelle',r:'167–175',c:'#e8a33d'},
+      {n:'VO₂max / Intervalle',r:'176–201',c:COR},
+    ];
+    document.getElementById('gd-hrzones-grid').innerHTML=zones.map(z=>
+      `<div style="display:flex;align-items:center;gap:8px;"><span style="width:8px;height:8px;border-radius:2px;background:${z.c};flex-shrink:0;"></span><span style="font-size:11px;color:#333;flex:1;">${z.n}</span><span style="font-size:11px;font-weight:700;color:${z.c};font-family:'DM Mono',monospace;">${z.r} bpm</span></div>`
+    ).join('');
 
     // Charts
     if(typeof Chart==='undefined')return;
