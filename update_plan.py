@@ -299,54 +299,61 @@ def fetch_run_dynamics(api, running_acts):
     return dyn
 
 
-def fetch_challenges(api, today):
-    """Fetch active Garmin badge challenges. Returns list or [] on failure."""
-    endpoints = [
-        "/badge-challenge/v1/badgeChallenges?start=0&limit=50",
-        "/badge-challenge/v1/badgeChallenges",
-    ]
-    raw = None
-    for ep in endpoints:
-        try:
-            resp = api.garth.get("connect", ep)
-            raw = resp.json()
-            print(f"Challenges OK from {ep}: {str(raw)[:200]}")
-            break
-        except Exception as e:
-            print(f"Challenge endpoint {ep} failed: {e}")
+def _format_challenge_units(badge_key, progress, target):
+    """Rohwerte (Schritte/Meter/Sekunden/Anzahl) in lesbare Einheiten umrechnen."""
+    k = (badge_key or "").lower()
+    if "step" in k:
+        return round(progress), round(target), "Schritte"
+    if "strength" in k or "hour" in k or "ride" in k or "_hr" in k:
+        return round(progress / 3600, 1), round(target / 3600, 1), "h"
+    if "cycle" in k or "run" in k or "walk" in k or "km" in k or "mile" in k or "distance" in k:
+        return round(progress / 1000, 1), round(target / 1000, 1), "km"
+    if "photo" in k:
+        return round(progress), round(target), "Fotos"
+    if "activit" in k:
+        return round(progress), round(target), "Aktivitäten"
+    return round(progress, 1), round(target, 1), ""
 
-    if not raw:
+
+def fetch_challenges(api, today):
+    """Aktive, noch nicht abgeschlossene Garmin-Badge-Challenges mit Fortschritt."""
+    try:
+        items = api.get_non_completed_badge_challenges(1, 100)
+    except Exception as e:
+        print(f"Challenge-Fehler: {e}")
+        return []
+    if not isinstance(items, list):
         return []
 
-    # Normalise – different Garmin API versions use different field names
-    items = raw if isinstance(raw, list) else (
-        raw.get("badgeChallengeList") or raw.get("challenges") or raw.get("data") or []
-    )
-
     challenges = []
-    for item in items[:10]:
+    for item in items:
         try:
-            name = (item.get("badgeChallengeName") or item.get("challengeName")
-                    or item.get("name") or "")
-            end_str = (item.get("endDate") or item.get("challengeEndDate")
-                       or item.get("end_date") or "")
-            current = float(item.get("currentConsumption") or item.get("progress")
-                            or item.get("current") or 0)
-            goal = float(item.get("badgeChallengeGoal") or item.get("goal") or 1)
-            unit = (item.get("badgeChallengeGoalUnit") or item.get("unit") or "")
+            start_str = (item.get("startDate") or "")[:10]
+            end_str = (item.get("endDate") or "")[:10]
+            if not end_str:
+                continue
+            end_date = date.fromisoformat(end_str)
+            days_remaining = (end_date - today).days
+            if days_remaining < 0:
+                continue  # abgelaufen
+            if start_str and date.fromisoformat(start_str) > today:
+                continue  # noch nicht gestartet
+            if item.get("badgeEarnedDate"):
+                continue  # schon geschafft
 
-            days_remaining = None
-            if end_str:
-                end_date = date.fromisoformat(end_str[:10])
-                days_remaining = (end_date - today).days
-                if days_remaining < 0:
-                    continue  # skip expired
+            progress = float(item.get("badgeProgressValue") or 0)
+            target = float(item.get("badgeTargetValue") or 0)
+            if target <= 0:
+                continue  # ohne Ziel kein sinnvoller Fortschritt
+            pct = min(100, round(progress / target * 100))
+            if pct >= 100:
+                continue  # faktisch fertig
 
-            pct = min(100, round(current / goal * 100)) if goal > 0 else 0
+            cur, goal, unit = _format_challenge_units(item.get("badgeKey"), progress, target)
             challenges.append({
-                "name": name,
-                "current": round(current, 1),
-                "goal": round(goal, 1),
+                "name": item.get("badgeChallengeName", ""),
+                "current": cur,
+                "goal": goal,
                 "unit": unit,
                 "days_remaining": days_remaining,
                 "pct": pct,
@@ -354,7 +361,10 @@ def fetch_challenges(api, today):
         except Exception as e:
             print(f"Challenge parse error: {e}")
 
-    return challenges
+    # Nach Dringlichkeit sortieren: bald endend zuerst, dann höchster Fortschritt
+    challenges.sort(key=lambda c: (c["days_remaining"], -c["pct"]))
+    print(f"Challenges: {len(challenges)} aktiv – {[c['name'] for c in challenges]}")
+    return challenges[:8]
 
 
 # ── History management ────────────────────────────────────────────────────────
