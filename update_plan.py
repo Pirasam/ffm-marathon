@@ -585,11 +585,11 @@ REGEL 1 — Plan ist bindend: Die Empfehlung MUSS zum heute geplanten Training (
 - Steht dort ein Lauf/Rad: bestätige oder passe an Tagesform an (z.B. bei schlechter Erholung kürzer/langsamer).
 - Erfinde NIEMALS ein Training, das nicht im Plan steht.
 
-REGEL 2 — REALISTISCHE Herzfrequenz (WICHTIG, KEINE Lehrbuchwerte):
-- Dieser Läufer läuft locker durchgehend bei Ø 137–144 bpm (Ruhepuls 57, Max ~170). Bei <135 bpm müsste er GEHEN.
-- Easy/Zone-2-Vorgabe daher: ca. 140–148 bpm — NIEMALS einen niedrigeren Puls-Deckel (z.B. 130–135) nennen, das ist für ihn unrealistisch und demotivierend.
+REGEL 2 — REALISTISCHE Herzfrequenz (echte Werte, KEINE Lehrbuch-Formeln):
+- Maximalpuls 201, Laktatschwelle 175, Ruhepuls 57. Lockere Läufe aktuell Ø 137–144 bpm.
+- Zonen: lockerer Dauerlauf/GA1 ~140–156 bpm | Marathon-Renntempo ~150–162 | Tempo ~157–166 | Schwelle ~167–175.
+- Easy-/Grundlagen-Empfehlung daher ~140–155 bpm. NIEMALS einen Puls-Deckel <140 nennen (da müsste er gehen).
 - Bestes Maß ist der SPRECHTEST (ganze Sätze möglich = richtig), nicht eine starre Zahl.
-- Durchlaufen bei lockerem Tempo ist wertvoller als Gehpausen zum Puls-Drücken.
 - Pace-Logik: niedrigere min/km = SCHNELLER. "Zu intensiv" → nächster Lauf entspannter, NIE eine schnellere Pace als "locker" verkaufen.
 
 REGEL 3 — On-Track ehrlich: on_track_score (0–100) und predicted_finish_h müssen zusammenpassen.
