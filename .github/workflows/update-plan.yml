@@ -2,7 +2,14 @@ name: Tägliches Trainingsupdate
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # 05:00 UTC = 07:00 MESZ (Sommer/Trainingsphase) bzw. 06:00 MEZ (Winter)
+    # Mehrere Auslösezeiten als Fallback gegen GitHubs unzuverlässige Scheduler.
+    # Ziel ist ~07:00 MESZ; der Idempotenz-Schutz sorgt dafür, dass pro Tag nur
+    # der erste erfolgreiche Lauf wirklich arbeitet (die anderen brechen früh ab).
+    - cron: "0 5 * * *"    # 07:00 MESZ
+    - cron: "20 5 * * *"   # 07:20
+    - cron: "45 5 * * *"   # 07:45
+    - cron: "15 6 * * *"   # 08:15
+    - cron: "0 7 * * *"    # 09:00 (Sicherheitsnetz)
   workflow_dispatch:        # manuell auslösbar
 
 jobs:
@@ -14,11 +21,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Schon heute aktualisiert? (Idempotenz)
+        id: guard
+        run: |
+          if grep -q "\"updated\": \"$(date -u +%Y-%m-%d)\"" index.html; then
+            echo "Heute bereits aktualisiert – überspringe."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/setup-python@v5
+        if: steps.guard.outputs.skip == 'false'
         with:
           python-version: "3.11"
 
       - name: Garmin-Session cachen
+        if: steps.guard.outputs.skip == 'false'
         uses: actions/cache@v4
         with:
           path: ~/.garmin_session
@@ -27,9 +46,11 @@ jobs:
             garmin-session-
 
       - name: Abhängigkeiten installieren
+        if: steps.guard.outputs.skip == 'false'
         run: pip install -r requirements.txt
 
       - name: Plan aktualisieren
+        if: steps.guard.outputs.skip == 'false'
         run: python update_plan.py
         env:
           GARMIN_EMAIL: ${{ secrets.GARMIN_EMAIL }}
@@ -38,6 +59,7 @@ jobs:
           GARMIN_SESSION_DATA: ${{ secrets.GARMIN_SESSION_DATA }}
 
       - name: Änderungen pushen
+        if: steps.guard.outputs.skip == 'false'
         run: |
           git config user.name "Marathon Bot"
           git config user.email "marathon-bot@users.noreply.github.com"
