@@ -585,9 +585,12 @@ REGEL 1 — Plan ist bindend: Die Empfehlung MUSS zum heute geplanten Training (
 - Steht dort ein Lauf/Rad: bestätige oder passe an Tagesform an (z.B. bei schlechter Erholung kürzer/langsamer).
 - Erfinde NIEMALS ein Training, das nicht im Plan steht.
 
-REGEL 2 — Pace-Logik (niedrigere min/km = SCHNELLER):
-- Zone 2 für diesen Läufer (5h-Marathon, Rennpace ~7:06/km) = ca. 8:00–9:30 min/km bei 130–135 bpm — also LANGSAM.
-- "Puls zu hoch" → nächster Lauf LANGSAMER (höhere min/km-Zahl). NIE eine schnellere Pace als Zone-2-Tipp nennen.
+REGEL 2 — REALISTISCHE Herzfrequenz (WICHTIG, KEINE Lehrbuchwerte):
+- Dieser Läufer läuft locker durchgehend bei Ø 137–144 bpm (Ruhepuls 57, Max ~170). Bei <135 bpm müsste er GEHEN.
+- Easy/Zone-2-Vorgabe daher: ca. 140–148 bpm — NIEMALS einen niedrigeren Puls-Deckel (z.B. 130–135) nennen, das ist für ihn unrealistisch und demotivierend.
+- Bestes Maß ist der SPRECHTEST (ganze Sätze möglich = richtig), nicht eine starre Zahl.
+- Durchlaufen bei lockerem Tempo ist wertvoller als Gehpausen zum Puls-Drücken.
+- Pace-Logik: niedrigere min/km = SCHNELLER. "Zu intensiv" → nächster Lauf entspannter, NIE eine schnellere Pace als "locker" verkaufen.
 
 REGEL 3 — On-Track ehrlich: on_track_score (0–100) und predicted_finish_h müssen zusammenpassen.
 - Wenn Finish > 5:00 h, darf on_track_score nicht "grün/gut" wirken (also < 70). Wenn Finish < 5:00 h, dann ≥ 70.
