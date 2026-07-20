@@ -21,6 +21,17 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')] Start"
 
 cd "$REPO" || { echo "FEHLER: Repo nicht gefunden: $REPO"; exit 1; }
 
+# Heute schon erfolgreich gesynct? Dann sofort raus.
+# Der Job ist bewusst mehrfach am Tag eingeplant (falls der Mac um 07:00
+# schlief); dieser Check macht die Wiederholungen praktisch kostenlos.
+if [ "${1:-}" != "--force" ] && [ -f garmin_data.json ]; then
+  LAST=$("$PY" -c "import json;print(json.load(open('garmin_data.json')).get('sync_date',''))" 2>/dev/null || echo "")
+  if [ "$LAST" = "$(date +%F)" ]; then
+    echo "Heute bereits gesynct ($LAST) – nichts zu tun."
+    exit 0
+  fi
+fi
+
 # Netzwerk da? Sonst still beenden (z.B. Mac ohne WLAN aufgewacht).
 if ! /sbin/ping -c1 -t5 connect.garmin.com >/dev/null 2>&1; then
   echo "Kein Netz / Garmin nicht erreichbar – Abbruch, kein Schaden."

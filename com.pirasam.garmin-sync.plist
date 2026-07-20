@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.pirasam.garmin-sync</string>
+
+  <!-- caffeinate -s: verhindert, dass der Mac mitten im Sync einschlaeft
+       (dieser Mini schlaeft schon nach 1 Minute Leerlauf). -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/caffeinate</string>
+    <string>-s</string>
+    <string>/bin/bash</string>
+    <string>/Users/samuelpirard/ffm-marathon/daily_sync.sh</string>
+  </array>
+
+  <!-- Primaer 07:00. Schlaeft der Mac dann (Mac Mini schlaeft nach 1 Min),
+       holt launchd den Lauf beim naechsten Aufwachen nach. Die spaeteren
+       Zeiten sind Auffangnetze fuer den Fall, dass der Mac laenger schlief –
+       das Skript bricht sofort ab, wenn heute schon gesynct wurde. -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>8</integer><key>Minute</key><integer>30</integer></dict>
+    <dict><key>Hour</key><integer>10</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>13</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>18</integer><key>Minute</key><integer>0</integer></dict>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/samuelpirard/ffm-marathon</string>
+
+  <key>StandardOutPath</key>
+  <string>/Users/samuelpirard/ffm-marathon/logs/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/samuelpirard/ffm-marathon/logs/launchd.err.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>
