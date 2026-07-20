@@ -9,7 +9,7 @@
 
 set -uo pipefail
 
-REPO="$HOME/Desktop/ffm-marathon"
+REPO="$HOME/ffm-marathon"
 LOG="$REPO/logs/sync.log"
 PY="/usr/bin/python3"
 
@@ -45,9 +45,10 @@ git add garmin_data.json
 git -c user.name="Garmin Sync" -c user.email="garmin-sync@local" \
     commit -q -m "Garmin-Daten $(date +%Y-%m-%d)"
 
-# 3) Push (mit Rebase, falls die Cloud parallel index.html committet hat)
+# 3) Push (mit Rebase, falls die Cloud parallel index.html committet hat).
+#    --autostash: sonstige lokale Aenderungen blockieren den Rebase nicht.
 for i in 1 2 3; do
-  if git pull --rebase --quiet origin main && git push --quiet origin main; then
+  if git pull --rebase --autostash --quiet origin main && git push --quiet origin main; then
     echo "Push erfolgreich (Versuch $i)."
     echo "[$(date '+%H:%M:%S')] Fertig – Actions rendert jetzt das Dashboard."
     exit 0
