@@ -4,71 +4,69 @@ Live: **https://pirasam.github.io/ffm-marathon/**
 
 ## Wie es läuft (du musst nichts tun)
 
+Alles passiert in der Cloud — **unabhängig davon, ob dein Mac an ist.**
+
 ```
-07:00  Mac          sync_garmin.py   →  garmin_data.json  →  git push
-         ↓ (Push löst aus)
-       GitHub       update_plan.py   →  Claude Opus 4.8   →  index.html
-         ↓
-       GitHub Pages → Dashboard aktuell
+07:00 (UTC 05:00)   GitHub Actions
+   1. sync_garmin.py   Garmin-Daten holen   → garmin_data.json
+   2. update_plan.py   Claude Opus 4.8      → index.html
+   3. push             → GitHub Pages aktualisiert das Dashboard
 ```
 
-**Warum diese Aufteilung?** Garmin blockt den Token-Refresh aus GitHub-Servern
-mit `429 Too Many Requests` — vom Mac aus funktioniert er zuverlässig. Der
-Anthropic-Key liegt dagegen nur in GitHub. Also holt der Mac die Daten, die
-Cloud macht die Analyse. Jeder Teil macht nur das, was er kann.
+Zwei weitere Zeitfenster (07:40, 08:30) fangen ab, wenn GitHubs Zeitplan sich
+verspätet. Liegen die Daten des Tages schon vor, brechen sie sofort ab.
 
-Der **Push der Daten** ist der Auslöser fürs Rendern — nicht der GitHub-Zeitplan,
-der sich um Stunden verspätet hat. Zwei geplante Läufe (07:30, 09:00) bleiben nur
-als Sicherheitsnetz.
+**Der Mac ist nur Redundanz, keine Voraussetzung.** Läuft er (per launchd,
+5 Zeitfenster), synct er ebenfalls und pusht — das löst dann direkt ein Rendern
+aus. Ist er aus, macht die Cloud alles allein.
+
+## Was wann schiefgehen kann
+
+| Problem | Was passiert | Was du tun musst |
+|---|---|---|
+| Garmin antwortet mit 429 | 4 Versuche mit wachsender Pause; klappt es nicht, wird aus den letzten guten Daten gerendert | nichts |
+| Garmin-Token abgelaufen (401) | Dashboard zeigt Datenalter **in Rot** mit Hinweis | Token erneuern (unten) |
+| Claude nicht erreichbar | Kennzahlen werden aktualisiert, vorherige Texte bleiben stehen | nichts |
+| Mac aus | Cloud macht alles | nichts |
+
+**Grundregel:** Es wird nie etwas Gutes durch etwas Leeres ersetzt. Schlägt ein
+Schritt fehl, bleibt der vorherige Stand erhalten und das Alter wird sichtbar
+ausgewiesen — statt so zu tun, als wäre alles frisch.
+
+## Der einzige Wartungsfall: Garmin-Token
+
+Der Token hält etwa ein Jahr. Läuft er ab, zeigt das Dashboard eine rote
+Warnung mit dem Datenalter. Dann:
+
+```bash
+cd ~/ffm-marathon
+python3 generate_session.py          # fragt Garmin-Login + ggf. 2FA
+cat garmin_secret.txt | pbcopy       # Token in die Zwischenablage
+```
+
+Dann einfügen unter:
+https://github.com/Pirasam/ffm-marathon/settings/secrets/actions/GARMIN_SESSION_DATA
 
 ## Dateien
 
-| Datei | Zweck | Läuft wo |
-|---|---|---|
-| `garmin_client.py` | Garmin-API (Login, Kennzahlen, Laufdynamik, Challenges) | nur lokal |
-| `sync_garmin.py` | Holt Daten → `garmin_data.json` | nur lokal |
-| `daily_sync.sh` | launchd-Runner: Sync + Commit + Push | nur lokal |
-| `update_plan.py` | Liest JSON → Claude → `index.html` | Cloud |
-| `garmin_data.json` | Einzige Datenquelle fürs Dashboard | im Repo |
-| `generate_session.py` | Garmin-Login erneuern (siehe unten) | nur lokal |
+| Datei | Zweck |
+|---|---|
+| `garmin_client.py` | Garmin-API: Login (mit Retry), Kennzahlen, Laufdynamik, Challenges |
+| `sync_garmin.py` | Holt Daten → `garmin_data.json`; schreibt nie leere Daten |
+| `update_plan.py` | Liest JSON → Claude → `index.html`; bricht ohne Daten ab |
+| `garmin_data.json` | Einzige Datenquelle fürs Dashboard (inkl. Historie) |
+| `daily_sync.sh` + `com.pirasam.garmin-sync.plist` | Optionale Mac-Redundanz |
+| `generate_session.py` | Garmin-Login erneuern |
 
-## Sicherheitsnetze
+## Nachschauen, was passiert ist
 
-- **Garmin-Abruf schlägt fehl** → `garmin_data.json` bleibt unangetastet, kein Push.
-  Alte gute Daten werden nie durch leere ersetzt.
-- **Claude schlägt fehl** → Kennzahlen werden aktualisiert, die vorherigen Texte
-  bleiben stehen (kein „nicht verfügbar").
-- **Mac war aus** → launchd holt den Lauf beim Aufwachen nach. Bleiben die Daten
-  älter als 1 Tag, zeigt das Dashboard eine deutliche Warnung mit Alter statt so
-  zu tun, als wäre alles frisch.
-- **Kein Netz** → Skript beendet sich still, ohne Schaden.
+- **Cloud:** https://github.com/Pirasam/ffm-marathon/actions
+- **Mac:** `tail -30 ~/ffm-marathon/logs/sync.log`
 
-## Wenn doch mal was klemmt
+## Hinweise
 
-**Prüfen, was zuletzt passiert ist:**
-```bash
-tail -30 ~/ffm-marathon/logs/sync.log
-```
-
-**Sync von Hand anstoßen:**
-```bash
-cd ~/ffm-marathon && ./daily_sync.sh && tail -20 logs/sync.log
-```
-
-**Automatik-Status:**
-```bash
-launchctl print gui/$(id -u)/com.pirasam.garmin-sync | grep -E "state|last exit"
-```
-
-**Garmin-Login abgelaufen** (ca. 1× im Jahr, Log zeigt Login-Fehler):
-```bash
-cd ~/ffm-marathon && python3 generate_session.py
-```
-
-## Wichtig
-
-- Das Repo liegt in `~/ffm-marathon`. Auf dem Schreibtisch ist nur ein Verweis —
+- Das Repo liegt in `~/ffm-marathon`, auf dem Schreibtisch ist nur ein Verweis —
   macOS verbietet Hintergrundjobs den Zugriff auf `~/Desktop`.
-- `garmin_secret.txt` und `logs/` sind in `.gitignore` und dürfen nie ins Repo.
-- Der Genesungsmodus (keine Trainingsempfehlungen) wird in `update_plan.py` über
-  `RECOVERY_MODE = True` gesteuert. Zum Beenden auf `False` setzen.
+- `garmin_secret.txt` und `logs/` sind in `.gitignore` und gehören nie ins Repo.
+- Genesungsmodus (keine Trainingsempfehlungen) steuert `RECOVERY_MODE` in
+  `update_plan.py`. Zum Beenden auf `False` setzen.
