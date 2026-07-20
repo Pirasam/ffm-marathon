@@ -2488,7 +2488,17 @@ document.addEventListener('DOMContentLoaded',()=>{
     const[bgc,tc]=iMap[g.training_intensity]||iMap.Mittel;
     const b=document.getElementById('gd-rec-badge');b.textContent=g.training_intensity||'Mittel';b.style.background=bgc;b.style.color=tc;
     document.getElementById('gd-rec-text').textContent=g.recommendation||'';
-    if(g.updated)document.getElementById('gd-updated').textContent=`Aktualisiert ${g.updated} 07:00 · Basierend auf Garmin-Daten`;
+    // Datenstand ehrlich anzeigen: veraltete Daten werden markiert, nicht kaschiert.
+    {
+      const el=document.getElementById('gd-updated');
+      const age=g.data_age_days, sd=g.data_sync_date;
+      if(sd){
+        const dd=new Date(sd), fmt=dd.getDate()+'.'+(dd.getMonth()+1)+'.';
+        if(age===0){el.textContent=`Garmin-Daten von heute (${fmt})`;el.style.color='#bbb';}
+        else if(age===1){el.textContent=`Garmin-Daten von gestern (${fmt})`;el.style.color='#bbb';}
+        else{el.innerHTML=`<span style="color:#d94f38;font-weight:600;">⚠ Garmin-Daten ${age} Tage alt (${fmt})</span> – Sync auf dem Mac lauft nicht`;}
+      }else if(g.updated){el.textContent=`Aktualisiert ${g.updated}`;}
+    }
 
     // Longrun-Tipps
     const lt=g.long_run_tips;

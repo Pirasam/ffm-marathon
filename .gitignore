@@ -2,3 +2,4 @@ garmin_secret.txt
 .garmin_session
 __pycache__/
 *.pyc
+logs/
