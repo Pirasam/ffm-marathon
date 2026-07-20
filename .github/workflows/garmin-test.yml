@@ -1,8 +1,7 @@
 name: Garmin-Erreichbarkeit testen
 
-# Einmaliger Diagnose-Workflow: Kann GitHub Actions sich ueberhaupt bei Garmin
-# anmelden? Schreibt nichts, aendert nichts – reiner Test mit Wiederholungen,
-# um transiente 429 von einer echten Sperre zu unterscheiden.
+# Diagnose: Kann GitHub Actions sich bei Garmin anmelden? Schreibt das Ergebnis
+# nach diag_garmin.txt und committet es, damit es ohne Log-Zugriff lesbar ist.
 
 on:
   workflow_dispatch:
@@ -12,6 +11,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -24,31 +25,48 @@ jobs:
           GARMIN_SESSION_DATA: ${{ secrets.GARMIN_SESSION_DATA }}
         run: |
           python - <<'PY'
-          import os, time, sys
+          import os, time, datetime
           from garminconnect import Garmin
 
-          secret = os.environ.get("GARMIN_SESSION_DATA", "").strip()
-          print(f"Secret vorhanden: {bool(secret)}, Laenge: {len(secret)}")
-          if not secret:
-              print("ERGEBNIS: SECRET_FEHLT"); sys.exit(0)
+          out = []
+          def log(s):
+              print(s); out.append(s)
 
-          delays = [0, 30, 90, 180]
-          for i, d in enumerate(delays, 1):
-              if d:
-                  print(f"warte {d}s …"); time.sleep(d)
-              try:
-                  api = Garmin()
-                  api.garth.loads(secret)
-                  name = api.garth.profile.get("displayName")
-                  api.display_name = name
-                  rhr = api.get_stats("2026-07-20").get("restingHeartRate")
-                  print(f"Versuch {i}: ERFOLG – Nutzer {name}, Ruhepuls {rhr}")
-                  print("ERGEBNIS: ACTIONS_KANN_GARMIN")
-                  sys.exit(0)
-              except Exception as e:
-                  msg = str(e)[:200]
-                  print(f"Versuch {i}: Fehler – {msg}")
-                  code = "429" if "429" in msg else ("401" if "401" in msg else "andere")
-                  last = code
-          print(f"ERGEBNIS: ACTIONS_BLOCKIERT ({last})")
+          secret = os.environ.get("GARMIN_SESSION_DATA", "").strip()
+          log(f"Zeit: {datetime.datetime.utcnow().isoformat()}Z")
+          log(f"Secret vorhanden: {bool(secret)}, Laenge: {len(secret)}")
+
+          result = "SECRET_FEHLT"
+          if secret:
+              for i, d in enumerate([0, 30, 90, 180], 1):
+                  if d:
+                      log(f"warte {d}s …"); time.sleep(d)
+                  try:
+                      api = Garmin()
+                      api.garth.loads(secret)
+                      api.display_name = api.garth.profile.get("displayName")
+                      rhr = api.get_stats(datetime.date.today().isoformat()).get("restingHeartRate")
+                      log(f"Versuch {i}: ERFOLG – Nutzer {api.display_name}, Ruhepuls {rhr}")
+                      result = "ACTIONS_KANN_GARMIN"
+                      break
+                  except Exception as e:
+                      msg = str(e)[:180]
+                      log(f"Versuch {i}: Fehler – {msg}")
+                      result = "BLOCKIERT_429" if "429" in msg else (
+                               "TOKEN_UNGUELTIG_401" if "401" in msg else "FEHLER_ANDERE")
+
+          log(f"ERGEBNIS: {result}")
+          with open("diag_garmin.txt", "w") as f:
+              f.write("\n".join(out) + "\n")
           PY
+
+      - name: Ergebnis committen
+        run: |
+          git config user.name "Diag Bot"
+          git config user.email "diag@users.noreply.github.com"
+          git add diag_garmin.txt
+          git diff --staged --quiet || {
+            git commit -m "Diagnose Garmin-Erreichbarkeit"
+            git pull --rebase --autostash --quiet origin main
+            git push --quiet
+          }
