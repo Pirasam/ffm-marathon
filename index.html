@@ -79,6 +79,7 @@
   #gd-challenges-grid{grid-template-columns:1fr!important;}
   #gd-longrun-grid{grid-template-columns:1fr!important;}
   #gd-rd-cards{grid-template-columns:repeat(2,1fr)!important;}
+  #gd-rc-metrics{grid-template-columns:repeat(3,1fr)!important;gap:6px!important;}
   #gd-rd-charts{grid-template-columns:1fr!important;}
   #gd-hero-inner{flex-direction:column!important;}
   #gd-ftime{font-size:42px!important;}}
@@ -86,34 +87,222 @@
 <!-- GARMIN:START -->
 <script>
 window.GARMIN_DATA = {
-  "challenges": [],
-  "recent_activities": [],
-  "_errors": [
-    "login: GARMIN_SESSION_DATA ungueltig (erste 40 Zeichen: 'W3sib2F1dGhfdG9rZW4iOiAiZGZlNDE5MGYtZDNk'): 429 Client Error: Too Many Requests for url: https://connectapi.garmin.com/oauth-service/oauth/exchange/user/2.0"
+  "sleep_hours": 4.5,
+  "sleep_score": 57,
+  "hrv_status": "BALANCED",
+  "hrv_value": 33,
+  "hrv_weekly_avg": 42,
+  "hrv_balanced_low": 39,
+  "hrv_balanced_high": 50,
+  "stress": 24,
+  "resting_hr": 58,
+  "body_battery": 58,
+  "training_readiness": 74,
+  "recent_activities": [
+    {
+      "name": "Frankfurt am Main Laufen",
+      "type": "running",
+      "date": "2026-06-25",
+      "distance_km": 7.2,
+      "duration_min": 56,
+      "pace_min_km": 7.7,
+      "avg_hr": 142.0
+    },
+    {
+      "name": "Frankfurt am Main Radfahren",
+      "type": "cycling",
+      "date": "2026-06-24",
+      "distance_km": 16.0,
+      "duration_min": 46,
+      "pace_min_km": 2.87,
+      "avg_hr": 121.0
+    },
+    {
+      "name": "Frankfurt am Main Radfahren",
+      "type": "cycling",
+      "date": "2026-06-24",
+      "distance_km": 14.3,
+      "duration_min": 39,
+      "pace_min_km": 2.73,
+      "avg_hr": 119.0
+    },
+    {
+      "name": "Frankfurt am Main Laufen",
+      "type": "running",
+      "date": "2026-06-23",
+      "distance_km": 10.1,
+      "duration_min": 76,
+      "pace_min_km": 7.47,
+      "avg_hr": 144.0
+    },
+    {
+      "name": "Frankfurt am Main Radfahren",
+      "type": "cycling",
+      "date": "2026-06-22",
+      "distance_km": 16.1,
+      "duration_min": 45,
+      "pace_min_km": 2.78,
+      "avg_hr": 128.0
+    },
+    {
+      "name": "Frankfurt am Main Radfahren",
+      "type": "cycling",
+      "date": "2026-06-22",
+      "distance_km": 14.5,
+      "duration_min": 38,
+      "pace_min_km": 2.65,
+      "avg_hr": 124.0
+    },
+    {
+      "name": "Bergisch Gladbach RWR",
+      "type": "running",
+      "date": "2026-06-18",
+      "distance_km": 9.5,
+      "duration_min": 88,
+      "pace_min_km": 9.3,
+      "avg_hr": 139.0
+    },
+    {
+      "name": "Frankfurt am Main Rennradfahren",
+      "type": "road_biking",
+      "date": "2026-06-17",
+      "distance_km": 16.0,
+      "duration_min": 42,
+      "pace_min_km": 2.62,
+      "avg_hr": 124.0
+    },
+    {
+      "name": "Frankfurt am Main Rennradfahren",
+      "type": "road_biking",
+      "date": "2026-06-17",
+      "distance_km": 14.2,
+      "duration_min": 38,
+      "pace_min_km": 2.64,
+      "avg_hr": 124.0
+    },
+    {
+      "name": "Frankfurt am Main Laufen",
+      "type": "running",
+      "date": "2026-06-16",
+      "distance_km": 7.0,
+      "duration_min": 56,
+      "pace_min_km": 8.01,
+      "avg_hr": 137.0
+    },
+    {
+      "name": "Frankfurt am Main Rennradfahren",
+      "type": "road_biking",
+      "date": "2026-06-15",
+      "distance_km": 16.0,
+      "duration_min": 42,
+      "pace_min_km": 2.65,
+      "avg_hr": 120.0
+    },
+    {
+      "name": "Frankfurt am Main Rennradfahren",
+      "type": "road_biking",
+      "date": "2026-06-15",
+      "distance_km": 14.3,
+      "duration_min": 40,
+      "pace_min_km": 2.82,
+      "avg_hr": 116.0
+    }
   ],
+  "last_run": {
+    "name": "Dierhagen Laufen",
+    "type": "running",
+    "date": "2026-06-28",
+    "distance_km": 10.0,
+    "duration_min": 73,
+    "pace_min_km": 7.27,
+    "avg_hr": 148.0
+  },
+  "weight_kg": 89.4,
   "vo2max": 45.0,
-  "vo2max_carried": true,
-  "recommendation": "Heute steht lockeres Pendeln auf dem Rad an – halte den Puls locker unter 130 bpm und dreh die Körner nicht auf. Die Beine sollen frisch für den Dienstag bleiben, also wirklich entspannt rollen und den Tag genießen.",
-  "training_intensity": "Leicht",
+  "challenges": [
+    {
+      "name": "June Step Month",
+      "current": 270872,
+      "goal": 300000,
+      "unit": "Schritte",
+      "days_remaining": 2,
+      "pct": 90
+    },
+    {
+      "name": "June Time to Ride",
+      "current": 15.9,
+      "goal": 20.0,
+      "unit": "h",
+      "days_remaining": 2,
+      "pct": 79
+    },
+    {
+      "name": "June Gains",
+      "current": 0.0,
+      "goal": 4.0,
+      "unit": "h",
+      "days_remaining": 2,
+      "pct": 0
+    },
+    {
+      "name": "June Photo Share",
+      "current": 0,
+      "goal": 3,
+      "unit": "Fotos",
+      "days_remaining": 2,
+      "pct": 0
+    }
+  ],
+  "_errors": [],
+  "recommendation": "Konsequent Ruhe – kein Training, auch kein „lockeres\" Rad. Priorität sind Schlaf nachholen und viel trinken; Antibiotikum mit reichlich Wasser und aufrecht einnehmen, das reduziert Magenbeschwerden und schützt so auch den Schlaf.",
+  "training_intensity": "Genesung",
   "slider_sleep": 7.0,
-  "slider_wellbeing": 3,
-  "slider_hrv": 2,
-  "predicted_finish_h": 5.15,
-  "on_track_score": 52,
-  "on_track_note": "Mit VO₂max 45 und aktuell noch fehlendem Laufvolumen liegt die Prognose bei ~5:15 h – der größte Hebel ist jetzt konsequenter Aufbau der wöchentlichen Laufkilometer in den kommenden Wochen.",
-  "factor_volume": 20,
-  "factor_hrv": 50,
-  "factor_vo2max": 62,
-  "factor_weight": 50,
+  "slider_wellbeing": 4,
+  "slider_hrv": 3,
+  "predicted_finish_h": 5.18,
+  "on_track_score": 58,
+  "on_track_note": "Bei VO₂max 45 und sinkendem Gewicht ist die Basis solide; die Prognose ~5:18 h liegt knapp über dem Ziel. Größter Hebel: konsequenter Aufbau des Lauf-Wochenumfangs in den nächsten Wochen.",
+  "factor_volume": 38,
+  "factor_hrv": 78,
+  "factor_vo2max": 85,
+  "factor_weight": 62,
   "challenge_alert": "",
   "run_feedback": "",
   "long_run_tips": null,
-  "updated": "2026-07-20"
+  "run_dynamics": {
+    "date": "2026-06-28",
+    "distance_km": 10.0,
+    "cadence": 164.0,
+    "stride_length": 84.0,
+    "vertical_oscillation": 9.9,
+    "vertical_ratio": 11.7,
+    "ground_contact_time": 270.0,
+    "ground_contact_balance": 49.3,
+    "avg_power": 356.0,
+    "performance_condition": -2,
+    "step_speed_loss_pct": 3.8
+  },
+  "updated": "2026-07-20",
+  "vo2max_carried": true,
+  "recovery_mode": true,
+  "recovery_reason": "Borreliose nach Zeckenstich (09.07.), Antibiotikum seit 17.07.",
+  "recovery_since": "2026-07-16",
+  "recovery_status": "Stabil",
+  "recovery_note": "Nach dem Tief am 16./17.07. (Ruhepuls 61, HRV unausgeglichen) haben sich die Werte am 18./19.07. auf Bestwerte des Monats erholt: HRV 52, Ruhepuls 50, Schlafscore 95/96. Der heutige Einbruch (HRV 33, Ruhepuls 58) geht überwiegend auf nur 4,5 h Schlaf zurück – ein Ausreißer, kein erkennbarer Rückfall.",
+  "readiness_check": "Ruhepuls mehrere Tage bei 53–55 und HRV stabil bei 42–48 – zusammen mit Symptomfreiheit und ärztlicher Freigabe.",
+  "baseline_rhr": [
+    53,
+    55
+  ],
+  "baseline_hrv": [
+    42,
+    48
+  ]
 };
 </script>
 <!-- GARMIN:END -->
 <!-- HISTORY:START -->
-<script>window.GARMIN_HISTORY = {"hrv": [{"d": "2026-06-27", "v": 43}, {"d": "2026-06-26", "v": 43}, {"d": "2026-06-25", "v": 43}, {"d": "2026-06-24", "v": 47}, {"d": "2026-06-23", "v": 41}, {"d": "2026-06-22", "v": 46}, {"d": "2026-06-21", "v": 43}, {"d": "2026-06-20", "v": 51}, {"d": "2026-06-19", "v": 31}, {"d": "2026-06-18", "v": 41}, {"d": "2026-06-17", "v": 42}, {"d": "2026-06-16", "v": 45}, {"d": "2026-06-15", "v": 43}, {"d": "2026-06-14", "v": 37}, {"d": "2026-06-13", "v": 48}, {"d": "2026-06-12", "v": 44}, {"d": "2026-06-11", "v": 45}, {"d": "2026-06-10", "v": 41}, {"d": "2026-06-09", "v": 46}, {"d": "2026-06-08", "v": 46}, {"d": "2026-06-07", "v": 42}, {"d": "2026-06-06", "v": 45}, {"d": "2026-06-05", "v": 48}, {"d": "2026-06-04", "v": 45}, {"d": "2026-06-03", "v": 49}, {"d": "2026-06-02", "v": 45}, {"d": "2026-06-01", "v": 49}, {"d": "2026-05-31", "v": 42}, {"d": "2026-05-30", "v": 45}, {"d": "2026-05-29", "v": 47}], "rhr": [{"d": "2026-06-27", "v": 57}, {"d": "2026-06-26", "v": 56}, {"d": "2026-06-25", "v": 56}, {"d": "2026-06-24", "v": 56}, {"d": "2026-06-23", "v": 56}, {"d": "2026-06-22", "v": 55}, {"d": "2026-06-21", "v": 57}, {"d": "2026-06-20", "v": 53}, {"d": "2026-06-19", "v": 54}, {"d": "2026-06-18", "v": 58}, {"d": "2026-06-17", "v": 57}, {"d": "2026-06-16", "v": 55}, {"d": "2026-06-15", "v": 55}, {"d": "2026-06-14", "v": 56}, {"d": "2026-06-13", "v": 50}, {"d": "2026-06-12", "v": 53}, {"d": "2026-06-11", "v": 56}, {"d": "2026-06-10", "v": 56}, {"d": "2026-06-09", "v": 54}, {"d": "2026-06-08", "v": 53}, {"d": "2026-06-07", "v": 55}, {"d": "2026-06-06", "v": 53}, {"d": "2026-06-05", "v": 52}, {"d": "2026-06-04", "v": 53}, {"d": "2026-06-03", "v": 51}, {"d": "2026-06-02", "v": 50}, {"d": "2026-06-01", "v": 53}, {"d": "2026-05-31", "v": 54}, {"d": "2026-05-30", "v": 53}, {"d": "2026-05-29", "v": 52}], "weight": [{"d": "2026-06-27", "v": 89.4}, {"d": "2026-06-26", "v": 90.0}, {"d": "2026-06-25", "v": 89.8}, {"d": "2026-06-24", "v": 89.8}, {"d": "2026-06-23", "v": 90.3}, {"d": "2026-06-22", "v": 91.0}, {"d": "2026-06-20", "v": 90.7}, {"d": "2026-06-18", "v": 91.0}, {"d": "2026-06-17", "v": 90.3}, {"d": "2026-06-16", "v": 90.7}, {"d": "2026-06-15", "v": 90.7}, {"d": "2026-06-14", "v": 91.1}, {"d": "2026-06-13", "v": 91.7}, {"d": "2026-06-12", "v": 90.6}, {"d": "2026-06-11", "v": 90.6}, {"d": "2026-06-10", "v": 90.7}, {"d": "2026-06-09", "v": 90.6}, {"d": "2026-06-08", "v": 91.1}, {"d": "2026-06-07", "v": 91.1}, {"d": "2026-06-05", "v": 91.3}, {"d": "2026-06-04", "v": 91.6}, {"d": "2026-06-03", "v": 91.4}, {"d": "2026-06-02", "v": 92.2}, {"d": "2026-06-01", "v": 92.3}, {"d": "2026-05-31", "v": 91.3}, {"d": "2026-05-30", "v": 91.2}, {"d": "2026-05-29", "v": 91.6}, {"d": "2026-05-28", "v": 92.2}, {"d": "2026-05-27", "v": 92.5}, {"d": "2026-05-26", "v": 92.8}, {"d": "2026-05-25", "v": 92.9}, {"d": "2026-05-24", "v": 91.0}, {"d": "2026-05-23", "v": 92.1}, {"d": "2026-05-22", "v": 91.3}, {"d": "2026-05-21", "v": 91.6}, {"d": "2026-05-20", "v": 91.4}, {"d": "2026-05-19", "v": 92.1}, {"d": "2026-05-18", "v": 92.0}, {"d": "2026-05-17", "v": 92.2}, {"d": "2026-05-16", "v": 91.8}, {"d": "2026-05-15", "v": 92.1}, {"d": "2026-05-14", "v": 91.8}, {"d": "2026-05-13", "v": 92.2}, {"d": "2026-05-12", "v": 92.5}, {"d": "2026-05-11", "v": 92.9}, {"d": "2026-05-10", "v": 93.6}, {"d": "2026-05-09", "v": 93.6}, {"d": "2026-05-08", "v": 93.2}, {"d": "2026-05-07", "v": 92.9}, {"d": "2026-05-06", "v": 93.3}, {"d": "2026-05-04", "v": 93.9}, {"d": "2026-05-03", "v": 94.0}, {"d": "2026-05-02", "v": 93.2}, {"d": "2026-05-01", "v": 93.2}, {"d": "2026-04-22", "v": 94.0}, {"d": "2026-04-17", "v": 94.5}, {"d": "2026-04-11", "v": 94.4}], "weekly_km": [{"w": "2026-W26", "v": 17.3}, {"w": "2026-W25", "v": 16.5}], "run_dyn": [{"d": "2026-06-28", "cadence": 164.0, "vertical_ratio": 11.7, "gct": 270.0}, {"d": "2026-06-25", "cadence": 159.0, "vertical_ratio": 12.7, "gct": 278.0}, {"d": "2026-06-23", "cadence": 161.0, "vertical_ratio": 12.7, "gct": 274.0}, {"d": "2026-06-18", "cadence": 136.0, "vertical_ratio": 12.1, "gct": 314.0}, {"d": "2026-06-16", "cadence": 159.0, "vertical_ratio": 12.4, "gct": 290.0}, {"d": "2026-06-11", "cadence": 163.0, "vertical_ratio": 11.4, "gct": 272.0}, {"d": "2026-06-09", "cadence": 165.0, "vertical_ratio": 11.6, "gct": 264.0}, {"d": "2026-06-07", "cadence": 162.0, "vertical_ratio": 11.9, "gct": 276.0}, {"d": "2026-06-03", "cadence": 162.0, "vertical_ratio": 11.6, "gct": 273.0}, {"d": "2026-05-30", "cadence": 165.0, "vertical_ratio": 11.2, "gct": 243.0}], "vo2max": [{"d": "2026-07-20", "v": 45.0}, {"d": "2026-07-19", "v": 45.0}, {"d": "2026-07-18", "v": 45.0}, {"d": "2026-07-17", "v": 45.0}, {"d": "2026-07-16", "v": 45.0}, {"d": "2026-07-15", "v": 45.0}, {"d": "2026-07-14", "v": 45.0}, {"d": "2026-07-13", "v": 45.0}, {"d": "2026-07-12", "v": 45.0}, {"d": "2026-07-11", "v": 45.0}, {"d": "2026-07-10", "v": 45.0}, {"d": "2026-07-09", "v": 45.0}, {"d": "2026-07-08", "v": 45.0}, {"d": "2026-07-07", "v": 45.0}, {"d": "2026-07-06", "v": 45.0}, {"d": "2026-07-05", "v": 45.0}, {"d": "2026-07-04", "v": 45.0}, {"d": "2026-07-03", "v": 45.0}, {"d": "2026-07-02", "v": 45.0}, {"d": "2026-07-01", "v": 45.0}, {"d": "2026-06-30", "v": 45.0}, {"d": "2026-06-29", "v": 45.0}, {"d": "2026-06-26", "v": 45.0}]};</script>
+<script>window.GARMIN_HISTORY = {"hrv": [{"d": "2026-07-19", "v": 52}, {"d": "2026-07-18", "v": 52}, {"d": "2026-07-17", "v": 38}, {"d": "2026-07-16", "v": 38}, {"d": "2026-07-15", "v": 42}, {"d": "2026-07-14", "v": 41}, {"d": "2026-07-13", "v": 41}, {"d": "2026-07-12", "v": 43}, {"d": "2026-07-11", "v": 41}, {"d": "2026-07-10", "v": 45}, {"d": "2026-07-09", "v": 45}, {"d": "2026-07-08", "v": 48}, {"d": "2026-07-07", "v": 43}, {"d": "2026-07-06", "v": 45}, {"d": "2026-07-05", "v": 46}, {"d": "2026-07-04", "v": 48}, {"d": "2026-07-03", "v": 47}, {"d": "2026-07-02", "v": 44}, {"d": "2026-07-01", "v": 39}, {"d": "2026-06-30", "v": 40}, {"d": "2026-06-29", "v": 41}, {"d": "2026-06-28", "v": 37}, {"d": "2026-06-27", "v": 43}, {"d": "2026-06-26", "v": 43}, {"d": "2026-06-25", "v": 43}, {"d": "2026-06-24", "v": 47}, {"d": "2026-06-23", "v": 41}, {"d": "2026-06-22", "v": 46}, {"d": "2026-06-21", "v": 43}, {"d": "2026-06-20", "v": 51}], "rhr": [{"d": "2026-07-19", "v": 51}, {"d": "2026-07-18", "v": 50}, {"d": "2026-07-17", "v": 53}, {"d": "2026-07-16", "v": 61}, {"d": "2026-07-15", "v": 55}, {"d": "2026-07-14", "v": 57}, {"d": "2026-07-13", "v": 58}, {"d": "2026-07-12", "v": 56}, {"d": "2026-07-11", "v": 56}, {"d": "2026-07-10", "v": 55}, {"d": "2026-07-09", "v": 53}, {"d": "2026-07-08", "v": 54}, {"d": "2026-07-07", "v": 55}, {"d": "2026-07-06", "v": 53}, {"d": "2026-07-05", "v": 56}, {"d": "2026-07-04", "v": 54}, {"d": "2026-07-03", "v": 54}, {"d": "2026-07-02", "v": 56}, {"d": "2026-07-01", "v": 55}, {"d": "2026-06-30", "v": 57}, {"d": "2026-06-29", "v": 55}, {"d": "2026-06-28", "v": 57}, {"d": "2026-06-27", "v": 57}, {"d": "2026-06-26", "v": 56}, {"d": "2026-06-25", "v": 56}, {"d": "2026-06-24", "v": 56}, {"d": "2026-06-23", "v": 56}, {"d": "2026-06-22", "v": 55}, {"d": "2026-06-21", "v": 57}, {"d": "2026-06-20", "v": 53}], "weight": [{"d": "2026-06-27", "v": 89.4}, {"d": "2026-06-26", "v": 90.0}, {"d": "2026-06-25", "v": 89.8}, {"d": "2026-06-24", "v": 89.8}, {"d": "2026-06-23", "v": 90.3}, {"d": "2026-06-22", "v": 91.0}, {"d": "2026-06-20", "v": 90.7}, {"d": "2026-06-18", "v": 91.0}, {"d": "2026-06-17", "v": 90.3}, {"d": "2026-06-16", "v": 90.7}, {"d": "2026-06-15", "v": 90.7}, {"d": "2026-06-14", "v": 91.1}, {"d": "2026-06-13", "v": 91.7}, {"d": "2026-06-12", "v": 90.6}, {"d": "2026-06-11", "v": 90.6}, {"d": "2026-06-10", "v": 90.7}, {"d": "2026-06-09", "v": 90.6}, {"d": "2026-06-08", "v": 91.1}, {"d": "2026-06-07", "v": 91.1}, {"d": "2026-06-05", "v": 91.3}, {"d": "2026-06-04", "v": 91.6}, {"d": "2026-06-03", "v": 91.4}, {"d": "2026-06-02", "v": 92.2}, {"d": "2026-06-01", "v": 92.3}, {"d": "2026-05-31", "v": 91.3}, {"d": "2026-05-30", "v": 91.2}, {"d": "2026-05-29", "v": 91.6}, {"d": "2026-05-28", "v": 92.2}, {"d": "2026-05-27", "v": 92.5}, {"d": "2026-05-26", "v": 92.8}, {"d": "2026-05-25", "v": 92.9}, {"d": "2026-05-24", "v": 91.0}, {"d": "2026-05-23", "v": 92.1}, {"d": "2026-05-22", "v": 91.3}, {"d": "2026-05-21", "v": 91.6}, {"d": "2026-05-20", "v": 91.4}, {"d": "2026-05-19", "v": 92.1}, {"d": "2026-05-18", "v": 92.0}, {"d": "2026-05-17", "v": 92.2}, {"d": "2026-05-16", "v": 91.8}, {"d": "2026-05-15", "v": 92.1}, {"d": "2026-05-14", "v": 91.8}, {"d": "2026-05-13", "v": 92.2}, {"d": "2026-05-12", "v": 92.5}, {"d": "2026-05-11", "v": 92.9}, {"d": "2026-05-10", "v": 93.6}, {"d": "2026-05-09", "v": 93.6}, {"d": "2026-05-08", "v": 93.2}, {"d": "2026-05-07", "v": 92.9}, {"d": "2026-05-06", "v": 93.3}, {"d": "2026-05-04", "v": 93.9}, {"d": "2026-05-03", "v": 94.0}, {"d": "2026-05-02", "v": 93.2}, {"d": "2026-05-01", "v": 93.2}, {"d": "2026-04-22", "v": 94.0}, {"d": "2026-04-17", "v": 94.5}, {"d": "2026-04-11", "v": 94.4}], "weekly_km": [{"w": "2026-W26", "v": 17.3}, {"w": "2026-W25", "v": 16.5}], "run_dyn": [{"d": "2026-06-28", "cadence": 164.0, "vertical_ratio": 11.7, "gct": 270.0}, {"d": "2026-06-25", "cadence": 159.0, "vertical_ratio": 12.7, "gct": 278.0}, {"d": "2026-06-23", "cadence": 161.0, "vertical_ratio": 12.7, "gct": 274.0}, {"d": "2026-06-18", "cadence": 136.0, "vertical_ratio": 12.1, "gct": 314.0}, {"d": "2026-06-16", "cadence": 159.0, "vertical_ratio": 12.4, "gct": 290.0}, {"d": "2026-06-11", "cadence": 163.0, "vertical_ratio": 11.4, "gct": 272.0}, {"d": "2026-06-09", "cadence": 165.0, "vertical_ratio": 11.6, "gct": 264.0}, {"d": "2026-06-07", "cadence": 162.0, "vertical_ratio": 11.9, "gct": 276.0}, {"d": "2026-06-03", "cadence": 162.0, "vertical_ratio": 11.6, "gct": 273.0}, {"d": "2026-05-30", "cadence": 165.0, "vertical_ratio": 11.2, "gct": 243.0}], "vo2max": [{"d": "2026-06-26", "v": 45.0}]};</script>
 <!-- HISTORY:END -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -128,6 +317,30 @@ window.GARMIN_DATA = {
 <div class="main">
   <!-- GARMIN DASHBOARD -->
   <div id="gd-root" style="display:none;padding:0 0 24px;margin-bottom:8px;border-bottom:1px solid var(--border);font-size:12px;font-family:'DM Mono',monospace;">
+
+    <!-- Genesungs-Modus Banner -->
+    <div id="gd-recovery" style="display:none;background:linear-gradient(135deg,#fffaf7 0%,#fff5f2 100%);border:1px solid #ffd4c8;border-left:4px solid #ff6b57;border-radius:10px;padding:14px 16px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px;">
+        <span style="font-size:18px;">🩺</span>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#1a1a2e;">Genesungsmodus · Training pausiert</div>
+          <div id="gd-rc-reason" style="font-size:10px;color:#8a7570;margin-top:1px;"></div>
+        </div>
+        <div id="gd-rc-status" style="margin-left:auto;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;"></div>
+      </div>
+
+      <div id="gd-rc-note" style="font-size:12px;color:#333;line-height:1.6;margin-bottom:10px;"></div>
+
+      <!-- Erholungswerte vs. Basis -->
+      <div id="gd-rc-metrics" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;"></div>
+
+      <div id="gd-rc-advice" style="font-size:12px;color:#333;line-height:1.6;background:#fff;border:1px solid #f3e3de;border-radius:8px;padding:10px 12px;margin-bottom:8px;"></div>
+      <div id="gd-rc-readiness" style="font-size:11px;color:#777;line-height:1.5;margin-bottom:10px;"></div>
+
+      <div style="font-size:11px;color:#b33d28;background:rgba(255,107,87,0.08);border-radius:6px;padding:9px 11px;line-height:1.5;">
+        <b>⚠ Vor Wiederaufnahme des Trainings ärztlich abklären lassen</b> — bei Borreliose besteht in den ersten Wochen das Risiko einer Herzbeteiligung (Lyme-Karditis). Bei Herzstolpern, Druck auf der Brust, Luftnot oder Schwindel sofort ärztlich vorstellen.
+      </div>
+    </div>
 
     <!-- Marathon Predictor -->
     <div style="background:#fff;border:1px solid #e5e0f0;border-radius:10px;padding:16px;margin-bottom:12px;">
@@ -2203,6 +2416,34 @@ document.addEventListener('DOMContentLoaded',()=>{
     const clr=(v,hi,mid)=>v==null?'#999':v>=hi?'#00c96a':v>=mid?VIO:COR;
     const hrZone=hr=>hr<142?{n:'Sehr locker',c:'#00c96a'}:hr<=156?{n:'Lockerer DL',c:'#00c96a'}:hr<=166?{n:'Tempo',c:VIO}:hr<=175?{n:'Schwelle',c:'#e8a33d'}:{n:'VO₂max',c:COR};
 
+    // ── Genesungsmodus ──
+    if(g.recovery_mode){
+      const el=document.getElementById('gd-recovery');
+      el.style.display='block';
+      document.getElementById('gd-rc-reason').textContent=g.recovery_reason||'';
+      const st=g.recovery_status||'';
+      const sMap={'Erholung':['rgba(0,230,118,0.15)','#00a855'],'Stabil':['rgba(139,92,246,0.15)','#7c3aed'],'Rückschlag':['rgba(255,107,87,0.15)','#b33d28']};
+      const[sb,sc]=sMap[st]||sMap['Stabil'];
+      const stEl=document.getElementById('gd-rc-status');stEl.textContent=st;stEl.style.background=sb;stEl.style.color=sc;
+      document.getElementById('gd-rc-note').textContent=g.recovery_note||'';
+      document.getElementById('gd-rc-advice').innerHTML='<b style="color:#b33d28;">Heute:</b> '+(g.recommendation||'');
+      const rk=document.getElementById('gd-rc-readiness');
+      if(g.readiness_check){rk.textContent='Rückkehr-Kriterium: '+g.readiness_check;}else{rk.style.display='none';}
+      // Werte gegen Basis
+      const bR=g.baseline_rhr||[53,55], bH=g.baseline_hrv||[42,48];
+      const inR=g.resting_hr!=null&&g.resting_hr<=bR[1]+1;
+      const inH=g.hrv_value!=null&&g.hrv_value>=bH[0];
+      const slOk=g.sleep_hours!=null&&g.sleep_hours>=7;
+      const card=(lab,val,unit,base,ok)=>`<div style="background:#fff;border:1px solid #f3e3de;border-radius:8px;padding:9px 10px;">
+        <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px;">${lab}</div>
+        <div style="font-size:17px;font-weight:700;color:${ok?'#00c96a':'#d94f38'};">${val==null?'–':val}<span style="font-size:10px;color:#999;font-weight:400;margin-left:2px;">${unit}</span></div>
+        <div style="font-size:9px;color:#aaa;">Basis ${base} ${ok?'✓':'⚠'}</div></div>`;
+      document.getElementById('gd-rc-metrics').innerHTML=
+        card('Ruhepuls',g.resting_hr,'bpm',bR[0]+'–'+bR[1],inR)+
+        card('HRV',g.hrv_value,'ms',bH[0]+'–'+bH[1],inH)+
+        card('Schlaf',g.sleep_hours,'h','≥7',slOk);
+    }
+
     // Countdown
     const marathon=new Date('2026-10-25');const now2=new Date();now2.setHours(0,0,0,0);
     document.getElementById('gd-countdown').textContent=`Frankfurt Marathon · 25. Oktober 2026 · noch ${Math.ceil((marathon-now2)/864e5)} Tage`;
@@ -2243,7 +2484,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const mn=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
     const nd=new Date();
     document.getElementById('gd-rec-date').textContent=`Heute · ${dn[nd.getDay()]}, ${nd.getDate()}. ${mn[nd.getMonth()]}`;
-    const iMap={Leicht:['rgba(0,230,118,0.12)','#00a855'],Mittel:['rgba(139,92,246,0.12)','#7c3aed'],Hart:['rgba(255,107,87,0.12)','#d94f38']};
+    const iMap={Leicht:['rgba(0,230,118,0.12)','#00a855'],Mittel:['rgba(139,92,246,0.12)','#7c3aed'],Hart:['rgba(255,107,87,0.12)','#d94f38'],Ruhe:['rgba(139,92,246,0.12)','#7c3aed'],Genesung:['rgba(255,107,87,0.12)','#b33d28']};
     const[bgc,tc]=iMap[g.training_intensity]||iMap.Mittel;
     const b=document.getElementById('gd-rec-badge');b.textContent=g.training_intensity||'Mittel';b.style.background=bgc;b.style.color=tc;
     document.getElementById('gd-rec-text').textContent=g.recommendation||'';

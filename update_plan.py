@@ -10,6 +10,19 @@ TOKENSTORE_PATH = os.path.expanduser("~/.garmin_session")
 GARMIN_MARKER = ("<!-- GARMIN:START -->", "<!-- GARMIN:END -->")
 HISTORY_MARKER = ("<!-- HISTORY:START -->", "<!-- HISTORY:END -->")
 
+CLAUDE_MODEL = "claude-opus-4-8"
+
+# ── Genesungs-Modus ───────────────────────────────────────────────────────────
+# Solange aktiv: KEINE Trainingsempfehlungen. Stattdessen Erholungsverlauf,
+# Rückkehr-Kriterien und der Hinweis auf die nötige ärztliche Freigabe.
+# Zum Beenden einfach RECOVERY_MODE = False setzen.
+RECOVERY_MODE = True
+RECOVERY_REASON = "Borreliose nach Zeckenstich (09.07.), Antibiotikum seit 17.07."
+RECOVERY_SINCE = "2026-07-16"
+# Individuelle Normalwerte VOR der Infektion (aus den Daten 27.06.–09.07.)
+BASELINE_RHR = (53, 55)
+BASELINE_HRV = (42, 48)
+
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 
@@ -63,10 +76,14 @@ def fetch_garmin_metrics(api):
     metrics = {}
     _errors = []
 
-    # Sleep
+    # Sleep — Garmin indexiert die zuletzt geschlafene Nacht unter dem HEUTIGEN
+    # Datum. Fallback auf gestern, falls morgens noch nicht synchronisiert.
     try:
-        sleep = api.get_sleep_data(yesterday)
-        dto = sleep.get("dailySleepDTO", {})
+        dto = {}
+        for d in (today_str, yesterday):
+            dto = (api.get_sleep_data(d) or {}).get("dailySleepDTO", {}) or {}
+            if dto.get("sleepTimeSeconds"):
+                break
         secs = dto.get("sleepTimeSeconds") or 0
         metrics["sleep_hours"] = round(secs / 3600, 1) if secs else None
         metrics["sleep_score"] = ((dto.get("sleepScores") or {}).get("overall") or {}).get("value")
@@ -77,9 +94,13 @@ def fetch_garmin_metrics(api):
 
     # HRV — lastNightAvg ist der von Garmin angezeigte Nachtwert (40–50er-Bereich).
     # lastNight5MinHigh ist nur der Spitzenwert und liegt deutlich höher.
+    # Ebenfalls unter dem heutigen Datum indexiert (Fallback: gestern).
     try:
-        hrv = api.get_hrv_data(yesterday)
-        s = hrv.get("hrvSummary", {})
+        s = {}
+        for d in (today_str, yesterday):
+            s = (api.get_hrv_data(d) or {}).get("hrvSummary", {}) or {}
+            if s.get("lastNightAvg") or s.get("lastNight5MinHigh"):
+                break
         metrics["hrv_status"] = s.get("status")
         metrics["hrv_value"] = s.get("lastNightAvg") or s.get("lastNight5MinHigh")
         metrics["hrv_weekly_avg"] = s.get("weeklyAvg")
@@ -533,10 +554,61 @@ def get_plan_context(html_content):
 
 # ── Claude ────────────────────────────────────────────────────────────────────
 
-def call_claude(metrics, plan_context):
+def _claude_json(prompt, max_tokens=1100):
     import anthropic
     client = anthropic.Anthropic()
+    response = client.messages.create(
+        model=CLAUDE_MODEL,
+        max_tokens=max_tokens,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    text = response.content[0].text.strip()
+    text = re.sub(r"^```(?:json)?\s*", "", text)
+    text = re.sub(r"\s*```$", "", text)
+    return json.loads(text)
 
+
+def call_claude_recovery(metrics, history):
+    """Genesungs-Modus: keine Trainingsempfehlung, sondern Erholungseinschätzung."""
+    rhr_hist = [x["v"] for x in (history.get("rhr") or [])[:10]]
+    hrv_hist = [x["v"] for x in (history.get("hrv") or [])[:10]]
+
+    prompt = f"""Du bist ein vorsichtiger Sportmediziner-Assistent. Der Sportler ist KRANK und
+erholt sich: {RECOVERY_REASON}. Er darf NICHT trainieren, bis ein Arzt ihn freigibt.
+
+Wichtiger medizinischer Kontext: Bei Borreliose besteht in den ersten 1–2 Wochen nach Infektion
+das Risiko einer Lyme-Karditis (Herzbeteiligung). Ausdauerbelastung ist bis zur ärztlichen
+Abklärung potenziell gefährlich. Empfiehl deshalb UNTER KEINEN UMSTÄNDEN Training,
+auch kein "lockeres" Laufen oder Radfahren.
+
+Seine Normalwerte VOR der Infektion: Ruhepuls {BASELINE_RHR[0]}–{BASELINE_RHR[1]} bpm,
+HRV {BASELINE_HRV[0]}–{BASELINE_HRV[1]} ms.
+
+Heutige Werte:
+- Ruhepuls: {metrics.get("resting_hr")} bpm
+- HRV: {metrics.get("hrv_value")} ms (Status {metrics.get("hrv_status")})
+- Schlaf: {metrics.get("sleep_hours")} h (Score {metrics.get("sleep_score")}/100)
+- Body Battery: {metrics.get("body_battery")}/100
+- Stress gestern: {metrics.get("stress")}/100
+
+Verlauf (neueste zuerst):
+- Ruhepuls letzte 10 Tage: {rhr_hist}
+- HRV letzte 10 Tage: {hrv_hist}
+
+Beurteile NÜCHTERN den Erholungsverlauf. Beachte: schlechter Schlaf allein drückt HRV und
+hebt den Ruhepuls – unterscheide das von einem echten Rückschlag.
+
+Antworte NUR mit diesem JSON (kein Markdown):
+{{
+  "recovery_status": "<Erholung | Stabil | Rückschlag>",
+  "recovery_note": "<2 Sätze: wie stehen Ruhepuls, HRV und Schlaf im Vergleich zur Basis? Nüchtern, keine Panik, keine Verharmlosung.>",
+  "recovery_advice": "<2 Sätze konkrete Erholungsunterstützung für heute: Schlaf, Flüssigkeit, Ernährung, Belastungsvermeidung. NIEMALS Training empfehlen.>",
+  "readiness_check": "<1 Satz: wie weit sind die Werte noch von der Basis entfernt und was wäre das Signal für Besserung?>"
+}}"""
+    return _claude_json(prompt, max_tokens=700)
+
+
+def call_claude(metrics, plan_context):
     hrv_labels = {
         "BALANCED": "Grün (ausgeglichen)", "UNBALANCED": "Gelb (unausgeglichen)",
         "LOW": "Rot (niedrig)", "POOR": "Rot (schlecht)", "NONE": "Keine Daten",
@@ -626,15 +698,7 @@ Antworte NUR mit diesem JSON (kein Markdown):
   "run_feedback": "<falls letzter Lauf vorhanden: 2 konkrete, motivierende Sätze mit echten Zahlen. Sonst leer.>"{longrun_field}
 }}"""
 
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=1100,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    text = response.content[0].text.strip()
-    text = re.sub(r"^```(?:json)?\s*", "", text)
-    text = re.sub(r"\s*```$", "", text)
-    return json.loads(text)
+    return _claude_json(prompt, max_tokens=1100)
 
 
 # ── HTML injection ────────────────────────────────────────────────────────────
@@ -659,6 +723,11 @@ def inject_garmin_data(html_content, metrics, claude_result):
         "long_run_tips": claude_result.get("long_run_tips") or None,
         "updated": date.today().isoformat(),
     }
+    # Genesungs-Modus-Felder durchreichen (nur gesetzt, wenn aktiv)
+    for k in ("recovery_mode", "recovery_reason", "recovery_since", "recovery_status",
+              "recovery_note", "readiness_check", "baseline_rhr", "baseline_hrv"):
+        if k in claude_result:
+            payload[k] = claude_result[k]
     payload.pop("weekly_running", None)
     payload.pop("weight_history", None)
     # run_dynamics behalten, aber die Historie liegt in GARMIN_HISTORY
@@ -723,6 +792,45 @@ def main():
 
     plan_context = get_plan_context(html)
     print(f"Plan-Kontext: {plan_context}")
+
+    # ── Genesungs-Modus: keine Trainingsempfehlung, nur Erholungseinschätzung ──
+    if RECOVERY_MODE:
+        print(f"Genesungs-Modus aktiv ({RECOVERY_REASON}) – Modell {CLAUDE_MODEL}")
+        try:
+            rec = call_claude_recovery(metrics, history)
+            print(json.dumps(rec, ensure_ascii=False))
+        except Exception as e:
+            print(f"Claude (Genesung) fehlgeschlagen: {e}")
+            rec = {
+                "recovery_status": "Stabil",
+                "recovery_note": "Tagesbewertung nicht verfügbar – Werte siehe Verlauf unten.",
+                "recovery_advice": "Ruhe, ausreichend trinken, Schlaf priorisieren. Kein Training.",
+                "readiness_check": "",
+            }
+        claude_result = {
+            "recommendation": rec.get("recovery_advice", ""),
+            "training_intensity": "Genesung",
+            "recovery_mode": True,
+            "recovery_reason": RECOVERY_REASON,
+            "recovery_since": RECOVERY_SINCE,
+            "recovery_status": rec.get("recovery_status", ""),
+            "recovery_note": rec.get("recovery_note", ""),
+            "readiness_check": rec.get("readiness_check", ""),
+            "baseline_rhr": list(BASELINE_RHR),
+            "baseline_hrv": list(BASELINE_HRV),
+            # Trainingsspezifische Felder bewusst neutral/leer
+            "slider_sleep": metrics.get("sleep_hours") or 7.5,
+            "slider_wellbeing": 2,
+            "slider_hrv": 2,
+            "challenge_alert": "",
+            "run_feedback": "",
+            "long_run_tips": None,
+        }
+        html = inject_garmin_data(html, metrics, claude_result)
+        with open(html_path, "w", encoding="utf-8") as f:
+            f.write(html)
+        print("index.html aktualisiert (Genesungs-Modus).")
+        return
 
     print("Claude API …")
     try:
