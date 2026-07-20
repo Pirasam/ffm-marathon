@@ -1,0 +1,4 @@
+Zeit: 2026-07-20T13:09:39.434027Z
+Secret vorhanden: True, Laenge: 4220
+Versuch 1: ERFOLG – Nutzer 29f48ec5-e4db-4b23-adc8-12bd2248209b, Ruhepuls 58
+ERGEBNIS: ACTIONS_KANN_GARMIN
