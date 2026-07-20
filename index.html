@@ -2493,7 +2493,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         const dd=new Date(sd), fmt=dd.getDate()+'.'+(dd.getMonth()+1)+'.';
         if(age===0){el.textContent=`Garmin-Daten von heute (${fmt})`;el.style.color='#bbb';}
         else if(age===1){el.textContent=`Garmin-Daten von gestern (${fmt})`;el.style.color='#bbb';}
-        else{el.innerHTML=`<span style="color:#d94f38;font-weight:600;">⚠ Garmin-Daten ${age} Tage alt (${fmt})</span> – Sync auf dem Mac lauft nicht`;}
+        else{el.innerHTML=`<span style="color:#d94f38;font-weight:600;">⚠ Garmin-Daten ${age} Tage alt (${fmt})</span> – Garmin-Token vermutlich abgelaufen, muss erneuert werden`;}
       }else if(g.updated){el.textContent=`Aktualisiert ${g.updated}`;}
     }
 

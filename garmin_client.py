@@ -14,44 +14,59 @@ from collections import defaultdict
 TOKENSTORE_PATH = os.path.expanduser("~/.garmin_session")
 
 
-def garmin_login():
+class GarminTokenExpired(RuntimeError):
+    """Der gespeicherte Garmin-Token ist abgelaufen und muss erneuert werden."""
+
+
+def garmin_login(retries=4):
+    """Meldet sich mit dem gespeicherten Token an.
+
+    Garmin antwortet auf den Token-Refresh gelegentlich mit 429 (Rate Limit) –
+    das ist meist voruebergehend, deshalb mehrere Versuche mit wachsender Pause.
+    Ein 401 dagegen heisst: Token wirklich abgelaufen, neu erzeugen noetig.
+    """
+    import time
     from garminconnect import Garmin
-    email = os.environ.get("GARMIN_EMAIL", "")
-    password = os.environ.get("GARMIN_PASSWORD", "")
+
     session_secret = os.environ.get("GARMIN_SESSION_DATA", "").strip()
+    source = "GitHub-Secret" if session_secret else None
 
-    print(f"Garmin: GARMIN_SESSION_DATA gesetzt={bool(session_secret)}, Laenge={len(session_secret)}")
+    if not session_secret and os.path.exists(TOKENSTORE_PATH):
+        with open(TOKENSTORE_PATH) as f:
+            session_secret = f.read().strip()
+        source = "lokale Session"
 
-    api = Garmin(email, password)
+    if not session_secret:
+        raise GarminTokenExpired(
+            "Keine Garmin-Session gefunden. Lokal 'python3 generate_session.py' "
+            "ausfuehren und GARMIN_SESSION_DATA als GitHub-Secret setzen.")
 
-    # 1. GitHub Secret — kein Fresh-Login in CI (Garmin 429 auf CI-IPs)
-    if session_secret:
-        preview = session_secret[:40].replace('\n', '\\n')
-        print(f"Garmin: Secret-Preview: {preview!r}")
+    delays = [0, 20, 60, 150][:retries]
+    last = None
+    for i, d in enumerate(delays, 1):
+        if d:
+            print(f"Garmin: Rate-Limit – warte {d}s vor Versuch {i} …")
+            time.sleep(d)
         try:
+            api = Garmin()
             api.garth.loads(session_secret)
             api.display_name = api.garth.profile.get("displayName")
-            print(f"Garmin: Session OK, Nutzer: {api.display_name}")
+            print(f"Garmin: Anmeldung OK ({source}, Versuch {i})")
             return api
         except Exception as e:
-            raise RuntimeError(f"GARMIN_SESSION_DATA ungueltig (erste 40 Zeichen: {preview!r}): {e}")
+            last = e
+            msg = str(e)
+            if "401" in msg or "Unauthorized" in msg:
+                raise GarminTokenExpired(
+                    f"Garmin-Token abgelaufen ({msg[:120]}). Lokal "
+                    "'python3 generate_session.py' ausfuehren und das GitHub-Secret "
+                    "GARMIN_SESSION_DATA aktualisieren.") from e
+            if "429" not in msg:
+                # Kein Rate-Limit -> weitere Versuche bringen nichts
+                break
+            print(f"Garmin: Versuch {i} mit 429 fehlgeschlagen.")
 
-    # 2. Gecachte Session
-    if os.path.exists(TOKENSTORE_PATH):
-        try:
-            with open(TOKENSTORE_PATH) as f:
-                api.garth.loads(f.read())
-            api.display_name = api.garth.profile.get("displayName")
-            print(f"Garmin: gecachte Session OK, Nutzer: {api.display_name}")
-            return api
-        except Exception as e:
-            print(f"Garmin: gecachte Session ungueltig: {e}")
-
-    # 3. Kein Fresh-Login — wuerde in CI mit 429 scheitern
-    raise RuntimeError(
-        "Keine gueltige Garmin-Session. Bitte generate_session.py lokal ausfuehren "
-        "und GARMIN_SESSION_DATA als GitHub Secret setzen."
-    )
+    raise RuntimeError(f"Garmin-Anmeldung nach {len(delays)} Versuchen gescheitert: {last}")
 
 
 # ── Garmin data ───────────────────────────────────────────────────────────────

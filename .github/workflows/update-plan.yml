@@ -1,31 +1,34 @@
-name: Dashboard rendern
+name: Tagesupdate
 
-# Architektur:
-#   Garmin-Abruf laeuft LOKAL auf dem Mac (sync_garmin.py via launchd) und pusht
-#   garmin_data.json. Grund: Garmin blockt den OAuth-Refresh aus GitHub-IPs (429).
-#   Dieser Workflow rendert daraus nur das Dashboard (braucht nur den Claude-Key).
+# Laeuft komplett in der Cloud – unabhaengig davon, ob der Mac an ist.
 #
-#   Haupt-Ausloeser ist deshalb der PUSH der Daten – nicht der unzuverlaessige
-#   GitHub-Scheduler. Der Zeitplan bleibt nur als Sicherheitsnetz.
+#   1) sync_garmin.py  holt die Garmin-Daten     -> garmin_data.json
+#   2) update_plan.py  laesst Claude analysieren -> index.html
+#
+# Schlaegt Schritt 1 fehl (z.B. Garmin-Rate-Limit), rendert Schritt 2 trotzdem
+# aus den zuletzt gespeicherten Daten – das Dashboard weist das Datenalter aus.
+# Nur ein abgelaufener Token braucht Handarbeit; das meldet der Job deutlich.
 
 on:
+  schedule:
+    - cron: "0 5 * * *"     # ~07:00 MESZ
+    - cron: "40 5 * * *"    # Auffangnetz
+    - cron: "30 6 * * *"    # Auffangnetz
   push:
     paths:
-      - "garmin_data.json"      # laeuft direkt nach dem lokalen Sync
+      - "garmin_data.json"          # lokaler Mac-Sync hat Daten geliefert
       - "update_plan.py"
+      - "garmin_client.py"
       - ".github/workflows/update-plan.yml"
     branches: [main]
-  schedule:
-    - cron: "30 5 * * *"        # Sicherheitsnetz ~07:30 MESZ
-    - cron: "0 7 * * *"         # Sicherheitsnetz ~09:00 MESZ
   workflow_dispatch:
 
 concurrency:
-  group: dashboard-render
+  group: tagesupdate
   cancel-in-progress: false
 
 jobs:
-  render:
+  update:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -33,52 +36,62 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Daten pruefen (Frische + Vollstaendigkeit)
-        id: check
+      - name: Heute schon fertig? (nur bei geplanten Laeufen)
+        id: guard
         run: |
-          if [ ! -f garmin_data.json ]; then
-            echo "garmin_data.json fehlt – nichts zu rendern."
-            echo "skip=true" >> "$GITHUB_OUTPUT"; exit 0
-          fi
-          SYNC=$(python3 -c "import json;print(json.load(open('garmin_data.json')).get('sync_date',''))")
-          AGE=$(( ( $(date -u +%s) - $(date -u -d "$SYNC" +%s) ) / 86400 ))
-          echo "Datenstand: $SYNC (Alter: $AGE Tage)"
-          # Bei geplanten Laeufen nicht doppelt rendern, wenn index.html schon aktuell ist
           if [ "${{ github.event_name }}" = "schedule" ] && \
-             grep -q "\"updated\": \"$(date -u +%Y-%m-%d)\"" index.html; then
-            echo "Heute bereits gerendert – ueberspringe."
-            echo "skip=true" >> "$GITHUB_OUTPUT"; exit 0
+             [ -f garmin_data.json ] && \
+             python3 -c "import json,sys,datetime; sys.exit(0 if json.load(open('garmin_data.json')).get('sync_date')==datetime.date.today().isoformat() else 1)"; then
+            echo "Daten von heute liegen bereits vor – ueberspringe."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
-          echo "skip=false" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-python@v5
-        if: steps.check.outputs.skip == 'false'
+        if: steps.guard.outputs.skip == 'false'
         with:
           python-version: "3.11"
 
-      - name: Abhaengigkeiten installieren
-        if: steps.check.outputs.skip == 'false'
+      - name: Abhaengigkeiten
+        if: steps.guard.outputs.skip == 'false'
         run: pip install -r requirements.txt
 
+      # Darf fehlschlagen: dann rendern wir aus den letzten guten Daten weiter.
+      - name: Garmin-Daten holen
+        id: sync
+        if: steps.guard.outputs.skip == 'false'
+        continue-on-error: true
+        env:
+          GARMIN_SESSION_DATA: ${{ secrets.GARMIN_SESSION_DATA }}
+        run: python sync_garmin.py
+
       - name: Dashboard rendern
-        if: steps.check.outputs.skip == 'false'
-        run: python update_plan.py
+        if: steps.guard.outputs.skip == 'false'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python update_plan.py
 
       - name: Aenderungen pushen
-        if: steps.check.outputs.skip == 'false'
+        if: steps.guard.outputs.skip == 'false'
         run: |
           git config user.name "Marathon Bot"
           git config user.email "marathon-bot@users.noreply.github.com"
-          git add index.html
+          git add index.html garmin_data.json
           if git diff --staged --quiet; then
-            echo "index.html unveraendert – nichts zu pushen."
-            exit 0
+            echo "Nichts geaendert."; exit 0
           fi
-          git commit -m "Dashboard: $(date +%Y-%m-%d)"
+          git commit -m "Tagesupdate: $(date +%Y-%m-%d)"
           for i in 1 2 3; do
-            git pull --rebase --quiet origin main && git push --quiet && exit 0
-            echo "Push-Versuch $i fehlgeschlagen, neuer Versuch …"; sleep 10
+            git pull --rebase --autostash --quiet origin main && git push --quiet && exit 0
+            echo "Push-Versuch $i fehlgeschlagen …"; sleep 10
           done
           exit 1
+
+      - name: Warnen wenn Garmin-Abruf scheiterte
+        if: steps.guard.outputs.skip == 'false' && steps.sync.outcome == 'failure'
+        run: |
+          echo "::warning::Garmin-Abruf fehlgeschlagen – Dashboard wurde aus den"
+          echo "::warning::zuletzt gespeicherten Daten gerendert und zeigt das Datenalter."
+          echo "::warning::Bei abgelaufenem Token: lokal 'python3 generate_session.py'"
+          echo "::warning::ausfuehren und das Secret GARMIN_SESSION_DATA aktualisieren."
