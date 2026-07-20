@@ -24,7 +24,10 @@ jobs:
       - name: Schon heute aktualisiert? (Idempotenz)
         id: guard
         run: |
-          if grep -q "\"updated\": \"$(date -u +%Y-%m-%d)\"" index.html; then
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "Manuell gestartet – läuft immer durch."
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          elif grep -q "\"updated\": \"$(date -u +%Y-%m-%d)\"" index.html; then
             echo "Heute bereits aktualisiert – überspringe."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
