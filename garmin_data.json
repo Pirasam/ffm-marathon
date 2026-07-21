@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-07-20T13:18:00+00:00",
-  "sync_date": "2026-07-20",
+  "synced_at": "2026-07-21T07:00:22+02:00",
+  "sync_date": "2026-07-21",
   "metrics": {
     "sleep_hours": 4.5,
     "sleep_score": 57,
@@ -9,10 +9,10 @@
     "hrv_weekly_avg": 42,
     "hrv_balanced_low": 41,
     "hrv_balanced_high": 50,
-    "stress": 24,
-    "resting_hr": 58,
-    "body_battery": 58,
-    "training_readiness": 74,
+    "stress": 6,
+    "resting_hr": 53,
+    "body_battery": 38,
+    "training_readiness": 75,
     "recent_activities": [
       {
         "name": "Dierhagen Laufen",
@@ -76,15 +76,6 @@
         "duration_min": 79,
         "pace_min_km": null,
         "avg_hr": 98.0
-      },
-      {
-        "name": "Dierhagen Laufen",
-        "type": "running",
-        "date": "2026-07-06",
-        "distance_km": 12.0,
-        "duration_min": 88,
-        "pace_min_km": 7.34,
-        "avg_hr": 136.0
       }
     ],
     "last_run": {
@@ -98,7 +89,7 @@
     },
     "weekly_running": {
       "2026-W29": 1.4,
-      "2026-W28": 43.2
+      "2026-W28": 31.2
     },
     "run_dynamics": {
       "date": "2026-07-15",
@@ -127,11 +118,6 @@
           "cadence": 165.0,
           "vertical_ratio": 11.2,
           "gct": 248.0
-        },
-        "2026-07-06": {
-          "cadence": 163.0,
-          "vertical_ratio": 12.2,
-          "gct": 271.0
         }
       }
     },
@@ -205,7 +191,7 @@
         "current": 82.6,
         "goal": 200.0,
         "unit": "km",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 41
       },
       {
@@ -213,7 +199,7 @@
         "current": 9.0,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 90
       },
       {
@@ -221,7 +207,7 @@
         "current": 72.6,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 90
       },
       {
@@ -229,23 +215,23 @@
         "current": 3.6,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 89
       },
       {
         "name": "July Step Month",
-        "current": 225378,
+        "current": 227176,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 11,
-        "pct": 75
+        "days_remaining": 10,
+        "pct": 76
       },
       {
         "name": "Active July",
         "current": 10,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 50
       },
       {
@@ -253,7 +239,7 @@
         "current": 6.2,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 31
       },
       {
@@ -261,7 +247,7 @@
         "current": 0.0,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 0
       }
     ],
@@ -269,6 +255,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-07-21",
+        "v": 33
+      },
       {
         "d": "2026-07-20",
         "v": 33
@@ -384,13 +374,13 @@
       {
         "d": "2026-06-22",
         "v": 46
-      },
-      {
-        "d": "2026-06-21",
-        "v": 43
       }
     ],
     "rhr": [
+      {
+        "d": "2026-07-21",
+        "v": 53
+      },
       {
         "d": "2026-07-20",
         "v": 58
@@ -506,10 +496,6 @@
       {
         "d": "2026-06-22",
         "v": 55
-      },
-      {
-        "d": "2026-06-21",
-        "v": 57
       }
     ],
     "weight": [
@@ -761,7 +747,7 @@
       },
       {
         "w": "2026-W28",
-        "v": 43.2
+        "v": 31.2
       }
     ],
     "run_dyn": [
@@ -791,6 +777,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-07-21",
+        "v": 45.1
+      },
       {
         "d": "2026-07-20",
         "v": 45.1
