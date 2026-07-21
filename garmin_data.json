@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-07-21T05:00:52+00:00",
+  "synced_at": "2026-07-21T07:46:14+00:00",
   "sync_date": "2026-07-21",
   "metrics": {
-    "sleep_hours": 4.5,
-    "sleep_score": 57,
+    "sleep_hours": 7.6,
+    "sleep_score": 88,
     "hrv_status": "BALANCED",
-    "hrv_value": 33,
+    "hrv_value": 40,
     "hrv_weekly_avg": 42,
     "hrv_balanced_low": 41,
     "hrv_balanced_high": 50,
-    "stress": 6,
+    "stress": 16,
     "resting_hr": 53,
-    "body_battery": 38,
-    "training_readiness": 75,
+    "body_battery": 89,
+    "training_readiness": 92,
     "recent_activities": [
       {
         "name": "Dierhagen Laufen",
@@ -220,7 +220,7 @@
       },
       {
         "name": "July Step Month",
-        "current": 227176,
+        "current": 227331,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 10,
@@ -257,7 +257,7 @@
     "hrv": [
       {
         "d": "2026-07-21",
-        "v": 33
+        "v": 40
       },
       {
         "d": "2026-07-20",
