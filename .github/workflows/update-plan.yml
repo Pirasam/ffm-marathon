@@ -57,37 +57,47 @@ jobs:
           GARMIN_SESSION_DATA: ${{ secrets.GARMIN_SESSION_DATA }}
         run: python sync_garmin.py
 
-      # Nur weiterarbeiten, wenn sich die WERTE geaendert haben (synced_at ignorieren).
-      # So laufen die Mehrfach-Termine ohne Leerlauf und ohne Commit-Rauschen.
-      - name: Haben sich die Werte geaendert?
+      # Entscheidend ist NICHT, ob der Sync etwas geaendert hat, sondern ob das
+      # gerenderte Dashboard noch zu den vorliegenden Daten passt. Sonst bleibt
+      # ein Stillstand unbemerkt, wenn der Cloud-Sync scheitert, aber der Mac
+      # laengst neuere Daten geliefert hat (genau so vom 21.–24.07. passiert).
+      - name: Passt das Dashboard zu den Daten?
         id: diff
         run: |
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
-          import json, subprocess
-          def metrics(src):
-              try:
-                  if src == "HEAD":
-                      raw = subprocess.check_output(["git","show","HEAD:garmin_data.json"])
-                      d = json.loads(raw)
-                  else:
-                      d = json.load(open(src))
-                  m = dict(d.get("metrics", {}))
-                  m.pop("_errors", None)
-                  return json.dumps(m, sort_keys=True)
-              except Exception:
-                  return None
-          now, prev = metrics("garmin_data.json"), metrics("HEAD")
-          print("changed=" + ("true" if now and now != prev else "false"))
+          import json, re
+          KEYS = ("hrv_value", "resting_hr", "sleep_hours", "body_battery",
+                  "weight_kg", "training_readiness")
+          try:
+              d = json.load(open("garmin_data.json"))
+              m = d.get("metrics", {})
+              data = {k: m.get(k) for k in KEYS}
+              data["sync_date"] = d.get("sync_date")
+          except Exception as e:
+              print(f"render=false")
+              raise SystemExit(0)
+
+          try:
+              html = open("index.html", encoding="utf-8").read()
+              cur = json.loads(re.search(r"window\.GARMIN_DATA\s*=\s*(\{.*?\});",
+                                         html, re.DOTALL).group(1))
+              shown = {k: cur.get(k) for k in KEYS}
+              shown["sync_date"] = cur.get("data_sync_date")
+          except Exception:
+              shown = None
+
+          need = shown != data
+          print("render=" + ("true" if need else "false"))
           PY
 
       - name: Dashboard rendern
-        if: steps.diff.outputs.changed == 'true'
+        if: steps.diff.outputs.render == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python update_plan.py
 
       - name: Aenderungen pushen
-        if: steps.diff.outputs.changed == 'true'
+        if: steps.diff.outputs.render == 'true'
         run: |
           git config user.name "Marathon Bot"
           git config user.email "marathon-bot@users.noreply.github.com"
@@ -103,7 +113,7 @@ jobs:
           exit 1
 
       - name: Nichts Neues
-        if: steps.diff.outputs.changed != 'true'
+        if: steps.diff.outputs.render != 'true'
         run: echo "Keine neuen Garmin-Werte – Dashboard bleibt wie es ist."
 
       - name: Warnen wenn Garmin-Abruf scheiterte
