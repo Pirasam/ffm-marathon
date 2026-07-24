@@ -2,23 +2,41 @@
 
 Live: **https://pirasam.github.io/ffm-marathon/**
 
-## Wie es läuft (du musst nichts tun)
-
-Alles passiert in der Cloud — **unabhängig davon, ob dein Mac an ist.**
+## Wie es läuft
 
 ```
-07:00 (UTC 05:00)   GitHub Actions
-   1. sync_garmin.py   Garmin-Daten holen   → garmin_data.json
-   2. update_plan.py   Claude Opus 4.8      → index.html
-   3. push             → GitHub Pages aktualisiert das Dashboard
+06:58  Mac wacht auf  ->  sync_garmin.py  ->  garmin_data.json  ->  push
+          |                                                          |
+          |                                        loest Rendern aus v
+       (schlaeft weiter)                    GitHub: Claude -> index.html
 ```
 
-Zwei weitere Zeitfenster (07:40, 08:30) fangen ab, wenn GitHubs Zeitplan sich
-verspätet. Liegen die Daten des Tages schon vor, brechen sie sofort ab.
+Zusaetzlich versucht GitHub selbst 3x vormittags zu synchronisieren (07:00,
+09:00, 11:00) – das klappt aber nur, solange der Garmin-Token frisch ist
+(siehe unten). Verlass dich auf den Mac; die Cloud ist Beiwerk.
 
-**Der Mac ist nur Redundanz, keine Voraussetzung.** Läuft er (per launchd,
-5 Zeitfenster), synct er ebenfalls und pusht — das löst dann direkt ein Rendern
-aus. Ist er aus, macht die Cloud alles allein.
+**Warum der Mac?** Garmins Zugriffs-Token gilt nur ~24 h. Das Erneuern wird
+aus GitHub-Netzen blockiert (429). Vom Mac aus funktioniert es. Deshalb muss
+der Mini nachts schlafen (nicht ausschalten) und um 06:58 aufwachen:
+
+```bash
+sudo pmset repeat wake MTWRFSU 06:58:00     # einmalig, braucht dein Passwort
+pmset -g sched                              # pruefen
+```
+
+## Der Wartungsfall: Garmin-Login erneuern
+
+Der Login traegt ~30 Tage. Vorher warnen Log **und Dashboard** sichtbar.
+Dann:
+
+```bash
+cd ~/ffm-marathon
+python3 generate_session.py          # Garmin-Login + ggf. 2FA
+cat garmin_secret.txt | pbcopy       # Token kopieren
+```
+
+Einfuegen unter:
+https://github.com/Pirasam/ffm-marathon/settings/secrets/actions/GARMIN_SESSION_DATA
 
 ## Was wann schiefgehen kann
 
@@ -32,20 +50,6 @@ aus. Ist er aus, macht die Cloud alles allein.
 **Grundregel:** Es wird nie etwas Gutes durch etwas Leeres ersetzt. Schlägt ein
 Schritt fehl, bleibt der vorherige Stand erhalten und das Alter wird sichtbar
 ausgewiesen — statt so zu tun, als wäre alles frisch.
-
-## Der einzige Wartungsfall: Garmin-Token
-
-Der Token hält etwa ein Jahr. Läuft er ab, zeigt das Dashboard eine rote
-Warnung mit dem Datenalter. Dann:
-
-```bash
-cd ~/ffm-marathon
-python3 generate_session.py          # fragt Garmin-Login + ggf. 2FA
-cat garmin_secret.txt | pbcopy       # Token in die Zwischenablage
-```
-
-Dann einfügen unter:
-https://github.com/Pirasam/ffm-marathon/settings/secrets/actions/GARMIN_SESSION_DATA
 
 ## Dateien
 
