@@ -2476,15 +2476,21 @@ document.addEventListener('DOMContentLoaded',()=>{
     const[bgc,tc]=iMap[g.training_intensity]||iMap.Mittel;
     const b=document.getElementById('gd-rec-badge');b.textContent=g.training_intensity||'Mittel';b.style.background=bgc;b.style.color=tc;
     document.getElementById('gd-rec-text').textContent=g.recommendation||'';
-    // Datenstand ehrlich anzeigen: veraltete Daten werden markiert, nicht kaschiert.
+    // Datenstand ehrlich anzeigen. WICHTIG: Das Alter wird HIER im Browser aus
+    // dem Sync-Datum berechnet, nicht beim Rendern eingebrannt – sonst friert
+    // die Anzeige bei "0 Tage" ein, sobald das Rendern ausfaellt (genau das ist
+    // vom 21.–24.07. passiert und blieb dadurch unbemerkt).
     {
       const el=document.getElementById('gd-updated');
-      const age=g.data_age_days, sd=g.data_sync_date;
+      const sd=g.data_sync_date;
       if(sd){
-        const dd=new Date(sd), fmt=dd.getDate()+'.'+(dd.getMonth()+1)+'.';
-        if(age===0){el.textContent=`Garmin-Daten von heute (${fmt})`;el.style.color='#bbb';}
+        const dd=new Date(sd+'T00:00:00');
+        const t=new Date(); t.setHours(0,0,0,0);
+        const age=Math.round((t-dd)/864e5);
+        const fmt=dd.getDate()+'.'+(dd.getMonth()+1)+'.';
+        if(age<=0){el.textContent=`Garmin-Daten von heute (${fmt})`;el.style.color='#bbb';}
         else if(age===1){el.textContent=`Garmin-Daten von gestern (${fmt})`;el.style.color='#bbb';}
-        else{el.innerHTML=`<span style="color:#d94f38;font-weight:600;">⚠ Garmin-Daten ${age} Tage alt (${fmt})</span> – Garmin-Token vermutlich abgelaufen, muss erneuert werden`;}
+        else{el.innerHTML=`<span style="color:#d94f38;font-weight:600;">⚠ Garmin-Daten ${age} Tage alt (${fmt})</span> – Sync liefert nichts mehr, siehe README`;}
       }else if(g.updated){el.textContent=`Aktualisiert ${g.updated}`;}
     }
 
