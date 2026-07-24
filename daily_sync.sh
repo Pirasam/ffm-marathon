@@ -21,6 +21,19 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')] Start"
 
 cd "$REPO" || { echo "FEHLER: Repo nicht gefunden: $REPO"; exit 1; }
 
+# Selbstheilung: ein haengender Rebase blockierte sonst JEDEN weiteren Lauf –
+# genau das ist am 22.07. passiert, danach lief der Sync tagelang ins Leere.
+if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
+  echo "WARNUNG: haengender Rebase gefunden – wird aufgeraeumt."
+  git rebase --abort 2>/dev/null || true
+  rm -rf .git/rebase-merge .git/rebase-apply
+fi
+
+# Nur die Datendatei auf Serverstand bringen (NICHT das ganze Repo – sonst
+# waeren lokale Code-Aenderungen weg). Sie wird gleich neu geschrieben.
+git fetch --quiet origin main 2>/dev/null || true
+git checkout --quiet origin/main -- garmin_data.json 2>/dev/null || true
+
 # Heute schon erfolgreich gesynct? Dann sofort raus.
 # Der Job ist bewusst mehrfach am Tag eingeplant (falls der Mac um 07:00
 # schlief); dieser Check macht die Wiederholungen praktisch kostenlos.
@@ -56,10 +69,21 @@ git add garmin_data.json
 git -c user.name="Garmin Sync" -c user.email="garmin-sync@local" \
     commit -q -m "Garmin-Daten $(date +%Y-%m-%d)"
 
-# 3) Push (mit Rebase, falls die Cloud parallel index.html committet hat).
-#    --autostash: sonstige lokale Aenderungen blockieren den Rebase nicht.
+# 3) Push. Bei Konflikt gewinnt IMMER die frisch gesyncte Datei – sie wird
+#    jeden Lauf komplett neu geschrieben, ein Zusammenfuehren waere sinnlos.
 for i in 1 2 3; do
-  if git pull --rebase --autostash --quiet origin main && git push --quiet origin main; then
+  if ! git pull --rebase --autostash --quiet origin main 2>/dev/null; then
+    if [ -n "$(git diff --name-only --diff-filter=U 2>/dev/null)" ]; then
+      echo "Konflikt – behalte die frisch gesyncten Daten."
+      git checkout --theirs -- garmin_data.json 2>/dev/null || true
+      git add garmin_data.json 2>/dev/null || true
+      GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || {
+        git rebase --abort 2>/dev/null || true
+        rm -rf .git/rebase-merge .git/rebase-apply
+      }
+    fi
+  fi
+  if git push --quiet origin main 2>/dev/null; then
     echo "Push erfolgreich (Versuch $i)."
     echo "[$(date '+%H:%M:%S')] Fertig – Actions rendert jetzt das Dashboard."
     exit 0
