@@ -73,6 +73,10 @@ jobs:
               m = d.get("metrics", {})
               data = {k: m.get(k) for k in KEYS}
               data["sync_date"] = d.get("sync_date")
+              # Nur der Warn-Zustand zaehlt, nicht die genaue Restlaufzeit –
+              # sonst wuerde jeder Lauf neu rendern (Zahl aendert sich staendig).
+              td = d.get("token_days_left")
+              data["token_warn"] = td is not None and td < 7
           except Exception as e:
               print(f"render=false")
               raise SystemExit(0)
@@ -83,6 +87,8 @@ jobs:
                                          html, re.DOTALL).group(1))
               shown = {k: cur.get(k) for k in KEYS}
               shown["sync_date"] = cur.get("data_sync_date")
+              st = cur.get("token_days_left")
+              shown["token_warn"] = st is not None and st < 7
           except Exception:
               shown = None
 
