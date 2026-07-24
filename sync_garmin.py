@@ -78,9 +78,33 @@ def main():
     history = update_history(history, metrics, today.isoformat(),
                              metrics.get("weekly_running", {}))
 
+    # Wie lange traegt der Garmin-Login noch? Der Refresh-Token laeuft nach
+    # ~30 Tagen ab; danach hilft nur generate_session.py. Rechtzeitig warnen.
+    token_days = None
+    try:
+        import base64
+        raw = os.environ.get("GARMIN_SESSION_DATA", "").strip()
+        if not raw:
+            with open(os.path.expanduser("~/.garmin_session")) as f:
+                raw = f.read().strip()
+        parts = json.loads(base64.b64decode(raw))
+        o2 = parts[1] if len(parts) > 1 and isinstance(parts[1], dict) else {}
+        rexp = o2.get("refresh_token_expires_at")
+        if rexp:
+            import time
+            token_days = round((rexp - time.time()) / 86400, 1)
+            if token_days < 7:
+                print(f"WARNUNG: Garmin-Login laeuft in {token_days} Tagen ab – "
+                      f"'python3 generate_session.py' ausfuehren.")
+            else:
+                print(f"Garmin-Login noch {token_days} Tage gueltig.")
+    except Exception:
+        pass
+
     payload = {
         "synced_at": datetime.now().astimezone().isoformat(timespec="seconds"),
         "sync_date": today.isoformat(),
+        "token_days_left": token_days,
         "metrics": metrics,
         "history": history,
     }

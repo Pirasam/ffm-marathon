@@ -2475,6 +2475,11 @@ document.addEventListener('DOMContentLoaded',()=>{
         else if(age===1){el.textContent=`Garmin-Daten von gestern (${fmt})`;el.style.color='#bbb';}
         else{el.innerHTML=`<span style="color:#d94f38;font-weight:600;">⚠ Garmin-Daten ${age} Tage alt (${fmt})</span> – Sync liefert nichts mehr, siehe README`;}
       }else if(g.updated){el.textContent=`Aktualisiert ${g.updated}`;}
+      // Vorwarnung, BEVOR der Garmin-Login abläuft und die Seite stehenbleibt.
+      const td=g.token_days_left;
+      if(td!=null&&td<7){
+        el.innerHTML+=`<div style="margin-top:4px;color:#d94f38;font-weight:600;">🔑 Garmin-Login läuft in ${td} Tagen ab – bitte erneuern (README)</div>`;
+      }
     }
 
     // Longrun-Tipps

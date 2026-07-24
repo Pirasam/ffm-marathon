@@ -362,7 +362,8 @@ def main():
     age_days = (date.today() - date.fromisoformat(sync_date)).days if sync_date else None
     print(f"Daten vom {sync_date} ({synced_at}), Alter: {age_days} Tage")
     metrics["data_sync_date"] = sync_date
-    metrics["data_age_days"] = age_days
+    metrics["data_age_days"] = age_days   # nur informativ; das Dashboard rechnet selbst
+    metrics["token_days_left"] = data.get("token_days_left")
 
     html = save_history(html, history)
 
