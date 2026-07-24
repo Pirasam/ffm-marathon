@@ -1,6 +1,7 @@
 {
-  "synced_at": "2026-07-24T09:40:36+02:00",
+  "synced_at": "2026-07-24T10:32:56+02:00",
   "sync_date": "2026-07-24",
+  "token_days_left": 2.3,
   "metrics": {
     "sleep_hours": 8.5,
     "sleep_score": 87,
@@ -9,7 +10,7 @@
     "hrv_weekly_avg": 41,
     "hrv_balanced_low": 41,
     "hrv_balanced_high": 50,
-    "stress": 11,
+    "stress": 12,
     "resting_hr": 53,
     "body_battery": 100,
     "training_readiness": 94,
@@ -197,7 +198,7 @@
       },
       {
         "name": "July Step Month",
-        "current": 240143,
+        "current": 240185,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 7,
