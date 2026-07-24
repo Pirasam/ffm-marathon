@@ -17,8 +17,12 @@ on:
     - cron: "0 7 * * *"     # 09:00 MESZ – Uhr meist synchronisiert
     - cron: "0 9 * * *"     # 11:00 MESZ – sicheres Auffangnetz
   push:
-    paths:                  # nur Code-Aenderungen, NICHT garmin_data.json
-      - "update_plan.py"    # (sonst Endlosschleife durch eigenen Daten-Commit)
+    paths:
+      # Daten vom Mac-Sync -> sofort rendern. Keine Endlosschleife: der
+      # "Werte geaendert?"-Schritt stoppt den Folgelauf, weil die Metriken
+      # dann identisch sind (synced_at wird beim Vergleich ignoriert).
+      - "garmin_data.json"
+      - "update_plan.py"
       - "garmin_client.py"
       - "sync_garmin.py"
       - ".github/workflows/update-plan.yml"
