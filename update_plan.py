@@ -17,13 +17,25 @@ HISTORY_MARKER = ("<!-- HISTORY:START -->", "<!-- HISTORY:END -->")
 
 CLAUDE_MODEL = "claude-opus-4-8"
 
-# ── Genesungs-Modus ───────────────────────────────────────────────────────────
-# Solange aktiv: KEINE Trainingsempfehlungen. Stattdessen Erholungsverlauf,
-# Rückkehr-Kriterien und der Hinweis auf die nötige ärztliche Freigabe.
-# Zum Beenden einfach RECOVERY_MODE = False setzen.
+# ── Genesungs- / Wiedereinstiegs-Modus ────────────────────────────────────────
+# RECOVERY_MODE True: kein normaler Trainingsplan, sondern Erholungs-/Wiederein-
+#   stiegs-Ansicht. Zum Beenden (voller Trainingsbetrieb) RECOVERY_MODE = False.
+# DOCTOR_CLEARED steuert, ob begrenzte Aktivität erlaubt ist (ärztliche Freigabe).
 RECOVERY_MODE = True
 RECOVERY_REASON = "Borreliose nach Zeckenstich (09.07.), Antibiotikum seit 17.07."
 RECOVERY_SINCE = "2026-07-16"
+
+# Ärztliche Freigabe vom 27.07.2026 (Kontrolltermin):
+DOCTOR_CLEARED = True
+DOCTOR_DATE = "2026-07-27"
+DOCTOR_GUIDANCE = (
+    "Antibiotikum schlägt an, Werte sollten sich bald normalisieren. Sport bis "
+    "50% der normalen Belastung wieder möglich UND wichtig – auch psychisch, weil "
+    "gewohnt. Bei der Hitze später diese Woche besser aussetzen; ab nächster Woche "
+    "(ab 04.08.) langsam wieder aufnehmen, immer auf das Körpergefühl hören. "
+    "Antikörper-Bluttest Ende August."
+)
+
 # Individuelle Normalwerte VOR der Infektion (aus den Daten 27.06.–09.07.)
 BASELINE_RHR = (53, 55)
 BASELINE_HRV = (42, 48)
@@ -126,43 +138,65 @@ def _claude_json(prompt, max_tokens=1100):
 
 
 def call_claude_recovery(metrics, history):
-    """Genesungs-Modus: keine Trainingsempfehlung, sondern Erholungseinschätzung."""
+    """Wiedereinstieg nach Krankheit: begleitet, begrenzt, mit ärztlicher Freigabe."""
     rhr_hist = [x["v"] for x in (history.get("rhr") or [])[:10]]
     hrv_hist = [x["v"] for x in (history.get("hrv") or [])[:10]]
+    today = date.today()
 
-    prompt = f"""Du bist ein vorsichtiger Sportmediziner-Assistent. Der Sportler ist KRANK und
-erholt sich: {RECOVERY_REASON}. Er darf NICHT trainieren, bis ein Arzt ihn freigibt.
+    if DOCTOR_CLEARED:
+        frame = f"""Der Sportler erholt sich von: {RECOVERY_REASON}.
+Am {DOCTOR_DATE} war er beim Arzt. ÄRZTLICHE FREIGABE (maßgeblich): "{DOCTOR_GUIDANCE}"
 
-Wichtiger medizinischer Kontext: Bei Borreliose besteht in den ersten 1–2 Wochen nach Infektion
-das Risiko einer Lyme-Karditis (Herzbeteiligung). Ausdauerbelastung ist bis zur ärztlichen
-Abklärung potenziell gefährlich. Empfiehl deshalb UNTER KEINEN UMSTÄNDEN Training,
-auch kein "lockeres" Laufen oder Radfahren.
+Das heißt konkret:
+- Begrenzte Aktivität ist jetzt ERLAUBT und sogar erwünscht – aber nur bis ~50% seiner
+  normalen Belastung (normal waren ~40 km Laufen/Woche; 50% = also sehr moderat, kurze
+  lockere Einheiten, keine langen oder intensiven Läufe).
+- Bei Hitze diese Woche AUSSETZEN. Ab nächster Woche (ab 04.08.) langsam wieder aufnehmen.
+- IMMER auf das Körpergefühl hören; bei Herzstolpern, Druck auf der Brust, Luftnot,
+  Schwindel oder ungewöhnlicher Erschöpfung sofort stoppen und ärztlich abklären.
+- Kein Leistungsdruck. Bewegung ist auch für die Psyche wichtig, weil er es gewohnt ist."""
+        status_line = ('"recovery_status": "<Erholung | Wiedereinstieg | Rückschlag>",')
+        advice_line = ('"recovery_advice": "<2–3 Sätze für HEUTE: Falls die Werte gut sind und '
+                       'es nicht zu heiß ist, eine konkrete, sehr moderate Aktivität vorschlagen '
+                       '(z.B. 20–30 Min lockeres Gehen/Radeln/kurzer Lauf nach Gefühl, max ~50%). '
+                       'Bei Hitze oder schlechten Werten stattdessen Ruhe/leichte Bewegung. '
+                       'Immer den Körpergefühl-Vorbehalt nennen.>")')
+    else:
+        frame = f"""Der Sportler ist KRANK: {RECOVERY_REASON}. Er darf NICHT trainieren,
+bis ein Arzt ihn freigibt. Bei Borreliose besteht Risiko einer Lyme-Karditis (Herz).
+Empfiehl UNTER KEINEN UMSTÄNDEN Training, auch kein "lockeres" Laufen/Radfahren."""
+        status_line = '"recovery_status": "<Erholung | Stabil | Rückschlag>",'
+        advice_line = ('"recovery_advice": "<2 Sätze Erholungsunterstützung für heute: Schlaf, '
+                       'Flüssigkeit, Ernährung, Belastungsvermeidung. NIEMALS Training empfehlen.>")')
+
+    prompt = f"""Du bist ein vorsichtiger Sportmediziner-Assistent. {frame}
 
 Seine Normalwerte VOR der Infektion: Ruhepuls {BASELINE_RHR[0]}–{BASELINE_RHR[1]} bpm,
-HRV {BASELINE_HRV[0]}–{BASELINE_HRV[1]} ms.
+HRV {BASELINE_HRV[0]}–{BASELINE_HRV[1]} ms. Heute ist {today.strftime('%A, %d.%m.%Y')}.
 
 Heutige Werte:
 - Ruhepuls: {metrics.get("resting_hr")} bpm
 - HRV: {metrics.get("hrv_value")} ms (Status {metrics.get("hrv_status")})
 - Schlaf: {metrics.get("sleep_hours")} h (Score {metrics.get("sleep_score")}/100)
 - Body Battery: {metrics.get("body_battery")}/100
+- Training Readiness: {metrics.get("training_readiness")}/100
 - Stress gestern: {metrics.get("stress")}/100
 
 Verlauf (neueste zuerst):
 - Ruhepuls letzte 10 Tage: {rhr_hist}
 - HRV letzte 10 Tage: {hrv_hist}
 
-Beurteile NÜCHTERN den Erholungsverlauf. Beachte: schlechter Schlaf allein drückt HRV und
-hebt den Ruhepuls – unterscheide das von einem echten Rückschlag.
+Beurteile NÜCHTERN. Beachte: schlechter Schlaf allein drückt HRV und hebt den Ruhepuls –
+unterscheide das von einem echten Rückschlag.
 
 Antworte NUR mit diesem JSON (kein Markdown):
 {{
-  "recovery_status": "<Erholung | Stabil | Rückschlag>",
-  "recovery_note": "<2 Sätze: wie stehen Ruhepuls, HRV und Schlaf im Vergleich zur Basis? Nüchtern, keine Panik, keine Verharmlosung.>",
-  "recovery_advice": "<2 Sätze konkrete Erholungsunterstützung für heute: Schlaf, Flüssigkeit, Ernährung, Belastungsvermeidung. NIEMALS Training empfehlen.>",
-  "readiness_check": "<1 Satz: wie weit sind die Werte noch von der Basis entfernt und was wäre das Signal für Besserung?>"
+  {status_line}
+  "recovery_note": "<2 Sätze: wie stehen Ruhepuls, HRV und Schlaf im Vergleich zur Basis? Nüchtern.>",
+  {advice_line},
+  "readiness_check": "<1 Satz: nächster Meilenstein bzw. worauf heute beim Wiedereinstieg achten.>"
 }}"""
-    return _claude_json(prompt, max_tokens=700)
+    return _claude_json(prompt, max_tokens=750)
 
 
 def call_claude(metrics, plan_context):
@@ -282,7 +316,8 @@ def inject_garmin_data(html_content, metrics, claude_result):
     }
     # Genesungs-Modus-Felder durchreichen (nur gesetzt, wenn aktiv)
     for k in ("recovery_mode", "recovery_reason", "recovery_since", "recovery_status",
-              "recovery_note", "readiness_check", "baseline_rhr", "baseline_hrv"):
+              "recovery_note", "readiness_check", "baseline_rhr", "baseline_hrv",
+              "doctor_cleared", "doctor_date", "doctor_guidance"):
         if k in claude_result:
             payload[k] = claude_result[k]
     payload.pop("weekly_running", None)
@@ -389,13 +424,16 @@ def main():
             }
         claude_result = {
             "recommendation": rec.get("recovery_advice", ""),
-            "training_intensity": "Genesung",
+            "training_intensity": "Wiedereinstieg" if DOCTOR_CLEARED else "Genesung",
             "recovery_mode": True,
             "recovery_reason": RECOVERY_REASON,
             "recovery_since": RECOVERY_SINCE,
             "recovery_status": rec.get("recovery_status", ""),
             "recovery_note": rec.get("recovery_note", ""),
             "readiness_check": rec.get("readiness_check", ""),
+            "doctor_cleared": DOCTOR_CLEARED,
+            "doctor_date": DOCTOR_DATE,
+            "doctor_guidance": DOCTOR_GUIDANCE,
             "baseline_rhr": list(BASELINE_RHR),
             "baseline_hrv": list(BASELINE_HRV),
             # Trainingsspezifische Felder bewusst neutral/leer

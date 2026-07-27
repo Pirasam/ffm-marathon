@@ -277,7 +277,7 @@ window.GARMIN_DATA = {
       <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px;">
         <span style="font-size:18px;">🩺</span>
         <div>
-          <div style="font-size:12px;font-weight:700;color:#1a1a2e;">Genesungsmodus · Training pausiert</div>
+          <div id="gd-rc-title" style="font-size:12px;font-weight:700;color:#1a1a2e;">Genesungsmodus</div>
           <div id="gd-rc-reason" style="font-size:10px;color:#8a7570;margin-top:1px;"></div>
         </div>
         <div id="gd-rc-status" style="margin-left:auto;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;"></div>
@@ -291,8 +291,10 @@ window.GARMIN_DATA = {
       <div id="gd-rc-advice" style="font-size:12px;color:#333;line-height:1.6;background:#fff;border:1px solid #f3e3de;border-radius:8px;padding:10px 12px;margin-bottom:8px;"></div>
       <div id="gd-rc-readiness" style="font-size:11px;color:#777;line-height:1.5;margin-bottom:10px;"></div>
 
-      <div style="font-size:11px;color:#b33d28;background:rgba(255,107,87,0.08);border-radius:6px;padding:9px 11px;line-height:1.5;">
-        <b>⚠ Vor Wiederaufnahme des Trainings ärztlich abklären lassen</b> — bei Borreliose besteht in den ersten Wochen das Risiko einer Herzbeteiligung (Lyme-Karditis). Bei Herzstolpern, Druck auf der Brust, Luftnot oder Schwindel sofort ärztlich vorstellen.
+      <div id="gd-rc-doctor" style="display:none;font-size:11px;color:#1a5c42;background:rgba(28,125,90,0.09);border-radius:6px;padding:9px 11px;line-height:1.5;margin-bottom:8px;"></div>
+
+      <div id="gd-rc-warn" style="font-size:11px;color:#b33d28;background:rgba(255,107,87,0.08);border-radius:6px;padding:9px 11px;line-height:1.5;">
+        <b>⚠ Auf Warnzeichen achten</b> — bei Herzstolpern, Druck auf der Brust, Luftnot, Schwindel oder ungewöhnlicher Erschöpfung Belastung sofort abbrechen und ärztlich vorstellen.
       </div>
     </div>
 
@@ -2374,15 +2376,28 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(g.recovery_mode){
       const el=document.getElementById('gd-recovery');
       el.style.display='block';
+      const cleared=g.doctor_cleared;
+      // Nach ärztlicher Freigabe: grüner Wiedereinstiegs-Rahmen statt rotem Warn-Ton.
+      document.getElementById('gd-rc-title').textContent=cleared?'Wiedereinstieg · begleitet':'Genesungsmodus · Training pausiert';
+      if(cleared){el.style.background='linear-gradient(135deg,#f7fdfa 0%,#eef8f3 100%)';el.style.borderColor='#c3e6d6';el.style.borderLeftColor='#1c7d5a';}
       document.getElementById('gd-rc-reason').textContent=g.recovery_reason||'';
       const st=g.recovery_status||'';
-      const sMap={'Erholung':['rgba(0,230,118,0.15)','#00a855'],'Stabil':['rgba(139,92,246,0.15)','#7c3aed'],'Rückschlag':['rgba(255,107,87,0.15)','#b33d28']};
+      const sMap={'Erholung':['rgba(0,230,118,0.15)','#00a855'],'Wiedereinstieg':['rgba(0,230,118,0.15)','#00a855'],'Stabil':['rgba(139,92,246,0.15)','#7c3aed'],'Rückschlag':['rgba(255,107,87,0.15)','#b33d28']};
       const[sb,sc]=sMap[st]||sMap['Stabil'];
       const stEl=document.getElementById('gd-rc-status');stEl.textContent=st;stEl.style.background=sb;stEl.style.color=sc;
       document.getElementById('gd-rc-note').textContent=g.recovery_note||'';
-      document.getElementById('gd-rc-advice').innerHTML='<b style="color:#b33d28;">Heute:</b> '+(g.recommendation||'');
+      const adv=document.getElementById('gd-rc-advice');
+      adv.innerHTML=`<b style="color:${cleared?'#1a5c42':'#b33d28'};">Heute:</b> `+(g.recommendation||'');
       const rk=document.getElementById('gd-rc-readiness');
-      if(g.readiness_check){rk.textContent='Rückkehr-Kriterium: '+g.readiness_check;}else{rk.style.display='none';}
+      if(g.readiness_check){rk.textContent=(cleared?'Achte auf: ':'Rückkehr-Kriterium: ')+g.readiness_check;}else{rk.style.display='none';}
+      // Ärztliche Freigabe sichtbar dokumentieren
+      const dEl=document.getElementById('gd-rc-doctor');
+      if(cleared&&g.doctor_guidance){
+        const dd=g.doctor_date?new Date(g.doctor_date+'T00:00:00'):null;
+        const df=dd?` (${dd.getDate()}.${dd.getMonth()+1}.)`:'';
+        dEl.style.display='block';
+        dEl.innerHTML=`<b>🩺 Ärztliche Freigabe${df}:</b> ${g.doctor_guidance}`;
+      }
       // Werte gegen Basis
       const bR=g.baseline_rhr||[53,55], bH=g.baseline_hrv||[42,48];
       const inR=g.resting_hr!=null&&g.resting_hr<=bR[1]+1;
