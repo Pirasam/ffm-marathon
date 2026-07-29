@@ -11,9 +11,9 @@ Live: **https://pirasam.github.io/ffm-marathon/**
        (schlaeft weiter)                    GitHub: Claude -> index.html
 ```
 
-Zusaetzlich versucht GitHub selbst 3x vormittags zu synchronisieren (07:00,
-09:00, 11:00) – das klappt aber nur, solange der Garmin-Token frisch ist
-(siehe unten). Verlass dich auf den Mac; die Cloud ist Beiwerk.
+Der Mac ist die einzige Datenquelle (Garmin blockt den Abruf aus der Cloud).
+Die Cloud rendert nur das Dashboard. An Tagen ohne Mac aktualisiert sich die
+Seite nicht – sie zeigt dann sichtbar das Datenalter an.
 
 **Warum der Mac?** Garmins Zugriffs-Token gilt nur ~24 h. Das Erneuern wird
 aus GitHub-Netzen blockiert (429). Vom Mac aus funktioniert es. Deshalb muss
@@ -24,19 +24,16 @@ sudo pmset repeat wake MTWRFSU 06:58:00     # einmalig, braucht dein Passwort
 pmset -g sched                              # pruefen
 ```
 
-## Der Wartungsfall: Garmin-Login erneuern
+## Wartung: praktisch keine
 
-Der Login traegt ~30 Tage. Vorher warnen Log **und Dashboard** sichtbar.
-Dann:
+Die Garmin-Sitzung **erneuert sich selbst**: Garmin gibt bei jedem Abruf einen
+frischen 30-Tage-Token aus, den der Mac zurückspeichert. Solange der Mac
+mindestens **einmal im Monat** läuft, musst du nie wieder etwas erneuern – kein
+`generate_session.py`, kein GitHub-Secret, keine GitHub-Einstellungen.
 
-```bash
-cd ~/ffm-marathon
-python3 generate_session.py          # Garmin-Login + ggf. 2FA
-cat garmin_secret.txt | pbcopy       # Token kopieren
-```
-
-Einfuegen unter:
-https://github.com/Pirasam/ffm-marathon/settings/secrets/actions/GARMIN_SESSION_DATA
+Nur zwei seltene Fälle brauchen noch Handarbeit:
+- **Mac war über 30 Tage aus** oder **Garmin-Passwort geändert** → einmal
+  `python3 generate_session.py` (fragt Login + ggf. 2FA).
 
 ## Was wann schiefgehen kann
 
