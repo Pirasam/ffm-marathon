@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-07-28T06:58:12+02:00",
-  "sync_date": "2026-07-28",
-  "token_days_left": -1.6,
+  "synced_at": "2026-07-29T06:58:13+02:00",
+  "sync_date": "2026-07-29",
+  "token_days_left": -2.6,
   "metrics": {
-    "sleep_hours": 7.5,
-    "sleep_score": 79,
+    "sleep_hours": 8.8,
+    "sleep_score": 88,
     "hrv_status": "LOW",
     "hrv_value": 40,
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 41,
     "hrv_balanced_high": 50,
-    "stress": 27,
-    "resting_hr": 60,
-    "body_battery": 42,
+    "stress": null,
+    "resting_hr": null,
+    "body_battery": 93,
     "training_readiness": null,
     "recent_activities": [
       {
@@ -23,15 +23,6 @@
         "duration_min": 10,
         "pace_min_km": 7.37,
         "avg_hr": 139.0
-      },
-      {
-        "name": "Dierhagen Radfahren",
-        "type": "cycling",
-        "date": "2026-07-14",
-        "distance_km": 56.9,
-        "duration_min": 195,
-        "pace_min_km": 3.43,
-        "avg_hr": 110.0
       }
     ],
     "last_run": {
@@ -66,8 +57,9 @@
         }
       }
     },
-    "weight_kg": 90.3,
+    "weight_kg": 89.5,
     "weight_history": {
+      "2026-07-28": 89.5,
       "2026-07-26": 90.3,
       "2026-07-23": 89.4,
       "2026-07-22": 91.7,
@@ -126,17 +118,24 @@
       "2026-05-22": 91.3,
       "2026-05-21": 91.6,
       "2026-05-20": 91.4,
-      "2026-05-19": 92.1,
-      "2026-05-18": 92.0
+      "2026-05-19": 92.1
     },
     "vo2max": 45.1,
     "challenges": [
+      {
+        "name": "July Step Month",
+        "current": 274003,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 2,
+        "pct": 91
+      },
       {
         "name": "July Time to Run",
         "current": 9.0,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 90
       },
       {
@@ -144,15 +143,7 @@
         "current": 72.6,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 3,
-        "pct": 90
-      },
-      {
-        "name": "July Step Month",
-        "current": 269355,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 90
       },
       {
@@ -160,7 +151,7 @@
         "current": 3.6,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 89
       },
       {
@@ -168,7 +159,7 @@
         "current": 10,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 50
       },
       {
@@ -176,7 +167,7 @@
         "current": 6.2,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 31
       },
       {
@@ -184,7 +175,7 @@
         "current": 0.0,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 0
       },
       {
@@ -192,7 +183,7 @@
         "current": 72.6,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 64,
+        "days_remaining": 63,
         "pct": 24
       }
     ],
@@ -201,6 +192,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-07-29",
+        "v": 40
+      },
       {
         "d": "2026-07-28",
         "v": 40
@@ -316,10 +311,6 @@
       {
         "d": "2026-06-30",
         "v": 40
-      },
-      {
-        "d": "2026-06-29",
-        "v": 41
       }
     ],
     "rhr": [
@@ -445,6 +436,10 @@
       }
     ],
     "weight": [
+      {
+        "d": "2026-07-28",
+        "v": 89.5
+      },
       {
         "d": "2026-07-26",
         "v": 90.3
@@ -680,10 +675,6 @@
       {
         "d": "2026-05-19",
         "v": 92.1
-      },
-      {
-        "d": "2026-05-18",
-        "v": 92.0
       }
     ],
     "weekly_km": [
@@ -723,6 +714,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-07-29",
+        "v": 45.1
+      },
       {
         "d": "2026-07-28",
         "v": 45.1
