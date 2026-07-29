@@ -55,6 +55,21 @@ def main():
         print("Bestehende garmin_data.json bleibt unveraendert.")
         return 1
 
+    # Selbst-Erneuerung: Garmin gibt bei jedem Login/Refresh einen NEUEN
+    # 30-Tage-Token aus. Speichern wir ihn zurueck, lebt die Sitzung ewig weiter
+    # – solange der Mac mindestens einmal im Monat laeuft. Kein generate_session,
+    # kein GitHub-Secret mehr noetig.
+    try:
+        tokenstore = os.path.expanduser("~/.garmin_session")
+        fresh = api.garth.dumps()
+        tmp = tokenstore + ".tmp"
+        with open(tmp, "w") as f:
+            f.write(fresh)
+        os.replace(tmp, tokenstore)
+        print("Garmin-Sitzung erneuert und zurueckgespeichert (~30 Tage).")
+    except Exception as e:
+        print(f"WARNUNG: Konnte Sitzung nicht zurueckspeichern ({e}).")
+
     # Harte Plausibilitaetspruefung: ohne Kerndaten nichts ueberschreiben
     core = [metrics.get("resting_hr"), metrics.get("hrv_value"), metrics.get("sleep_hours")]
     if all(v is None for v in core):

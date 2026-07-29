@@ -1,30 +1,18 @@
 name: Tagesupdate
 
-# Laeuft komplett in der Cloud – unabhaengig davon, ob der Mac an ist.
+# Der Mac holt die Garmin-Daten (sync_garmin.py) und pusht garmin_data.json.
+# Dieser Workflow rendert daraus nur das Dashboard – er ruft KEIN Garmin auf
+# und braucht KEIN Garmin-Secret mehr. Grund: Garmin blockt den Token-Refresh
+# aus GitHub-IPs; der Mac erneuert seine Sitzung dagegen bei jedem Lauf selbst.
 #
-#   1) sync_garmin.py  holt die Garmin-Daten     -> garmin_data.json
-#   2) update_plan.py  laesst Claude analysieren -> index.html
-#
-# WICHTIG zur Uhrzeit: Die naechtlichen Werte (Schlaf, HRV) landen erst bei
-# Garmin, wenn die Uhr morgens mit dem Handy synchronisiert – oft erst 1–2 h
-# nach dem Aufwachen. Deshalb laeuft der Job MEHRFACH ueber den Vormittag und
-# rendert jedes Mal neu, sobald frischere Daten da sind. Gerendert/committet
-# wird nur, wenn sich die Werte wirklich geaendert haben (kein Leerlauf).
+# Einzige Voraussetzung in der Cloud: der ANTHROPIC_API_KEY (fuer die Analyse).
 
 on:
-  schedule:
-    - cron: "0 5 * * *"     # 07:00 MESZ – frueher Versuch
-    - cron: "0 7 * * *"     # 09:00 MESZ – Uhr meist synchronisiert
-    - cron: "0 9 * * *"     # 11:00 MESZ – sicheres Auffangnetz
   push:
     paths:
-      # Daten vom Mac-Sync -> sofort rendern. Keine Endlosschleife: der
-      # "Werte geaendert?"-Schritt stoppt den Folgelauf, weil die Metriken
-      # dann identisch sind (synced_at wird beim Vergleich ignoriert).
-      - "garmin_data.json"
+      - "garmin_data.json"          # Mac hat frische Daten geliefert
       - "update_plan.py"
-      - "garmin_client.py"
-      - "sync_garmin.py"
+      - "index.html"
       - ".github/workflows/update-plan.yml"
     branches: [main]
   workflow_dispatch:
@@ -34,7 +22,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update:
+  render:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -42,89 +30,59 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Abhaengigkeiten
-        run: pip install -r requirements.txt
-
-      # Darf fehlschlagen: dann rendern wir aus den letzten guten Daten weiter.
-      - name: Garmin-Daten holen
-        id: sync
-        continue-on-error: true
-        env:
-          GARMIN_SESSION_DATA: ${{ secrets.GARMIN_SESSION_DATA }}
-        run: python sync_garmin.py
-
-      # Entscheidend ist NICHT, ob der Sync etwas geaendert hat, sondern ob das
-      # gerenderte Dashboard noch zu den vorliegenden Daten passt. Sonst bleibt
-      # ein Stillstand unbemerkt, wenn der Cloud-Sync scheitert, aber der Mac
-      # laengst neuere Daten geliefert hat (genau so vom 21.–24.07. passiert).
+      # Nur rendern, wenn das Dashboard nicht mehr zu den Daten passt
+      # (verhindert Endlosschleife durch den eigenen Commit).
       - name: Passt das Dashboard zu den Daten?
         id: diff
         run: |
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json, re
-          KEYS = ("hrv_value", "resting_hr", "sleep_hours", "body_battery",
-                  "weight_kg", "training_readiness")
+          KEYS = ("hrv_value","resting_hr","sleep_hours","body_battery",
+                  "weight_kg","training_readiness")
           try:
               d = json.load(open("garmin_data.json"))
-              m = d.get("metrics", {})
-              data = {k: m.get(k) for k in KEYS}
+              data = {k: d["metrics"].get(k) for k in KEYS}
               data["sync_date"] = d.get("sync_date")
-              # Nur der Warn-Zustand zaehlt, nicht die genaue Restlaufzeit –
-              # sonst wuerde jeder Lauf neu rendern (Zahl aendert sich staendig).
-              td = d.get("token_days_left")
-              data["token_warn"] = td is not None and td < 7
-          except Exception as e:
-              print(f"render=false")
-              raise SystemExit(0)
-
+          except Exception:
+              print("render=false"); raise SystemExit(0)
           try:
               html = open("index.html", encoding="utf-8").read()
               cur = json.loads(re.search(r"window\.GARMIN_DATA\s*=\s*(\{.*?\});",
                                          html, re.DOTALL).group(1))
               shown = {k: cur.get(k) for k in KEYS}
               shown["sync_date"] = cur.get("data_sync_date")
-              st = cur.get("token_days_left")
-              shown["token_warn"] = st is not None and st < 7
           except Exception:
               shown = None
-
-          need = shown != data
-          print("render=" + ("true" if need else "false"))
+          print("render=" + ("true" if shown != data else "false"))
           PY
 
+      - uses: actions/setup-python@v5
+        if: steps.diff.outputs.render == 'true' || github.event_name == 'workflow_dispatch'
+        with:
+          python-version: "3.11"
+
+      - name: Abhaengigkeiten
+        if: steps.diff.outputs.render == 'true' || github.event_name == 'workflow_dispatch'
+        run: pip install -r requirements.txt
+
       - name: Dashboard rendern
-        if: steps.diff.outputs.render == 'true' || github.event_name != 'schedule'
+        if: steps.diff.outputs.render == 'true' || github.event_name == 'workflow_dispatch'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python update_plan.py
 
       - name: Aenderungen pushen
-        if: steps.diff.outputs.render == 'true' || github.event_name != 'schedule'
+        if: steps.diff.outputs.render == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           git config user.name "Marathon Bot"
           git config user.email "marathon-bot@users.noreply.github.com"
-          git add index.html garmin_data.json
+          git add index.html
           if git diff --staged --quiet; then
             echo "Nichts geaendert."; exit 0
           fi
-          git commit -m "Tagesupdate: $(date +%Y-%m-%d)"
+          git commit -m "Dashboard: $(date +%Y-%m-%d)"
           for i in 1 2 3; do
             git pull --rebase --autostash --quiet origin main && git push --quiet && exit 0
             echo "Push-Versuch $i fehlgeschlagen …"; sleep 10
           done
           exit 1
-
-      - name: Nichts Neues
-        if: steps.diff.outputs.render != 'true' && github.event_name == 'schedule'
-        run: echo "Keine neuen Garmin-Werte – Dashboard bleibt wie es ist."
-
-      - name: Warnen wenn Garmin-Abruf scheiterte
-        if: steps.sync.outcome == 'failure'
-        run: |
-          echo "::warning::Garmin-Abruf fehlgeschlagen. Bei abgelaufenem Token:"
-          echo "::warning::lokal 'python3 generate_session.py' ausfuehren und das"
-          echo "::warning::Secret GARMIN_SESSION_DATA aktualisieren."
