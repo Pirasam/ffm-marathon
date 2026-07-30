@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-07-29T09:08:57+02:00",
-  "sync_date": "2026-07-29",
-  "token_days_left": 30.0,
+  "synced_at": "2026-07-30T06:58:15+02:00",
+  "sync_date": "2026-07-30",
+  "token_days_left": 29.1,
   "metrics": {
-    "sleep_hours": 7.9,
-    "sleep_score": 93,
-    "hrv_status": "LOW",
-    "hrv_value": 45,
+    "sleep_hours": 7.8,
+    "sleep_score": 81,
+    "hrv_status": "UNBALANCED",
+    "hrv_value": 41,
     "hrv_weekly_avg": 39,
     "hrv_balanced_low": 41,
     "hrv_balanced_high": 50,
-    "stress": 13,
-    "resting_hr": 55,
-    "body_battery": 100,
-    "training_readiness": 81,
+    "stress": 15,
+    "resting_hr": 56,
+    "body_battery": 87,
+    "training_readiness": 90,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -23,15 +23,6 @@
         "duration_min": 38,
         "pace_min_km": 8.35,
         "avg_hr": 132.0
-      },
-      {
-        "name": "Dierhagen Laufen",
-        "type": "running",
-        "date": "2026-07-15",
-        "distance_km": 1.4,
-        "duration_min": 10,
-        "pace_min_km": 7.37,
-        "avg_hr": 139.0
       }
     ],
     "last_run": {
@@ -44,8 +35,7 @@
       "avg_hr": 132.0
     },
     "weekly_running": {
-      "2026-W31": 4.5,
-      "2026-W29": 1.4
+      "2026-W31": 4.5
     },
     "run_dynamics": {
       "date": "2026-07-29",
@@ -64,11 +54,6 @@
           "cadence": 161.0,
           "vertical_ratio": 13.5,
           "gct": 276.0
-        },
-        "2026-07-15": {
-          "cadence": 163.0,
-          "vertical_ratio": 12.9,
-          "gct": 269.0
         }
       }
     },
@@ -142,7 +127,7 @@
         "current": 9.6,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 96
       },
       {
@@ -150,23 +135,23 @@
         "current": 77.2,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 96
       },
       {
         "name": "July Step Month",
-        "current": 280984,
+        "current": 285513,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 2,
-        "pct": 94
+        "days_remaining": 1,
+        "pct": 95
       },
       {
         "name": "July Gains",
         "current": 3.6,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 89
       },
       {
@@ -174,7 +159,7 @@
         "current": 11,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 55
       },
       {
@@ -182,7 +167,7 @@
         "current": 6.2,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 31
       },
       {
@@ -190,7 +175,7 @@
         "current": 0.0,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 0
       },
       {
@@ -198,7 +183,7 @@
         "current": 77.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 63,
+        "days_remaining": 62,
         "pct": 26
       }
     ],
@@ -207,6 +192,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-07-30",
+        "v": 41
+      },
       {
         "d": "2026-07-29",
         "v": 45
@@ -322,13 +311,13 @@
       {
         "d": "2026-07-01",
         "v": 39
-      },
-      {
-        "d": "2026-06-30",
-        "v": 40
       }
     ],
     "rhr": [
+      {
+        "d": "2026-07-30",
+        "v": 56
+      },
       {
         "d": "2026-07-29",
         "v": 55
@@ -444,10 +433,6 @@
       {
         "d": "2026-07-01",
         "v": 55
-      },
-      {
-        "d": "2026-06-30",
-        "v": 57
       }
     ],
     "weight": [
@@ -739,6 +724,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-07-30",
+        "v": 45.1
+      },
       {
         "d": "2026-07-29",
         "v": 45.1
