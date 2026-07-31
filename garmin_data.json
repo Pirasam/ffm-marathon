@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-07-30T06:58:15+02:00",
-  "sync_date": "2026-07-30",
-  "token_days_left": 29.1,
+  "synced_at": "2026-07-31T06:58:14+02:00",
+  "sync_date": "2026-07-31",
+  "token_days_left": 30.0,
   "metrics": {
-    "sleep_hours": 7.8,
-    "sleep_score": 81,
+    "sleep_hours": 6.0,
+    "sleep_score": 70,
     "hrv_status": "UNBALANCED",
-    "hrv_value": 41,
+    "hrv_value": 38,
     "hrv_weekly_avg": 39,
     "hrv_balanced_low": 41,
     "hrv_balanced_high": 50,
-    "stress": 15,
-    "resting_hr": 56,
-    "body_battery": 87,
-    "training_readiness": 90,
+    "stress": 22,
+    "resting_hr": 59,
+    "body_battery": 75,
+    "training_readiness": 70,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -127,7 +127,7 @@
         "current": 9.6,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 96
       },
       {
@@ -135,23 +135,23 @@
         "current": 77.2,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 96
       },
       {
         "name": "July Step Month",
-        "current": 285513,
+        "current": 288876,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 1,
-        "pct": 95
+        "days_remaining": 0,
+        "pct": 96
       },
       {
         "name": "July Gains",
         "current": 3.6,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 89
       },
       {
@@ -159,7 +159,7 @@
         "current": 11,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 55
       },
       {
@@ -167,7 +167,7 @@
         "current": 6.2,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 31
       },
       {
@@ -175,7 +175,7 @@
         "current": 0.0,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 0
       },
       {
@@ -183,7 +183,7 @@
         "current": 77.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 62,
+        "days_remaining": 61,
         "pct": 26
       }
     ],
@@ -192,6 +192,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-07-31",
+        "v": 38
+      },
       {
         "d": "2026-07-30",
         "v": 41
@@ -307,13 +311,13 @@
       {
         "d": "2026-07-02",
         "v": 44
-      },
-      {
-        "d": "2026-07-01",
-        "v": 39
       }
     ],
     "rhr": [
+      {
+        "d": "2026-07-31",
+        "v": 59
+      },
       {
         "d": "2026-07-30",
         "v": 56
@@ -429,10 +433,6 @@
       {
         "d": "2026-07-02",
         "v": 56
-      },
-      {
-        "d": "2026-07-01",
-        "v": 55
       }
     ],
     "weight": [
@@ -724,6 +724,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-07-31",
+        "v": 45.1
+      },
       {
         "d": "2026-07-30",
         "v": 45.1
