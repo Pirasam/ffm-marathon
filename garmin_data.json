@@ -1,20 +1,29 @@
 {
-  "synced_at": "2026-08-02T06:58:13+02:00",
-  "sync_date": "2026-08-02",
-  "token_days_left": 29.0,
+  "synced_at": "2026-08-03T06:58:11+02:00",
+  "sync_date": "2026-08-03",
+  "token_days_left": 30.0,
   "metrics": {
-    "sleep_hours": 7.8,
-    "sleep_score": 85,
+    "sleep_hours": 7.6,
+    "sleep_score": 86,
     "hrv_status": "BALANCED",
-    "hrv_value": 47,
+    "hrv_value": 41,
     "hrv_weekly_avg": 42,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 50,
-    "stress": 11,
-    "resting_hr": 55,
-    "body_battery": 100,
-    "training_readiness": 95,
+    "stress": 16,
+    "resting_hr": 57,
+    "body_battery": 81,
+    "training_readiness": 85,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-08-02",
+        "distance_km": 6.7,
+        "duration_min": 52,
+        "pace_min_km": 7.73,
+        "avg_hr": 138.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -37,28 +46,33 @@
     "last_run": {
       "name": "Frankfurt am Main Laufen",
       "type": "running",
-      "date": "2026-07-31",
-      "distance_km": 6.4,
-      "duration_min": 53,
-      "pace_min_km": 8.35,
-      "avg_hr": 133.0
+      "date": "2026-08-02",
+      "distance_km": 6.7,
+      "duration_min": 52,
+      "pace_min_km": 7.73,
+      "avg_hr": 138.0
     },
     "weekly_running": {
-      "2026-W31": 10.9
+      "2026-W31": 17.6
     },
     "run_dynamics": {
-      "date": "2026-07-31",
-      "distance_km": 6.4,
-      "cadence": 155.0,
-      "stride_length": 77.0,
-      "vertical_oscillation": 10.3,
-      "vertical_ratio": 13.2,
-      "ground_contact_time": 287.0,
-      "ground_contact_balance": 49.7,
-      "avg_power": 331.0,
-      "performance_condition": -9,
-      "step_speed_loss_pct": 4.1,
+      "date": "2026-08-02",
+      "distance_km": 6.7,
+      "cadence": 163.0,
+      "stride_length": 79.0,
+      "vertical_oscillation": 10.1,
+      "vertical_ratio": 12.5,
+      "ground_contact_time": 262.0,
+      "ground_contact_balance": 49.5,
+      "avg_power": 337.0,
+      "performance_condition": -6,
+      "step_speed_loss_pct": 4.5,
       "history": {
+        "2026-08-02": {
+          "cadence": 163.0,
+          "vertical_ratio": 12.5,
+          "gct": 262.0
+        },
         "2026-07-31": {
           "cadence": 155.0,
           "vertical_ratio": 13.2,
@@ -71,8 +85,9 @@
         }
       }
     },
-    "weight_kg": 89.5,
+    "weight_kg": 90.9,
     "weight_history": {
+      "2026-08-03": 90.9,
       "2026-07-28": 89.5,
       "2026-07-26": 90.3,
       "2026-07-23": 89.4,
@@ -131,24 +146,27 @@
       "2026-05-23": 92.1,
       "2026-05-22": 91.3,
       "2026-05-21": 91.6,
-      "2026-05-20": 91.4,
-      "2026-05-19": 92.1
+      "2026-05-20": 91.4
     },
-    "vo2max": 44.8,
+    "vo2max": 44.5,
     "challenges": [
       {
         "name": "2026 Running - Stage 3",
-        "current": 83.6,
+        "current": 90.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 59,
-        "pct": 28
+        "days_remaining": 58,
+        "pct": 30
       }
     ],
     "_errors": []
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-03",
+        "v": 41
+      },
       {
         "d": "2026-08-02",
         "v": 47
@@ -264,13 +282,13 @@
       {
         "d": "2026-07-05",
         "v": 46
-      },
-      {
-        "d": "2026-07-04",
-        "v": 48
       }
     ],
     "rhr": [
+      {
+        "d": "2026-08-03",
+        "v": 57
+      },
       {
         "d": "2026-08-02",
         "v": 55
@@ -386,13 +404,13 @@
       {
         "d": "2026-07-05",
         "v": 56
-      },
-      {
-        "d": "2026-07-04",
-        "v": 54
       }
     ],
     "weight": [
+      {
+        "d": "2026-08-03",
+        "v": 90.9
+      },
       {
         "d": "2026-07-28",
         "v": 89.5
@@ -628,16 +646,12 @@
       {
         "d": "2026-05-20",
         "v": 91.4
-      },
-      {
-        "d": "2026-05-19",
-        "v": 92.1
       }
     ],
     "weekly_km": [
       {
         "w": "2026-W31",
-        "v": 10.9
+        "v": 17.6
       },
       {
         "w": "2026-W29",
@@ -649,6 +663,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-08-02",
+        "cadence": 163.0,
+        "vertical_ratio": 12.5,
+        "gct": 262.0
+      },
       {
         "d": "2026-07-31",
         "cadence": 155.0,
@@ -687,6 +707,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-03",
+        "v": 44.5
+      },
       {
         "d": "2026-08-02",
         "v": 44.8
