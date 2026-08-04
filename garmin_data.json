@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-03T06:58:11+02:00",
-  "sync_date": "2026-08-03",
-  "token_days_left": 30.0,
+  "synced_at": "2026-08-04T06:58:13+02:00",
+  "sync_date": "2026-08-04",
+  "token_days_left": 29.0,
   "metrics": {
     "sleep_hours": 7.6,
     "sleep_score": 86,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 42,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 50,
-    "stress": 16,
-    "resting_hr": 57,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 81,
-    "training_readiness": 85,
+    "training_readiness": null,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Rennradfahren",
+        "type": "road_biking",
+        "date": "2026-08-03",
+        "distance_km": 14.2,
+        "duration_min": 38,
+        "pace_min_km": 2.68,
+        "avg_hr": 129.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -155,7 +164,7 @@
         "current": 90.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 58,
+        "days_remaining": 57,
         "pct": 30
       }
     ],
@@ -163,6 +172,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-04",
+        "v": 41
+      },
       {
         "d": "2026-08-03",
         "v": 41
@@ -278,10 +291,6 @@
       {
         "d": "2026-07-06",
         "v": 45
-      },
-      {
-        "d": "2026-07-05",
-        "v": 46
       }
     ],
     "rhr": [
@@ -707,6 +716,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-04",
+        "v": 44.5
+      },
       {
         "d": "2026-08-03",
         "v": 44.5
