@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-08-05T06:58:14+02:00",
+  "synced_at": "2026-08-05T16:04:16+02:00",
   "sync_date": "2026-08-05",
-  "token_days_left": 30.0,
+  "token_days_left": 29.6,
   "metrics": {
     "sleep_hours": 7.9,
-    "sleep_score": 84,
+    "sleep_score": 87,
     "hrv_status": "BALANCED",
-    "hrv_value": 39,
+    "hrv_value": 41,
     "hrv_weekly_avg": 41,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 50,
-    "stress": 21,
-    "resting_hr": 61,
-    "body_battery": 32,
-    "training_readiness": null,
+    "stress": 22,
+    "resting_hr": 57,
+    "body_battery": 83,
+    "training_readiness": 77,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -109,8 +109,9 @@
         }
       }
     },
-    "weight_kg": 90.4,
+    "weight_kg": 89.9,
     "weight_history": {
+      "2026-08-05": 89.9,
       "2026-08-04": 90.4,
       "2026-08-03": 90.9,
       "2026-07-28": 89.5,
@@ -169,18 +170,17 @@
       "2026-05-25": 92.9,
       "2026-05-24": 91.0,
       "2026-05-23": 92.1,
-      "2026-05-22": 91.3,
-      "2026-05-21": 91.6
+      "2026-05-22": 91.3
     },
     "vo2max": 44.2,
     "challenges": [
       {
         "name": "Step into August",
-        "current": 40597,
+        "current": 43859,
         "goal": 100000,
         "unit": "Schritte",
         "days_remaining": 9,
-        "pct": 41
+        "pct": 44
       },
       {
         "name": "August Rundown",
@@ -191,20 +191,20 @@
         "pct": 17
       },
       {
+        "name": "August Step Month",
+        "current": 43859,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 26,
+        "pct": 15
+      },
+      {
         "name": "Active August",
         "current": 3,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 26,
         "pct": 15
-      },
-      {
-        "name": "August Step Month",
-        "current": 40597,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 26,
-        "pct": 14
       },
       {
         "name": "August Gains",
@@ -229,7 +229,7 @@
     "hrv": [
       {
         "d": "2026-08-05",
-        "v": 39
+        "v": 41
       },
       {
         "d": "2026-08-04",
@@ -351,7 +351,7 @@
     "rhr": [
       {
         "d": "2026-08-05",
-        "v": 61
+        "v": 57
       },
       {
         "d": "2026-08-04",
@@ -471,6 +471,10 @@
       }
     ],
     "weight": [
+      {
+        "d": "2026-08-05",
+        "v": 89.9
+      },
       {
         "d": "2026-08-04",
         "v": 90.4
@@ -706,10 +710,6 @@
       {
         "d": "2026-05-22",
         "v": 91.3
-      },
-      {
-        "d": "2026-05-21",
-        "v": 91.6
       }
     ],
     "weekly_km": [
