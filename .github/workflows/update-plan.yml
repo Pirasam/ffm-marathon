@@ -29,6 +29,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2          # HEAD~1 fuer den Code-Aenderungs-Vergleich noetig
 
       # Rendern, wenn (a) die RENDER-LOGIK sich geaendert hat (update_plan.py /
       # garmin_client.py im letzten Commit) ODER (b) die Daten nicht mehr zum
