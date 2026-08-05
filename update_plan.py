@@ -142,6 +142,7 @@ def call_claude_recovery(metrics, history):
     rhr_hist = [x["v"] for x in (history.get("rhr") or [])[:10]]
     hrv_hist = [x["v"] for x in (history.get("hrv") or [])[:10]]
     today = date.today()
+    days_to_marathon = (date(2026, 10, 25) - today).days
 
     if DOCTOR_CLEARED:
         frame = f"""Der Sportler erholt sich von: {RECOVERY_REASON}.
@@ -189,14 +190,25 @@ Verlauf (neueste zuerst):
 Beurteile NÜCHTERN. Beachte: schlechter Schlaf allein drückt HRV und hebt den Ruhepuls –
 unterscheide das von einem echten Rückschlag.
 
+ZUSÄTZLICH – Marathon-On-Track (Ziel: Frankfurt 25.10.2026 unter 5:00 h, in {days_to_marathon} Tagen):
+Er hatte vor der Krankheit eine solide Basis (21-km-Longrun, VO₂max ~45, ~40 km/Woche) und ist
+jetzt im Wiedereinstieg. Schätze REALISTISCH und ehrlich, ob das Ziel noch machbar ist – die
+Krankheit hat Wochen gekostet, aber die Basis ist da. Wenn Finish > 5:00 h, dann on_track_score < 70.
+
 Antworte NUR mit diesem JSON (kein Markdown):
 {{
   {status_line}
   "recovery_note": "<2 Sätze: wie stehen Ruhepuls, HRV und Schlaf im Vergleich zur Basis? Nüchtern.>",
   {advice_line},
-  "readiness_check": "<1 Satz: nächster Meilenstein bzw. worauf heute beim Wiedereinstieg achten.>"
+  "predicted_finish_h": <realistische Marathon-Zielzeit in Stunden, z.B. 5.15, unter Berücksichtigung der Krankheitspause>,
+  "on_track_score": <0–100, ehrlich; konsistent mit predicted_finish_h>,
+  "on_track_note": "<1 Satz: wo steht er auf dem Weg zum Marathon, größter Hebel im Wiedereinstieg>",
+  "factor_volume": <0–100: Laufumfang aktuell>,
+  "factor_hrv": <0–100: Erholung/HRV>,
+  "factor_vo2max": <0–100: Ausdauerbasis>,
+  "factor_weight": <0–100: Gewicht Richtung 87 kg>
 }}"""
-    return _claude_json(prompt, max_tokens=750)
+    return _claude_json(prompt, max_tokens=850)
 
 
 def call_claude(metrics, plan_context):
@@ -436,6 +448,14 @@ def main():
             "doctor_guidance": DOCTOR_GUIDANCE,
             "baseline_rhr": list(BASELINE_RHR),
             "baseline_hrv": list(BASELINE_HRV),
+            # On-Track-Prognose (Predictor bleibt sichtbar im Wiedereinstieg)
+            "predicted_finish_h": rec.get("predicted_finish_h"),
+            "on_track_score": rec.get("on_track_score", 55),
+            "on_track_note": rec.get("on_track_note", ""),
+            "factor_volume": rec.get("factor_volume", 40),
+            "factor_hrv": rec.get("factor_hrv", 60),
+            "factor_vo2max": rec.get("factor_vo2max", 75),
+            "factor_weight": rec.get("factor_weight", 60),
             # Trainingsspezifische Felder bewusst neutral/leer
             "slider_sleep": metrics.get("sleep_hours") or 7.5,
             "slider_wellbeing": 2,

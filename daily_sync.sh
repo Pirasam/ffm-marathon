@@ -34,13 +34,21 @@ fi
 git fetch --quiet origin main 2>/dev/null || true
 git checkout --quiet origin/main -- garmin_data.json 2>/dev/null || true
 
-# Heute schon erfolgreich gesynct? Dann sofort raus.
-# Der Job ist bewusst mehrfach am Tag eingeplant (falls der Mac um 07:00
-# schlief); dieser Check macht die Wiederholungen praktisch kostenlos.
+# Drosselung: nicht oefter als alle 8 Minuten (ausser --force). So kann der Job
+# haeufig laufen und trotzdem neue Trainings zeitnah einsammeln, ohne zu hammern.
 if [ "${1:-}" != "--force" ] && [ -f garmin_data.json ]; then
-  LAST=$("$PY" -c "import json;print(json.load(open('garmin_data.json')).get('sync_date',''))" 2>/dev/null || echo "")
-  if [ "$LAST" = "$(date +%F)" ]; then
-    echo "Heute bereits gesynct ($LAST) – nichts zu tun."
+  AGE=$("$PY" - <<'PY' 2>/dev/null || echo 9999
+import json, datetime
+try:
+    t = json.load(open("garmin_data.json")).get("synced_at","")
+    dt = datetime.datetime.fromisoformat(t)
+    print(int((datetime.datetime.now(dt.tzinfo) - dt).total_seconds() // 60))
+except Exception:
+    print(9999)
+PY
+)
+  if [ "$AGE" -lt 8 ] 2>/dev/null; then
+    echo "Vor $AGE Min gesynct – Drosselung, nichts zu tun."
     exit 0
   fi
 fi
@@ -57,10 +65,28 @@ if ! "$PY" sync_garmin.py; then
   exit 1
 fi
 
-# 2) Nur committen, wenn sich wirklich etwas geaendert hat.
-#    git status erfasst auch noch unversionierte Dateien (git diff nicht).
-if [ -z "$(git status --porcelain -- garmin_data.json)" ]; then
-  echo "Keine Aenderung an garmin_data.json – nichts zu pushen."
+# 2) Nur committen, wenn sich die WERTE geaendert haben (synced_at/Token-Restlauf
+#    aendern sich jeden Lauf – die zaehlen nicht, sonst Push-Spam alle paar Minuten).
+CHANGED=$("$PY" - <<'PY' 2>/dev/null || echo yes
+import json, subprocess
+def core(src):
+    try:
+        d = json.loads(src)
+        m = dict(d.get("metrics", {})); m.pop("_errors", None)
+        return json.dumps({"m": m, "h": d.get("history")}, sort_keys=True)
+    except Exception:
+        return None
+now = core(open("garmin_data.json").read())
+try:
+    prev = core(subprocess.check_output(["git","show","origin/main:garmin_data.json"]).decode())
+except Exception:
+    prev = None
+print("no" if (now is not None and now == prev) else "yes")
+PY
+)
+if [ "$CHANGED" = "no" ]; then
+  echo "Werte unveraendert – nichts zu pushen."
+  git checkout --quiet -- garmin_data.json 2>/dev/null || true
   echo "[$(date '+%H:%M:%S')] Fertig (unveraendert)"
   exit 0
 fi

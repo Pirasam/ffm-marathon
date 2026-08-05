@@ -276,6 +276,13 @@ window.GARMIN_DATA = {
   <!-- GARMIN DASHBOARD -->
   <div id="gd-root" style="display:none;padding:0 0 24px;margin-bottom:8px;border-bottom:1px solid var(--border);font-size:12px;font-family:'DM Mono',monospace;">
 
+    <!-- Aktualisieren -->
+    <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <button id="gd-refresh" style="display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-size:11px;font-weight:600;color:#1a5c42;background:#eef8f3;border:1px solid #c3e6d6;border-radius:20px;padding:6px 12px;cursor:pointer;">
+        <span id="gd-refresh-icon">↻</span><span id="gd-refresh-label">Daten aktualisieren</span>
+      </button>
+    </div>
+
     <!-- Genesungs-Modus Banner -->
     <div id="gd-recovery" style="display:none;background:linear-gradient(135deg,#fffaf7 0%,#fff5f2 100%);border:1px solid #ffd4c8;border-left:4px solid #ff6b57;border-radius:10px;padding:14px 16px;margin-bottom:12px;">
       <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px;">
@@ -287,19 +294,14 @@ window.GARMIN_DATA = {
         <div id="gd-rc-status" style="margin-left:auto;font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;"></div>
       </div>
 
-      <div id="gd-rc-note" style="font-size:12px;color:#333;line-height:1.6;margin-bottom:10px;"></div>
-
-      <!-- Erholungswerte vs. Basis -->
+      <!-- 1) Status quo: Werte gegen Basis -->
       <div id="gd-rc-metrics" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;"></div>
 
-      <div id="gd-rc-advice" style="font-size:12px;color:#333;line-height:1.6;background:#fff;border:1px solid #f3e3de;border-radius:8px;padding:10px 12px;margin-bottom:8px;"></div>
-      <div id="gd-rc-readiness" style="font-size:11px;color:#777;line-height:1.5;margin-bottom:10px;"></div>
+      <!-- 2) Recap der letzten Nacht -->
+      <div id="gd-rc-note" style="font-size:12px;color:#333;line-height:1.6;margin-bottom:10px;"></div>
 
-      <div id="gd-rc-doctor" style="display:none;font-size:11px;color:#1a5c42;background:rgba(28,125,90,0.09);border-radius:6px;padding:9px 11px;line-height:1.5;margin-bottom:8px;"></div>
-
-      <div id="gd-rc-warn" style="font-size:11px;color:#b33d28;background:rgba(255,107,87,0.08);border-radius:6px;padding:9px 11px;line-height:1.5;">
-        <b>⚠ Auf Warnzeichen achten</b> — bei Herzstolpern, Druck auf der Brust, Luftnot, Schwindel oder ungewöhnlicher Erschöpfung Belastung sofort abbrechen und ärztlich vorstellen.
-      </div>
+      <!-- 3) Tagesaktuelle Empfehlung -->
+      <div id="gd-rc-advice" style="font-size:12px;color:#333;line-height:1.6;background:#fff;border:1px solid #f3e3de;border-radius:8px;padding:10px 12px;"></div>
     </div>
 
     <!-- Marathon Predictor -->
@@ -1068,7 +1070,7 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "nur Zone 2"
+        "v": "nur locker"
       },
       {
         "l": "Longrun",
@@ -1083,7 +1085,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Nach der ersten Lauf-Woche zählt Erholung als Training. Schlaf priorisieren."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w6di",
@@ -1102,7 +1104,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause. Nach Krankheit lieber ein Tag zu viel Ruhe als einer zu wenig."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w6do",
@@ -1112,7 +1114,7 @@ const weeks = [
           "run",
           "z2"
         ],
-        "desc": "Gemütlich, nach Gefühl. Wenn der Puls klettert: Tempo raus, gehen ist erlaubt."
+        "desc": "Gemütlich nach Gefühl. Puls klettert? Tempo raus, gehen erlaubt."
       },
       {
         "id": "w6fr",
@@ -1121,7 +1123,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Erholung. Wie fühlen sich die Beine an?"
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w6sa",
@@ -1131,7 +1133,7 @@ const weeks = [
           "run",
           "z2"
         ],
-        "desc": "Bei Hitze aussetzen (Arztvorgabe). Sonst locker. Kein Longrun diese Woche."
+        "desc": "Bei Hitze aussetzen. Sonst locker. Noch kein Longrun."
       },
       {
         "id": "w6so",
@@ -1140,18 +1142,18 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Bilanz der ersten Woche zurück. Nächste Woche kommt Struktur mit dem Pendeln."
+        "desc": "Bilanz erste Woche. Ab Montag Struktur mit Büro-Pendeln."
       }
     ]
   },
   {
     "label": "W7",
     "name": "Woche 7",
-    "focus": "Aufbau behutsam · Pendeln startet",
+    "focus": "Aufbau · komplett locker (22–25 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~20 km"
+        "v": "22–25 km"
       },
       {
         "l": "Rad",
@@ -1159,11 +1161,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "nur Zone 2"
+        "v": "komplett locker"
       },
       {
         "l": "Longrun",
-        "v": "8 km"
+        "v": "11 km"
       }
     ],
     "days": [
@@ -1175,17 +1177,17 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erster Bürotag zurück. Rad ganz gemütlich, Puls <130 – reine Erholung, kein Training."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w7di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 5–6 km",
+        "title": "Rücklauf · 6 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Abends heimlaufen (ganz oder Teilstrecke, Rest Bahn). Locker, Puls ≤150."
+        "desc": "Heimlaufen (ganz oder Teilstrecke). Locker, Puls 140–150."
       },
       {
         "id": "w7mi",
@@ -1194,17 +1196,17 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pflichtruhetag. Schlaf und Hamstring-Mobilität."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w7do",
         "name": "Do · Büro",
-        "title": "Rücklauf · 6–7 km",
+        "title": "Rücklauf · 7 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker heimlaufen. Sprechtest muss gehen, sonst zu schnell."
+        "desc": "Locker, Sprechtest muss gehen. Kein Tempo diese Woche."
       },
       {
         "id": "w7fr",
@@ -1214,17 +1216,17 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Lockeres Pendeln, Beine für den Longrun schonen."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w7sa",
         "name": "Sa",
-        "title": "Longrun-Aufbau · 8 km",
+        "title": "Longrun · 11 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Erster wieder etwas längerer Lauf. Ganz ruhig, 8:00+/km, viel trinken. Bei Hitze früh morgens.",
+        "desc": "Komplett locker, 8:00+/km. Bei Hitze früh morgens, Elektrolyte.",
         "longrun": true
       },
       {
@@ -1235,18 +1237,18 @@ const weeks = [
           "kraft",
           "rest"
         ],
-        "desc": "Nordic Curls, RDL leicht, Rumpf. Gegen die alte Quad-Dominanz. Kein Lauf."
+        "desc": "Nordic Curls, RDL, Rumpf. Gegen Quad-Dominanz. Kein Lauf."
       }
     ]
   },
   {
     "label": "W8",
     "name": "Woche 8",
-    "focus": "Aufbau · Distanz vorsichtig steigern",
+    "focus": "Aufbau · locker + Steigerungen (28–32 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~28 km"
+        "v": "28–32 km"
       },
       {
         "l": "Rad",
@@ -1254,11 +1256,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "nur Zone 2"
+        "v": "locker + Steigerungen"
       },
       {
         "l": "Longrun",
-        "v": "11 km"
+        "v": "14 km"
       }
     ],
     "days": [
@@ -1270,17 +1272,17 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung nach Longrun/Kraft. Puls <130."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w8di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 7 km",
+        "title": "Rücklauf · 8 km + Steigerungen",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker heimlaufen. Immer noch reine Grundlage, kein Tempo."
+        "desc": "Locker, am Ende 4× 20 s zügig (kein Sprint) für die Spritzigkeit."
       },
       {
         "id": "w8mi",
@@ -1289,17 +1291,17 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause. Erholungswerte checken – Ruhepuls sollte ≤55 bleiben."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w8do",
         "name": "Do · Büro",
-        "title": "Rücklauf · 8 km",
+        "title": "Rücklauf · 9 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Ruhig, Puls ≤150. Frequenz bewusst Richtung 165 halten."
+        "desc": "Ruhig, Puls 140–150. Frequenz Richtung 165 halten."
       },
       {
         "id": "w8fr",
@@ -1309,17 +1311,17 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Locker, Beine schonen."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w8sa",
         "name": "Sa",
-        "title": "Longrun · 11 km",
+        "title": "Longrun · 14 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Behutsam länger. Zone 2, Start 8:00/km. Elektrolyte mitnehmen (Natrium!).",
+        "desc": "Zone 2, Start 8:00/km, Gel ab km 10. Natrium mitnehmen.",
         "longrun": true
       },
       {
@@ -1330,18 +1332,18 @@ const weeks = [
           "kraft",
           "rest"
         ],
-        "desc": "Zweite feste Krafteinheit. Hamstring-Fokus, Rumpf. Kein Lauf."
+        "desc": "Nordic Curls, RDL, Rumpf. Gegen Quad-Dominanz. Kein Lauf."
       }
     ]
   },
   {
     "label": "W9",
     "name": "Woche 9",
-    "focus": "Aufbau · zurück Richtung Basis",
+    "focus": "Aufbau · erste moderate Abschnitte (33–37 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~34 km"
+        "v": "33–37 km"
       },
       {
         "l": "Rad",
@@ -1349,11 +1351,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "Z2, Ende Woche 1× zügig"
+        "v": "1× moderat"
       },
       {
         "l": "Longrun",
-        "v": "14 km"
+        "v": "18 km"
       }
     ],
     "days": [
@@ -1365,17 +1367,17 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung. Puls <130."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w9di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 8 km",
+        "title": "Rücklauf · 9 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker. Wenn sich alles leicht anfühlt, ist das das grüne Licht für mehr."
+        "desc": "Locker. Fühlt sich alles leicht an, ist das grünes Licht für mehr."
       },
       {
         "id": "w9mi",
@@ -1384,17 +1386,17 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause. Antikörper-Bluttest steht diese Wochen an – Termin nicht vergessen."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w9do",
         "name": "Do · Büro",
-        "title": "Zügiger Dauerlauf · 8 km",
+        "title": "Zügiger Reiz · 9 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Erste leicht flottere Einheit: letzte 3 km etwas zügiger (Puls bis ~158), aber weit unter Schwelle. Nur wenn die Woche sich gut anfühlte."
+        "desc": "Erster flotterer Reiz (nur wenn Woche unauffällig): 20–25 Min bei 142–148 bpm, Rest locker."
       },
       {
         "id": "w9fr",
@@ -1404,39 +1406,39 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Locker, Beine für den Longrun schonen."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w9sa",
         "name": "Sa",
-        "title": "Longrun · 14 km",
+        "title": "Longrun · 18 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Wieder Richtung ordentliche Länge. Strikt Zone 2, Gel ab km 10.",
+        "desc": "Zone 2, letzte 3–4 km leicht zügiger antesten. Verpflegung üben.",
         "longrun": true
       },
       {
         "id": "w9so",
         "name": "So",
-        "title": "Kraft + Mobility",
+        "title": "Kraft · Hamstring",
         "badges": [
           "kraft",
           "rest"
         ],
-        "desc": "Hamstring, Rumpf, lockeres Dehnen. Kein Lauf."
+        "desc": "Nordic Curls, RDL, Rumpf. Gegen Quad-Dominanz. Kein Lauf."
       }
     ]
   },
   {
     "label": "W10",
     "name": "Woche 10",
-    "focus": "Standortbestimmung · Entscheidung Marathon",
+    "focus": "Vorinfektniveau · Standortbestimmung (37–41 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~34 km"
+        "v": "37–41 km"
       },
       {
         "l": "Rad",
@@ -1444,11 +1446,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "Zone 2"
+        "v": "1× Marathonbelastung"
       },
       {
         "l": "Longrun",
-        "v": "16 km"
+        "v": "21 km"
       }
     ],
     "days": [
@@ -1460,12 +1462,12 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung. Diese Woche ehrlich Bilanz ziehen (siehe So)."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w10di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 8 km",
+        "title": "Rücklauf · 9 km",
         "badges": [
           "run",
           "z2"
@@ -1479,17 +1481,17 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w10do",
         "name": "Do · Büro",
-        "title": "Rücklauf · 8–10 km",
+        "title": "Marathonbelastung · 10 km",
         "badges": [
           "run",
-          "z2"
+          "lt"
         ],
-        "desc": "Ruhig. Frequenz und Bodenkontakt beobachten – sind sie wieder wie vor der Krankheit?"
+        "desc": "30–40 Min bei ~145–151 bpm, kontrolliert. Nur wenn Puls und Gefühl stabil."
       },
       {
         "id": "w10fr",
@@ -1499,17 +1501,17 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Locker."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w10sa",
         "name": "Sa",
-        "title": "Longrun · 16 km",
+        "title": "Longrun · 21 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Zurück auf dem Vor-Krankheits-Niveau. Wenn sich das gut anfühlt, ist der Marathon realistisch.",
+        "desc": "Zurück auf Vorinfekt-Niveau. Fühlt sich das gut an → Marathon realistisch.",
         "longrun": true
       },
       {
@@ -1520,18 +1522,18 @@ const weeks = [
           "kraft",
           "rest"
         ],
-        "desc": "ENTSCHEIDUNGSPUNKT: Antikörpertest + Körpergefühl + Werte. Marathon 25.10. weiter verfolgen oder Ziel verschieben? Ehrlich entscheiden."
+        "desc": "STANDORTBESTIMMUNG: Antikörpertest + Körpergefühl + Werte. Marathon 25.10. weiter oder Ziel anpassen? Ehrlich entscheiden."
       }
     ]
   },
   {
     "label": "W11",
     "name": "Woche 11",
-    "focus": "Marathon-Build · Aufbau (falls Freigabe)",
+    "focus": "Entlastung · Deload (31–35 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~40 km"
+        "v": "31–35 km"
       },
       {
         "l": "Rad",
@@ -1539,11 +1541,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "Z2 + 1× LT kurz"
+        "v": "nur locker"
       },
       {
         "l": "Longrun",
-        "v": "20 km"
+        "v": "16 km"
       }
     ],
     "days": [
@@ -1555,36 +1557,36 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w11di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 10 km",
+        "title": "Rücklauf · 8 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker Grundlage."
+        "desc": "Locker, kurz. Diese Woche bewusst weniger."
       },
       {
         "id": "w11mi",
-        "name": "Mi · Büro",
-        "title": "Tempo kurz · 8 km",
-        "badges": [
-          "run",
-          "lt"
-        ],
-        "desc": "Erste echte Tempo-Einheit: 2× 8 Min an der Schwelle (Puls ~170), dazwischen locker. Nur wenn gesund."
-      },
-      {
-        "id": "w11do",
-        "name": "Do",
+        "name": "Mi",
         "title": "Ruhetag",
         "badges": [
           "rest"
         ],
-        "desc": "Pause nach Tempo."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
+      },
+      {
+        "id": "w11do",
+        "name": "Do · Büro",
+        "title": "Rücklauf · 8 km",
+        "badges": [
+          "run",
+          "z2"
+        ],
+        "desc": "Locker. Körper adaptiert die Belastung der letzten Wochen."
       },
       {
         "id": "w11fr",
@@ -1594,39 +1596,38 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Beine für den langen Lauf schonen."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w11sa",
         "name": "Sa",
-        "title": "Longrun · 20 km",
+        "title": "Longrun kurz · 16 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Erster 20er seit der Krankheit. Zone 2, Verpflegung wie im Wettkampf üben.",
+        "desc": "Reduziert, ganz entspannt.",
         "longrun": true
       },
       {
         "id": "w11so",
         "name": "So",
-        "title": "Kraft · Hamstring",
+        "title": "Ruhetag",
         "badges": [
-          "kraft",
           "rest"
         ],
-        "desc": "Erhaltung. Kein Lauf."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       }
     ]
   },
   {
     "label": "W12",
     "name": "Woche 12",
-    "focus": "Peak-Block · Aufbau",
+    "focus": "Marathonaufbau (40–44 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~46 km"
+        "v": "40–44 km"
       },
       {
         "l": "Rad",
@@ -1634,7 +1635,7 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "Z2 + 1× LT"
+        "v": "1× Marathonbelastung"
       },
       {
         "l": "Longrun",
@@ -1650,12 +1651,12 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w12di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 10–12 km",
+        "title": "Rücklauf · 10 km",
         "badges": [
           "run",
           "z2"
@@ -1665,12 +1666,12 @@ const weeks = [
       {
         "id": "w12mi",
         "name": "Mi · Büro",
-        "title": "Tempolauf · 10 km",
+        "title": "Marathonbelastung · 8 km",
         "badges": [
           "run",
           "lt"
         ],
-        "desc": "3× 8 Min Schwelle, Puls ~170–174. Dazwischen 3 Min locker."
+        "desc": "2× 20 Min bei 145–151 bpm, dazwischen 5 Min locker."
       },
       {
         "id": "w12do",
@@ -1679,7 +1680,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w12fr",
@@ -1689,7 +1690,7 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Schonen."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w12sa",
@@ -1699,29 +1700,29 @@ const weeks = [
           "run",
           "z2"
         ],
-        "desc": "Solide Länge. Marathon-Verpflegung strikt üben, Elektrolyte.",
+        "desc": "Zone 2, Renn-Verpflegung strikt üben.",
         "longrun": true
       },
       {
         "id": "w12so",
         "name": "So",
-        "title": "Kraft + Mobility",
+        "title": "Kraft · Hamstring",
         "badges": [
           "kraft",
           "rest"
         ],
-        "desc": "Hamstring, Rumpf. Kein Lauf."
+        "desc": "Nordic Curls, RDL, Rumpf. Gegen Quad-Dominanz. Kein Lauf."
       }
     ]
   },
   {
     "label": "W13",
     "name": "Woche 13",
-    "focus": "Entlastung · Deload",
+    "focus": "Längster Belastungsblock (42–46 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~30 km"
+        "v": "42–46 km"
       },
       {
         "l": "Rad",
@@ -1729,11 +1730,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "nur Zone 2"
+        "v": "1× Tempo/LT"
       },
       {
         "l": "Longrun",
-        "v": "16 km"
+        "v": "25 km"
       }
     ],
     "days": [
@@ -1745,36 +1746,36 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung. Diese Woche bewusst weniger."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w13di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 8 km",
+        "title": "Rücklauf · 11 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker, kurz."
+        "desc": "Locker Grundlage."
       },
       {
         "id": "w13mi",
-        "name": "Mi",
+        "name": "Mi · Büro",
+        "title": "Tempolauf · 10 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "3× 8 Min an der Schwelle (~170–172 bpm), 3 Min locker dazwischen."
+      },
+      {
+        "id": "w13do",
+        "name": "Do",
         "title": "Ruhetag",
         "badges": [
           "rest"
         ],
-        "desc": "Pause."
-      },
-      {
-        "id": "w13do",
-        "name": "Do · Büro",
-        "title": "Rücklauf · 8 km",
-        "badges": [
-          "run",
-          "z2"
-        ],
-        "desc": "Locker. Körper adaptiert die Belastung der letzten Wochen."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w13fr",
@@ -1784,38 +1785,39 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Locker."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w13sa",
         "name": "Sa",
-        "title": "Longrun kurz · 16 km",
+        "title": "Longrun · 25 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Reduzierter Longrun, ganz entspannt.",
+        "desc": "Der längste Belastungsblock. Letzte 5 km im Marathon-Renntempo.",
         "longrun": true
       },
       {
         "id": "w13so",
         "name": "So",
-        "title": "Ruhetag",
+        "title": "Kraft · Hamstring",
         "badges": [
+          "kraft",
           "rest"
         ],
-        "desc": "Volle Erholung vor dem nächsten Block."
+        "desc": "Nordic Curls, RDL, Rumpf. Gegen Quad-Dominanz. Kein Lauf."
       }
     ]
   },
   {
     "label": "W14",
     "name": "Woche 14",
-    "focus": "Longrun-Peak · 28 km",
+    "focus": "Entlastung (34–38 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~48 km"
+        "v": "34–38 km"
       },
       {
         "l": "Rad",
@@ -1823,11 +1825,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "Z2 + 1× LT"
+        "v": "nur locker"
       },
       {
         "l": "Longrun",
-        "v": "28 km"
+        "v": "19 km"
       }
     ],
     "days": [
@@ -1839,27 +1841,27 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w14di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 12 km",
+        "title": "Rücklauf · 9 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker Grundlage."
+        "desc": "Locker."
       },
       {
         "id": "w14mi",
         "name": "Mi · Büro",
-        "title": "Tempolauf · 10 km",
+        "title": "Rücklauf · 9 km",
         "badges": [
           "run",
-          "lt"
+          "z2"
         ],
-        "desc": "3–4× 8 Min Schwelle. Puls ~172."
+        "desc": "Locker. Erholung nach dem großen Block."
       },
       {
         "id": "w14do",
@@ -1868,7 +1870,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause vor dem langen Lauf."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w14fr",
@@ -1878,39 +1880,38 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Schonen."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w14sa",
         "name": "Sa",
-        "title": "Longrun-Peak · 28 km",
+        "title": "Longrun kurz · 19 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Der wichtigste lange Lauf. Renn-Verpflegung komplett durchspielen. Zone 2, letzte 5 km ggf. Marathon-Renntempo antesten.",
+        "desc": "Reduziert, entspannt.",
         "longrun": true
       },
       {
         "id": "w14so",
         "name": "So",
-        "title": "Kraft leicht",
+        "title": "Ruhetag",
         "badges": [
-          "kraft",
           "rest"
         ],
-        "desc": "Locker, Regeneration. Kein Lauf."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       }
     ]
   },
   {
     "label": "W15",
     "name": "Woche 15",
-    "focus": "Letzter langer Block · 30 km",
+    "focus": "Letzter Peak (44–48 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~46 km"
+        "v": "44–48 km"
       },
       {
         "l": "Rad",
@@ -1918,11 +1919,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "Z2 + Renntempo"
+        "v": "Renntempo"
       },
       {
         "l": "Longrun",
-        "v": "30 km"
+        "v": "28 km"
       }
     ],
     "days": [
@@ -1934,27 +1935,27 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w15di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 12 km",
+        "title": "Rücklauf · 10 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker."
+        "desc": "Locker Grundlage."
       },
       {
         "id": "w15mi",
         "name": "Mi · Büro",
-        "title": "Marathon-Renntempo · 12 km",
+        "title": "Marathon-Renntempo · 10 km",
         "badges": [
           "run",
           "lt"
         ],
-        "desc": "3× 3 km im Zieltempo (~7:00/km, Puls ~155–160). Renngefühl bekommen."
+        "desc": "3× 3 km im Zieltempo (~7:00/km, ~150 bpm). Renngefühl kalibrieren."
       },
       {
         "id": "w15do",
@@ -1963,7 +1964,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w15fr",
@@ -1973,17 +1974,17 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Schonen."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w15sa",
         "name": "Sa",
-        "title": "Longrun · 30 km",
+        "title": "Longrun-Peak · 28 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Letzter sehr langer Lauf. Danach beginnt das Tapering. Alles wie am Renntag.",
+        "desc": "Der wichtigste lange Lauf. Alles wie am Renntag, letzte 6 km Renntempo.",
         "longrun": true
       },
       {
@@ -1993,18 +1994,18 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Volle Erholung."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       }
     ]
   },
   {
     "label": "W16",
     "name": "Woche 16",
-    "focus": "Taper Beginn · Volumen −30%",
+    "focus": "Taperbeginn (34–38 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~32 km"
+        "v": "34–38 km"
       },
       {
         "l": "Rad",
@@ -2012,7 +2013,7 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "Z2 + kurzes Tempo"
+        "v": "kurzes Renntempo"
       },
       {
         "l": "Longrun",
@@ -2028,17 +2029,17 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Erholung. Ab jetzt runterfahren, nicht mehr aufbauen."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w16di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 10 km",
+        "title": "Rücklauf · 9 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker."
+        "desc": "Locker. Ab jetzt runterfahren, nicht mehr aufbauen."
       },
       {
         "id": "w16mi",
@@ -2048,7 +2049,7 @@ const weeks = [
           "run",
           "lt"
         ],
-        "desc": "2× 2 km Zieltempo, spritzig halten ohne zu ermüden."
+        "desc": "2× 2 km Zieltempo, spritzig ohne zu ermüden."
       },
       {
         "id": "w16do",
@@ -2057,7 +2058,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w16fr",
@@ -2067,7 +2068,7 @@ const weeks = [
           "bike",
           "z2"
         ],
-        "desc": "Locker."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w16sa",
@@ -2077,7 +2078,7 @@ const weeks = [
           "run",
           "z2"
         ],
-        "desc": "Deutlich kürzer als Peak. Beine bleiben an Länge gewöhnt, erholen sich aber.",
+        "desc": "Deutlich kürzer als Peak. Beine an Länge gewöhnt halten, erholen.",
         "longrun": true
       },
       {
@@ -2087,18 +2088,18 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Erholung."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       }
     ]
   },
   {
     "label": "W17",
     "name": "Woche 17",
-    "focus": "Taper · Spritzigkeit",
+    "focus": "Deutliche Reduktion (23–28 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~22 km"
+        "v": "23–28 km"
       },
       {
         "l": "Rad",
@@ -2110,7 +2111,7 @@ const weeks = [
       },
       {
         "l": "Longrun",
-        "v": "13 km"
+        "v": "14 km"
       }
     ],
     "days": [
@@ -2121,12 +2122,12 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Erholung, Beine frisch machen."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w17di",
         "name": "Di · Büro",
-        "title": "Rücklauf · 8 km",
+        "title": "Rücklauf · 7 km",
         "badges": [
           "run",
           "z2"
@@ -2150,22 +2151,22 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w17fr",
-        "name": "Fr",
-        "title": "Locker · 5 km",
+        "name": "Fr · Büro",
+        "title": "Rad-Pendeln locker",
         "badges": [
-          "run",
+          "bike",
           "z2"
         ],
-        "desc": "Ganz locker, Lockerungslauf."
+        "desc": "Locker pendeln, Puls <130 – reine Erholung, kein Reiz."
       },
       {
         "id": "w17sa",
         "name": "Sa",
-        "title": "Longrun kurz · 13 km",
+        "title": "Longrun kurz · 14 km",
         "badges": [
           "run",
           "z2"
@@ -2180,18 +2181,18 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Erholung. Nächste Woche ist Renn-Woche."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       }
     ]
   },
   {
     "label": "W18",
     "name": "Renn-Woche",
-    "focus": "Taper-Ende · MARATHON",
+    "focus": "Frisch bleiben · MARATHON",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~15 km"
+        "v": "10–14 km"
       },
       {
         "l": "Rad",
@@ -2214,7 +2215,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Erholung. Kohlenhydrate hochfahren beginnen."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w18di",
@@ -2224,7 +2225,7 @@ const weeks = [
           "run",
           "z2"
         ],
-        "desc": "Kurz, mit 4× 20 s zügig. Beine spritzig halten."
+        "desc": "Kurz, 4× 20 s zügig. Beine spritzig halten."
       },
       {
         "id": "w18mi",
@@ -2233,7 +2234,7 @@ const weeks = [
         "badges": [
           "rest"
         ],
-        "desc": "Pause."
+        "desc": "Pause. Erholung ist im Wiedereinstieg Teil des Trainings."
       },
       {
         "id": "w18do",
@@ -2243,7 +2244,7 @@ const weeks = [
           "run",
           "z2"
         ],
-        "desc": "Ganz kurz, lockern. Danach nur noch Ruhe."
+        "desc": "Ganz kurz lockern. Danach nur noch Ruhe."
       },
       {
         "id": "w18fr",
@@ -2262,7 +2263,7 @@ const weeks = [
           "run",
           "z2"
         ],
-        "desc": "Optional 15 Min ganz locker + 2 Steigerungen. Ausrüstung bereitlegen."
+        "desc": "15 Min locker + 2 Steigerungen. Ausrüstung bereitlegen."
       },
       {
         "id": "w18so",
@@ -2272,7 +2273,7 @@ const weeks = [
           "run",
           "lt"
         ],
-        "desc": "25.10. Renntag! Zieltempo ~7:00/km, Puls kontrolliert unter der Schwelle. Verpflegung wie geübt. Genieß es – nach allem, was hinter dir liegt."
+        "desc": "25.10. Renntag! Pacing: erste 10 km 140–145 bpm, dann 145–150, im letzten Drittel >150 nur wenn Atmung/Beine/Gefühl stabil. Verpflegung wie geübt. Genieß es."
       }
     ]
   }
@@ -2362,10 +2363,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(g.recovery_mode){
       const el=document.getElementById('gd-recovery');
       el.style.display='block';
-      // Aufgeräumt: im Wiedereinstieg irrelevante/doppelte Blöcke ausblenden.
-      // Die Marathon-Prognose ist während der Genesung nicht aussagekräftig,
-      // die Tagesempfehlung steht schon im Genesungs-Banner, Challenges sind Ballast.
-      ['gd-predictor','gd-rec-wrap','gd-challenges-section'].forEach(id=>{
+      // Aufgeräumt: doppelte Empfehlungskarte + Challenges ausblenden.
+      // Die Marathon-Prognose (gd-predictor) bleibt sichtbar (On-Track).
+      ['gd-rec-wrap','gd-challenges-section'].forEach(id=>{
         const n=document.getElementById(id); if(n)n.style.display='none';
       });
       const cleared=g.doctor_cleared;
@@ -2380,16 +2380,6 @@ document.addEventListener('DOMContentLoaded',()=>{
       document.getElementById('gd-rc-note').textContent=g.recovery_note||'';
       const adv=document.getElementById('gd-rc-advice');
       adv.innerHTML=`<b style="color:${cleared?'#1a5c42':'#b33d28'};">Heute:</b> `+(g.recommendation||'');
-      const rk=document.getElementById('gd-rc-readiness');
-      if(g.readiness_check){rk.textContent=(cleared?'Achte auf: ':'Rückkehr-Kriterium: ')+g.readiness_check;}else{rk.style.display='none';}
-      // Ärztliche Freigabe sichtbar dokumentieren
-      const dEl=document.getElementById('gd-rc-doctor');
-      if(cleared&&g.doctor_guidance){
-        const dd=g.doctor_date?new Date(g.doctor_date+'T00:00:00'):null;
-        const df=dd?` (${dd.getDate()}.${dd.getMonth()+1}.)`:'';
-        dEl.style.display='block';
-        dEl.innerHTML=`<b>🩺 Ärztliche Freigabe${df}:</b> ${g.doctor_guidance}`;
-      }
       // Werte gegen Basis
       const bR=g.baseline_rhr||[53,55], bH=g.baseline_hrv||[42,48];
       const inR=g.resting_hr!=null&&g.resting_hr<=bR[1]+1;
@@ -2574,6 +2564,16 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   }
   renderDashboard();
+
+  // Aktualisieren: holt die frisch gerenderte Seite (Cache umgehen). Die eigentliche
+  // Garmin-Abfrage läuft auf dem Mac; dieser Button zeigt den neuesten Stand.
+  const rb=document.getElementById('gd-refresh');
+  if(rb)rb.addEventListener('click',()=>{
+    document.getElementById('gd-refresh-icon').textContent='⟳';
+    document.getElementById('gd-refresh-label').textContent='Lädt…';
+    rb.style.opacity='0.6';
+    location.href=location.pathname+'?t='+Date.now();
+  });
 });
 </script>
 </body>
