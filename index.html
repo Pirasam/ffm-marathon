@@ -2425,7 +2425,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     // Factors
     const fEl=document.getElementById('gd-factors');
     fEl.innerHTML='<div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">Einflussfaktoren</div>'+
-      [{l:'Trainingsvolumen',k:'factor_volume'},{l:'HRV-Gesundheit',k:'factor_hrv'},{l:'VO₂max',k:'factor_vo2max'},{l:'Gewichtsziel',k:'factor_weight'}].map(f=>{
+      [{l:'Trainingsvolumen',k:'factor_volume'},{l:'HRV-Gesundheit',k:'factor_hrv'},{l:'Ausdauerbasis',k:'factor_vo2max'},{l:'Gewichtsziel',k:'factor_weight'}].map(f=>{
         const pct=g[f.k]||50,c=pct>=70?'#00c96a':pct>=45?VIO:COR;
         return `<div style="margin-bottom:6px;"><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px;"><span style="color:#555;">${f.l}</span><span style="color:${c};font-weight:600;">${pct}%</span></div><div style="background:#f0eef8;border-radius:3px;height:4px;"><div style="background:${c};width:${pct}%;height:100%;border-radius:3px;"></div></div></div>`;
       }).join('');
