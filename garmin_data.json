@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-06T10:00:12+02:00",
+  "synced_at": "2026-08-06T13:00:22+02:00",
   "sync_date": "2026-08-06",
-  "token_days_left": 29.9,
+  "token_days_left": 29.7,
   "metrics": {
     "sleep_hours": 7.2,
     "sleep_score": 84,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 41,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 50,
-    "stress": 16,
+    "stress": 20,
     "resting_hr": 57,
     "body_battery": 91,
     "training_readiness": 53,
@@ -190,11 +190,11 @@
     "challenges": [
       {
         "name": "Step into August",
-        "current": 56802,
+        "current": 59621,
         "goal": 100000,
         "unit": "Schritte",
         "days_remaining": 8,
-        "pct": 57
+        "pct": 60
       },
       {
         "name": "August Rundown",
@@ -205,20 +205,20 @@
         "pct": 26
       },
       {
+        "name": "August Step Month",
+        "current": 59621,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 25,
+        "pct": 20
+      },
+      {
         "name": "Active August",
         "current": 4,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 25,
         "pct": 20
-      },
-      {
-        "name": "August Step Month",
-        "current": 56802,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 25,
-        "pct": 19
       },
       {
         "name": "August Gains",
