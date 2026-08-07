@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-07T08:30:12+02:00",
+  "synced_at": "2026-08-07T10:00:14+02:00",
   "sync_date": "2026-08-07",
   "token_days_left": 29.9,
   "metrics": {
@@ -13,8 +13,17 @@
     "stress": 18,
     "resting_hr": 58,
     "body_battery": 86,
-    "training_readiness": 71,
+    "training_readiness": 70,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-08-07",
+        "distance_km": 4.4,
+        "duration_min": 42,
+        "pace_min_km": 9.71,
+        "avg_hr": 112.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -73,29 +82,34 @@
     "last_run": {
       "name": "Frankfurt am Main Laufen",
       "type": "running",
-      "date": "2026-08-06",
-      "distance_km": 7.5,
-      "duration_min": 57,
-      "pace_min_km": 7.66,
-      "avg_hr": 138.0
+      "date": "2026-08-07",
+      "distance_km": 4.4,
+      "duration_min": 42,
+      "pace_min_km": 9.71,
+      "avg_hr": 112.0
     },
     "weekly_running": {
-      "2026-W32": 14.2,
+      "2026-W32": 18.6,
       "2026-W31": 17.6
     },
     "run_dynamics": {
-      "date": "2026-08-06",
-      "distance_km": 7.5,
-      "cadence": 163.0,
-      "stride_length": 80.0,
-      "vertical_oscillation": 10.2,
-      "vertical_ratio": 12.6,
-      "ground_contact_time": 271.0,
-      "ground_contact_balance": 49.2,
-      "avg_power": 349.0,
-      "performance_condition": -3,
+      "date": "2026-08-07",
+      "distance_km": 4.4,
+      "cadence": 147.0,
+      "stride_length": 70.0,
+      "vertical_oscillation": 9.0,
+      "vertical_ratio": 13.0,
+      "ground_contact_time": 290.0,
+      "ground_contact_balance": 50.6,
+      "avg_power": 276.0,
+      "performance_condition": null,
       "step_speed_loss_pct": 5.2,
       "history": {
+        "2026-08-07": {
+          "cadence": 147.0,
+          "vertical_ratio": 13.0,
+          "gct": 290.0
+        },
         "2026-08-06": {
           "cadence": 163.0,
           "vertical_ratio": 12.6,
@@ -190,35 +204,35 @@
     "challenges": [
       {
         "name": "Step into August",
-        "current": 62881,
+        "current": 69442,
         "goal": 100000,
         "unit": "Schritte",
         "days_remaining": 7,
-        "pct": 63
+        "pct": 69
       },
       {
         "name": "August Rundown",
-        "current": 20.9,
+        "current": 25.3,
         "goal": 80.5,
         "unit": "km",
         "days_remaining": 24,
-        "pct": 26
-      },
-      {
-        "name": "August Step Month",
-        "current": 62881,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 24,
-        "pct": 21
+        "pct": 31
       },
       {
         "name": "Active August",
-        "current": 4,
+        "current": 5,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 24,
-        "pct": 20
+        "pct": 25
+      },
+      {
+        "name": "August Step Month",
+        "current": 69442,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 24,
+        "pct": 23
       },
       {
         "name": "August Gains",
@@ -230,11 +244,11 @@
       },
       {
         "name": "2026 Running - Stage 3",
-        "current": 104.5,
+        "current": 108.8,
         "goal": 300.0,
         "unit": "km",
         "days_remaining": 54,
-        "pct": 35
+        "pct": 36
       }
     ],
     "_errors": []
@@ -729,7 +743,7 @@
     "weekly_km": [
       {
         "w": "2026-W32",
-        "v": 14.2
+        "v": 18.6
       },
       {
         "w": "2026-W31",
@@ -745,6 +759,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-08-07",
+        "cadence": 147.0,
+        "vertical_ratio": 13.0,
+        "gct": 290.0
+      },
       {
         "d": "2026-08-06",
         "cadence": 163.0,
