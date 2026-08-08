@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-07T17:30:17+02:00",
-  "sync_date": "2026-08-07",
-  "token_days_left": 29.6,
+  "synced_at": "2026-08-08T06:58:08+02:00",
+  "sync_date": "2026-08-08",
+  "token_days_left": 29.0,
   "metrics": {
     "sleep_hours": 8.2,
     "sleep_score": 83,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 42,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 50,
-    "stress": 22,
-    "resting_hr": 58,
-    "body_battery": 86,
-    "training_readiness": 75,
+    "stress": 33,
+    "resting_hr": 61,
+    "body_battery": 33,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -204,42 +204,42 @@
     "challenges": [
       {
         "name": "Step into August",
-        "current": 72613,
+        "current": 74550,
         "goal": 100000,
         "unit": "Schritte",
-        "days_remaining": 7,
-        "pct": 73
+        "days_remaining": 6,
+        "pct": 75
       },
       {
         "name": "August Rundown",
         "current": 25.3,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 31
+      },
+      {
+        "name": "August Step Month",
+        "current": 74550,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 23,
+        "pct": 25
       },
       {
         "name": "Active August",
         "current": 5,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 25
-      },
-      {
-        "name": "August Step Month",
-        "current": 72613,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 24,
-        "pct": 24
       },
       {
         "name": "August Gains",
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 0
       },
       {
@@ -247,7 +247,7 @@
         "current": 108.8,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 54,
+        "days_remaining": 53,
         "pct": 36
       }
     ],
@@ -255,6 +255,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-08",
+        "v": 40
+      },
       {
         "d": "2026-08-07",
         "v": 40
@@ -370,13 +374,13 @@
       {
         "d": "2026-07-10",
         "v": 45
-      },
-      {
-        "d": "2026-07-09",
-        "v": 45
       }
     ],
     "rhr": [
+      {
+        "d": "2026-08-08",
+        "v": 61
+      },
       {
         "d": "2026-08-07",
         "v": 58
@@ -492,10 +496,6 @@
       {
         "d": "2026-07-10",
         "v": 55
-      },
-      {
-        "d": "2026-07-09",
-        "v": 53
       }
     ],
     "weight": [
@@ -821,6 +821,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-08",
+        "v": 43.8
+      },
       {
         "d": "2026-08-07",
         "v": 43.8
