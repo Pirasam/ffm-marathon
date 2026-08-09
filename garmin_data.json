@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-09T08:30:12+02:00",
+  "synced_at": "2026-08-09T10:00:23+02:00",
   "sync_date": "2026-08-09",
-  "token_days_left": 29.1,
+  "token_days_left": 29.0,
   "metrics": {
     "sleep_hours": 6.0,
     "sleep_score": 69,
@@ -204,11 +204,11 @@
     "challenges": [
       {
         "name": "Step into August",
-        "current": 81430,
+        "current": 81681,
         "goal": 100000,
         "unit": "Schritte",
         "days_remaining": 5,
-        "pct": 81
+        "pct": 82
       },
       {
         "name": "August Rundown",
@@ -220,7 +220,7 @@
       },
       {
         "name": "August Step Month",
-        "current": 81430,
+        "current": 81681,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 22,
