@@ -22,11 +22,13 @@ CLAUDE_MODEL = "claude-opus-4-8"
 #   stiegs-Ansicht. Zum Beenden (voller Trainingsbetrieb) RECOVERY_MODE = False.
 # DOCTOR_CLEARED steuert, ob begrenzte Aktivität erlaubt ist (ärztliche Freigabe).
 RECOVERY_MODE = True
-RECOVERY_REASON = "Borreliose nach Zeckenstich (09.07.), Antibiotikum seit 17.07."
-RECOVERY_SINCE = "2026-07-16"
+RECOVERY_REASON = "Akuter Atemwegsinfekt (Halsschmerzen, Husten, belegte Lunge) seit 08.08.2026 – Immunsystem nach Borreliose-Antibiose noch geschwächt."
+RECOVERY_SINCE = "2026-08-08"
 
-# Ärztliche Freigabe vom 27.07.2026 (Kontrolltermin):
-DOCTOR_CLEARED = True
+# Wiedereinstieg wieder PAUSIERT wegen des neuen Infekts (war 27.07. ärztlich
+# freigegeben). Bei Symptomen "unterhalb des Halses" (Husten, Lunge, Fieber)
+# gilt: kein Training. Zum Wieder-Aktivieren DOCTOR_CLEARED = True setzen.
+DOCTOR_CLEARED = False
 DOCTOR_DATE = "2026-07-27"
 DOCTOR_GUIDANCE = (
     "Antibiotikum schlägt an, Werte sollten sich bald normalisieren. Sport bis "
@@ -163,12 +165,20 @@ Das heißt konkret:
                        'Bei Hitze oder schlechten Werten stattdessen Ruhe/leichte Bewegung. '
                        'Immer den Körpergefühl-Vorbehalt nennen.>")')
     else:
-        frame = f"""Der Sportler ist KRANK: {RECOVERY_REASON}. Er darf NICHT trainieren,
-bis ein Arzt ihn freigibt. Bei Borreliose besteht Risiko einer Lyme-Karditis (Herz).
+        frame = f"""Der Sportler ist KRANK: {RECOVERY_REASON}. Er darf NICHT trainieren.
+
+Wichtiger medizinischer Kontext:
+- Symptome "unterhalb des Halses" (Husten, belegte Lunge, Fieber, Gliederschmerzen) bedeuten
+  in der Sportmedizin: KEIN Training. Sport während eines Atemwegsinfekts erhöht das Risiko
+  einer Herzmuskelentzündung (Myokarditis) – umso mehr, da er gerade erst eine Borreliose
+  (ebenfalls mit Herzrisiko) hinter sich hat.
+- Bei belegter Lunge/schmerzhaftem Husten, Fieber, Atemnot oder Verschlechterung ärztlich
+  abklären lassen (mögliche Bronchitis/Lungenbeteiligung).
 Empfiehl UNTER KEINEN UMSTÄNDEN Training, auch kein "lockeres" Laufen/Radfahren."""
         status_line = '"recovery_status": "<Erholung | Stabil | Rückschlag>",'
-        advice_line = ('"recovery_advice": "<2 Sätze Erholungsunterstützung für heute: Schlaf, '
-                       'Flüssigkeit, Ernährung, Belastungsvermeidung. NIEMALS Training empfehlen.>")')
+        advice_line = ('"recovery_advice": "<2 Sätze Erholungsunterstützung für heute: Ruhe, '
+                       'Schlaf, viel trinken, warmhalten. Bei anhaltendem Husten/belegter Lunge '
+                       'ärztlich abklären. NIEMALS Training empfehlen.>")')
 
     prompt = f"""Du bist ein vorsichtiger Sportmediziner-Assistent. {frame}
 
