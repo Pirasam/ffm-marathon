@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-11T08:30:13+02:00",
+  "synced_at": "2026-08-11T10:00:14+02:00",
   "sync_date": "2026-08-11",
   "token_days_left": 29.9,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 40,
     "hrv_balanced_low": 41,
     "hrv_balanced_high": 50,
-    "stress": 15,
+    "stress": 20,
     "resting_hr": 56,
     "body_battery": 89,
     "training_readiness": 86,
@@ -204,15 +204,15 @@
     "challenges": [
       {
         "name": "Step into August",
-        "current": 91798,
+        "current": 93311,
         "goal": 100000,
         "unit": "Schritte",
         "days_remaining": 3,
-        "pct": 92
+        "pct": 93
       },
       {
         "name": "August Step Month",
-        "current": 91798,
+        "current": 93311,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 20,
