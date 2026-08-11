@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-08-11T06:58:12+02:00",
+  "synced_at": "2026-08-11T08:30:13+02:00",
   "sync_date": "2026-08-11",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
     "sleep_hours": 7.9,
-    "sleep_score": 83,
+    "sleep_score": 89,
     "hrv_status": "UNBALANCED",
-    "hrv_value": 36,
-    "hrv_weekly_avg": 39,
-    "hrv_balanced_low": 40,
+    "hrv_value": 46,
+    "hrv_weekly_avg": 40,
+    "hrv_balanced_low": 41,
     "hrv_balanced_high": 50,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 67,
-    "training_readiness": null,
+    "stress": 15,
+    "resting_hr": 56,
+    "body_battery": 89,
+    "training_readiness": 86,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -137,8 +137,9 @@
         }
       }
     },
-    "weight_kg": 90.3,
+    "weight_kg": 90.1,
     "weight_history": {
+      "2026-08-11": 90.1,
       "2026-08-06": 90.3,
       "2026-08-05": 89.9,
       "2026-08-04": 90.4,
@@ -197,14 +198,13 @@
       "2026-05-27": 92.5,
       "2026-05-26": 92.8,
       "2026-05-25": 92.9,
-      "2026-05-24": 91.0,
-      "2026-05-23": 92.1
+      "2026-05-24": 91.0
     },
     "vo2max": 43.8,
     "challenges": [
       {
         "name": "Step into August",
-        "current": 91734,
+        "current": 91798,
         "goal": 100000,
         "unit": "Schritte",
         "days_remaining": 3,
@@ -212,7 +212,7 @@
       },
       {
         "name": "August Step Month",
-        "current": 91734,
+        "current": 91798,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 20,
@@ -257,7 +257,7 @@
     "hrv": [
       {
         "d": "2026-08-11",
-        "v": 36
+        "v": 46
       },
       {
         "d": "2026-08-10",
@@ -378,6 +378,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-08-11",
+        "v": 56
+      },
+      {
         "d": "2026-08-10",
         "v": 59
       },
@@ -492,13 +496,13 @@
       {
         "d": "2026-07-13",
         "v": 58
-      },
-      {
-        "d": "2026-07-12",
-        "v": 56
       }
     ],
     "weight": [
+      {
+        "d": "2026-08-11",
+        "v": 90.1
+      },
       {
         "d": "2026-08-06",
         "v": 90.3
@@ -734,10 +738,6 @@
       {
         "d": "2026-05-24",
         "v": 91.0
-      },
-      {
-        "d": "2026-05-23",
-        "v": 92.1
       }
     ],
     "weekly_km": [
