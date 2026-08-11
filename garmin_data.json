@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-10T20:30:11+02:00",
-  "sync_date": "2026-08-10",
-  "token_days_left": 29.5,
+  "synced_at": "2026-08-11T06:58:12+02:00",
+  "sync_date": "2026-08-11",
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 7.9,
     "sleep_score": 83,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 39,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 50,
-    "stress": 29,
-    "resting_hr": 59,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 67,
-    "training_readiness": 70,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -204,34 +204,34 @@
     "challenges": [
       {
         "name": "Step into August",
-        "current": 89853,
+        "current": 91734,
         "goal": 100000,
         "unit": "Schritte",
-        "days_remaining": 4,
-        "pct": 90
+        "days_remaining": 3,
+        "pct": 92
+      },
+      {
+        "name": "August Step Month",
+        "current": 91734,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 20,
+        "pct": 31
       },
       {
         "name": "August Rundown",
         "current": 25.3,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 31
-      },
-      {
-        "name": "August Step Month",
-        "current": 89853,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 21,
-        "pct": 30
       },
       {
         "name": "Active August",
         "current": 5,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 25
       },
       {
@@ -239,7 +239,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 0
       },
       {
@@ -247,7 +247,7 @@
         "current": 108.8,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 51,
+        "days_remaining": 50,
         "pct": 36
       }
     ],
@@ -255,6 +255,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-11",
+        "v": 36
+      },
       {
         "d": "2026-08-10",
         "v": 36
@@ -370,10 +374,6 @@
       {
         "d": "2026-07-13",
         "v": 41
-      },
-      {
-        "d": "2026-07-12",
-        "v": 43
       }
     ],
     "rhr": [
@@ -821,6 +821,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-11",
+        "v": 43.8
+      },
       {
         "d": "2026-08-10",
         "v": 43.8
