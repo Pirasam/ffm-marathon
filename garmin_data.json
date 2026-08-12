@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-12T08:30:13+02:00",
+  "synced_at": "2026-08-12T16:00:13+02:00",
   "sync_date": "2026-08-12",
-  "token_days_left": 29.9,
+  "token_days_left": 29.6,
   "metrics": {
     "sleep_hours": 7.9,
     "sleep_score": 90,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 40,
     "hrv_balanced_low": 41,
     "hrv_balanced_high": 49,
-    "stress": 14,
+    "stress": 20,
     "resting_hr": 56,
     "body_battery": 90,
     "training_readiness": 92,
@@ -204,19 +204,19 @@
     "challenges": [
       {
         "name": "Step into August",
-        "current": 96540,
+        "current": 98380,
         "goal": 100000,
         "unit": "Schritte",
         "days_remaining": 2,
-        "pct": 97
+        "pct": 98
       },
       {
         "name": "August Step Month",
-        "current": 96540,
+        "current": 98380,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 19,
-        "pct": 32
+        "pct": 33
       },
       {
         "name": "August Rundown",
