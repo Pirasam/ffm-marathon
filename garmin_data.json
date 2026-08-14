@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-08-13T20:30:12+02:00",
-  "sync_date": "2026-08-13",
-  "token_days_left": 29.4,
+  "synced_at": "2026-08-14T06:58:19+02:00",
+  "sync_date": "2026-08-14",
+  "token_days_left": 30.0,
   "metrics": {
-    "sleep_hours": 7.9,
-    "sleep_score": 84,
+    "sleep_hours": 7.3,
+    "sleep_score": 79,
     "hrv_status": "UNBALANCED",
-    "hrv_value": 39,
+    "hrv_value": 40,
     "hrv_weekly_avg": 39,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 49,
-    "stress": 25,
-    "resting_hr": 57,
-    "body_battery": 91,
-    "training_readiness": 91,
+    "stress": 16,
+    "resting_hr": 56,
+    "body_battery": 89,
+    "training_readiness": 85,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -190,10 +190,10 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 104638,
+        "current": 104852,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 18,
+        "days_remaining": 17,
         "pct": 35
       },
       {
@@ -201,7 +201,7 @@
         "current": 25.3,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 18,
+        "days_remaining": 17,
         "pct": 31
       },
       {
@@ -209,7 +209,7 @@
         "current": 5,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 18,
+        "days_remaining": 17,
         "pct": 25
       },
       {
@@ -217,7 +217,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 18,
+        "days_remaining": 17,
         "pct": 0
       },
       {
@@ -225,7 +225,7 @@
         "current": 108.8,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 48,
+        "days_remaining": 47,
         "pct": 36
       }
     ],
@@ -234,6 +234,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-14",
+        "v": 40
+      },
       {
         "d": "2026-08-13",
         "v": 39
@@ -349,13 +353,13 @@
       {
         "d": "2026-07-16",
         "v": 38
-      },
-      {
-        "d": "2026-07-15",
-        "v": 42
       }
     ],
     "rhr": [
+      {
+        "d": "2026-08-14",
+        "v": 56
+      },
       {
         "d": "2026-08-13",
         "v": 57
@@ -471,10 +475,6 @@
       {
         "d": "2026-07-16",
         "v": 61
-      },
-      {
-        "d": "2026-07-15",
-        "v": 55
       }
     ],
     "weight": [
@@ -800,6 +800,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-14",
+        "v": 43.8
+      },
       {
         "d": "2026-08-13",
         "v": 43.8
