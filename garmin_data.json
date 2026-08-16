@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-08-16T06:58:16+02:00",
+  "synced_at": "2026-08-16T08:30:12+02:00",
   "sync_date": "2026-08-16",
   "token_days_left": 29.1,
   "metrics": {
-    "sleep_hours": 7.7,
-    "sleep_score": 78,
-    "hrv_status": "UNBALANCED",
+    "sleep_hours": 7.8,
+    "sleep_score": 86,
+    "hrv_status": "BALANCED",
     "hrv_value": 39,
-    "hrv_weekly_avg": 39,
+    "hrv_weekly_avg": 40,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 49,
-    "stress": 23,
-    "resting_hr": 61,
-    "body_battery": 19,
-    "training_readiness": null,
+    "stress": 17,
+    "resting_hr": 58,
+    "body_battery": 78,
+    "training_readiness": 92,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -176,7 +176,7 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 116403,
+        "current": 116474,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 15,
@@ -344,7 +344,7 @@
     "rhr": [
       {
         "d": "2026-08-16",
-        "v": 61
+        "v": 58
       },
       {
         "d": "2026-08-15",
