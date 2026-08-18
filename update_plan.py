@@ -22,20 +22,19 @@ CLAUDE_MODEL = "claude-opus-4-8"
 #   stiegs-Ansicht. Zum Beenden (voller Trainingsbetrieb) RECOVERY_MODE = False.
 # DOCTOR_CLEARED steuert, ob begrenzte Aktivität erlaubt ist (ärztliche Freigabe).
 RECOVERY_MODE = True
-RECOVERY_REASON = "Akuter Atemwegsinfekt (Halsschmerzen, Husten, belegte Lunge) seit 08.08.2026 – Immunsystem nach Borreliose-Antibiose noch geschwächt."
-RECOVERY_SINCE = "2026-08-08"
+RECOVERY_REASON = "Wiedereinstieg nach Atemwegsinfekt (Lunge frei, nur noch Restschnupfen) – zuvor Borreliose. Vorsichtiger Marathon-Aufbau."
+RECOVERY_SINCE = "2026-08-18"
 
-# Wiedereinstieg wieder PAUSIERT wegen des neuen Infekts (war 27.07. ärztlich
-# freigegeben). Bei Symptomen "unterhalb des Halses" (Husten, Lunge, Fieber)
-# gilt: kein Training. Zum Wieder-Aktivieren DOCTOR_CLEARED = True setzen.
-DOCTOR_CLEARED = False
+# Wieder-Aufbau ab 18.08.: Lunge frei, Symptome nur noch oberhalb des Halses,
+# Werte zurück auf Basisniveau. Begrenzte Aktivität wieder erlaubt.
+# Zum vollen Trainingsbetrieb später RECOVERY_MODE = False.
+DOCTOR_CLEARED = True
 DOCTOR_DATE = "2026-07-27"
 DOCTOR_GUIDANCE = (
-    "Antibiotikum schlägt an, Werte sollten sich bald normalisieren. Sport bis "
-    "50% der normalen Belastung wieder möglich UND wichtig – auch psychisch, weil "
-    "gewohnt. Bei der Hitze später diese Woche besser aussetzen; ab nächster Woche "
-    "(ab 04.08.) langsam wieder aufnehmen, immer auf das Körpergefühl hören. "
-    "Antikörper-Bluttest Ende August."
+    "Grundfreigabe vom 27.07. gilt weiter. Nach dem zweiten Infekt (jetzt abgeklungen, "
+    "Lunge frei) vorsichtig wieder aufbauen: erst lockere Läufe, dann Longrun langsam "
+    "steigern. Immer auf das Körpergefühl hören; bei erneutem Husten/Brustsymptomen oder "
+    "Herzstolpern sofort pausieren. Antikörper-Bluttest Ende August nicht vergessen."
 )
 
 # Individuelle Normalwerte VOR der Infektion (aus den Daten 27.06.–09.07.)
@@ -150,14 +149,13 @@ def call_claude_recovery(metrics, history):
         frame = f"""Der Sportler erholt sich von: {RECOVERY_REASON}.
 Am {DOCTOR_DATE} war er beim Arzt. ÄRZTLICHE FREIGABE (maßgeblich): "{DOCTOR_GUIDANCE}"
 
-Das heißt konkret:
-- Begrenzte Aktivität ist jetzt ERLAUBT und sogar erwünscht – aber nur bis ~50% seiner
-  normalen Belastung (normal waren ~40 km Laufen/Woche; 50% = also sehr moderat, kurze
-  lockere Einheiten, keine langen oder intensiven Läufe).
-- Bei Hitze diese Woche AUSSETZEN. Ab nächster Woche (ab 04.08.) langsam wieder aufnehmen.
-- IMMER auf das Körpergefühl hören; bei Herzstolpern, Druck auf der Brust, Luftnot,
-  Schwindel oder ungewöhnlicher Erschöpfung sofort stoppen und ärztlich abklären.
-- Kein Leistungsdruck. Bewegung ist auch für die Psyche wichtig, weil er es gewohnt ist."""
+Das heißt konkret (Stand 18.08., nach zweitem Infekt jetzt abgeklungen, Lunge frei):
+- Wieder-Aufbau läuft: er ist schon zurück bei lockeren Läufen (zuletzt 10 km locker).
+  Jetzt Umfang und Longrun BEHUTSAM steigern, um den Marathon (25.10., ~10 Wochen) vorzubereiten.
+- Einheiten primär locker (Zone 2, ~140–150 bpm). Tempo nur einbauen, wenn mehrere Tage unauffällig.
+- IMMER auf das Körpergefühl hören; bei erneutem Husten, Brustsymptomen, Herzstolpern oder
+  ungewöhnlicher Erschöpfung sofort pausieren.
+- Kein Leistungsdruck, aber der Marathon ist wieder das Ziel – geduldiger, gesunder Aufbau."""
         status_line = ('"recovery_status": "<Erholung | Wiedereinstieg | Rückschlag>",')
         advice_line = ('"recovery_advice": "<2–3 Sätze für HEUTE: Falls die Werte gut sind und '
                        'es nicht zu heiß ist, eine konkrete, sehr moderate Aktivität vorschlagen '
