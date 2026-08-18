@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-08-17T20:30:12+02:00",
-  "sync_date": "2026-08-17",
-  "token_days_left": 29.8,
+  "synced_at": "2026-08-18T06:58:13+02:00",
+  "sync_date": "2026-08-18",
+  "token_days_left": 29.4,
   "metrics": {
-    "sleep_hours": 6.4,
-    "sleep_score": 74,
+    "sleep_hours": 7.3,
+    "sleep_score": 84,
     "hrv_status": "BALANCED",
-    "hrv_value": 35,
-    "hrv_weekly_avg": 40,
+    "hrv_value": 43,
+    "hrv_weekly_avg": 39,
     "hrv_balanced_low": 39,
     "hrv_balanced_high": 49,
-    "stress": 30,
-    "resting_hr": 59,
-    "body_battery": 64,
-    "training_readiness": 81,
+    "stress": 15,
+    "resting_hr": 57,
+    "body_battery": 88,
+    "training_readiness": 89,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -50,15 +50,6 @@
         "duration_min": 53,
         "pace_min_km": 7.9,
         "avg_hr": 139.0
-      },
-      {
-        "name": "Frankfurt am Main Rennradfahren",
-        "type": "road_biking",
-        "date": "2026-08-03",
-        "distance_km": 14.2,
-        "duration_min": 38,
-        "pace_min_km": 2.68,
-        "avg_hr": 129.0
       }
     ],
     "last_run": {
@@ -176,10 +167,10 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 135223,
+        "current": 135852,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 14,
+        "days_remaining": 13,
         "pct": 45
       },
       {
@@ -187,7 +178,7 @@
         "current": 31.9,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 14,
+        "days_remaining": 13,
         "pct": 40
       },
       {
@@ -195,7 +186,7 @@
         "current": 6,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 14,
+        "days_remaining": 13,
         "pct": 30
       },
       {
@@ -203,7 +194,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 14,
+        "days_remaining": 13,
         "pct": 0
       },
       {
@@ -211,7 +202,7 @@
         "current": 115.5,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 44,
+        "days_remaining": 43,
         "pct": 38
       }
     ],
@@ -220,6 +211,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-18",
+        "v": 43
+      },
       {
         "d": "2026-08-17",
         "v": 35
@@ -335,13 +330,13 @@
       {
         "d": "2026-07-20",
         "v": 33
-      },
-      {
-        "d": "2026-07-19",
-        "v": 52
       }
     ],
     "rhr": [
+      {
+        "d": "2026-08-18",
+        "v": 57
+      },
       {
         "d": "2026-08-17",
         "v": 59
@@ -457,10 +452,6 @@
       {
         "d": "2026-07-20",
         "v": 58
-      },
-      {
-        "d": "2026-07-19",
-        "v": 51
       }
     ],
     "weight": [
@@ -796,6 +787,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-18",
+        "v": 43.8
+      },
       {
         "d": "2026-08-17",
         "v": 43.8
