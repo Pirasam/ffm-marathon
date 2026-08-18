@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-18T19:00:13+02:00",
+  "synced_at": "2026-08-18T20:30:12+02:00",
   "sync_date": "2026-08-18",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
     "sleep_hours": 7.3,
     "sleep_score": 84,
@@ -13,7 +13,7 @@
     "stress": 30,
     "resting_hr": 57,
     "body_battery": 88,
-    "training_readiness": 66,
+    "training_readiness": 75,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
