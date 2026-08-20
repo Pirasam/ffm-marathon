@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-20T10:00:14+02:00",
+  "synced_at": "2026-08-20T20:30:12+02:00",
   "sync_date": "2026-08-20",
-  "token_days_left": 29.4,
+  "token_days_left": 28.9,
   "metrics": {
     "sleep_hours": 7.9,
     "sleep_score": 83,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 39,
     "hrv_balanced_low": 40,
     "hrv_balanced_high": 49,
-    "stress": 15,
+    "stress": 20,
     "resting_hr": 55,
     "body_battery": 92,
-    "training_readiness": 75,
+    "training_readiness": 73,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-08-20",
+        "distance_km": 10.2,
+        "duration_min": 31,
+        "pace_min_km": 3.05,
+        "avg_hr": 112.0
+      },
       {
         "name": "Frankfurt am Main Radfahren",
         "type": "cycling",
@@ -195,15 +204,15 @@
     "challenges": [
       {
         "name": "Active August",
-        "current": 11,
+        "current": 12,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 11,
-        "pct": 55
+        "pct": 60
       },
       {
         "name": "August Step Month",
-        "current": 161410,
+        "current": 162780,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 11,
