@@ -1,43 +1,37 @@
 #!/usr/bin/env python3
-"""Einmaliger Garmin-Login fuer das Dashboard der Frau (ueber garth direkt).
+"""Einmaliger Garmin-Login fuer das Dashboard der Frau (moderne garminconnect-API).
 
-Nutzt garths eigenen, aktuellen Login (die alte garminconnect-Huelle scheitert
-an Garmins neuem SSO mit 401). Speichert die Sitzung in ~/.garmin_session_frau –
-getrennt von Samuels ~/.garmin_session – im selben Format, das der Sync liest.
+MUSS mit aktuellem Python laufen (das System-Python 3.9 ist zu alt fuer Garmins
+neuen Login). Deshalb per uv starten:
 
-Ausfuehren (deine Frau gibt IHREN Garmin-Login ein):
-    python3 connect_frau.py
+    ~/.local/bin/uv run --python 3.13 --with garminconnect connect_frau.py
+
+Speichert die Sitzung in ~/.garmin_session_frau (getrennt von Samuels Sitzung),
+im base64-Format, das der Sync via garth.loads liest.
 """
 import os, sys, getpass, base64, json
+from datetime import date
 
-try:
-    import garth
-except ImportError:
-    print("FEHLER: garth nicht installiert – 'pip3 install -U garth garminconnect'")
-    sys.exit(1)
+from garminconnect import Garmin
 
 TOKEN_PATH = os.path.expanduser("~/.garmin_session_frau")
 
 email = input("Garmin E-Mail (deiner Frau): ").strip()
 password = getpass.getpass("Garmin Passwort (wird nicht angezeigt): ")
 
-def get_mfa():
-    print("\nGarmin hat einen Verifizierungscode per E-Mail/App gesendet.")
-    return input("Code eingeben: ").strip()
-
-print("\nAnmelden bei Garmin Connect (ueber garth) …")
+print("\nAnmelden bei Garmin Connect …")
 try:
-    garth.login(email, password, prompt_mfa=get_mfa)
-except TypeError:
-    # aeltere garth-Signatur ohne prompt_mfa
-    garth.login(email, password)
+    garmin = Garmin(email=email, password=password, return_on_mfa=True)
+    res1, res2 = garmin.login()
+    if res1 == "needs_mfa":
+        code = input("\nGarmin-Verifizierungscode (E-Mail/App) eingeben: ").strip()
+        garmin.resume_login(res2, code)
 except Exception as e:
     print(f"\nFEHLER beim Login: {e}")
-    print("Falls weiterhin 401: bitte kurz Bescheid geben – dann brauchen wir ein neueres Python.")
     sys.exit(1)
 
-# Session im base64-Format sichern (kompatibel mit garth.loads im Sync)
-session_data = garth.client.dumps()
+# Sitzung sichern (base64, kompatibel mit garth.loads im Sync)
+session_data = garmin.garth.dumps()
 decoded = json.loads(base64.b64decode(session_data).decode())
 if len(decoded) < 2 or decoded[1] is None:
     print("\nFEHLER: Login lieferte keine gueltigen Tokens. Bitte nochmal versuchen.")
@@ -49,13 +43,14 @@ with open(tmp, "w") as f:
 os.replace(tmp, TOKEN_PATH)
 print(f"\nLogin erfolgreich! Sitzung gespeichert: {TOKEN_PATH}")
 
-# Kurzer Funktionstest ueber unsere Pipeline
+# Kurzer Funktionstest inkl. Zyklusdaten (Natural Cycles -> Garmin)
 try:
-    from garmin_client import garmin_login, fetch_garmin_metrics
-    api = garmin_login(token_path=TOKEN_PATH)
-    from datetime import date
-    rhr = api.get_stats(date.today().isoformat()).get("restingHeartRate")
+    garmin.display_name = garmin.garth.profile.get("displayName")
+    rhr = garmin.get_stats(date.today().isoformat()).get("restingHeartRate")
     print(f"Test OK – Ruhepuls heute: {rhr}")
+    for m in ("get_menstrual_data_for_date", "get_menstrual_calendar_data"):
+        if hasattr(garmin, m):
+            print(f"Zyklus-Methode vorhanden: {m}")
 except Exception as e:
     print(f"Test-Hinweis (Login trotzdem gespeichert): {e}")
 
