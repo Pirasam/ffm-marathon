@@ -1,0 +1,496 @@
+{
+  "synced_at": "2026-08-21T10:57:02+02:00",
+  "sync_date": "2026-08-21",
+  "token_days_left": null,
+  "metrics": {
+    "sleep_hours": 8.4,
+    "sleep_score": 89,
+    "hrv_status": "BALANCED",
+    "hrv_value": 31,
+    "hrv_weekly_avg": 29,
+    "hrv_balanced_low": 28,
+    "hrv_balanced_high": 33,
+    "stress": 15,
+    "resting_hr": 60,
+    "body_battery": 92,
+    "training_readiness": 98,
+    "recent_activities": [
+      {
+        "name": "Pilates",
+        "type": "pilates",
+        "date": "2026-08-18",
+        "distance_km": 0.0,
+        "duration_min": 61,
+        "pace_min_km": null,
+        "avg_hr": 87.0
+      },
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-08-16",
+        "distance_km": 6.5,
+        "duration_min": 68,
+        "pace_min_km": 10.37,
+        "avg_hr": 137.0
+      },
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-08-14",
+        "distance_km": 4.1,
+        "duration_min": 41,
+        "pace_min_km": 10.02,
+        "avg_hr": 140.0
+      },
+      {
+        "name": "Pilates",
+        "type": "pilates",
+        "date": "2026-08-11",
+        "distance_km": 0.0,
+        "duration_min": 65,
+        "pace_min_km": null,
+        "avg_hr": 92.0
+      },
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-08-07",
+        "distance_km": 4.3,
+        "duration_min": 42,
+        "pace_min_km": 9.76,
+        "avg_hr": 140.0
+      }
+    ],
+    "last_run": {
+      "name": "Frankfurt am Main Laufen",
+      "type": "running",
+      "date": "2026-08-16",
+      "distance_km": 6.5,
+      "duration_min": 68,
+      "pace_min_km": 10.37,
+      "avg_hr": 137.0
+    },
+    "weekly_running": {
+      "2026-W33": 10.6,
+      "2026-W32": 4.3
+    },
+    "run_dynamics": {
+      "date": "2026-08-16",
+      "distance_km": 6.5,
+      "cadence": 128.0,
+      "stride_length": 66.0,
+      "vertical_oscillation": 7.4,
+      "vertical_ratio": 11.3,
+      "ground_contact_time": 313.0,
+      "ground_contact_balance": 49.6,
+      "avg_power": 139.0,
+      "performance_condition": null,
+      "step_speed_loss_pct": null,
+      "history": {
+        "2026-08-16": {
+          "cadence": 128.0,
+          "vertical_ratio": 11.3,
+          "gct": 313.0
+        },
+        "2026-08-14": {
+          "cadence": 137.0,
+          "vertical_ratio": 11.0,
+          "gct": 311.0
+        },
+        "2026-08-07": {
+          "cadence": 135.0,
+          "vertical_ratio": 11.0,
+          "gct": 308.0
+        }
+      }
+    },
+    "weight_kg": 66.3,
+    "weight_history": {
+      "2026-08-06": 66.3,
+      "2026-07-14": 66.3,
+      "2026-07-05": 66.2,
+      "2026-07-02": 66.0,
+      "2026-06-12": 65.7
+    },
+    "vo2max": 39.3,
+    "challenges": [
+      {
+        "name": "August Step Month",
+        "current": 163051,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 10,
+        "pct": 54
+      },
+      {
+        "name": "Active August",
+        "current": 5,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 10,
+        "pct": 25
+      },
+      {
+        "name": "August Rundown",
+        "current": 15.0,
+        "goal": 80.5,
+        "unit": "km",
+        "days_remaining": 10,
+        "pct": 19
+      },
+      {
+        "name": "August Likes",
+        "current": 3.0,
+        "goal": 25.0,
+        "unit": "",
+        "days_remaining": 10,
+        "pct": 12
+      },
+      {
+        "name": "August Gains",
+        "current": 0.0,
+        "goal": 4.0,
+        "unit": "h",
+        "days_remaining": 10,
+        "pct": 0
+      },
+      {
+        "name": "August Warrior",
+        "current": 0.0,
+        "goal": 14400.0,
+        "unit": "",
+        "days_remaining": 10,
+        "pct": 0
+      },
+      {
+        "name": "August Time to Walk",
+        "current": 0.0,
+        "goal": 15.0,
+        "unit": "h",
+        "days_remaining": 10,
+        "pct": 0
+      },
+      {
+        "name": "2026 Running - Stage 3",
+        "current": 46.2,
+        "goal": 300.0,
+        "unit": "km",
+        "days_remaining": 40,
+        "pct": 15
+      }
+    ],
+    "cycle": {
+      "tracked": true,
+      "start_date": "2026-08-01",
+      "day_in_cycle": 21,
+      "phase": "luteal",
+      "phase_raw": 4,
+      "period_length": 7,
+      "predicted_cycle_length": 27,
+      "cycle_type": "REGULAR",
+      "fertile_window_start": 10,
+      "fertile_window_length": 7,
+      "days_until_next_phase": 7,
+      "next_period_in_days": 7,
+      "next_period_date": "2026-08-28",
+      "next_follicular_in_days": 14
+    },
+    "_errors": []
+  },
+  "history": {
+    "hrv": [
+      {
+        "d": "2026-08-21",
+        "v": 31
+      },
+      {
+        "d": "2026-08-20",
+        "v": 31
+      },
+      {
+        "d": "2026-08-19",
+        "v": 28
+      },
+      {
+        "d": "2026-08-17",
+        "v": 31
+      },
+      {
+        "d": "2026-08-16",
+        "v": 28
+      },
+      {
+        "d": "2026-08-15",
+        "v": 25
+      },
+      {
+        "d": "2026-08-14",
+        "v": 26
+      },
+      {
+        "d": "2026-08-13",
+        "v": 29
+      },
+      {
+        "d": "2026-08-12",
+        "v": 29
+      },
+      {
+        "d": "2026-08-11",
+        "v": 30
+      },
+      {
+        "d": "2026-08-10",
+        "v": 35
+      },
+      {
+        "d": "2026-08-09",
+        "v": 30
+      },
+      {
+        "d": "2026-08-08",
+        "v": 25
+      },
+      {
+        "d": "2026-08-07",
+        "v": 33
+      },
+      {
+        "d": "2026-08-06",
+        "v": 28
+      },
+      {
+        "d": "2026-08-05",
+        "v": 31
+      },
+      {
+        "d": "2026-08-04",
+        "v": 29
+      },
+      {
+        "d": "2026-08-03",
+        "v": 30
+      },
+      {
+        "d": "2026-08-02",
+        "v": 23
+      },
+      {
+        "d": "2026-08-01",
+        "v": 31
+      },
+      {
+        "d": "2026-07-31",
+        "v": 28
+      },
+      {
+        "d": "2026-07-30",
+        "v": 26
+      },
+      {
+        "d": "2026-07-29",
+        "v": 32
+      },
+      {
+        "d": "2026-07-28",
+        "v": 33
+      },
+      {
+        "d": "2026-07-27",
+        "v": 29
+      },
+      {
+        "d": "2026-07-25",
+        "v": 25
+      },
+      {
+        "d": "2026-07-24",
+        "v": 27
+      },
+      {
+        "d": "2026-07-22",
+        "v": 30
+      }
+    ],
+    "rhr": [
+      {
+        "d": "2026-08-21",
+        "v": 60
+      },
+      {
+        "d": "2026-08-20",
+        "v": 60
+      },
+      {
+        "d": "2026-08-19",
+        "v": 61
+      },
+      {
+        "d": "2026-08-18",
+        "v": 63
+      },
+      {
+        "d": "2026-08-17",
+        "v": 60
+      },
+      {
+        "d": "2026-08-16",
+        "v": 58
+      },
+      {
+        "d": "2026-08-15",
+        "v": 59
+      },
+      {
+        "d": "2026-08-14",
+        "v": 60
+      },
+      {
+        "d": "2026-08-13",
+        "v": 59
+      },
+      {
+        "d": "2026-08-12",
+        "v": 59
+      },
+      {
+        "d": "2026-08-11",
+        "v": 58
+      },
+      {
+        "d": "2026-08-10",
+        "v": 58
+      },
+      {
+        "d": "2026-08-09",
+        "v": 58
+      },
+      {
+        "d": "2026-08-08",
+        "v": 58
+      },
+      {
+        "d": "2026-08-07",
+        "v": 57
+      },
+      {
+        "d": "2026-08-06",
+        "v": 58
+      },
+      {
+        "d": "2026-08-05",
+        "v": 60
+      },
+      {
+        "d": "2026-08-04",
+        "v": 58
+      },
+      {
+        "d": "2026-08-03",
+        "v": 59
+      },
+      {
+        "d": "2026-08-02",
+        "v": 63
+      },
+      {
+        "d": "2026-08-01",
+        "v": 58
+      },
+      {
+        "d": "2026-07-31",
+        "v": 59
+      },
+      {
+        "d": "2026-07-30",
+        "v": 59
+      },
+      {
+        "d": "2026-07-29",
+        "v": 58
+      },
+      {
+        "d": "2026-07-28",
+        "v": 59
+      },
+      {
+        "d": "2026-07-27",
+        "v": 58
+      },
+      {
+        "d": "2026-07-26",
+        "v": 63
+      },
+      {
+        "d": "2026-07-25",
+        "v": 62
+      },
+      {
+        "d": "2026-07-24",
+        "v": 57
+      },
+      {
+        "d": "2026-07-23",
+        "v": 61
+      }
+    ],
+    "weight": [
+      {
+        "d": "2026-08-06",
+        "v": 66.3
+      },
+      {
+        "d": "2026-07-14",
+        "v": 66.3
+      },
+      {
+        "d": "2026-07-05",
+        "v": 66.2
+      },
+      {
+        "d": "2026-07-02",
+        "v": 66.0
+      },
+      {
+        "d": "2026-06-12",
+        "v": 65.7
+      }
+    ],
+    "weekly_km": [
+      {
+        "w": "2026-W33",
+        "v": 10.6
+      },
+      {
+        "w": "2026-W32",
+        "v": 4.3
+      }
+    ],
+    "run_dyn": [
+      {
+        "d": "2026-08-16",
+        "cadence": 128.0,
+        "vertical_ratio": 11.3,
+        "gct": 313.0
+      },
+      {
+        "d": "2026-08-14",
+        "cadence": 137.0,
+        "vertical_ratio": 11.0,
+        "gct": 311.0
+      },
+      {
+        "d": "2026-08-07",
+        "cadence": 135.0,
+        "vertical_ratio": 11.0,
+        "gct": 308.0
+      }
+    ],
+    "vo2max": [
+      {
+        "d": "2026-08-21",
+        "v": 39.3
+      }
+    ]
+  }
+}

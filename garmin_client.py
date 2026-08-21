@@ -269,8 +269,92 @@ def fetch_garmin_metrics(api):
     # Challenges
     metrics["challenges"] = fetch_challenges(api, today)
 
+    # Zyklus (Natural Cycles -> Garmin Connect). None, wenn nicht getrackt.
+    try:
+        metrics["cycle"] = fetch_cycle(api, today)
+    except Exception as e:
+        print(f"Cycle error: {e}"); _errors.append(f"cycle: {e}")
+        metrics["cycle"] = None
+
     metrics["_errors"] = _errors
     return metrics
+
+
+# ── Menstruationszyklus (Natural Cycles -> Garmin) ─────────────────────────────
+
+# Phasen leiten wir aus Zyklustag + Garmins vorhergesagtem Fruchtbarkeitsfenster
+# ab (robuster als die rohe Phasen-Nummer). Reihenfolge im Zyklus:
+#   Menstruation -> Follikelphase -> Fruchtbares Fenster/Eisprung -> Lutealphase
+def _cycle_phase(day_in_cycle, period_len, fertile_start, fertile_len):
+    if not day_in_cycle:
+        return None
+    pl = period_len or 5
+    fs = fertile_start or 10
+    fl = fertile_len or 6
+    if day_in_cycle <= pl:
+        return "menstruation"
+    if day_in_cycle < fs:
+        return "follikel"
+    if day_in_cycle < fs + fl:
+        return "fruchtbar"
+    return "luteal"
+
+
+def fetch_cycle(api, today):
+    """Aktuelle Zyklusphase + Vorhersagen aus Garmins Menstruations-Endpoint.
+
+    Liefert None, wenn die Nutzerin keinen Zyklus trackt (z. B. Samuel). Fuer die
+    Frau kommen die Daten automatisch aus Natural Cycles.
+    """
+    if not hasattr(api, "get_menstrual_data_for_date"):
+        return None
+    day = api.get_menstrual_data_for_date(today.isoformat())
+    summ = (day or {}).get("daySummary") or {}
+    if not summ or not summ.get("dayInCycle"):
+        return None
+
+    start_str = summ.get("startDate")
+    day_in_cycle = summ.get("dayInCycle")
+    period_len = summ.get("periodLength")
+    pred_len = summ.get("predictedCycleLength")
+    fertile_start = summ.get("fertileWindowStart")
+    fertile_len = summ.get("lengthOfFertileWindow")
+
+    phase = _cycle_phase(day_in_cycle, period_len, fertile_start, fertile_len)
+
+    # Naechster Periodenbeginn aus Startdatum + vorhergesagter Zykluslaenge
+    next_period_in = None
+    next_period_date = None
+    if start_str and pred_len:
+        try:
+            start_d = date.fromisoformat(start_str)
+            next_period_date = (start_d + timedelta(days=pred_len)).isoformat()
+            next_period_in = (date.fromisoformat(next_period_date) - today).days
+        except Exception:
+            pass
+
+    # Naechstes Follikel-Fenster (Ziel fuer harte Wochen): beginnt nach der
+    # naechsten Periode, sobald die Blutung vorbei ist.
+    next_follicular_in = None
+    if next_period_in is not None and period_len:
+        next_follicular_in = next_period_in + period_len
+
+    return {
+        "tracked": True,
+        "start_date": start_str,
+        "day_in_cycle": day_in_cycle,
+        "phase": phase,
+        "phase_raw": summ.get("currentPhase"),
+        "period_length": period_len,
+        "predicted_cycle_length": pred_len,
+        "cycle_type": summ.get("cycleType"),
+        "fertile_window_start": fertile_start,
+        "fertile_window_length": fertile_len,
+        "days_until_next_phase": summ.get("daysUntilNextPhase"),
+        "next_period_in_days": next_period_in,
+        "next_period_date": next_period_date,
+        "next_follicular_in_days": next_follicular_in,
+    }
 
 
 def _dynamics_from_activity(a):

@@ -73,7 +73,8 @@ def main():
     # kein GitHub-Secret mehr noetig.
     try:
         tokenstore = TOKEN_PATH
-        fresh = api.garth.dumps()
+        # Alte Lib: api.garth.dumps(); neue Lib (Frau): api.client.dumps()
+        fresh = api.garth.dumps() if hasattr(api, "garth") else api.client.dumps()
         tmp = tokenstore + ".tmp"
         with open(tmp, "w") as f:
             f.write(fresh)
