@@ -18,21 +18,23 @@ class GarminTokenExpired(RuntimeError):
     """Der gespeicherte Garmin-Token ist abgelaufen und muss erneuert werden."""
 
 
-def garmin_login(retries=4):
+def garmin_login(retries=4, token_path=None):
     """Meldet sich mit dem gespeicherten Token an.
 
-    Garmin antwortet auf den Token-Refresh gelegentlich mit 429 (Rate Limit) –
-    das ist meist voruebergehend, deshalb mehrere Versuche mit wachsender Pause.
-    Ein 401 dagegen heisst: Token wirklich abgelaufen, neu erzeugen noetig.
+    token_path: Pfad zur Sitzungsdatei (fuer mehrere Profile). Default: Samuels
+    ~/.garmin_session. Garmin antwortet auf den Token-Refresh gelegentlich mit
+    429 (Rate Limit) – deshalb mehrere Versuche mit wachsender Pause. Ein 401
+    heisst: Token wirklich abgelaufen, neu erzeugen noetig.
     """
     import time
     from garminconnect import Garmin
 
+    tok = token_path or TOKENSTORE_PATH
     session_secret = os.environ.get("GARMIN_SESSION_DATA", "").strip()
     source = "GitHub-Secret" if session_secret else None
 
-    if not session_secret and os.path.exists(TOKENSTORE_PATH):
-        with open(TOKENSTORE_PATH) as f:
+    if not session_secret and os.path.exists(tok):
+        with open(tok) as f:
             session_secret = f.read().strip()
         source = "lokale Session"
 

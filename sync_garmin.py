@@ -19,9 +19,21 @@ from datetime import date, datetime
 
 from garmin_client import (garmin_login, fetch_garmin_metrics,
                            backfill_history, update_history)
+from profiles import get_profile
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(REPO_DIR, "garmin_data.json")
+
+# Profil aus --profile NAME (Default: samuel = altes Verhalten, gleiche Pfade).
+def _arg_profile():
+    for i, a in enumerate(sys.argv):
+        if a == "--profile" and i + 1 < len(sys.argv):
+            return sys.argv[i + 1]
+    return "samuel"
+
+PROFILE = _arg_profile()
+_P = get_profile(PROFILE)
+TOKEN_PATH = _P["token"]
+DATA_PATH = os.path.join(REPO_DIR, _P["data"])
 
 EMPTY_HISTORY = {"hrv": [], "rhr": [], "weight": [], "weekly_km": [],
                  "run_dyn": [], "vo2max": []}
@@ -45,10 +57,10 @@ def main():
     existing = load_existing()
     history = existing.get("history") or dict(EMPTY_HISTORY)
 
-    print(f"[{datetime.now():%Y-%m-%d %H:%M:%S}] Garmin-Sync startet …")
+    print(f"[{datetime.now():%Y-%m-%d %H:%M:%S}] Garmin-Sync ({PROFILE}) startet …")
 
     try:
-        api = garmin_login()
+        api = garmin_login(token_path=TOKEN_PATH)
         metrics = fetch_garmin_metrics(api)
     except Exception as e:
         print(f"FEHLER: Garmin-Abruf fehlgeschlagen: {e}")
@@ -60,7 +72,7 @@ def main():
     # – solange der Mac mindestens einmal im Monat laeuft. Kein generate_session,
     # kein GitHub-Secret mehr noetig.
     try:
-        tokenstore = os.path.expanduser("~/.garmin_session")
+        tokenstore = TOKEN_PATH
         fresh = api.garth.dumps()
         tmp = tokenstore + ".tmp"
         with open(tmp, "w") as f:
@@ -100,7 +112,7 @@ def main():
         import base64
         raw = os.environ.get("GARMIN_SESSION_DATA", "").strip()
         if not raw:
-            with open(os.path.expanduser("~/.garmin_session")) as f:
+            with open(TOKEN_PATH) as f:
                 raw = f.read().strip()
         parts = json.loads(base64.b64decode(raw))
         o2 = parts[1] if len(parts) > 1 and isinstance(parts[1], dict) else {}
@@ -133,6 +145,7 @@ def main():
         print(f"Historie: " + ", ".join(f"{k}={len(v)}" for k, v in history.items()))
         return 0
 
+    os.makedirs(os.path.dirname(DATA_PATH) or ".", exist_ok=True)
     tmp = DATA_PATH + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
