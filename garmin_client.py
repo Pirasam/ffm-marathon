@@ -51,8 +51,22 @@ def garmin_login(retries=4, token_path=None):
             time.sleep(d)
         try:
             api = Garmin()
-            api.garth.loads(session_secret)
-            api.display_name = api.garth.profile.get("displayName")
+            if hasattr(api, "garth"):
+                # Alte garminconnect-Version (Samuel, System-Python 3.9)
+                api.garth.loads(session_secret)
+                api.display_name = api.garth.profile.get("displayName")
+            else:
+                # Neue garminconnect-Version (Frau, via uv/Python 3.13)
+                api.client.loads(session_secret)
+                try:
+                    api._load_profile_and_settings()
+                except Exception:
+                    pass
+                if not getattr(api, "display_name", None):
+                    name_file = (tok or "") + ".name"
+                    if os.path.exists(name_file):
+                        with open(name_file) as nf:
+                            api.display_name = nf.read().strip()
             print(f"Garmin: Anmeldung OK ({source}, Versuch {i})")
             return api
         except Exception as e:
