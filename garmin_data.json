@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-22T06:58:13+02:00",
+  "synced_at": "2026-08-22T08:30:13+02:00",
   "sync_date": "2026-08-22",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
     "sleep_hours": 7.4,
     "sleep_score": 77,
@@ -197,7 +197,7 @@
       },
       {
         "name": "August Step Month",
-        "current": 176558,
+        "current": 177021,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 9,
