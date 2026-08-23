@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-23T08:45:13+02:00",
+  "synced_at": "2026-08-23T12:15:13+02:00",
   "sync_date": "2026-08-23",
   "token_days_left": null,
   "metrics": {
@@ -13,8 +13,17 @@
     "stress": 17,
     "resting_hr": 59,
     "body_battery": 88,
-    "training_readiness": 95,
+    "training_readiness": 84,
     "recent_activities": [
+      {
+        "name": "Burg-Reuland Laufen",
+        "type": "running",
+        "date": "2026-08-23",
+        "distance_km": 6.3,
+        "duration_min": 62,
+        "pace_min_km": 9.89,
+        "avg_hr": 139.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -62,31 +71,36 @@
       }
     ],
     "last_run": {
-      "name": "Frankfurt am Main Laufen",
+      "name": "Burg-Reuland Laufen",
       "type": "running",
-      "date": "2026-08-21",
-      "distance_km": 5.7,
-      "duration_min": 60,
-      "pace_min_km": 10.53,
-      "avg_hr": 137.0
+      "date": "2026-08-23",
+      "distance_km": 6.3,
+      "duration_min": 62,
+      "pace_min_km": 9.89,
+      "avg_hr": 139.0
     },
     "weekly_running": {
-      "2026-W34": 5.7,
+      "2026-W34": 12.0,
       "2026-W33": 10.6
     },
     "run_dynamics": {
-      "date": "2026-08-21",
-      "distance_km": 5.7,
-      "cadence": 114.0,
+      "date": "2026-08-23",
+      "distance_km": 6.3,
+      "cadence": 146.0,
       "stride_length": 67.0,
-      "vertical_oscillation": 7.3,
-      "vertical_ratio": 11.0,
-      "ground_contact_time": 310.0,
+      "vertical_oscillation": 7.4,
+      "vertical_ratio": 11.2,
+      "ground_contact_time": 309.0,
       "ground_contact_balance": null,
-      "avg_power": 130.0,
+      "avg_power": 172.0,
       "performance_condition": null,
       "step_speed_loss_pct": null,
       "history": {
+        "2026-08-23": {
+          "cadence": 146.0,
+          "vertical_ratio": 11.2,
+          "gct": 309.0
+        },
         "2026-08-21": {
           "cadence": 114.0,
           "vertical_ratio": 11.0,
@@ -117,27 +131,27 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 186272,
+        "current": 196340,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 8,
-        "pct": 62
+        "pct": 65
       },
       {
         "name": "Active August",
-        "current": 6,
+        "current": 7,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 8,
-        "pct": 30
+        "pct": 35
       },
       {
         "name": "August Rundown",
-        "current": 20.7,
+        "current": 27.0,
         "goal": 80.5,
         "unit": "km",
         "days_remaining": 8,
-        "pct": 26
+        "pct": 34
       },
       {
         "name": "August Likes",
@@ -173,11 +187,11 @@
       },
       {
         "name": "2026 Running - Stage 3",
-        "current": 51.9,
+        "current": 58.2,
         "goal": 300.0,
         "unit": "km",
         "days_remaining": 38,
-        "pct": 17
+        "pct": 19
       }
     ],
     "cycle": {
@@ -473,7 +487,7 @@
     "weekly_km": [
       {
         "w": "2026-W34",
-        "v": 5.7
+        "v": 12.0
       },
       {
         "w": "2026-W33",
@@ -485,6 +499,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-08-23",
+        "cadence": 146.0,
+        "vertical_ratio": 11.2,
+        "gct": 309.0
+      },
       {
         "d": "2026-08-21",
         "cadence": 114.0,
