@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-22T17:30:13+02:00",
-  "sync_date": "2026-08-22",
-  "token_days_left": 29.6,
+  "synced_at": "2026-08-23T06:58:15+02:00",
+  "sync_date": "2026-08-23",
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 7.4,
     "sleep_score": 77,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 39,
     "hrv_balanced_high": 49,
-    "stress": 26,
-    "resting_hr": 59,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 75,
-    "training_readiness": 65,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -188,27 +188,35 @@
     "vo2max": 43.6,
     "challenges": [
       {
+        "name": "August Ride to 100",
+        "current": 0.0,
+        "goal": 100.0,
+        "unit": "km",
+        "days_remaining": 6,
+        "pct": 0
+      },
+      {
         "name": "Active August",
         "current": 13,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 65
       },
       {
         "name": "August Step Month",
-        "current": 183114,
+        "current": 184663,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 9,
-        "pct": 61
+        "days_remaining": 8,
+        "pct": 62
       },
       {
         "name": "August Rundown",
         "current": 47.6,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 59
       },
       {
@@ -216,7 +224,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 0
       },
       {
@@ -224,7 +232,7 @@
         "current": 131.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 39,
+        "days_remaining": 38,
         "pct": 44
       }
     ],
@@ -233,6 +241,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-23",
+        "v": 34
+      },
       {
         "d": "2026-08-22",
         "v": 34
@@ -347,10 +359,6 @@
       },
       {
         "d": "2026-07-25",
-        "v": 43
-      },
-      {
-        "d": "2026-07-24",
         "v": 43
       }
     ],
@@ -825,6 +833,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-23",
+        "v": 43.6
+      },
       {
         "d": "2026-08-22",
         "v": 43.6
