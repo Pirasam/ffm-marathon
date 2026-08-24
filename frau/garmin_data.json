@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-24T12:15:14+02:00",
+  "synced_at": "2026-08-24T17:15:14+02:00",
   "sync_date": "2026-08-24",
   "token_days_left": null,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 18,
+    "stress": 23,
     "resting_hr": 58,
     "body_battery": 96,
     "training_readiness": 100,
@@ -131,7 +131,7 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 202928,
+        "current": 204506,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 7,
