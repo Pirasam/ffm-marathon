@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-24T19:00:24+02:00",
+  "synced_at": "2026-08-24T20:30:10+02:00",
   "sync_date": "2026-08-24",
-  "token_days_left": 29.5,
+  "token_days_left": 29.4,
   "metrics": {
     "sleep_hours": 7.0,
     "sleep_score": 77,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 39,
     "hrv_balanced_high": 49,
-    "stress": 28,
+    "stress": 31,
     "resting_hr": 61,
     "body_battery": 51,
-    "training_readiness": 51,
+    "training_readiness": 41,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Rennradfahren",
@@ -245,7 +245,7 @@
       },
       {
         "name": "August Step Month",
-        "current": 212497,
+        "current": 213051,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 7,
