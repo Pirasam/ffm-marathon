@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-24T17:30:13+02:00",
+  "synced_at": "2026-08-24T19:00:24+02:00",
   "sync_date": "2026-08-24",
-  "token_days_left": 29.6,
+  "token_days_left": 29.5,
   "metrics": {
     "sleep_hours": 7.0,
     "sleep_score": 77,
@@ -10,11 +10,29 @@
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 39,
     "hrv_balanced_high": 49,
-    "stress": 29,
+    "stress": 28,
     "resting_hr": 61,
     "body_battery": 51,
-    "training_readiness": 50,
+    "training_readiness": 51,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Rennradfahren",
+        "type": "road_biking",
+        "date": "2026-08-24",
+        "distance_km": 16.1,
+        "duration_min": 45,
+        "pace_min_km": 2.79,
+        "avg_hr": 125.0
+      },
+      {
+        "name": "Frankfurt am Main Rennradfahren",
+        "type": "road_biking",
+        "date": "2026-08-24",
+        "distance_km": 10.2,
+        "duration_min": 37,
+        "pace_min_km": 3.64,
+        "avg_hr": 108.0
+      },
       {
         "name": "Burg-Reuland Laufen",
         "type": "running",
@@ -203,11 +221,19 @@
     "challenges": [
       {
         "name": "August Ride to 100",
-        "current": 0.0,
+        "current": 26.3,
         "goal": 100.0,
         "unit": "km",
         "days_remaining": 5,
-        "pct": 0
+        "pct": 26
+      },
+      {
+        "name": "Active August",
+        "current": 16,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 7,
+        "pct": 80
       },
       {
         "name": "August Rundown",
@@ -219,19 +245,11 @@
       },
       {
         "name": "August Step Month",
-        "current": 211852,
+        "current": 212497,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 7,
         "pct": 71
-      },
-      {
-        "name": "Active August",
-        "current": 14,
-        "goal": 20,
-        "unit": "Aktivitäten",
-        "days_remaining": 7,
-        "pct": 70
       },
       {
         "name": "August Gains",
