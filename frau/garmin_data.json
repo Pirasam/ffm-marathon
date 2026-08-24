@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-08-23T19:45:13+02:00",
-  "sync_date": "2026-08-23",
+  "synced_at": "2026-08-24T07:13:12+02:00",
+  "sync_date": "2026-08-24",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 7.5,
-    "sleep_score": 80,
+    "sleep_hours": 8.1,
+    "sleep_score": 93,
     "hrv_status": "BALANCED",
-    "hrv_value": 30,
+    "hrv_value": 33,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 26,
-    "resting_hr": 59,
-    "body_battery": 88,
-    "training_readiness": 84,
+    "stress": 14,
+    "resting_hr": 58,
+    "body_battery": 96,
+    "training_readiness": 100,
     "recent_activities": [
       {
         "name": "Burg-Reuland Laufen",
@@ -131,18 +131,18 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 199437,
+        "current": 199976,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 8,
-        "pct": 66
+        "days_remaining": 7,
+        "pct": 67
       },
       {
         "name": "Active August",
         "current": 7,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 35
       },
       {
@@ -150,7 +150,7 @@
         "current": 27.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 34
       },
       {
@@ -158,7 +158,7 @@
         "current": 3.0,
         "goal": 25.0,
         "unit": "",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 12
       },
       {
@@ -166,7 +166,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 0
       },
       {
@@ -174,7 +174,7 @@
         "current": 0.0,
         "goal": 14400.0,
         "unit": "",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 0
       },
       {
@@ -182,7 +182,7 @@
         "current": 0.0,
         "goal": 15.0,
         "unit": "h",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 0
       },
       {
@@ -190,14 +190,14 @@
         "current": 58.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 38,
+        "days_remaining": 37,
         "pct": 19
       }
     ],
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-01",
-      "day_in_cycle": 23,
+      "day_in_cycle": 24,
       "phase": "luteal",
       "phase_raw": 4,
       "period_length": 7,
@@ -205,16 +205,20 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 5,
-      "next_period_in_days": 5,
+      "days_until_next_phase": 4,
+      "next_period_in_days": 4,
       "next_period_date": "2026-08-28",
-      "next_follicular_in_days": 12
+      "next_follicular_in_days": 11
     },
     "_errors": [],
     "vo2max_carried": true
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-24",
+        "v": 33
+      },
       {
         "d": "2026-08-23",
         "v": 30
@@ -330,13 +334,13 @@
       {
         "d": "2026-07-24",
         "v": 27
-      },
-      {
-        "d": "2026-07-22",
-        "v": 30
       }
     ],
     "rhr": [
+      {
+        "d": "2026-08-24",
+        "v": 58
+      },
       {
         "d": "2026-08-23",
         "v": 59
@@ -452,10 +456,6 @@
       {
         "d": "2026-07-26",
         "v": 63
-      },
-      {
-        "d": "2026-07-25",
-        "v": 62
       }
     ],
     "weight": [
@@ -531,6 +531,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-24",
+        "v": 39.3
+      },
       {
         "d": "2026-08-23",
         "v": 39.3
