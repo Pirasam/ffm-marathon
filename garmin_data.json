@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-24T14:30:13+02:00",
+  "synced_at": "2026-08-24T17:30:13+02:00",
   "sync_date": "2026-08-24",
-  "token_days_left": 29.7,
+  "token_days_left": 29.6,
   "metrics": {
     "sleep_hours": 7.0,
     "sleep_score": 77,
@@ -13,7 +13,7 @@
     "stress": 29,
     "resting_hr": 61,
     "body_battery": 51,
-    "training_readiness": 43,
+    "training_readiness": 50,
     "recent_activities": [
       {
         "name": "Burg-Reuland Laufen",
