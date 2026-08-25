@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-08-24T17:15:14+02:00",
-  "sync_date": "2026-08-24",
+  "synced_at": "2026-08-25T07:13:14+02:00",
+  "sync_date": "2026-08-25",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.1,
-    "sleep_score": 93,
+    "sleep_hours": 8.2,
+    "sleep_score": 87,
     "hrv_status": "BALANCED",
-    "hrv_value": 33,
+    "hrv_value": 29,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 23,
+    "stress": 17,
     "resting_hr": 58,
-    "body_battery": 96,
+    "body_battery": 91,
     "training_readiness": 100,
     "recent_activities": [
       {
@@ -131,18 +131,18 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 204506,
+        "current": 207344,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 7,
-        "pct": 68
+        "days_remaining": 6,
+        "pct": 69
       },
       {
         "name": "Active August",
         "current": 7,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 35
       },
       {
@@ -150,7 +150,7 @@
         "current": 27.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 34
       },
       {
@@ -158,7 +158,7 @@
         "current": 3.0,
         "goal": 25.0,
         "unit": "",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 12
       },
       {
@@ -166,7 +166,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 0
       },
       {
@@ -174,7 +174,7 @@
         "current": 0.0,
         "goal": 14400.0,
         "unit": "",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 0
       },
       {
@@ -182,7 +182,7 @@
         "current": 0.0,
         "goal": 15.0,
         "unit": "h",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 0
       },
       {
@@ -190,14 +190,14 @@
         "current": 58.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 37,
+        "days_remaining": 36,
         "pct": 19
       }
     ],
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-01",
-      "day_in_cycle": 24,
+      "day_in_cycle": 25,
       "phase": "luteal",
       "phase_raw": 4,
       "period_length": 7,
@@ -205,16 +205,20 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 4,
-      "next_period_in_days": 4,
+      "days_until_next_phase": 3,
+      "next_period_in_days": 3,
       "next_period_date": "2026-08-28",
-      "next_follicular_in_days": 11
+      "next_follicular_in_days": 10
     },
     "_errors": [],
     "vo2max_carried": true
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-25",
+        "v": 29
+      },
       {
         "d": "2026-08-24",
         "v": 33
@@ -330,13 +334,13 @@
       {
         "d": "2026-07-25",
         "v": 25
-      },
-      {
-        "d": "2026-07-24",
-        "v": 27
       }
     ],
     "rhr": [
+      {
+        "d": "2026-08-25",
+        "v": 58
+      },
       {
         "d": "2026-08-24",
         "v": 58
@@ -452,10 +456,6 @@
       {
         "d": "2026-07-27",
         "v": 58
-      },
-      {
-        "d": "2026-07-26",
-        "v": 63
       }
     ],
     "weight": [
@@ -531,6 +531,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-25",
+        "v": 39.3
+      },
       {
         "d": "2026-08-24",
         "v": 39.3
