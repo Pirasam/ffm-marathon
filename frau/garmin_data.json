@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-25T14:45:14+02:00",
+  "synced_at": "2026-08-25T19:45:13+02:00",
   "sync_date": "2026-08-25",
   "token_days_left": null,
   "metrics": {
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 20,
+    "stress": 23,
     "resting_hr": 58,
     "body_battery": 91,
     "training_readiness": 100,
     "recent_activities": [
+      {
+        "name": "Pilates",
+        "type": "pilates",
+        "date": "2026-08-25",
+        "distance_km": 0.0,
+        "duration_min": 49,
+        "pace_min_km": null,
+        "avg_hr": 91.0
+      },
       {
         "name": "Burg-Reuland Laufen",
         "type": "running",
@@ -131,7 +140,7 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 209907,
+        "current": 211048,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 6,
@@ -139,11 +148,11 @@
       },
       {
         "name": "Active August",
-        "current": 7,
+        "current": 8,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 6,
-        "pct": 35
+        "pct": 40
       },
       {
         "name": "August Rundown",
