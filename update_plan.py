@@ -22,13 +22,14 @@ CLAUDE_MODEL = "claude-opus-4-8"
 #   stiegs-Ansicht. Zum Beenden (voller Trainingsbetrieb) RECOVERY_MODE = False.
 # DOCTOR_CLEARED steuert, ob begrenzte Aktivität erlaubt ist (ärztliche Freigabe).
 RECOVERY_MODE = True
-RECOVERY_REASON = "Wiedereinstieg nach Atemwegsinfekt (Lunge frei, nur noch Restschnupfen) – zuvor Borreliose. Vorsichtiger Marathon-Aufbau."
-RECOVERY_SINCE = "2026-08-18"
+RECOVERY_REASON = "Neuer Atemwegsinfekt: 24.08. Halskratzen, 25.08. Lunge belegt. HRV unter Baseline (34 vs. 39–49) und fallend, Ruhepuls erhöht (60 vs. 53–55) – der Körper kämpft. Trainingspause. Vorgeschichte: Borreliose + Atemwegsinfekt."
+RECOVERY_SINCE = "2026-08-24"
 
-# Wieder-Aufbau ab 18.08.: Lunge frei, Symptome nur noch oberhalb des Halses,
-# Werte zurück auf Basisniveau. Begrenzte Aktivität wieder erlaubt.
-# Zum vollen Trainingsbetrieb später RECOVERY_MODE = False.
-DOCTOR_CLEARED = True
+# 25.08.: RÜCKSCHLAG. Nach dem Wieder-Aufbau (ab 18.08.) neuer Infekt mit
+# belegter Lunge – also Symptome UNTERHALB des Halses. Deshalb DOCTOR_CLEARED
+# zurück auf False: harte Trainingspause, kein "lockeres" Laufen. Sobald die
+# Lunge frei und er mehrere Tage symptomfrei ist, wieder auf True (Wiedereinstieg).
+DOCTOR_CLEARED = False
 DOCTOR_DATE = "2026-07-27"
 DOCTOR_GUIDANCE = (
     "Grundfreigabe vom 27.07. gilt weiter. Nach dem zweiten Infekt (jetzt abgeklungen, "
