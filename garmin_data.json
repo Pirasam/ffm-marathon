@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-08-26T06:58:20+02:00",
+  "synced_at": "2026-08-26T08:30:09+02:00",
   "sync_date": "2026-08-26",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
-    "sleep_hours": 5.8,
-    "sleep_score": 68,
+    "sleep_hours": 6.6,
+    "sleep_score": 72,
     "hrv_status": "LOW",
     "hrv_value": 30,
     "hrv_weekly_avg": 35,
     "hrv_balanced_low": 39,
     "hrv_balanced_high": 49,
-    "stress": 31,
-    "resting_hr": 63,
-    "body_battery": 51,
+    "stress": 25,
+    "resting_hr": 60,
+    "body_battery": 67,
     "training_readiness": 55,
     "recent_activities": [
       {
@@ -244,7 +244,7 @@
       },
       {
         "name": "August Step Month",
-        "current": 216555,
+        "current": 216837,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 5,
@@ -396,7 +396,7 @@
     "rhr": [
       {
         "d": "2026-08-26",
-        "v": 63
+        "v": 60
       },
       {
         "d": "2026-08-25",
