@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-27T08:30:13+02:00",
+  "synced_at": "2026-08-27T10:00:12+02:00",
   "sync_date": "2026-08-27",
   "token_days_left": 28.9,
   "metrics": {
@@ -13,8 +13,17 @@
     "stress": 23,
     "resting_hr": 60,
     "body_battery": 66,
-    "training_readiness": 60,
+    "training_readiness": 44,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-08-27",
+        "distance_km": 9.0,
+        "duration_min": 73,
+        "pace_min_km": 8.12,
+        "avg_hr": 143.0
+      },
       {
         "name": "Frankfurt am Main Rennradfahren",
         "type": "road_biking",
@@ -107,31 +116,37 @@
       }
     ],
     "last_run": {
-      "name": "Burg-Reuland Laufen",
+      "name": "Frankfurt am Main Laufen",
       "type": "running",
-      "date": "2026-08-23",
-      "distance_km": 13.7,
-      "duration_min": 119,
-      "pace_min_km": 8.75,
-      "avg_hr": 129.0
+      "date": "2026-08-27",
+      "distance_km": 9.0,
+      "duration_min": 73,
+      "pace_min_km": 8.12,
+      "avg_hr": 143.0
     },
     "weekly_running": {
+      "2026-W35": 9.0,
       "2026-W34": 29.4,
       "2026-W33": 6.6
     },
     "run_dynamics": {
-      "date": "2026-08-23",
-      "distance_km": 13.7,
-      "cadence": 157.0,
-      "stride_length": 73.0,
-      "vertical_oscillation": 9.5,
-      "vertical_ratio": 13.0,
-      "ground_contact_time": 282.0,
-      "ground_contact_balance": 50.7,
-      "avg_power": 297.0,
-      "performance_condition": 0,
-      "step_speed_loss_pct": 4.8,
+      "date": "2026-08-27",
+      "distance_km": 9.0,
+      "cadence": 159.0,
+      "stride_length": 77.0,
+      "vertical_oscillation": 10.3,
+      "vertical_ratio": 13.1,
+      "ground_contact_time": 280.0,
+      "ground_contact_balance": 50.2,
+      "avg_power": 333.0,
+      "performance_condition": -8,
+      "step_speed_loss_pct": 5.3,
       "history": {
+        "2026-08-27": {
+          "cadence": 159.0,
+          "vertical_ratio": 13.1,
+          "gct": 280.0
+        },
         "2026-08-23": {
           "cadence": 157.0,
           "vertical_ratio": 13.0,
@@ -215,7 +230,7 @@
       "2026-05-30": 91.2,
       "2026-05-29": 91.6
     },
-    "vo2max": 43.3,
+    "vo2max": 43.1,
     "challenges": [
       {
         "name": "August Ride to 100",
@@ -226,28 +241,28 @@
         "pct": 26
       },
       {
-        "name": "Active August",
-        "current": 16,
-        "goal": 20,
-        "unit": "Aktivitäten",
-        "days_remaining": 4,
-        "pct": 80
-      },
-      {
         "name": "August Rundown",
-        "current": 61.3,
+        "current": 70.3,
         "goal": 80.5,
         "unit": "km",
         "days_remaining": 4,
-        "pct": 76
+        "pct": 87
+      },
+      {
+        "name": "Active August",
+        "current": 17,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 4,
+        "pct": 85
       },
       {
         "name": "August Step Month",
-        "current": 224782,
+        "current": 236681,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 4,
-        "pct": 75
+        "pct": 79
       },
       {
         "name": "August Gains",
@@ -259,11 +274,11 @@
       },
       {
         "name": "2026 Running - Stage 3",
-        "current": 144.8,
+        "current": 153.8,
         "goal": 300.0,
         "unit": "km",
         "days_remaining": 34,
-        "pct": 48
+        "pct": 51
       }
     ],
     "cycle": null,
@@ -758,6 +773,10 @@
     ],
     "weekly_km": [
       {
+        "w": "2026-W35",
+        "v": 9.0
+      },
+      {
         "w": "2026-W34",
         "v": 29.4
       },
@@ -783,6 +802,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-08-27",
+        "cadence": 159.0,
+        "vertical_ratio": 13.1,
+        "gct": 280.0
+      },
       {
         "d": "2026-08-23",
         "cadence": 157.0,
@@ -871,7 +896,7 @@
     "vo2max": [
       {
         "d": "2026-08-27",
-        "v": 43.3
+        "v": 43.1
       },
       {
         "d": "2026-08-26",
