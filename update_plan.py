@@ -22,20 +22,25 @@ CLAUDE_MODEL = "claude-opus-4-8"
 #   stiegs-Ansicht. Zum Beenden (voller Trainingsbetrieb) RECOVERY_MODE = False.
 # DOCTOR_CLEARED steuert, ob begrenzte Aktivität erlaubt ist (ärztliche Freigabe).
 RECOVERY_MODE = True
-RECOVERY_REASON = "Neuer Atemwegsinfekt: 24.08. Halskratzen, 25.08. Lunge belegt. HRV unter Baseline (34 vs. 39–49) und fallend, Ruhepuls erhöht (60 vs. 53–55) – der Körper kämpft. Trainingspause. Vorgeschichte: Borreliose + Atemwegsinfekt."
-RECOVERY_SINCE = "2026-08-24"
+RECOVERY_REASON = "Wiedereinstieg mit SCHILDDRÜSEN-Erkenntnis: L-Thyroxin 175µg ist auf hohes Trainingsvolumen geeicht (TSH 2,34 unter Vollbelastung, 08.06.). Trainingspausen → relativer T4-Überschuss (Halbwertszeit ~7 Tage) → erhöhter Ruhepuls, gedrückte HRV, unruhiger Schlaf, Puls relativ zur Pace erhöht. Lösung: NICHT Dosis senken, sondern wieder locker trainieren – der Sport verbrennt den Überschuss in ~7–10 Tagen."
+RECOVERY_SINCE = "2026-08-26"
 
-# 25.08.: RÜCKSCHLAG. Nach dem Wieder-Aufbau (ab 18.08.) neuer Infekt mit
-# belegter Lunge – also Symptome UNTERHALB des Halses. Deshalb DOCTOR_CLEARED
-# zurück auf False: harte Trainingspause, kein "lockeres" Laufen. Sobald die
-# Lunge frei und er mehrere Tage symptomfrei ist, wieder auf True (Wiedereinstieg).
-DOCTOR_CLEARED = False
+# 26.08.: NEUINTERPRETATION. Die schlechten Werte (Ruhepuls hoch, HRV niedrig,
+# Schlaf) sind vor allem Folge der Trainingspause via Schilddrüse (relativer
+# L-Thyroxin-Überschuss), nicht mangelnder Fitness/reiner Infekt. Deshalb wieder
+# DOCTOR_CLEARED = True, ABER: Training rein LOCKER nach Gefühl/RPE, Puls
+# ignorieren, KEINE Intensität (~10–14 Tage). Sport ist hier die Therapie.
+DOCTOR_CLEARED = True
 DOCTOR_DATE = "2026-07-27"
 DOCTOR_GUIDANCE = (
-    "Grundfreigabe vom 27.07. gilt weiter. Nach dem zweiten Infekt (jetzt abgeklungen, "
-    "Lunge frei) vorsichtig wieder aufbauen: erst lockere Läufe, dann Longrun langsam "
-    "steigern. Immer auf das Körpergefühl hören; bei erneutem Husten/Brustsymptomen oder "
-    "Herzstolpern sofort pausieren. Antikörper-Bluttest Ende August nicht vergessen."
+    "Grundfreigabe vom 27.07. gilt weiter. Wiedereinstieg nach Gefühl/RPE, nicht nach Puls "
+    "(aktuell durch relativen L-Thyroxin-Überschuss 'falsch kalibriert'). Umfang halten, "
+    "keine Intervalle/Tempo für ~10–14 Tage; der Sport verbrennt den Hormon-Überschuss in "
+    "~7–10 Tagen, dann sinkt der Puls von allein zurück in Zone 2. Dosis NICHT eigenmächtig "
+    "ändern (TSH war unter Training mit 2,34 gut). TSH/fT3/fT4 messen lassen (einmal nach "
+    "Pause, einmal im Volltraining) und mit Endokrinologen einen Akutplan besprechen. "
+    "STOPP + ärztlich abklären bei Herzstolpern/Rhythmusstörungen, Brustdruck, Fieber, "
+    "Atemnot oder erneut belegter Lunge."
 )
 
 # Individuelle Normalwerte VOR der Infektion (aus den Daten 27.06.–09.07.)
@@ -150,19 +155,27 @@ def call_claude_recovery(metrics, history):
         frame = f"""Der Sportler erholt sich von: {RECOVERY_REASON}.
 Am {DOCTOR_DATE} war er beim Arzt. ÄRZTLICHE FREIGABE (maßgeblich): "{DOCTOR_GUIDANCE}"
 
-Das heißt konkret (Stand 18.08., nach zweitem Infekt jetzt abgeklungen, Lunge frei):
-- Wieder-Aufbau läuft: er ist schon zurück bei lockeren Läufen (zuletzt 10 km locker).
-  Jetzt Umfang und Longrun BEHUTSAM steigern, um den Marathon (25.10., ~10 Wochen) vorzubereiten.
-- Einheiten primär locker (Zone 2, ~140–150 bpm). Tempo nur einbauen, wenn mehrere Tage unauffällig.
-- IMMER auf das Körpergefühl hören; bei erneutem Husten, Brustsymptomen, Herzstolpern oder
-  ungewöhnlicher Erschöpfung sofort pausieren.
-- Kein Leistungsdruck, aber der Marathon ist wieder das Ziel – geduldiger, gesunder Aufbau."""
-        status_line = ('"recovery_status": "<Erholung | Wiedereinstieg | Rückschlag>",')
-        advice_line = ('"recovery_advice": "<2–3 Sätze für HEUTE: Falls die Werte gut sind und '
-                       'es nicht zu heiß ist, eine konkrete, sehr moderate Aktivität vorschlagen '
-                       '(z.B. 20–30 Min lockeres Gehen/Radeln/kurzer Lauf nach Gefühl, max ~50%). '
-                       'Bei Hitze oder schlechten Werten stattdessen Ruhe/leichte Bewegung. '
-                       'Immer den Körpergefühl-Vorbehalt nennen.>")')
+Das heißt konkret (Stand 26.08., SCHILDDRÜSEN-Erkenntnis – maßgeblich):
+- Der erhöhte Ruhepuls und die niedrige HRV sind AKTUELL vor allem Folge der Trainingspause
+  (relativer L-Thyroxin-Überschuss), NICHT mangelnder Fitness oder reiner Infekt. Wieder-
+  Antrainieren ist die Lösung, nicht Ruhe. Er darf und SOLL wieder trainieren.
+- Training strikt NACH GEFÜHL (RPE), NICHT nach Puls: locker = er könnte in ganzen Sätzen
+  sprechen. Der Puls ist gerade "falsch kalibriert" und darf ins untere Zone 3 pendeln,
+  solange das Tempo gefühlt sehr locker ist. Empfehlung: Pulsfeld an der Uhr ausblenden.
+- UMFANG halten (lange, ruhige Läufe), aber die nächsten ~10–14 Tage KEINE Intervalle/Tempo-
+  läufe – das schont Herz (Infekt-Nachwirkung + Schilddrüse) und hält trotzdem die Ausdauer.
+- Erwartung: nach ~7–10 Tagen konsequentem lockeren Training verbrennt der Sport den Hormon-
+  Überschuss, der Puls sinkt bei gleichem Tempo von allein zurück in echte Zone 2.
+- Dosis NICHT eigenmächtig ändern; TSH war unter Training mit 2,34 gut eingestellt. Werte
+  (TSH/fT3/fT4) messen lassen und mit Endokrinologen einen Pausen-Akutplan besprechen.
+- STOPP + ärztlich abklären bei: Herzstolpern/Rhythmusstörungen, Brustdruck/-schmerz, Fieber,
+  Atemnot oder erneut belegter Lunge (Myokarditis-Risiko, verschärft durch Borreliose-Historie)."""
+        status_line = ('"recovery_status": "<Wiedereinstieg | Aufbau | Rückschlag>",')
+        advice_line = ('"recovery_advice": "<2–3 Sätze für HEUTE: Konkreten lockeren Lauf nach '
+                       'GEFÜHL vorschlagen (Wohlfühltempo, in ganzen Sätzen sprechbar), Puls '
+                       'bewusst ignorieren/ausblenden, KEINE Intensität. Umfang gemäß Marathon-'
+                       'plan halten (langer Lauf ok, locker). Bei Brustsymptomen/Fieber/Herz-'
+                       'stolpern stattdessen Ruhe + Arzt. Den RPE-statt-Puls-Grund kurz nennen.>")')
     else:
         frame = f"""Der Sportler ist KRANK: {RECOVERY_REASON}. Er darf NICHT trainieren.
 
