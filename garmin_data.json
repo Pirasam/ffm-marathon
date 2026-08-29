@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-08-28T20:30:12+02:00",
-  "sync_date": "2026-08-28",
-  "token_days_left": 29.7,
+  "synced_at": "2026-08-29T06:58:11+02:00",
+  "sync_date": "2026-08-29",
+  "token_days_left": 29.3,
   "metrics": {
     "sleep_hours": 7.1,
     "sleep_score": 79,
@@ -10,11 +10,29 @@
     "hrv_weekly_avg": 32,
     "hrv_balanced_low": 39,
     "hrv_balanced_high": 48,
-    "stress": 35,
-    "resting_hr": 61,
-    "body_battery": 61,
-    "training_readiness": 62,
+    "stress": 26,
+    "resting_hr": 64,
+    "body_battery": 27,
+    "training_readiness": null,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Rennradfahren",
+        "type": "road_biking",
+        "date": "2026-08-28",
+        "distance_km": 15.0,
+        "duration_min": 42,
+        "pace_min_km": 2.81,
+        "avg_hr": 122.0
+      },
+      {
+        "name": "Frankfurt am Main Rennradfahren",
+        "type": "road_biking",
+        "date": "2026-08-28",
+        "distance_km": 14.4,
+        "duration_min": 40,
+        "pace_min_km": 2.78,
+        "avg_hr": 125.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -226,41 +244,40 @@
       "2026-06-03": 91.4,
       "2026-06-02": 92.2,
       "2026-06-01": 92.3,
-      "2026-05-31": 91.3,
-      "2026-05-30": 91.2
+      "2026-05-31": 91.3
     },
     "vo2max": 43.1,
     "challenges": [
       {
         "name": "August Ride to 100",
-        "current": 26.3,
+        "current": 55.7,
         "goal": 100.0,
         "unit": "km",
-        "days_remaining": 1,
-        "pct": 26
+        "days_remaining": 0,
+        "pct": 56
+      },
+      {
+        "name": "Active August",
+        "current": 19,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 2,
+        "pct": 95
       },
       {
         "name": "August Rundown",
         "current": 70.3,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 87
       },
       {
-        "name": "Active August",
-        "current": 17,
-        "goal": 20,
-        "unit": "Aktivitäten",
-        "days_remaining": 3,
-        "pct": 85
-      },
-      {
         "name": "August Step Month",
-        "current": 245252,
+        "current": 245601,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 82
       },
       {
@@ -268,7 +285,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 3,
+        "days_remaining": 2,
         "pct": 0
       },
       {
@@ -276,7 +293,7 @@
         "current": 153.8,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 33,
+        "days_remaining": 32,
         "pct": 51
       }
     ],
@@ -285,6 +302,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-29",
+        "v": 30
+      },
       {
         "d": "2026-08-28",
         "v": 30
@@ -400,13 +421,13 @@
       {
         "d": "2026-07-31",
         "v": 38
-      },
-      {
-        "d": "2026-07-30",
-        "v": 41
       }
     ],
     "rhr": [
+      {
+        "d": "2026-08-29",
+        "v": 64
+      },
       {
         "d": "2026-08-28",
         "v": 61
@@ -522,10 +543,6 @@
       {
         "d": "2026-07-31",
         "v": 59
-      },
-      {
-        "d": "2026-07-30",
-        "v": 56
       }
     ],
     "weight": [
@@ -893,6 +910,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-29",
+        "v": 43.1
+      },
       {
         "d": "2026-08-28",
         "v": 43.1
