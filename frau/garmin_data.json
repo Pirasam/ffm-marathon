@@ -1,20 +1,29 @@
 {
-  "synced_at": "2026-08-30T08:45:13+02:00",
+  "synced_at": "2026-08-30T10:15:11+02:00",
   "sync_date": "2026-08-30",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 7.7,
-    "sleep_score": 85,
+    "sleep_hours": 8.1,
+    "sleep_score": 89,
     "hrv_status": "BALANCED",
-    "hrv_value": 31,
+    "hrv_value": 30,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
     "stress": 16,
     "resting_hr": 56,
     "body_battery": 93,
-    "training_readiness": null,
+    "training_readiness": 89,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-08-30",
+        "distance_km": 7.2,
+        "duration_min": 70,
+        "pace_min_km": 9.84,
+        "avg_hr": 141.0
+      },
       {
         "name": "Pilates",
         "type": "pilates",
@@ -62,31 +71,37 @@
       }
     ],
     "last_run": {
-      "name": "Burg-Reuland Laufen",
+      "name": "Frankfurt am Main Laufen",
       "type": "running",
-      "date": "2026-08-23",
-      "distance_km": 6.3,
-      "duration_min": 62,
-      "pace_min_km": 9.89,
-      "avg_hr": 139.0
+      "date": "2026-08-30",
+      "distance_km": 7.2,
+      "duration_min": 70,
+      "pace_min_km": 9.84,
+      "avg_hr": 141.0
     },
     "weekly_running": {
+      "2026-W35": 7.2,
       "2026-W34": 12.0,
       "2026-W33": 6.5
     },
     "run_dynamics": {
-      "date": "2026-08-23",
-      "distance_km": 6.3,
-      "cadence": 146.0,
-      "stride_length": 67.0,
-      "vertical_oscillation": 7.4,
-      "vertical_ratio": 11.2,
-      "ground_contact_time": 309.0,
+      "date": "2026-08-30",
+      "distance_km": 7.2,
+      "cadence": 148.0,
+      "stride_length": 66.0,
+      "vertical_oscillation": 7.5,
+      "vertical_ratio": 11.3,
+      "ground_contact_time": 311.0,
       "ground_contact_balance": null,
-      "avg_power": 172.0,
+      "avg_power": 182.0,
       "performance_condition": null,
       "step_speed_loss_pct": null,
       "history": {
+        "2026-08-30": {
+          "cadence": 148.0,
+          "vertical_ratio": 11.3,
+          "gct": 311.0
+        },
         "2026-08-23": {
           "cadence": 146.0,
           "vertical_ratio": 11.2,
@@ -113,31 +128,31 @@
       "2026-07-02": 66.0,
       "2026-06-12": 65.7
     },
-    "vo2max": 39.3,
+    "vo2max": 39.1,
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 244605,
+        "current": 256555,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 1,
-        "pct": 82
+        "pct": 86
       },
       {
         "name": "Active August",
-        "current": 8,
+        "current": 9,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 1,
-        "pct": 40
+        "pct": 45
       },
       {
         "name": "August Rundown",
-        "current": 27.0,
+        "current": 34.1,
         "goal": 80.5,
         "unit": "km",
         "days_remaining": 1,
-        "pct": 34
+        "pct": 42
       },
       {
         "name": "August Likes",
@@ -173,11 +188,11 @@
       },
       {
         "name": "2026 Running - Stage 3",
-        "current": 58.2,
+        "current": 65.4,
         "goal": 300.0,
         "unit": "km",
         "days_remaining": 31,
-        "pct": 19
+        "pct": 22
       }
     ],
     "cycle": {
@@ -196,14 +211,13 @@
       "next_period_date": "2026-09-24",
       "next_follicular_in_days": 31
     },
-    "_errors": [],
-    "vo2max_carried": true
+    "_errors": []
   },
   "history": {
     "hrv": [
       {
         "d": "2026-08-30",
-        "v": 31
+        "v": 30
       },
       {
         "d": "2026-08-29",
@@ -472,6 +486,10 @@
     ],
     "weekly_km": [
       {
+        "w": "2026-W35",
+        "v": 7.2
+      },
+      {
         "w": "2026-W34",
         "v": 12.0
       },
@@ -485,6 +503,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-08-30",
+        "cadence": 148.0,
+        "vertical_ratio": 11.3,
+        "gct": 311.0
+      },
       {
         "d": "2026-08-23",
         "cadence": 146.0,
@@ -519,7 +543,7 @@
     "vo2max": [
       {
         "d": "2026-08-30",
-        "v": 39.3
+        "v": 39.1
       },
       {
         "d": "2026-08-29",
