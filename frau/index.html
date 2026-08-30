@@ -267,17 +267,19 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     var M=MODES[mode];
     var byt=runs.slice().sort(function(a,b){return a.t-b.t;});
     var last=byt.slice(-6),avg=last.reduce(function(s,o){return s+M.get(o);},0)/last.length;
-    var best=runs.reduce(function(a,b){return M.get(b)>M.get(a)?b:a;});
+    var g={};runs.forEach(function(r){var k=r.date.slice(0,7);(g[k]=g[k]||[]).push(M.get(r));});
+    var bm=Object.keys(g).map(function(k){var a=g[k];return [k,a.reduce(function(s,v){return s+v;},0)/a.length];})
+      .reduce(function(a,b){return b[1]>a[1]?b:a;});
+    function f1(x){return(x>=0?"+":"")+x.toFixed(1);}
     var out;
     if(mode==="dev"){
-      out="<b>Aktuell</b> Ø "+sgn(avg.toFixed(1))+" bpm gegenüber deiner Norm fürs Tempo "+
-        "(letzte 6 Läufe) · <b>Bestwert</b> "+sgn(best.dev)+" ("+best.date.slice(0,7)+"). "+
-        "Über 0 = effizienter als dein Schnitt. Klettert der Wert Richtung +5, ist der Puls "+
-        "wieder synchron → grünes Licht fürs Tempo.";
+      out="<b>Aktuell</b> Ø "+f1(avg)+" bpm ggü. deiner Tempo-Norm (letzte 6 Läufe) · "+
+        "<b>Bestmonat</b> "+f1(bm[1])+" ("+bm[0]+"). Über 0 = effizienter als dein Jahresschnitt. "+
+        "Klettert der Trend Richtung +5, ist der Puls wieder synchron → grünes Licht fürs Tempo.";
     }else{
-      out="<b>Aktuell</b> Ø "+avg.toFixed(0)+" (letzte 6 Läufe) · <b>12-Monats-Hoch</b> "+
-        M.get(best).toFixed(0)+" ("+best.date.slice(0,7)+"). Achtung: dieser Wert hängt am "+
-        "Lauftempo – bewusst langsames Z2-Laufen drückt ihn, auch ohne Fitnessverlust.";
+      out="<b>Aktuell</b> Ø "+avg.toFixed(0)+" (letzte 6 Läufe) · <b>Bestmonat</b> "+bm[1].toFixed(0)+
+        " ("+bm[0]+"). Achtung: dieser Wert hängt am Lauftempo – bewusst langsames Z2-Laufen "+
+        "drückt ihn, auch ohne Fitnessverlust.";
     }
     root.querySelector(".effc-readout").innerHTML=out;
   }
