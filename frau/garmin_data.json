@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-30T07:13:15+02:00",
+  "synced_at": "2026-08-30T08:45:13+02:00",
   "sync_date": "2026-08-30",
   "token_days_left": null,
   "metrics": {
@@ -10,9 +10,9 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 91,
+    "stress": 16,
+    "resting_hr": 56,
+    "body_battery": 93,
     "training_readiness": null,
     "recent_activities": [
       {
@@ -117,11 +117,11 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 244309,
+        "current": 244605,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 1,
-        "pct": 81
+        "pct": 82
       },
       {
         "name": "Active August",
@@ -324,6 +324,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-08-30",
+        "v": 56
+      },
+      {
         "d": "2026-08-29",
         "v": 58
       },
@@ -438,10 +442,6 @@
       {
         "d": "2026-08-01",
         "v": 58
-      },
-      {
-        "d": "2026-07-31",
-        "v": 59
       }
     ],
     "weight": [
