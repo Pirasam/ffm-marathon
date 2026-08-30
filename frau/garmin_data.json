@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-30T10:15:11+02:00",
+  "synced_at": "2026-08-30T12:15:11+02:00",
   "sync_date": "2026-08-30",
   "token_days_left": null,
   "metrics": {
@@ -163,14 +163,6 @@
         "pct": 12
       },
       {
-        "name": "August Gains",
-        "current": 0.0,
-        "goal": 4.0,
-        "unit": "h",
-        "days_remaining": 1,
-        "pct": 0
-      },
-      {
         "name": "August Warrior",
         "current": 0.0,
         "goal": 14400.0,
@@ -193,6 +185,14 @@
         "unit": "km",
         "days_remaining": 31,
         "pct": 22
+      },
+      {
+        "name": "2026 Walking - Stage 3",
+        "current": 0.0,
+        "goal": 146.4,
+        "unit": "km",
+        "days_remaining": 31,
+        "pct": 0
       }
     ],
     "cycle": {
