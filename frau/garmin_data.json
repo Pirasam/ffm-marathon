@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-08-30T14:45:12+02:00",
+  "synced_at": "2026-08-30T17:15:11+02:00",
   "sync_date": "2026-08-30",
   "token_days_left": null,
   "metrics": {
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 23,
+    "stress": 24,
     "resting_hr": 56,
     "body_battery": 93,
-    "training_readiness": 89,
+    "training_readiness": 95,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -132,11 +132,11 @@
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 258124,
+        "current": 260886,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 1,
-        "pct": 86
+        "pct": 87
       },
       {
         "name": "Active August",
