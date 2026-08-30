@@ -580,7 +580,12 @@ def compute_efficiency(eff_list, today, months=12):
         r["ei"] = round(r["speed"] / r["hf"] * 100, 2)
         hfc = r["hf"] - drift * (r["dist"] - refd)
         r["ei_corr"] = round(r["speed"] / hfc * 100, 2) if hfc > 0 else r["ei"]
+        # Tempo-normiert: erwarteter Puls fuers Tempo minus tatsaechlicher Puls.
+        # Positiv = Puls UNTER der Norm fuers Tempo = effizienter/fitter. Nicht
+        # vom langsamen Laufen austricksbar (im Gegensatz zum EI).
+        r["dev"] = round((a + b * r["speed"]) - r["hf"], 1)
     return {"runs": rs, "drift": round(drift, 3), "ref_dist": refd,
+            "fit_a": round(a, 2), "fit_b": round(b, 4),
             "generated": today.isoformat()}
 
 

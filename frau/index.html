@@ -130,18 +130,19 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 .effc{--e-ink:#221f1c;--e-mut:#7c736a;--e-faint:#a89f95;--e-grid:#ece7e0;
   --e-hair:#e6e0d8;--e-teal:#2f8e9e;--e-teal-ink:#1f6b78;--e-coral:#dd5f35;
   --e-band:rgba(47,142,158,.08);--e-dot:rgba(47,142,158,.55);--e-surface:#fff;
-  font-family:inherit;color:var(--e-ink);display:block;
+  --e-zero:#b8afa4;font-family:inherit;color:var(--e-ink);display:block;
   background:#fff;border:1px solid rgba(30,20,10,.08);border-radius:14px;
   padding:16px 16px 12px;margin:16px 0;box-shadow:0 1px 3px rgba(40,30,20,.05)}
 .effc-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
 .effc-h{font-size:1.05rem;margin:0;font-weight:700}
 .effc-sub{color:var(--e-mut);font-size:.82rem;margin:0 0 12px}
-.effc-tg{display:inline-flex;background:var(--e-grid);border-radius:8px;padding:3px;gap:2px}
-.effc-tg button{font:inherit;font-size:.76rem;font-weight:500;border:0;background:transparent;
+.effc-tg{display:inline-flex;background:var(--e-grid);border-radius:8px;padding:3px;gap:2px;flex-wrap:wrap}
+.effc-tg button{font:inherit;font-size:.75rem;font-weight:500;border:0;background:transparent;
   color:var(--e-mut);padding:4px 10px;border-radius:6px;cursor:pointer}
 .effc-tg button[aria-pressed="true"]{background:var(--e-surface);color:var(--e-ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
 .effc svg{display:block;width:100%;height:auto}
 .effc .gl{stroke:var(--e-grid);stroke-width:1}
+.effc .zero{stroke:var(--e-zero);stroke-width:1.3;stroke-dasharray:4 3}
 .effc .ax{fill:var(--e-mut);font-size:11px;font-family:inherit}
 .effc .band{fill:var(--e-band)}
 .effc .trend{fill:none;stroke:var(--e-coral);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round}
@@ -167,18 +168,19 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 .effc-tw{max-height:280px;overflow:auto;border:1px solid var(--e-hair);border-radius:9px;margin-top:8px}
 .effc-tip{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;z-index:50;
   background:var(--e-ink);color:#fff;border-radius:8px;padding:7px 10px;font-size:.75rem;
-  line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:210px}
+  line-height:1.4;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:220px}
 @media (prefers-reduced-motion:reduce){.effc *{transition:none!important}}
 </style>
 <div class="effc-head">
   <h2 class="effc-h">Laufeffizienz</h2>
-  <div class="effc-tg" role="group" aria-label="Korrektur">
-    <button class="effc-braw" aria-pressed="false">Roh</button>
-    <button class="effc-bcorr" aria-pressed="true">Längenkorrigiert</button>
+  <div class="effc-tg" role="group" aria-label="Ansicht">
+    <button class="effc-b-dev" aria-pressed="true">Tempo-normiert</button>
+    <button class="effc-b-corr" aria-pressed="false">Längenkorr.</button>
+    <button class="effc-b-raw" aria-pressed="false">Roh</button>
   </div>
 </div>
-<p class="effc-sub">Tempo pro Herzschlag je Lauf, 12 Monate. Höher = mehr Speed bei weniger Puls.</p>
-<svg class="effc-svg" viewBox="0 0 900 430" role="img" aria-label="Effizienz-Index je Lauf über 12 Monate"></svg>
+<p class="effc-sub"></p>
+<svg class="effc-svg" viewBox="0 0 900 430" role="img" aria-label="Laufeffizienz je Lauf über 12 Monate"></svg>
 <div class="effc-lg">
   <span class="ls"><span class="ll"></span> Trend (28 Tage)</span>
   <span class="ls"><svg width="12" height="12"><circle cx="6" cy="6" r="4.5" class="dot"/></svg> Lauf</span>
@@ -190,39 +192,56 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 </div>
 <p class="effc-note effc-readout"></p>
 <details><summary>Alle Läufe als Tabelle</summary>
-  <div class="effc-tw"><table><thead><tr><th>Datum</th><th>km</th><th>Pace</th><th>Ø-Puls</th><th>EI roh</th><th>korr.</th></tr></thead><tbody class="effc-tb"></tbody></table></div>
+  <div class="effc-tw"><table><thead><tr><th>Datum</th><th>km</th><th>Pace</th><th>Ø-Puls</th><th>Δ Tempo</th><th>EI korr.</th></tr></thead><tbody class="effc-tb"></tbody></table></div>
 </details>
 <script>
 (function(){
-  var RAW={"runs": [{"date": "2025-10-13", "dist": 4.86, "dur_min": 57.2, "pace": 11.77, "speed": 85.0, "hf": 139.0, "maxhf": 175.0, "ei": 61.15, "ei_corr": 61.27}, {"date": "2025-10-17", "dist": 6.31, "dur_min": 62.9, "pace": 9.968, "speed": 100.3, "hf": 149.0, "maxhf": 172.0, "ei": 67.32, "ei_corr": 67.77}, {"date": "2025-10-25", "dist": 4.01, "dur_min": 35.4, "pace": 8.828, "speed": 113.3, "hf": 154.0, "maxhf": 174.0, "ei": 73.57, "ei_corr": 73.5}, {"date": "2025-10-28", "dist": 4.56, "dur_min": 40.0, "pace": 8.772, "speed": 114.0, "hf": 150.0, "maxhf": 171.0, "ei": 76.0, "ei_corr": 76.07}, {"date": "2025-11-08", "dist": 1.61, "dur_min": 13.4, "pace": 8.323, "speed": 120.1, "hf": 156.0, "maxhf": 166.0, "ei": 76.99, "ei_corr": 76.33}, {"date": "2025-11-08", "dist": 1.14, "dur_min": 9.1, "pace": 7.982, "speed": 125.3, "hf": 148.0, "maxhf": 167.0, "ei": 84.66, "ei_corr": 83.78}, {"date": "2025-11-16", "dist": 5.98, "dur_min": 52.8, "pace": 8.829, "speed": 113.3, "hf": 154.0, "maxhf": 172.0, "ei": 73.57, "ei_corr": 73.97}, {"date": "2026-01-15", "dist": 4.27, "dur_min": 38.1, "pace": 8.923, "speed": 112.1, "hf": 148.0, "maxhf": 165.0, "ei": 75.74, "ei_corr": 75.74}, {"date": "2026-02-01", "dist": 3.9, "dur_min": 33.5, "pace": 8.59, "speed": 116.4, "hf": 143.0, "maxhf": 173.0, "ei": 81.4, "ei_corr": 81.29}, {"date": "2026-03-07", "dist": 1.13, "dur_min": 9.0, "pace": 7.965, "speed": 125.6, "hf": 148.0, "maxhf": 162.0, "ei": 84.86, "ei_corr": 83.97}, {"date": "2026-03-08", "dist": 3.26, "dur_min": 26.9, "pace": 8.252, "speed": 121.2, "hf": 153.0, "maxhf": 176.0, "ei": 79.22, "ei_corr": 78.95}, {"date": "2026-03-22", "dist": 3.49, "dur_min": 29.2, "pace": 8.367, "speed": 119.5, "hf": 150.0, "maxhf": 180.0, "ei": 79.67, "ei_corr": 79.45}, {"date": "2026-04-25", "dist": 1.15, "dur_min": 9.2, "pace": 8.0, "speed": 125.0, "hf": 148.0, "maxhf": 164.0, "ei": 84.46, "ei_corr": 83.58}, {"date": "2026-04-28", "dist": 2.89, "dur_min": 24.7, "pace": 8.547, "speed": 117.0, "hf": 146.0, "maxhf": 169.0, "ei": 80.14, "ei_corr": 79.76}, {"date": "2026-05-01", "dist": 3.07, "dur_min": 24.8, "pace": 8.078, "speed": 123.8, "hf": 158.0, "maxhf": 179.0, "ei": 78.35, "ei_corr": 78.05}, {"date": "2026-06-29", "dist": 3.11, "dur_min": 30.4, "pace": 9.775, "speed": 102.3, "hf": 137.0, "maxhf": 161.0, "ei": 74.67, "ei_corr": 74.35}, {"date": "2026-07-01", "dist": 4.73, "dur_min": 47.1, "pace": 9.958, "speed": 100.4, "hf": 140.0, "maxhf": 162.0, "ei": 71.71, "ei_corr": 71.82}, {"date": "2026-07-09", "dist": 4.14, "dur_min": 39.0, "pace": 9.42, "speed": 106.2, "hf": 143.0, "maxhf": 159.0, "ei": 74.27, "ei_corr": 74.22}, {"date": "2026-07-12", "dist": 5.32, "dur_min": 53.1, "pace": 9.981, "speed": 100.2, "hf": 136.0, "maxhf": 155.0, "ei": 73.68, "ei_corr": 73.95}, {"date": "2026-07-17", "dist": 7.08, "dur_min": 72.5, "pace": 10.24, "speed": 97.7, "hf": 142.0, "maxhf": 180.0, "ei": 68.8, "ei_corr": 69.48}, {"date": "2026-07-25", "dist": 5.04, "dur_min": 52.7, "pace": 10.456, "speed": 95.6, "hf": 143.0, "maxhf": 158.0, "ei": 66.85, "ei_corr": 67.03}, {"date": "2026-07-30", "dist": 4.91, "dur_min": 50.5, "pace": 10.285, "speed": 97.2, "hf": 135.0, "maxhf": 154.0, "ei": 72.0, "ei_corr": 72.16}, {"date": "2026-08-07", "dist": 4.34, "dur_min": 42.4, "pace": 9.77, "speed": 102.4, "hf": 140.0, "maxhf": 155.0, "ei": 73.14, "ei_corr": 73.15}, {"date": "2026-08-14", "dist": 4.12, "dur_min": 41.3, "pace": 10.024, "speed": 99.8, "hf": 140.0, "maxhf": 157.0, "ei": 71.29, "ei_corr": 71.24}, {"date": "2026-08-16", "dist": 6.53, "dur_min": 67.7, "pace": 10.368, "speed": 96.5, "hf": 137.0, "maxhf": 156.0, "ei": 70.44, "ei_corr": 71.01}, {"date": "2026-08-21", "dist": 5.7, "dur_min": 60.1, "pace": 10.544, "speed": 94.8, "hf": 137.0, "maxhf": 164.0, "ei": 69.2, "ei_corr": 69.55}, {"date": "2026-08-23", "dist": 6.29, "dur_min": 62.2, "pace": 9.889, "speed": 101.1, "hf": 139.0, "maxhf": 159.0, "ei": 72.73, "ei_corr": 73.25}, {"date": "2026-08-30", "dist": 7.16, "dur_min": 70.5, "pace": 9.846, "speed": 101.6, "hf": 141.0, "maxhf": 160.0, "ei": 72.06, "ei_corr": 72.79}], "drift": 0.496, "ref_dist": 4.3, "generated": "2026-08-30"}, mode="ei_corr";
+  var RAW={"runs": [{"date": "2025-10-13", "dist": 4.86, "dur_min": 57.2, "pace": 11.77, "speed": 85.0, "hf": 139.0, "maxhf": 175.0, "ei": 61.15, "ei_corr": 61.27, "dev": -4.5}, {"date": "2025-10-17", "dist": 6.31, "dur_min": 62.9, "pace": 9.968, "speed": 100.3, "hf": 149.0, "maxhf": 172.0, "ei": 67.32, "ei_corr": 67.77, "dev": -7.7}, {"date": "2025-10-25", "dist": 4.01, "dur_min": 35.4, "pace": 8.828, "speed": 113.3, "hf": 154.0, "maxhf": 174.0, "ei": 73.57, "ei_corr": 73.5, "dev": -6.9}, {"date": "2025-10-28", "dist": 4.56, "dur_min": 40.0, "pace": 8.772, "speed": 114.0, "hf": 150.0, "maxhf": 171.0, "ei": 76.0, "ei_corr": 76.07, "dev": -2.6}, {"date": "2025-11-08", "dist": 1.61, "dur_min": 13.4, "pace": 8.323, "speed": 120.1, "hf": 156.0, "maxhf": 166.0, "ei": 76.99, "ei_corr": 76.33, "dev": -5.9}, {"date": "2025-11-08", "dist": 1.14, "dur_min": 9.1, "pace": 7.982, "speed": 125.3, "hf": 148.0, "maxhf": 167.0, "ei": 84.66, "ei_corr": 83.78, "dev": 4.4}, {"date": "2025-11-16", "dist": 5.98, "dur_min": 52.8, "pace": 8.829, "speed": 113.3, "hf": 154.0, "maxhf": 172.0, "ei": 73.57, "ei_corr": 73.97, "dev": -6.9}, {"date": "2026-01-15", "dist": 4.27, "dur_min": 38.1, "pace": 8.923, "speed": 112.1, "hf": 148.0, "maxhf": 165.0, "ei": 75.74, "ei_corr": 75.74, "dev": -1.4}, {"date": "2026-02-01", "dist": 3.9, "dur_min": 33.5, "pace": 8.59, "speed": 116.4, "hf": 143.0, "maxhf": 173.0, "ei": 81.4, "ei_corr": 81.29, "dev": 5.5}, {"date": "2026-03-07", "dist": 1.13, "dur_min": 9.0, "pace": 7.965, "speed": 125.6, "hf": 148.0, "maxhf": 162.0, "ei": 84.86, "ei_corr": 83.97, "dev": 4.6}, {"date": "2026-03-08", "dist": 3.26, "dur_min": 26.9, "pace": 8.252, "speed": 121.2, "hf": 153.0, "maxhf": 176.0, "ei": 79.22, "ei_corr": 78.95, "dev": -2.4}, {"date": "2026-03-22", "dist": 3.49, "dur_min": 29.2, "pace": 8.367, "speed": 119.5, "hf": 150.0, "maxhf": 180.0, "ei": 79.67, "ei_corr": 79.45, "dev": -0.1}, {"date": "2026-04-25", "dist": 1.15, "dur_min": 9.2, "pace": 8.0, "speed": 125.0, "hf": 148.0, "maxhf": 164.0, "ei": 84.46, "ei_corr": 83.58, "dev": 4.3}, {"date": "2026-04-28", "dist": 2.89, "dur_min": 24.7, "pace": 8.547, "speed": 117.0, "hf": 146.0, "maxhf": 169.0, "ei": 80.14, "ei_corr": 79.76, "dev": 2.7}, {"date": "2026-05-01", "dist": 3.07, "dur_min": 24.8, "pace": 8.078, "speed": 123.8, "hf": 158.0, "maxhf": 179.0, "ei": 78.35, "ei_corr": 78.05, "dev": -6.2}, {"date": "2026-06-29", "dist": 3.11, "dur_min": 30.4, "pace": 9.775, "speed": 102.3, "hf": 137.0, "maxhf": 161.0, "ei": 74.67, "ei_corr": 74.35, "dev": 5.2}, {"date": "2026-07-01", "dist": 4.73, "dur_min": 47.1, "pace": 9.958, "speed": 100.4, "hf": 140.0, "maxhf": 162.0, "ei": 71.71, "ei_corr": 71.82, "dev": 1.3}, {"date": "2026-07-09", "dist": 4.14, "dur_min": 39.0, "pace": 9.42, "speed": 106.2, "hf": 143.0, "maxhf": 159.0, "ei": 74.27, "ei_corr": 74.22, "dev": 0.9}, {"date": "2026-07-12", "dist": 5.32, "dur_min": 53.1, "pace": 9.981, "speed": 100.2, "hf": 136.0, "maxhf": 155.0, "ei": 73.68, "ei_corr": 73.95, "dev": 5.2}, {"date": "2026-07-17", "dist": 7.08, "dur_min": 72.5, "pace": 10.24, "speed": 97.7, "hf": 142.0, "maxhf": 180.0, "ei": 68.8, "ei_corr": 69.48, "dev": -1.9}, {"date": "2026-07-25", "dist": 5.04, "dur_min": 52.7, "pace": 10.456, "speed": 95.6, "hf": 143.0, "maxhf": 158.0, "ei": 66.85, "ei_corr": 67.03, "dev": -3.8}, {"date": "2026-07-30", "dist": 4.91, "dur_min": 50.5, "pace": 10.285, "speed": 97.2, "hf": 135.0, "maxhf": 154.0, "ei": 72.0, "ei_corr": 72.16, "dev": 4.9}, {"date": "2026-08-07", "dist": 4.34, "dur_min": 42.4, "pace": 9.77, "speed": 102.4, "hf": 140.0, "maxhf": 155.0, "ei": 73.14, "ei_corr": 73.15, "dev": 2.2}, {"date": "2026-08-14", "dist": 4.12, "dur_min": 41.3, "pace": 10.024, "speed": 99.8, "hf": 140.0, "maxhf": 157.0, "ei": 71.29, "ei_corr": 71.24, "dev": 1.1}, {"date": "2026-08-16", "dist": 6.53, "dur_min": 67.7, "pace": 10.368, "speed": 96.5, "hf": 137.0, "maxhf": 156.0, "ei": 70.44, "ei_corr": 71.01, "dev": 2.6}, {"date": "2026-08-21", "dist": 5.7, "dur_min": 60.1, "pace": 10.544, "speed": 94.8, "hf": 137.0, "maxhf": 164.0, "ei": 69.2, "ei_corr": 69.55, "dev": 1.8}, {"date": "2026-08-23", "dist": 6.29, "dur_min": 62.2, "pace": 9.889, "speed": 101.1, "hf": 139.0, "maxhf": 159.0, "ei": 72.73, "ei_corr": 73.25, "dev": 2.6}, {"date": "2026-08-30", "dist": 7.16, "dur_min": 70.5, "pace": 9.846, "speed": 101.6, "hf": 141.0, "maxhf": 160.0, "ei": 72.06, "ei_corr": 72.79, "dev": 0.9}], "drift": 0.496, "ref_dist": 4.3, "fit_a": 96.54, "fit_b": 0.4462, "generated": "2026-08-30"}, mode="dev";
   var root=document.currentScript.closest(".effc");
   var runs=RAW.runs.map(function(r){r.t=Date.parse(r.date);return r;});
-  var drift=RAW.drift||0, refd=RAW.ref_dist||8;
   var svg=root.querySelector(".effc-svg"), NS="http://www.w3.org/2000/svg";
   var tip=document.createElement("div");tip.className="effc-tip";document.body.appendChild(tip);
   var W=900,H=430,m={l:44,r:16,t:16,b:36},iw=W-m.l-m.r,ih=H-m.t-m.b;
+  var MODES={
+    dev:{lab:"Tempo-normiert",get:function(r){return r.dev;},thr:0,step:3,
+      band:"besser als dein Schnitt",zero:true,
+      sub:"Puls minus erwarteter Puls fürs jeweilige Tempo. Höher = effizienter – unabhängig davon, wie schnell du läufst."},
+    ei_corr:{lab:"Längenkorr.",get:function(r){return r.ei_corr;},thr:94,step:4,
+      band:"Formzone ≥ 94",zero:false,
+      sub:"Tempo pro Herzschlag (längenkorrigiert). Hängt am Lauftempo – langsame Läufe drücken ihn."},
+    ei:{lab:"Roh",get:function(r){return r.ei;},thr:94,step:4,
+      band:"Formzone ≥ 94",zero:false,
+      sub:"Tempo pro Herzschlag (roh). Hängt am Lauftempo."}
+  };
   var t0=Math.min.apply(0,runs.map(function(r){return r.t;})),
       t1=Math.max.apply(0,runs.map(function(r){return r.t;}));
   var pad=(t1-t0)*0.02||864e5, xmin=t0-pad, xmax=t1+pad;
-  var allv=runs.reduce(function(a,r){a.push(r.ei,r.ei_corr);return a;},[]);
-  var ymin=Math.floor(Math.min.apply(0,allv)-2), ymax=Math.ceil(Math.max.apply(0,allv)+2);
   function X(t){return m.l+(t-xmin)/(xmax-xmin)*iw;}
+  var ymin,ymax;
+  function setY(){var M=MODES[mode],vs=runs.map(M.get);
+    ymin=Math.min.apply(0,vs);ymax=Math.max.apply(0,vs);
+    ymin=Math.min(ymin,M.thr);ymax=Math.max(ymax,M.thr);
+    var p=(ymax-ymin)*0.12||1;ymin=Math.floor(ymin-p);ymax=Math.ceil(ymax+p);}
   function Y(v){return m.t+(ymax-v)/(ymax-ymin)*ih;}
   function rad(km){return 3+Math.min(Math.sqrt(km)*1.1,7);}
   function E(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
   function pace(p){var mm=Math.floor(p),ss=Math.round((p-mm)*60);if(ss==60){mm++;ss=0;}return mm+":"+(ss<10?"0":"")+ss;}
+  function sgn(v){return(v>=0?"+":"")+v;}
   var NM=["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
-  function trend(){var win=28*864e5,s=runs.slice().sort(function(a,b){return a.t-b.t;}),o=[];
+  function trend(){var M=MODES[mode],win=28*864e5,s=runs.slice().sort(function(a,b){return a.t-b.t;}),o=[];
     s.forEach(function(r){var w=s.filter(function(q){return q.t<=r.t&&q.t>r.t-win;});
-      o.push([r.t,w.reduce(function(a,q){return a+q[mode];},0)/w.length]);});return o;}
+      o.push([r.t,w.reduce(function(a,q){return a+M.get(q);},0)/w.length]);});return o;}
   function draw(){
+    var M=MODES[mode];setY();
     while(svg.firstChild)svg.removeChild(svg.firstChild);
-    var bt=Y(ymax),bb=Y(94);
+    var bt=Y(ymax),bb=Y(M.thr);
     if(bb>bt){svg.appendChild(E("rect",{x:m.l,y:bt,width:iw,height:bb-bt,"class":"band"}));
-      var bl=E("text",{x:m.l+5,y:bt+13,"class":"anno"});bl.textContent="Formzone ≥ 94";svg.appendChild(bl);}
-    for(var v=Math.ceil(ymin/4)*4;v<=ymax;v+=4){var y=Y(v);
+      var bl=E("text",{x:m.l+5,y:bt+13,"class":"anno"});bl.textContent=M.band;svg.appendChild(bl);}
+    var lo=Math.ceil(ymin/M.step)*M.step;
+    for(var v=lo;v<=ymax;v+=M.step){var y=Y(v);
       svg.appendChild(E("line",{x1:m.l,y1:y,x2:W-m.r,y2:y,"class":"gl"}));
       var t=E("text",{x:m.l-7,y:y+3.5,"class":"ax","text-anchor":"end"});t.textContent=v;svg.appendChild(t);}
+    if(M.zero){svg.appendChild(E("line",{x1:m.l,y1:Y(0),x2:W-m.r,y2:Y(0),"class":"zero"}));}
     var d=new Date(xmin);d.setDate(1);d.setMonth(d.getMonth()+1);
     while(d.getTime()<xmax){var x=X(d.getTime());
       svg.appendChild(E("line",{x1:x,y1:m.t,x2:x,y2:m.t+ih,"class":"gl"}));
@@ -233,30 +252,47 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     svg.appendChild(E("path",{d:ds,"class":"trend"}));
     var cur=runs.slice().sort(function(a,b){return a.t-b.t;}).pop();
     runs.forEach(function(r){
-      var c=E("circle",{cx:X(r.t),cy:Y(r[mode]),r:rad(r.dist),"class":"dot"+(r===cur?" cur":"")});
+      var c=E("circle",{cx:X(r.t),cy:Y(M.get(r)),r:rad(r.dist),"class":"dot"+(r===cur?" cur":"")});
       c.addEventListener("mousemove",function(e){showTip(e,r);});
       c.addEventListener("mouseleave",function(){tip.style.opacity=0;});
       svg.appendChild(c);});
+    root.querySelector(".effc-sub").textContent=M.sub;
+    readout();
   }
   function showTip(e,r){tip.style.opacity=1;
-    tip.style.left=Math.min(e.clientX+13,innerWidth-215)+"px";tip.style.top=(e.clientY+13)+"px";
+    tip.style.left=Math.min(e.clientX+13,innerWidth-225)+"px";tip.style.top=(e.clientY+13)+"px";
     tip.innerHTML="<b>"+r.date+"</b><br>"+r.dist+" km · "+pace(r.pace)+"/km<br>Ø-Puls "+r.hf+
-      "<br>EI roh "+r.ei+" · korr. "+r.ei_corr;}
+      "<br>Δ Tempo "+sgn(r.dev)+" bpm · EI korr. "+r.ei_corr;}
+  function readout(){
+    var M=MODES[mode];
+    var byt=runs.slice().sort(function(a,b){return a.t-b.t;});
+    var last=byt.slice(-6),avg=last.reduce(function(s,o){return s+M.get(o);},0)/last.length;
+    var best=runs.reduce(function(a,b){return M.get(b)>M.get(a)?b:a;});
+    var out;
+    if(mode==="dev"){
+      out="<b>Aktuell</b> Ø "+sgn(avg.toFixed(1))+" bpm gegenüber deiner Norm fürs Tempo "+
+        "(letzte 6 Läufe) · <b>Bestwert</b> "+sgn(best.dev)+" ("+best.date.slice(0,7)+"). "+
+        "Über 0 = effizienter als dein Schnitt. Klettert der Wert Richtung +5, ist der Puls "+
+        "wieder synchron → grünes Licht fürs Tempo.";
+    }else{
+      out="<b>Aktuell</b> Ø "+avg.toFixed(0)+" (letzte 6 Läufe) · <b>12-Monats-Hoch</b> "+
+        M.get(best).toFixed(0)+" ("+best.date.slice(0,7)+"). Achtung: dieser Wert hängt am "+
+        "Lauftempo – bewusst langsames Z2-Laufen drückt ihn, auch ohne Fitnessverlust.";
+    }
+    root.querySelector(".effc-readout").innerHTML=out;
+  }
   function setMode(mm){mode=mm;
-    root.querySelector(".effc-braw").setAttribute("aria-pressed",mm==="ei");
-    root.querySelector(".effc-bcorr").setAttribute("aria-pressed",mm==="ei_corr");draw();}
-  root.querySelector(".effc-braw").onclick=function(){setMode("ei");};
-  root.querySelector(".effc-bcorr").onclick=function(){setMode("ei_corr");};
-  var byt=runs.slice().sort(function(a,b){return a.t-b.t;});
-  var peak=runs.reduce(function(a,b){return b.ei_corr>a.ei_corr?b:a;});
-  var last=byt.slice(-6),avg=last.reduce(function(s,o){return s+o.ei_corr;},0)/last.length;
-  root.querySelector(".effc-readout").innerHTML="<b>Aktuell</b> Ø "+avg.toFixed(0)+
-    " (letzte 6 Läufe) · <b>12-Monats-Hoch</b> "+peak.ei_corr.toFixed(0)+" ("+peak.date.slice(0,7)+
-    ") · Herzdrift "+(drift>=0?"+":"")+drift.toFixed(2)+" bpm/km. Klettert der Wert Richtung 94+, ist der Puls wieder synchron.";
+    root.querySelector(".effc-b-dev").setAttribute("aria-pressed",mm==="dev");
+    root.querySelector(".effc-b-corr").setAttribute("aria-pressed",mm==="ei_corr");
+    root.querySelector(".effc-b-raw").setAttribute("aria-pressed",mm==="ei");draw();}
+  root.querySelector(".effc-b-dev").onclick=function(){setMode("dev");};
+  root.querySelector(".effc-b-corr").onclick=function(){setMode("ei_corr");};
+  root.querySelector(".effc-b-raw").onclick=function(){setMode("ei");};
   var tb=root.querySelector(".effc-tb");
   runs.slice().sort(function(a,b){return b.t-a.t;}).forEach(function(r){
     var tr=document.createElement("tr");
-    tr.innerHTML="<td>"+r.date+"</td><td>"+r.dist+"</td><td>"+pace(r.pace)+"</td><td>"+r.hf+"</td><td>"+r.ei+"</td><td>"+r.ei_corr+"</td>";
+    tr.innerHTML="<td>"+r.date+"</td><td>"+r.dist+"</td><td>"+pace(r.pace)+"</td><td>"+r.hf+
+      "</td><td>"+sgn(r.dev)+"</td><td>"+r.ei_corr+"</td>";
     tb.appendChild(tr);});
   addEventListener("scroll",function(){tip.style.opacity=0;},{passive:true});
   draw();
