@@ -17,6 +17,8 @@ import json
 import os
 from datetime import date
 
+from chart_component import efficiency_chart
+
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "frau", "garmin_data.json")
 HTML_PATH = os.path.join(REPO_DIR, "frau", "index.html")
@@ -269,12 +271,16 @@ def build_html(data):
           <div class="road-goal">{esc(r['goal'])}</div>
         </div>"""
 
+    eff = m.get("efficiency")
+    eff_chart = efficiency_chart(eff) if eff and eff.get("runs") else ""
+
     return PAGE.format(
         updated=esc(synced or today.isoformat()),
         weeks=weeks_to_marathon, days=days_to_marathon,
         marathon=esc(MARATHON_NAME), marathon_date="31.10.2027",
         cycle_card=cycle_card, week_plan=week_plan,
         charts=charts, chips=chips, runs_table=runs_table, roadmap=road,
+        eff_chart=eff_chart,
     )
 
 
@@ -443,6 +449,8 @@ footer{{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}}
     <h2>Letzte Läufe</h2>
     {runs_table}
   </section>
+
+  {eff_chart}
 
   <section>
     <h2>Der Weg zum Marathon</h2>

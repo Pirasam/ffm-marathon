@@ -491,6 +491,99 @@ def fetch_challenges(api, today):
     return challenges[:8]
 
 
+# ── Laufeffizienz (Tempo pro Herzschlag, 12 Monate) ───────────────────────────
+# Wird inkrementell in history["efficiency"] mitgefuehrt: einmalig 12-Monats-
+# Backfill, danach je Sync nur neue Laeufe aus recent_activities anhaengen (kein
+# schwerer API-Call). compute_efficiency rechnet daraus EI + Laengenkorrektur.
+
+def merge_efficiency(history, recent_activities):
+    lst = history.get("efficiency") or []
+    seen = {(e.get("d"), round(e.get("dist", 0), 1)) for e in lst}
+    for a in (recent_activities or []):
+        ty = a.get("type", "")
+        if "running" not in ty and "trail" not in ty:
+            continue
+        d = a.get("date"); dist = a.get("distance_km")
+        dur = a.get("duration_min"); hf = a.get("avg_hr")
+        if not d or not dist or dist < 1 or not dur or dur < 5 or not hf:
+            continue
+        key = (d, round(dist, 1))
+        if key in seen:
+            continue
+        seen.add(key)
+        lst.append({"d": d, "dist": round(dist, 2), "dur": round(dur, 1), "hf": hf})
+    lst.sort(key=lambda e: e.get("d", ""), reverse=True)
+    history["efficiency"] = lst[:400]
+    return history
+
+
+def backfill_efficiency(api, history, today, months=12):
+    lst = history.get("efficiency") or []
+    if len(lst) >= 8:  # schon gefuellt -> kein erneuter Voll-Abruf
+        return history
+    start = (today - timedelta(days=int(months * 30.5))).isoformat()
+    try:
+        acts = api.get_activities_by_date(start, today.isoformat(), "")
+    except Exception as e:
+        print(f"Efficiency-Backfill-Fehler: {e}")
+        return history
+    seen = {(e.get("d"), round(e.get("dist", 0), 1)) for e in lst}
+    added = 0
+    for a in acts:
+        ty = (a.get("activityType") or {}).get("typeKey", "")
+        if "run" not in ty and "trail" not in ty:
+            continue
+        dist = (a.get("distance") or 0) / 1000.0
+        dur = (a.get("duration") or 0) / 60.0
+        hf = a.get("averageHR")
+        d = (a.get("startTimeLocal") or "")[:10]
+        if not d or dist < 1 or dur < 5 or not hf:
+            continue
+        key = (d, round(dist, 1))
+        if key in seen:
+            continue
+        seen.add(key)
+        lst.append({"d": d, "dist": round(dist, 2), "dur": round(dur, 1),
+                    "hf": hf, "mx": a.get("maxHR")})
+        added += 1
+    lst.sort(key=lambda e: e.get("d", ""), reverse=True)
+    history["efficiency"] = lst[:400]
+    print(f"Efficiency-Backfill: {added} Läufe")
+    return history
+
+
+def compute_efficiency(eff_list, today, months=12):
+    """Aus den gespeicherten Laeufen den Effizienz-Index (Speed/HF) + eine
+    datenbasierte Laengenkorrektur (Herzdrift) rechnen. Fuer den Renderer."""
+    cutoff = (today - timedelta(days=int(months * 30.5))).isoformat()
+    rs = []
+    for e in (eff_list or []):
+        d = e.get("d"); dist = e.get("dist"); dur = e.get("dur"); hf = e.get("hf")
+        if not d or d < cutoff or not dist or dist < 1 or not dur or dur < 5 or not hf:
+            continue
+        rs.append({"date": d, "dist": round(dist, 2), "dur_min": round(dur, 1),
+                   "pace": round(dur / dist, 3), "speed": round(dist * 1000 / dur, 1),
+                   "hf": hf, "maxhf": e.get("mx")})
+    rs.sort(key=lambda r: r["date"])
+    n = len(rs)
+    if n < 2:
+        return {"runs": rs, "drift": 0.0, "ref_dist": 8.0, "generated": today.isoformat()}
+    xs = [r["speed"] for r in rs]; ys = [r["hf"] for r in rs]
+    mx = sum(xs) / n; my = sum(ys) / n
+    b = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / (sum((x - mx) ** 2 for x in xs) or 1)
+    a = my - b * mx
+    res = [y - (a + b * x) for x, y in zip(xs, ys)]
+    dd = [r["dist"] for r in rs]; md = sum(dd) / n; mr = sum(res) / n
+    drift = sum((di - md) * (ri - mr) for di, ri in zip(dd, res)) / (sum((di - md) ** 2 for di in dd) or 1)
+    refd = round(sorted(dd)[n // 2], 1)
+    for r in rs:
+        r["ei"] = round(r["speed"] / r["hf"] * 100, 2)
+        hfc = r["hf"] - drift * (r["dist"] - refd)
+        r["ei_corr"] = round(r["speed"] / hfc * 100, 2) if hfc > 0 else r["ei"]
+    return {"runs": rs, "drift": round(drift, 3), "ref_dist": refd,
+            "generated": today.isoformat()}
+
+
 # ── History management ────────────────────────────────────────────────────────
 
 

@@ -18,7 +18,8 @@ import sys
 from datetime import date, datetime
 
 from garmin_client import (garmin_login, fetch_garmin_metrics,
-                           backfill_history, update_history)
+                           backfill_history, update_history,
+                           backfill_efficiency, merge_efficiency, compute_efficiency)
 from profiles import get_profile
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -36,7 +37,7 @@ TOKEN_PATH = _P["token"]
 DATA_PATH = os.path.join(REPO_DIR, _P["data"])
 
 EMPTY_HISTORY = {"hrv": [], "rhr": [], "weight": [], "weekly_km": [],
-                 "run_dyn": [], "vo2max": []}
+                 "run_dyn": [], "vo2max": [], "efficiency": []}
 
 
 def load_existing():
@@ -105,6 +106,15 @@ def main():
 
     history = update_history(history, metrics, today.isoformat(),
                              metrics.get("weekly_running", {}))
+
+    # Laufeffizienz (12 Monate): einmal backfillen, dann inkrementell fortschreiben.
+    try:
+        history = backfill_efficiency(api, history, today)
+        history = merge_efficiency(history, metrics.get("recent_activities"))
+        metrics["efficiency"] = compute_efficiency(history.get("efficiency") or [], today)
+    except Exception as e:
+        print(f"WARNUNG: Effizienz-Berechnung fehlgeschlagen ({e}).")
+        metrics["efficiency"] = (existing.get("metrics") or {}).get("efficiency")
 
     # Wie lange traegt der Garmin-Login noch? Der Refresh-Token laeuft nach
     # ~30 Tagen ab; danach hilft nur generate_session.py. Rechtzeitig warnen.

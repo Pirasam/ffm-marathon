@@ -10,10 +10,13 @@ import re
 import json
 from datetime import date, timedelta
 
+from chart_component import efficiency_chart
+
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "garmin_data.json")
 GARMIN_MARKER = ("<!-- GARMIN:START -->", "<!-- GARMIN:END -->")
 HISTORY_MARKER = ("<!-- HISTORY:START -->", "<!-- HISTORY:END -->")
+EFFICIENCY_MARKER = ("<!-- EFFICIENCY:START -->", "<!-- EFFICIENCY:END -->")
 
 CLAUDE_MODEL = "claude-opus-4-8"
 
@@ -377,6 +380,19 @@ def inject_garmin_data(html_content, metrics, claude_result):
     return html_content
 
 
+def inject_efficiency(html_content, metrics):
+    """Effizienz-Chart zwischen die EFFICIENCY-Marker rendern (deterministisch,
+    ohne KI). Ersatz per Funktion, damit Backslashes/$-Zeichen im HTML nicht als
+    re-Ersetzungsmuster interpretiert werden."""
+    start, end = EFFICIENCY_MARKER
+    eff = (metrics or {}).get("efficiency")
+    if not eff or start not in html_content:
+        return html_content
+    block = f"{start}\n{efficiency_chart(eff)}\n{end}"
+    return re.sub(re.escape(start) + r".*?" + re.escape(end),
+                  lambda m: block, html_content, flags=re.DOTALL)
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def load_existing_payload(html_content):
@@ -487,6 +503,7 @@ def main():
             "long_run_tips": None,
         }
         html = inject_garmin_data(html, metrics, claude_result)
+        html = inject_efficiency(html, metrics)
         with open(html_path, "w", encoding="utf-8") as f:
             f.write(html)
         print("index.html aktualisiert (Genesungs-Modus).")
@@ -518,6 +535,7 @@ def main():
         }
 
     html = inject_garmin_data(html, metrics, claude_result)
+    html = inject_efficiency(html, metrics)
 
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html)
