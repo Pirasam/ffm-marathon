@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-08-30T20:49:34+02:00",
-  "sync_date": "2026-08-30",
-  "token_days_left": 29.9,
+  "synced_at": "2026-08-31T06:58:10+02:00",
+  "sync_date": "2026-08-31",
+  "token_days_left": 29.4,
   "metrics": {
-    "sleep_hours": 8.3,
-    "sleep_score": 86,
+    "sleep_hours": 6.6,
+    "sleep_score": 73,
     "hrv_status": "LOW",
-    "hrv_value": 40,
+    "hrv_value": 35,
     "hrv_weekly_avg": 33,
-    "hrv_balanced_low": 39,
+    "hrv_balanced_low": 38,
     "hrv_balanced_high": 48,
-    "stress": 28,
-    "resting_hr": 58,
-    "body_battery": 85,
-    "training_readiness": 26,
+    "stress": 21,
+    "resting_hr": 61,
+    "body_battery": 66,
+    "training_readiness": 35,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -131,15 +131,6 @@
         "duration_min": 82,
         "pace_min_km": 8.16,
         "avg_hr": 139.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-08-16",
-        "distance_km": 6.6,
-        "duration_min": 66,
-        "pace_min_km": 10.0,
-        "avg_hr": 117.0
       }
     ],
     "last_run": {
@@ -153,8 +144,7 @@
     },
     "weekly_running": {
       "2026-W35": 25.0,
-      "2026-W34": 29.4,
-      "2026-W33": 6.6
+      "2026-W34": 29.4
     },
     "run_dynamics": {
       "date": "2026-08-30",
@@ -193,11 +183,6 @@
           "cadence": 161.0,
           "vertical_ratio": 13.3,
           "gct": 285.0
-        },
-        "2026-08-16": {
-          "cadence": 146.0,
-          "vertical_ratio": 13.3,
-          "gct": 302.0
         }
       }
     },
@@ -257,25 +242,24 @@
       "2026-06-05": 91.3,
       "2026-06-04": 91.6,
       "2026-06-03": 91.4,
-      "2026-06-02": 92.2,
-      "2026-06-01": 92.3
+      "2026-06-02": 92.2
     },
     "vo2max": 42.7,
     "challenges": [
       {
         "name": "August Step Month",
-        "current": 282319,
+        "current": 283927,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 1,
-        "pct": 94
+        "days_remaining": 0,
+        "pct": 95
       },
       {
         "name": "August Gains",
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 0
       },
       {
@@ -283,7 +267,7 @@
         "current": 169.9,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 31,
+        "days_remaining": 30,
         "pct": 57
       }
     ],
@@ -1220,11 +1204,15 @@
       "ref_dist": 7.8,
       "fit_a": 67.08,
       "fit_b": 0.5749,
-      "generated": "2026-08-30"
+      "generated": "2026-08-31"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-31",
+        "v": 35
+      },
       {
         "d": "2026-08-30",
         "v": 40
@@ -1340,13 +1328,13 @@
       {
         "d": "2026-08-02",
         "v": 47
-      },
-      {
-        "d": "2026-08-01",
-        "v": 38
       }
     ],
     "rhr": [
+      {
+        "d": "2026-08-31",
+        "v": 61
+      },
       {
         "d": "2026-08-30",
         "v": 58
@@ -1462,10 +1450,6 @@
       {
         "d": "2026-08-02",
         "v": 55
-      },
-      {
-        "d": "2026-08-01",
-        "v": 58
       }
     ],
     "weight": [
@@ -1839,6 +1823,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-31",
+        "v": 42.7
+      },
       {
         "d": "2026-08-30",
         "v": 42.7
