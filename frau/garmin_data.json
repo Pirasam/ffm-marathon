@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-08-30T21:08:10+02:00",
-  "sync_date": "2026-08-30",
+  "synced_at": "2026-08-31T07:13:13+02:00",
+  "sync_date": "2026-08-31",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.1,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 24,
-    "resting_hr": 56,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 93,
-    "training_readiness": 95,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -59,15 +59,6 @@
         "duration_min": 61,
         "pace_min_km": null,
         "avg_hr": 87.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-08-16",
-        "distance_km": 6.5,
-        "duration_min": 68,
-        "pace_min_km": 10.37,
-        "avg_hr": 137.0
       }
     ],
     "last_run": {
@@ -81,8 +72,7 @@
     },
     "weekly_running": {
       "2026-W35": 7.2,
-      "2026-W34": 12.0,
-      "2026-W33": 6.5
+      "2026-W34": 12.0
     },
     "run_dynamics": {
       "date": "2026-08-30",
@@ -111,11 +101,6 @@
           "cadence": 114.0,
           "vertical_ratio": 11.0,
           "gct": 310.0
-        },
-        "2026-08-16": {
-          "cadence": 128.0,
-          "vertical_ratio": 11.3,
-          "gct": 313.0
         }
       }
     },
@@ -135,7 +120,7 @@
         "current": 260886,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 87
       },
       {
@@ -143,7 +128,7 @@
         "current": 9,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 45
       },
       {
@@ -151,7 +136,7 @@
         "current": 34.1,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 42
       },
       {
@@ -159,23 +144,23 @@
         "current": 3.0,
         "goal": 25.0,
         "unit": "",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 12
-      },
-      {
-        "name": "August Warrior",
-        "current": 0.0,
-        "goal": 14400.0,
-        "unit": "",
-        "days_remaining": 1,
-        "pct": 0
       },
       {
         "name": "August Time to Walk",
         "current": 0.0,
         "goal": 15.0,
         "unit": "h",
-        "days_remaining": 1,
+        "days_remaining": 0,
+        "pct": 0
+      },
+      {
+        "name": "August Warrior",
+        "current": 0.0,
+        "goal": 14400.0,
+        "unit": "",
+        "days_remaining": 0,
         "pct": 0
       },
       {
@@ -183,7 +168,7 @@
         "current": 65.4,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 31,
+        "days_remaining": 30,
         "pct": 22
       },
       {
@@ -191,14 +176,14 @@
         "current": 0.0,
         "goal": 146.4,
         "unit": "km",
-        "days_remaining": 31,
+        "days_remaining": 30,
         "pct": 0
       }
     ],
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-28",
-      "day_in_cycle": 3,
+      "day_in_cycle": 4,
       "phase": "menstruation",
       "phase_raw": 1,
       "period_length": 6,
@@ -206,10 +191,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 4,
-      "next_period_in_days": 25,
+      "days_until_next_phase": 3,
+      "next_period_in_days": 24,
       "next_period_date": "2026-09-24",
-      "next_follicular_in_days": 31
+      "next_follicular_in_days": 30
     },
     "_errors": [],
     "efficiency": {
@@ -555,11 +540,15 @@
       "ref_dist": 4.3,
       "fit_a": 96.54,
       "fit_b": 0.4462,
-      "generated": "2026-08-30"
+      "generated": "2026-08-31"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-08-31",
+        "v": 30
+      },
       {
         "d": "2026-08-30",
         "v": 30
@@ -675,10 +664,6 @@
       {
         "d": "2026-08-01",
         "v": 31
-      },
-      {
-        "d": "2026-07-31",
-        "v": 28
       }
     ],
     "rhr": [
@@ -886,6 +871,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-08-31",
+        "v": 39.1
+      },
       {
         "d": "2026-08-30",
         "v": 39.1
