@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-01T06:58:12+02:00",
+  "synced_at": "2026-09-01T08:53:01+02:00",
   "sync_date": "2026-09-01",
   "token_days_left": 29.4,
   "metrics": {
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 34,
     "hrv_balanced_low": 38,
     "hrv_balanced_high": 48,
-    "stress": 13,
+    "stress": 14,
     "resting_hr": 57,
     "body_battery": 97,
-    "training_readiness": 66,
+    "training_readiness": 40,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-09-01",
+        "distance_km": 10.0,
+        "duration_min": 80,
+        "pace_min_km": 7.95,
+        "avg_hr": 142.0
+      },
       {
         "name": "Frankfurt am Main Rennradfahren",
         "type": "road_biking",
@@ -131,43 +140,40 @@
         "duration_min": 30,
         "pace_min_km": 3.1,
         "avg_hr": 117.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-08-18",
-        "distance_km": 10.0,
-        "duration_min": 82,
-        "pace_min_km": 8.16,
-        "avg_hr": 139.0
       }
     ],
     "last_run": {
       "name": "Frankfurt am Main Laufen",
       "type": "running",
-      "date": "2026-08-30",
-      "distance_km": 16.0,
-      "duration_min": 142,
-      "pace_min_km": 8.87,
-      "avg_hr": 138.0
+      "date": "2026-09-01",
+      "distance_km": 10.0,
+      "duration_min": 80,
+      "pace_min_km": 7.95,
+      "avg_hr": 142.0
     },
     "weekly_running": {
+      "2026-W36": 10.0,
       "2026-W35": 25.0,
       "2026-W34": 29.4
     },
     "run_dynamics": {
-      "date": "2026-08-30",
-      "distance_km": 16.0,
-      "cadence": 157.0,
-      "stride_length": 72.0,
-      "vertical_oscillation": 9.8,
-      "vertical_ratio": 13.6,
-      "ground_contact_time": 280.0,
-      "ground_contact_balance": 51.0,
-      "avg_power": 315.0,
-      "performance_condition": -3,
-      "step_speed_loss_pct": 6.1,
+      "date": "2026-09-01",
+      "distance_km": 10.0,
+      "cadence": 161.0,
+      "stride_length": 78.0,
+      "vertical_oscillation": 9.4,
+      "vertical_ratio": 11.9,
+      "ground_contact_time": 281.0,
+      "ground_contact_balance": 49.4,
+      "avg_power": 316.0,
+      "performance_condition": -2,
+      "step_speed_loss_pct": null,
       "history": {
+        "2026-09-01": {
+          "cadence": 161.0,
+          "vertical_ratio": 11.9,
+          "gct": 281.0
+        },
         "2026-08-30": {
           "cadence": 157.0,
           "vertical_ratio": 13.6,
@@ -256,11 +262,51 @@
     "challenges": [
       {
         "name": "2026 Running - Stage 3",
-        "current": 169.9,
+        "current": 179.9,
         "goal": 300.0,
         "unit": "km",
         "days_remaining": 29,
-        "pct": 57
+        "pct": 60
+      },
+      {
+        "name": "Ahotu Marathon Challenge",
+        "current": 10.0,
+        "goal": 42.1,
+        "unit": "km",
+        "days_remaining": 29,
+        "pct": 24
+      },
+      {
+        "name": "September Time to Run",
+        "current": 1.3,
+        "goal": 10.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 13
+      },
+      {
+        "name": "September Rundown",
+        "current": 10.0,
+        "goal": 80.5,
+        "unit": "km",
+        "days_remaining": 29,
+        "pct": 12
+      },
+      {
+        "name": "Active September",
+        "current": 1,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 29,
+        "pct": 5
+      },
+      {
+        "name": "September Step Month",
+        "current": 13505,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 29,
+        "pct": 5
       },
       {
         "name": "September Gains",
@@ -271,50 +317,10 @@
         "pct": 0
       },
       {
-        "name": "September Time to Run",
-        "current": 0.0,
-        "goal": 10.0,
-        "unit": "h",
-        "days_remaining": 29,
-        "pct": 0
-      },
-      {
         "name": "September Time to Ride",
         "current": 0.0,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 29,
-        "pct": 0
-      },
-      {
-        "name": "Active September",
-        "current": 0,
-        "goal": 20,
-        "unit": "Aktivitäten",
-        "days_remaining": 29,
-        "pct": 0
-      },
-      {
-        "name": "September Rundown",
-        "current": 0.0,
-        "goal": 80.5,
-        "unit": "km",
-        "days_remaining": 29,
-        "pct": 0
-      },
-      {
-        "name": "September Step Month",
-        "current": 112,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 29,
-        "pct": 0
-      },
-      {
-        "name": "Ahotu Marathon Challenge",
-        "current": 0.0,
-        "goal": 42.1,
-        "unit": "km",
         "days_remaining": 29,
         "pct": 0
       }
@@ -332,7 +338,7 @@
           "hf": 154.0,
           "maxhf": 179.0,
           "ei": 102.34,
-          "ei_corr": 102.0,
+          "ei_corr": 101.94,
           "dev": 3.7
         },
         {
@@ -344,8 +350,8 @@
           "hf": 148.0,
           "maxhf": 179.0,
           "ei": 89.12,
-          "ei_corr": 89.17,
-          "dev": -5.1
+          "ei_corr": 89.12,
+          "dev": -5.0
         },
         {
           "date": "2025-09-07",
@@ -356,8 +362,8 @@
           "hf": 145.0,
           "maxhf": 156.0,
           "ei": 94.69,
-          "ei_corr": 95.36,
-          "dev": 1.0
+          "ei_corr": 95.3,
+          "dev": 1.1
         },
         {
           "date": "2025-09-13",
@@ -368,7 +374,7 @@
           "hf": 146.0,
           "maxhf": 157.0,
           "ei": 99.25,
-          "ei_corr": 99.55,
+          "ei_corr": 99.48,
           "dev": 4.4
         },
         {
@@ -380,7 +386,7 @@
           "hf": 138.0,
           "maxhf": 153.0,
           "ei": 85.58,
-          "ei_corr": 84.54,
+          "ei_corr": 84.47,
           "dev": -3.0
         },
         {
@@ -392,8 +398,8 @@
           "hf": 114.0,
           "maxhf": 143.0,
           "ei": 83.51,
-          "ei_corr": 82.3,
-          "dev": 7.8
+          "ei_corr": 82.22,
+          "dev": 7.9
         },
         {
           "date": "2025-10-15",
@@ -404,7 +410,7 @@
           "hf": 138.0,
           "maxhf": 167.0,
           "ei": 76.01,
-          "ei_corr": 76.88,
+          "ei_corr": 76.83,
           "dev": -10.6
         },
         {
@@ -416,8 +422,8 @@
           "hf": 121.0,
           "maxhf": 139.0,
           "ei": 89.01,
-          "ei_corr": 88.46,
-          "dev": 8.0
+          "ei_corr": 88.39,
+          "dev": 8.1
         },
         {
           "date": "2025-11-06",
@@ -428,7 +434,7 @@
           "hf": 146.0,
           "maxhf": 168.0,
           "ei": 87.67,
-          "ei_corr": 87.33,
+          "ei_corr": 87.27,
           "dev": -5.3
         },
         {
@@ -440,7 +446,7 @@
           "hf": 137.0,
           "maxhf": 149.0,
           "ei": 85.55,
-          "ei_corr": 84.57,
+          "ei_corr": 84.51,
           "dev": -2.5
         },
         {
@@ -452,7 +458,7 @@
           "hf": 154.0,
           "maxhf": 168.0,
           "ei": 82.79,
-          "ei_corr": 83.38,
+          "ei_corr": 83.33,
           "dev": -13.6
         },
         {
@@ -464,7 +470,7 @@
           "hf": 133.0,
           "maxhf": 192.0,
           "ei": 85.79,
-          "ei_corr": 85.41,
+          "ei_corr": 85.34,
           "dev": -0.3
         },
         {
@@ -476,7 +482,7 @@
           "hf": 149.0,
           "maxhf": 165.0,
           "ei": 85.3,
-          "ei_corr": 85.92,
+          "ei_corr": 85.87,
           "dev": -8.8
         },
         {
@@ -488,7 +494,7 @@
           "hf": 152.0,
           "maxhf": 164.0,
           "ei": 89.61,
-          "ei_corr": 90.26,
+          "ei_corr": 90.21,
           "dev": -6.6
         },
         {
@@ -500,7 +506,7 @@
           "hf": 145.0,
           "maxhf": 167.0,
           "ei": 93.24,
-          "ei_corr": 92.63,
+          "ei_corr": 92.57,
           "dev": -0.2
         },
         {
@@ -512,7 +518,7 @@
           "hf": 149.0,
           "maxhf": 163.0,
           "ei": 90.94,
-          "ei_corr": 91.42,
+          "ei_corr": 91.37,
           "dev": -4.0
         },
         {
@@ -524,7 +530,7 @@
           "hf": 148.0,
           "maxhf": 159.0,
           "ei": 89.53,
-          "ei_corr": 90.01,
+          "ei_corr": 89.95,
           "dev": -4.7
         },
         {
@@ -536,7 +542,7 @@
           "hf": 150.0,
           "maxhf": 169.0,
           "ei": 75.47,
-          "ei_corr": 75.7,
+          "ei_corr": 75.65,
           "dev": -17.8
         },
         {
@@ -548,8 +554,8 @@
           "hf": 125.0,
           "maxhf": 142.0,
           "ei": 88.56,
-          "ei_corr": 87.35,
-          "dev": 5.7
+          "ei_corr": 87.27,
+          "dev": 5.8
         },
         {
           "date": "2026-01-23",
@@ -560,8 +566,8 @@
           "hf": 159.0,
           "maxhf": 177.0,
           "ei": 90.31,
-          "ei_corr": 89.43,
-          "dev": -9.4
+          "ei_corr": 89.37,
+          "dev": -9.3
         },
         {
           "date": "2026-01-25",
@@ -572,8 +578,8 @@
           "hf": 154.0,
           "maxhf": 168.0,
           "ei": 82.73,
-          "ei_corr": 83.32,
-          "dev": -13.7
+          "ei_corr": 83.27,
+          "dev": -13.6
         },
         {
           "date": "2026-01-31",
@@ -584,7 +590,7 @@
           "hf": 158.0,
           "maxhf": 180.0,
           "ei": 98.61,
-          "ei_corr": 97.56,
+          "ei_corr": 97.49,
           "dev": -1.3
         },
         {
@@ -596,7 +602,7 @@
           "hf": 148.0,
           "maxhf": 165.0,
           "ei": 84.05,
-          "ei_corr": 85.83,
+          "ei_corr": 85.78,
           "dev": -9.4
         },
         {
@@ -608,8 +614,8 @@
           "hf": 149.0,
           "maxhf": 165.0,
           "ei": 85.37,
-          "ei_corr": 85.04,
-          "dev": -8.8
+          "ei_corr": 84.98,
+          "dev": -8.7
         },
         {
           "date": "2026-03-15",
@@ -620,7 +626,7 @@
           "hf": 152.0,
           "maxhf": 170.0,
           "ei": 87.57,
-          "ei_corr": 87.65,
+          "ei_corr": 87.59,
           "dev": -8.4
         },
         {
@@ -632,7 +638,7 @@
           "hf": 147.0,
           "maxhf": 171.0,
           "ei": 87.55,
-          "ei_corr": 87.74,
+          "ei_corr": 87.68,
           "dev": -5.9
         },
         {
@@ -644,8 +650,8 @@
           "hf": 153.0,
           "maxhf": 170.0,
           "ei": 95.1,
-          "ei_corr": 95.03,
-          "dev": -2.3
+          "ei_corr": 94.97,
+          "dev": -2.2
         },
         {
           "date": "2026-03-22",
@@ -656,8 +662,8 @@
           "hf": 129.0,
           "maxhf": 166.0,
           "ei": 84.88,
-          "ei_corr": 83.77,
-          "dev": 1.0
+          "ei_corr": 83.69,
+          "dev": 1.1
         },
         {
           "date": "2026-04-02",
@@ -668,7 +674,7 @@
           "hf": 144.0,
           "maxhf": 169.0,
           "ei": 93.47,
-          "ei_corr": 92.3,
+          "ei_corr": 92.23,
           "dev": 0.5
         },
         {
@@ -680,8 +686,8 @@
           "hf": 141.0,
           "maxhf": 164.0,
           "ei": 90.85,
-          "ei_corr": 91.3,
-          "dev": -0.3
+          "ei_corr": 91.24,
+          "dev": -0.2
         },
         {
           "date": "2026-04-11",
@@ -692,7 +698,7 @@
           "hf": 149.0,
           "maxhf": 185.0,
           "ei": 101.95,
-          "ei_corr": 101.11,
+          "ei_corr": 101.04,
           "dev": 5.4
         },
         {
@@ -704,8 +710,8 @@
           "hf": 152.0,
           "maxhf": 163.0,
           "ei": 92.3,
-          "ei_corr": 92.3,
-          "dev": -4.3
+          "ei_corr": 92.24,
+          "dev": -4.2
         },
         {
           "date": "2026-04-15",
@@ -716,7 +722,7 @@
           "hf": 149.0,
           "maxhf": 161.0,
           "ei": 101.54,
-          "ei_corr": 99.58,
+          "ei_corr": 99.5,
           "dev": 5.1
         },
         {
@@ -728,7 +734,7 @@
           "hf": 110.0,
           "maxhf": 120.0,
           "ei": 67.18,
-          "ei_corr": 65.26,
+          "ei_corr": 65.2,
           "dev": -0.4
         },
         {
@@ -740,7 +746,7 @@
           "hf": 137.0,
           "maxhf": 179.0,
           "ei": 89.27,
-          "ei_corr": 88.25,
+          "ei_corr": 88.18,
           "dev": 0.4
         },
         {
@@ -752,8 +758,8 @@
           "hf": 152.0,
           "maxhf": 168.0,
           "ei": 92.63,
-          "ei_corr": 94.11,
-          "dev": -4.0
+          "ei_corr": 94.06,
+          "dev": -3.9
         },
         {
           "date": "2026-04-28",
@@ -764,7 +770,7 @@
           "hf": 149.0,
           "maxhf": 165.0,
           "ei": 96.04,
-          "ei_corr": 95.52,
+          "ei_corr": 95.46,
           "dev": 0.4
         },
         {
@@ -776,7 +782,7 @@
           "hf": 153.0,
           "maxhf": 176.0,
           "ei": 101.44,
-          "ei_corr": 100.74,
+          "ei_corr": 100.67,
           "dev": 3.3
         },
         {
@@ -788,7 +794,7 @@
           "hf": 150.0,
           "maxhf": 166.0,
           "ei": 94.73,
-          "ei_corr": 95.45,
+          "ei_corr": 95.4,
           "dev": -1.2
         },
         {
@@ -800,8 +806,8 @@
           "hf": 137.0,
           "maxhf": 153.0,
           "ei": 105.33,
-          "ei_corr": 104.05,
-          "dev": 13.0
+          "ei_corr": 103.96,
+          "dev": 13.1
         },
         {
           "date": "2026-05-07",
@@ -812,8 +818,8 @@
           "hf": 155.0,
           "maxhf": 182.0,
           "ei": 102.97,
-          "ei_corr": 102.31,
-          "dev": 3.8
+          "ei_corr": 102.24,
+          "dev": 3.9
         },
         {
           "date": "2026-05-10",
@@ -824,8 +830,8 @@
           "hf": 151.0,
           "maxhf": 164.0,
           "ei": 87.35,
-          "ei_corr": 88.86,
-          "dev": -8.1
+          "ei_corr": 88.81,
+          "dev": -8.0
         },
         {
           "date": "2026-05-13",
@@ -836,7 +842,7 @@
           "hf": 150.0,
           "maxhf": 164.0,
           "ei": 95.47,
-          "ei_corr": 96.2,
+          "ei_corr": 96.14,
           "dev": -0.6
         },
         {
@@ -848,7 +854,7 @@
           "hf": 152.0,
           "maxhf": 176.0,
           "ei": 102.3,
-          "ei_corr": 101.8,
+          "ei_corr": 101.73,
           "dev": 4.5
         },
         {
@@ -860,7 +866,7 @@
           "hf": 152.0,
           "maxhf": 164.0,
           "ei": 92.04,
-          "ei_corr": 93.45,
+          "ei_corr": 93.4,
           "dev": -4.5
         },
         {
@@ -872,7 +878,7 @@
           "hf": 153.0,
           "maxhf": 168.0,
           "ei": 88.1,
-          "ei_corr": 92.0,
+          "ei_corr": 91.97,
           "dev": -8.4
         },
         {
@@ -884,7 +890,7 @@
           "hf": 153.0,
           "maxhf": 168.0,
           "ei": 101.11,
-          "ei_corr": 100.84,
+          "ei_corr": 100.78,
           "dev": 3.0
         },
         {
@@ -896,7 +902,7 @@
           "hf": 148.0,
           "maxhf": 163.0,
           "ei": 98.72,
-          "ei_corr": 99.45,
+          "ei_corr": 99.39,
           "dev": 3.1
         },
         {
@@ -908,7 +914,7 @@
           "hf": 143.0,
           "maxhf": 159.0,
           "ei": 91.68,
-          "ei_corr": 94.64,
+          "ei_corr": 94.6,
           "dev": -0.5
         },
         {
@@ -920,7 +926,7 @@
           "hf": 144.0,
           "maxhf": 158.0,
           "ei": 97.15,
-          "ei_corr": 97.93,
+          "ei_corr": 97.87,
           "dev": 3.5
         },
         {
@@ -932,8 +938,8 @@
           "hf": 142.0,
           "maxhf": 153.0,
           "ei": 98.31,
-          "ei_corr": 99.08,
-          "dev": 5.3
+          "ei_corr": 99.02,
+          "dev": 5.4
         },
         {
           "date": "2026-06-16",
@@ -944,8 +950,8 @@
           "hf": 137.0,
           "maxhf": 149.0,
           "ei": 91.24,
-          "ei_corr": 90.99,
-          "dev": 1.9
+          "ei_corr": 90.92,
+          "dev": 2.0
         },
         {
           "date": "2026-06-18",
@@ -956,8 +962,8 @@
           "hf": 139.0,
           "maxhf": 161.0,
           "ei": 77.41,
-          "ei_corr": 77.88,
-          "dev": -10.1
+          "ei_corr": 77.82,
+          "dev": -10.0
         },
         {
           "date": "2026-06-23",
@@ -968,7 +974,7 @@
           "hf": 144.0,
           "maxhf": 159.0,
           "ei": 92.85,
-          "ei_corr": 93.58,
+          "ei_corr": 93.52,
           "dev": -0.0
         },
         {
@@ -980,8 +986,8 @@
           "hf": 142.0,
           "maxhf": 154.0,
           "ei": 91.55,
-          "ei_corr": 91.37,
-          "dev": -0.2
+          "ei_corr": 91.31,
+          "dev": -0.1
         },
         {
           "date": "2026-06-28",
@@ -992,8 +998,8 @@
           "hf": 148.0,
           "maxhf": 158.0,
           "ei": 92.91,
-          "ei_corr": 93.59,
-          "dev": -1.9
+          "ei_corr": 93.54,
+          "dev": -1.8
         },
         {
           "date": "2026-06-29",
@@ -1004,7 +1010,7 @@
           "hf": 115.0,
           "maxhf": 134.0,
           "ei": 91.04,
-          "ei_corr": 89.54,
+          "ei_corr": 89.45,
           "dev": 12.3
         },
         {
@@ -1016,7 +1022,7 @@
           "hf": 146.0,
           "maxhf": 157.0,
           "ei": 98.01,
-          "ei_corr": 98.74,
+          "ei_corr": 98.68,
           "dev": 3.4
         },
         {
@@ -1028,7 +1034,7 @@
           "hf": 137.0,
           "maxhf": 149.0,
           "ei": 97.15,
-          "ei_corr": 98.65,
+          "ei_corr": 98.59,
           "dev": 6.6
         },
         {
@@ -1040,8 +1046,8 @@
           "hf": 138.0,
           "maxhf": 151.0,
           "ei": 98.99,
-          "ei_corr": 101.94,
-          "dev": 7.6
+          "ei_corr": 101.89,
+          "dev": 7.7
         },
         {
           "date": "2026-07-06",
@@ -1052,7 +1058,7 @@
           "hf": 136.0,
           "maxhf": 148.0,
           "ei": 100.15,
-          "ei_corr": 101.69,
+          "ei_corr": 101.63,
           "dev": 9.4
         },
         {
@@ -1064,7 +1070,7 @@
           "hf": 147.0,
           "maxhf": 173.0,
           "ei": 104.22,
-          "ei_corr": 104.99,
+          "ei_corr": 104.92,
           "dev": 8.2
         },
         {
@@ -1076,7 +1082,7 @@
           "hf": 137.0,
           "maxhf": 157.0,
           "ei": 92.77,
-          "ei_corr": 97.39,
+          "ei_corr": 97.35,
           "dev": 3.2
         },
         {
@@ -1088,7 +1094,7 @@
           "hf": 139.0,
           "maxhf": 146.0,
           "ei": 97.12,
-          "ei_corr": 94.98,
+          "ei_corr": 94.9,
           "dev": 5.7
         },
         {
@@ -1100,7 +1106,7 @@
           "hf": 132.0,
           "maxhf": 144.0,
           "ei": 90.53,
-          "ei_corr": 89.45,
+          "ei_corr": 89.38,
           "dev": 3.8
         },
         {
@@ -1112,8 +1118,8 @@
           "hf": 133.0,
           "maxhf": 150.0,
           "ei": 89.92,
-          "ei_corr": 89.47,
-          "dev": 2.8
+          "ei_corr": 89.4,
+          "dev": 2.9
         },
         {
           "date": "2026-08-02",
@@ -1124,8 +1130,8 @@
           "hf": 138.0,
           "maxhf": 150.0,
           "ei": 93.84,
-          "ei_corr": 93.47,
-          "dev": 3.5
+          "ei_corr": 93.4,
+          "dev": 3.6
         },
         {
           "date": "2026-08-04",
@@ -1136,8 +1142,8 @@
           "hf": 139.0,
           "maxhf": 150.0,
           "ei": 91.15,
-          "ei_corr": 90.81,
-          "dev": 0.9
+          "ei_corr": 90.75,
+          "dev": 1.0
         },
         {
           "date": "2026-08-06",
@@ -1148,7 +1154,7 @@
           "hf": 138.0,
           "maxhf": 149.0,
           "ei": 94.49,
-          "ei_corr": 94.39,
+          "ei_corr": 94.33,
           "dev": 4.1
         },
         {
@@ -1160,7 +1166,7 @@
           "hf": 112.0,
           "maxhf": 126.0,
           "ei": 91.79,
-          "ei_corr": 90.43,
+          "ei_corr": 90.35,
           "dev": 14.2
         },
         {
@@ -1172,7 +1178,7 @@
           "hf": 117.0,
           "maxhf": 131.0,
           "ei": 85.47,
-          "ei_corr": 85.06,
+          "ei_corr": 84.99,
           "dev": 7.6
         },
         {
@@ -1184,7 +1190,7 @@
           "hf": 117.0,
           "maxhf": null,
           "ei": 85.47,
-          "ei_corr": 85.05,
+          "ei_corr": 84.97,
           "dev": 7.6
         },
         {
@@ -1196,8 +1202,8 @@
           "hf": 139.0,
           "maxhf": 151.0,
           "ei": 88.13,
-          "ei_corr": 88.82,
-          "dev": -1.5
+          "ei_corr": 88.76,
+          "dev": -1.4
         },
         {
           "date": "2026-08-21",
@@ -1208,8 +1214,8 @@
           "hf": 113.0,
           "maxhf": 132.0,
           "ei": 85.22,
-          "ei_corr": 84.46,
-          "dev": 9.4
+          "ei_corr": 84.38,
+          "dev": 9.5
         },
         {
           "date": "2026-08-23",
@@ -1220,7 +1226,7 @@
           "hf": 129.0,
           "maxhf": 150.0,
           "ei": 88.6,
-          "ei_corr": 90.6,
+          "ei_corr": 90.55,
           "dev": 3.8
         },
         {
@@ -1232,7 +1238,7 @@
           "hf": 143.0,
           "maxhf": 161.0,
           "ei": 86.08,
-          "ei_corr": 86.44,
+          "ei_corr": 86.38,
           "dev": -5.1
         },
         {
@@ -1244,14 +1250,26 @@
           "hf": 138.0,
           "maxhf": 158.0,
           "ei": 81.74,
-          "ei_corr": 84.18,
-          "dev": -6.1
+          "ei_corr": 84.14,
+          "dev": -6.0
+        },
+        {
+          "date": "2026-09-01",
+          "dist": 10.0,
+          "dur_min": 80,
+          "pace": 8.0,
+          "speed": 125.0,
+          "hf": 142.0,
+          "maxhf": null,
+          "ei": 88.03,
+          "ei_corr": 88.64,
+          "dev": -3.0
         }
       ],
-      "drift": 0.487,
-      "ref_dist": 7.8,
-      "fit_a": 67.08,
-      "fit_b": 0.5749,
+      "drift": 0.49,
+      "ref_dist": 8.0,
+      "fit_a": 67.2,
+      "fit_b": 0.5743,
       "generated": "2026-09-01"
     }
   },
@@ -1744,6 +1762,10 @@
     ],
     "weekly_km": [
       {
+        "w": "2026-W36",
+        "v": 10.0
+      },
+      {
         "w": "2026-W35",
         "v": 25.0
       },
@@ -1773,6 +1795,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-09-01",
+        "cadence": 161.0,
+        "vertical_ratio": 11.9,
+        "gct": 281.0
+      },
       {
         "d": "2026-08-30",
         "cadence": 157.0,
@@ -2041,6 +2069,12 @@
       }
     ],
     "efficiency": [
+      {
+        "d": "2026-09-01",
+        "dist": 10.0,
+        "dur": 80,
+        "hf": 142.0
+      },
       {
         "d": "2026-08-30",
         "dist": 16.02,
