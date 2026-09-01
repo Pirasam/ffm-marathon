@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-08-31T14:45:11+02:00",
-  "sync_date": "2026-08-31",
+  "synced_at": "2026-09-01T07:13:14+02:00",
+  "sync_date": "2026-09-01",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.5,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 19,
-    "resting_hr": 57,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 98,
-    "training_readiness": 100,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -104,8 +104,9 @@
         }
       }
     },
-    "weight_kg": 67.1,
+    "weight_kg": 66.8,
     "weight_history": {
+      "2026-09-01": 66.8,
       "2026-08-31": 67.1,
       "2026-08-22": 67.6,
       "2026-08-06": 66.3,
@@ -117,74 +118,74 @@
     "vo2max": 39.1,
     "challenges": [
       {
-        "name": "August Step Month",
-        "current": 268635,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 0,
-        "pct": 90
-      },
-      {
-        "name": "Active August",
-        "current": 9,
-        "goal": 20,
-        "unit": "Aktivitäten",
-        "days_remaining": 0,
-        "pct": 45
-      },
-      {
-        "name": "August Rundown",
-        "current": 34.1,
-        "goal": 80.5,
-        "unit": "km",
-        "days_remaining": 0,
-        "pct": 42
-      },
-      {
-        "name": "August Likes",
-        "current": 3.0,
-        "goal": 25.0,
-        "unit": "",
-        "days_remaining": 0,
-        "pct": 12
-      },
-      {
-        "name": "August Time to Walk",
-        "current": 0.0,
-        "goal": 15.0,
-        "unit": "h",
-        "days_remaining": 0,
-        "pct": 0
-      },
-      {
-        "name": "August Warrior",
-        "current": 0.0,
-        "goal": 14400.0,
-        "unit": "",
-        "days_remaining": 0,
-        "pct": 0
-      },
-      {
         "name": "2026 Running - Stage 3",
         "current": 65.4,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 30,
+        "days_remaining": 29,
         "pct": 22
       },
       {
-        "name": "2026 Walking - Stage 3",
+        "name": "September Likes",
         "current": 0.0,
-        "goal": 146.4,
+        "goal": 25.0,
+        "unit": "",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Time to Run",
+        "current": 0.0,
+        "goal": 10.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Time to Ride",
+        "current": 0.0,
+        "goal": 20.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Walking",
+        "current": 0.0,
+        "goal": 48.3,
         "unit": "km",
-        "days_remaining": 30,
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "Active September",
+        "current": 0,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Rundown",
+        "current": 0.0,
+        "goal": 80.5,
+        "unit": "km",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Step Month",
+        "current": 0,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 29,
         "pct": 0
       }
     ],
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-28",
-      "day_in_cycle": 4,
+      "day_in_cycle": 5,
       "phase": "menstruation",
       "phase_raw": 1,
       "period_length": 6,
@@ -192,10 +193,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 3,
-      "next_period_in_days": 24,
+      "days_until_next_phase": 2,
+      "next_period_in_days": 23,
       "next_period_date": "2026-09-24",
-      "next_follicular_in_days": 30
+      "next_follicular_in_days": 29
     },
     "_errors": [],
     "efficiency": {
@@ -541,11 +542,15 @@
       "ref_dist": 4.3,
       "fit_a": 96.54,
       "fit_b": 0.4462,
-      "generated": "2026-08-31"
+      "generated": "2026-09-01"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-01",
+        "v": 34
+      },
       {
         "d": "2026-08-31",
         "v": 34
@@ -661,10 +666,6 @@
       {
         "d": "2026-08-02",
         "v": 23
-      },
-      {
-        "d": "2026-08-01",
-        "v": 31
       }
     ],
     "rhr": [
@@ -791,6 +792,10 @@
     ],
     "weight": [
       {
+        "d": "2026-09-01",
+        "v": 66.8
+      },
+      {
         "d": "2026-08-31",
         "v": 67.1
       },
@@ -876,6 +881,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-01",
+        "v": 39.1
+      },
       {
         "d": "2026-08-31",
         "v": 39.1
