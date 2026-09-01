@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-08-31T13:00:12+02:00",
-  "sync_date": "2026-08-31",
-  "token_days_left": 29.2,
+  "synced_at": "2026-09-01T06:58:12+02:00",
+  "sync_date": "2026-09-01",
+  "token_days_left": 29.4,
   "metrics": {
-    "sleep_hours": 6.6,
-    "sleep_score": 73,
+    "sleep_hours": 7.8,
+    "sleep_score": 87,
     "hrv_status": "LOW",
-    "hrv_value": 35,
-    "hrv_weekly_avg": 33,
+    "hrv_value": 40,
+    "hrv_weekly_avg": 34,
     "hrv_balanced_low": 38,
     "hrv_balanced_high": 48,
-    "stress": 27,
-    "resting_hr": 61,
-    "body_battery": 66,
-    "training_readiness": 35,
+    "stress": 13,
+    "resting_hr": 57,
+    "body_battery": 97,
+    "training_readiness": 66,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Rennradfahren",
@@ -250,34 +250,73 @@
       "2026-06-07": 91.1,
       "2026-06-05": 91.3,
       "2026-06-04": 91.6,
-      "2026-06-03": 91.4,
-      "2026-06-02": 92.2
+      "2026-06-03": 91.4
     },
     "vo2max": 42.7,
     "challenges": [
-      {
-        "name": "August Step Month",
-        "current": 287869,
-        "goal": 300000,
-        "unit": "Schritte",
-        "days_remaining": 0,
-        "pct": 96
-      },
-      {
-        "name": "August Gains",
-        "current": 0.0,
-        "goal": 4.0,
-        "unit": "h",
-        "days_remaining": 0,
-        "pct": 0
-      },
       {
         "name": "2026 Running - Stage 3",
         "current": 169.9,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 30,
+        "days_remaining": 29,
         "pct": 57
+      },
+      {
+        "name": "September Gains",
+        "current": 0.0,
+        "goal": 4.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Time to Run",
+        "current": 0.0,
+        "goal": 10.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Time to Ride",
+        "current": 0.0,
+        "goal": 20.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "Active September",
+        "current": 0,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Rundown",
+        "current": 0.0,
+        "goal": 80.5,
+        "unit": "km",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "September Step Month",
+        "current": 112,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "Ahotu Marathon Challenge",
+        "current": 0.0,
+        "goal": 42.1,
+        "unit": "km",
+        "days_remaining": 29,
+        "pct": 0
       }
     ],
     "cycle": null,
@@ -1213,11 +1252,15 @@
       "ref_dist": 7.8,
       "fit_a": 67.08,
       "fit_b": 0.5749,
-      "generated": "2026-08-31"
+      "generated": "2026-09-01"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-01",
+        "v": 40
+      },
       {
         "d": "2026-08-31",
         "v": 35
@@ -1333,13 +1376,13 @@
       {
         "d": "2026-08-03",
         "v": 41
-      },
-      {
-        "d": "2026-08-02",
-        "v": 47
       }
     ],
     "rhr": [
+      {
+        "d": "2026-09-01",
+        "v": 57
+      },
       {
         "d": "2026-08-31",
         "v": 61
@@ -1455,10 +1498,6 @@
       {
         "d": "2026-08-03",
         "v": 57
-      },
-      {
-        "d": "2026-08-02",
-        "v": 55
       }
     ],
     "weight": [
@@ -1832,6 +1871,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-01",
+        "v": 42.7
+      },
       {
         "d": "2026-08-31",
         "v": 42.7
