@@ -19,7 +19,10 @@ from datetime import date, datetime
 
 from garmin_client import (garmin_login, fetch_garmin_metrics,
                            backfill_history, update_history,
-                           backfill_efficiency, merge_efficiency, compute_efficiency)
+                           backfill_efficiency, merge_efficiency, compute_efficiency,
+                           backfill_vo2max_monthly,
+                           compute_durability, compute_aerobic_base,
+                           compute_economy, backfill_economy)
 from profiles import get_profile
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -37,7 +40,8 @@ TOKEN_PATH = _P["token"]
 DATA_PATH = os.path.join(REPO_DIR, _P["data"])
 
 EMPTY_HISTORY = {"hrv": [], "rhr": [], "weight": [], "weekly_km": [],
-                 "run_dyn": [], "vo2max": [], "efficiency": []}
+                 "run_dyn": [], "vo2max": [], "efficiency": [],
+                 "durability": [], "vo2max_monthly": []}
 
 
 def load_existing():
@@ -112,9 +116,27 @@ def main():
         history = backfill_efficiency(api, history, today)
         history = merge_efficiency(history, metrics.get("recent_activities"))
         metrics["efficiency"] = compute_efficiency(history.get("efficiency") or [], today)
+        history = backfill_vo2max_monthly(api, history, today)
+        if metrics.get("efficiency") is not None:
+            metrics["efficiency"]["vo2max"] = history.get("vo2max_monthly") or []
     except Exception as e:
         print(f"WARNUNG: Effizienz-Berechnung fehlgeschlagen ({e}).")
         metrics["efficiency"] = (existing.get("metrics") or {}).get("efficiency")
+
+    # Marathon-Indikatoren: Durability, aerobe Basis, Laufoekonomie
+    try:
+        history = compute_durability(api, history, today)
+        history = backfill_economy(api, history, today)
+        eff_runs = (metrics.get("efficiency") or {}).get("runs") or []
+        metrics["marathon"] = {
+            "durability": history.get("durability") or [],
+            "aerobic_base": compute_aerobic_base(eff_runs, today),
+            "economy": compute_economy(history.get("run_dyn") or [], today),
+            "generated": today.isoformat(),
+        }
+    except Exception as e:
+        print(f"WARNUNG: Marathon-Indikatoren fehlgeschlagen ({e}).")
+        metrics["marathon"] = (existing.get("metrics") or {}).get("marathon")
 
     # Wie lange traegt der Garmin-Login noch? Der Refresh-Token laeuft nach
     # ~30 Tagen ab; danach hilft nur generate_session.py. Rechtzeitig warnen.

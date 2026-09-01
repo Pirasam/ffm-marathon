@@ -10,7 +10,7 @@ import re
 import json
 from datetime import date, timedelta
 
-from chart_component import efficiency_chart
+from marathon_indicators import marathon_indicators
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "garmin_data.json")
@@ -385,10 +385,10 @@ def inject_efficiency(html_content, metrics):
     ohne KI). Ersatz per Funktion, damit Backslashes/$-Zeichen im HTML nicht als
     re-Ersetzungsmuster interpretiert werden."""
     start, end = EFFICIENCY_MARKER
-    eff = (metrics or {}).get("efficiency")
-    if not eff or start not in html_content:
+    mara = (metrics or {}).get("marathon")
+    if not mara or start not in html_content:
         return html_content
-    block = f"{start}\n{efficiency_chart(eff)}\n{end}"
+    block = f"{start}\n{marathon_indicators(mara)}\n{end}"
     return re.sub(re.escape(start) + r".*?" + re.escape(end),
                   lambda m: block, html_content, flags=re.DOTALL)
 

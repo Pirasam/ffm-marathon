@@ -17,7 +17,7 @@ import json
 import os
 from datetime import date
 
-from chart_component import efficiency_chart
+from marathon_indicators import marathon_indicators
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "frau", "garmin_data.json")
@@ -271,8 +271,7 @@ def build_html(data):
           <div class="road-goal">{esc(r['goal'])}</div>
         </div>"""
 
-    eff = m.get("efficiency")
-    eff_chart = efficiency_chart(eff) if eff and eff.get("runs") else ""
+    eff_chart = marathon_indicators(m.get("marathon"))
 
     return PAGE.format(
         updated=esc(synced or today.isoformat()),

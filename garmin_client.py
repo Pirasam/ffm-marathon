@@ -552,6 +552,202 @@ def backfill_efficiency(api, history, today, months=12):
     return history
 
 
+def compute_durability(api, history, today, months=8, min_km=12):
+    """Aerobes Decoupling auf langen Läufen = (HF:Tempo 2. Hälfte / 1. Hälfte − 1).
+    Niedrig/negativ = gute Ermüdungsresistenz (Durability), DER Marathon-Kernwert.
+    Rechnet je Longrun einmal (Detail-Abruf), speichert inkrementell."""
+    import statistics as _st
+    have = {x["d"]: x for x in (history.get("durability") or [])}
+    start = (today - timedelta(days=int(months * 30.5))).isoformat()
+    try:
+        acts = api.get_activities_by_date(start, today.isoformat(), "")
+    except Exception as e:
+        print(f"Durability-Abruf-Fehler: {e}")
+        return history
+    longs = [a for a in acts
+             if "run" in ((a.get("activityType") or {}).get("typeKey", ""))
+             and (a.get("distance") or 0) / 1000 >= min_km]
+    added = 0
+    for a in longs:
+        d = (a.get("startTimeLocal") or "")[:10]
+        if not d or d in have:
+            continue
+        try:
+            det = api.get_activity_details(a.get("activityId"))
+            idx = {x.get("key"): x.get("metricsIndex") for x in det.get("metricDescriptors", [])}
+            rows = det.get("activityDetailMetrics", [])
+            def ser(k):
+                i = idx.get(k)
+                if i is None:
+                    return []
+                return [r["metrics"][i] for r in rows
+                        if r.get("metrics") and len(r["metrics"]) > i and r["metrics"][i] is not None]
+            hr = ser("directHeartRate")
+            sp = ser("directGradeAdjustedSpeed") or ser("directSpeed")
+            n = min(len(hr), len(sp))
+            if n < 40:
+                continue
+            pairs = [(h, s) for h, s in zip(hr[:n], sp[:n]) if s and s > 0.5 and h and h > 0]
+            if len(pairs) < 40:
+                continue
+            half = len(pairs) // 2
+            hh = [p[0] for p in pairs]; ss = [p[1] for p in pairs]
+            r1 = _st.mean(hh[:half]) / _st.mean(ss[:half])
+            r2 = _st.mean(hh[half:]) / _st.mean(ss[half:])
+            have[d] = {"d": d, "km": round(a["distance"] / 1000, 1),
+                       "decoup": round((r2 / r1 - 1) * 100, 1)}
+            added += 1
+        except Exception as e:
+            print(f"Durability-Detail-Fehler {d}: {str(e)[:50]}")
+    history["durability"] = sorted(have.values(), key=lambda x: x["d"], reverse=True)[:40]
+    print(f"Durability: {added} neue Longruns, gesamt {len(history['durability'])}")
+    return history
+
+
+def compute_aerobic_base(eff_runs, today, ref_hr=145, months=12, window_days=90):
+    """Tempo bei Referenz-HF (Default 145 bpm) = aerobe Basis. Je Monatsanker aus
+    einem ROLLIERENDEN 90-Tage-Fit HF~Geschwindigkeit interpoliert (stabil, nicht
+    aus 3 Läufen extrapoliert). Schneller = fittere Basis; verbessert sich durch
+    Grundlagentraining (anders als VO2max)."""
+    from datetime import date as _d
+    runs = []
+    for r in (eff_runs or []):
+        if r.get("date") and r.get("hf") and r.get("speed"):
+            try:
+                runs.append((_d.fromisoformat(r["date"]), r["speed"], r["hf"]))
+            except Exception:
+                pass
+    out = []
+    y, mo = today.year, today.month
+    anchors = []
+    for i in range(months):
+        mm, yy = mo - i, y
+        while mm <= 0:
+            mm += 12; yy -= 1
+        anchors.append((yy, mm))
+    for yy, mm in sorted(anchors):
+        try:
+            end = _d(yy, mm, 28)
+        except Exception:
+            continue
+        if end > today:
+            end = today
+        start = end - timedelta(days=window_days)
+        w = [r for r in runs if start <= r[0] <= end]
+        if len(w) < 8:
+            continue
+        xs = [r[1] for r in w]; ys = [r[2] for r in w]
+        n = len(xs); mx = sum(xs) / n; my = sum(ys) / n
+        den = sum((x - mx) ** 2 for x in xs)
+        if den <= 0:
+            continue
+        b = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / den
+        a = my - b * mx
+        if b <= 0.1:               # zu flacher/instabiler Fit -> überspringen
+            continue
+        speed = (ref_hr - a) / b
+        if speed <= 90 or speed > 320:
+            continue
+        out.append({"m": f"{yy:04d}-{mm:02d}", "pace_s": round(1000 / speed * 60), "ref": ref_hr})
+    return out
+
+
+def backfill_economy(api, history, today, months=12):
+    """Laufdynamik (vert. Verhältnis, Bodenkontakt, Kadenz) aus den Aktivitäts-
+    Summaries der letzten 12 Monate nachfüllen – für den Ökonomie-Verlauf. Nur
+    einmal (kein Extra-Detailabruf; Werte stehen in der Aktivitätsliste)."""
+    lst = history.get("run_dyn") or []
+    have = {x.get("d") for x in lst}
+    if len(lst) >= 25:
+        return history
+    start = (today - timedelta(days=int(months * 30.5))).isoformat()
+    try:
+        acts = api.get_activities_by_date(start, today.isoformat(), "")
+    except Exception as e:
+        print(f"Economy-Backfill-Fehler: {e}")
+        return history
+    added = 0
+    for a in acts:
+        if "run" not in ((a.get("activityType") or {}).get("typeKey", "")):
+            continue
+        d = (a.get("startTimeLocal") or "")[:10]
+        vr = a.get("avgVerticalRatio"); gct = a.get("avgGroundContactTime")
+        cad = a.get("averageRunningCadenceInStepsPerMinute")
+        if not d or d in have or not (vr or gct or cad):
+            continue
+        have.add(d)
+        lst.append({"d": d,
+                    "cadence": round(cad) if cad else None,
+                    "vertical_ratio": round(vr, 1) if vr else None,
+                    "gct": round(gct) if gct else None})
+        added += 1
+    history["run_dyn"] = sorted(lst, key=lambda x: x.get("d", ""), reverse=True)[:120]
+    print(f"Economy-Backfill: {added} Läufe")
+    return history
+
+
+def compute_economy(run_dyn, today, months=12):
+    """Laufoekonomie-Monatsmittel aus der Laufdynamik: vertikales Verhaeltnis (%),
+    Bodenkontaktzeit (ms), Kadenz (spm). Niedriger vert./GCT + adaequate Kadenz = oekonomischer."""
+    from collections import defaultdict
+    cutoff = (today - timedelta(days=int(months * 30.5))).isoformat()
+    mon = defaultdict(lambda: {"vr": [], "gct": [], "cad": []})
+    for r in (run_dyn or []):
+        d = r.get("d", "")
+        if d < cutoff:
+            continue
+        if r.get("vertical_ratio"):
+            mon[d[:7]]["vr"].append(r["vertical_ratio"])
+        if r.get("gct"):
+            mon[d[:7]]["gct"].append(r["gct"])
+        if r.get("cadence"):
+            mon[d[:7]]["cad"].append(r["cadence"])
+    out = []
+    for mk in sorted(mon):
+        v = mon[mk]
+        def avg(x):
+            return round(sum(x) / len(x), 1) if x else None
+        out.append({"m": mk, "vr": avg(v["vr"]), "gct": avg(v["gct"]), "cad": avg(v["cad"])})
+    return out
+
+
+def backfill_vo2max_monthly(api, history, today, months=12):
+    """Monatliche VO2max-Stichprobe (als Kontextlinie im Effizienz-Chart).
+    Einmal 12 Monate backfillen, danach nur den aktuellen Monat aktualisieren."""
+    from datetime import date as _date
+    series = {x["m"]: x["v"] for x in (history.get("vo2max_monthly") or [])}
+    y, mo = today.year, today.month
+    for i in range(months + 1):
+        mm, yy = mo - i, y
+        while mm <= 0:
+            mm += 12; yy -= 1
+        key = f"{yy:04d}-{mm:02d}"
+        if key in series and i > 0:      # aktueller Monat (i=0) immer neu
+            continue
+        # mehrere Tage pro Monat probieren (VO2max nur an Lauftagen erfasst)
+        v = None
+        for day in (23, 15, 8, 27, 4):
+            try:
+                sd = _date(yy, mm, day)
+            except Exception:
+                continue
+            if sd > today:
+                continue
+            try:
+                p = api.get_max_metrics(sd.isoformat())
+                if isinstance(p, list) and p:
+                    g = p[0].get("generic") or {}
+                    v = g.get("vo2MaxPreciseValue") or g.get("vo2MaxValue")
+                if v:
+                    break
+            except Exception:
+                pass
+        if v:
+            series[key] = round(v, 1)
+    history["vo2max_monthly"] = [{"m": k, "v": series[k]} for k in sorted(series)][-13:]
+    return history
+
+
 def compute_efficiency(eff_list, today, months=12):
     """Aus den gespeicherten Laeufen den Effizienz-Index (Speed/HF) + eine
     datenbasierte Laengenkorrektur (Herzdrift) rechnen. Fuer den Renderer."""
