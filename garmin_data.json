@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-02T16:00:22+02:00",
+  "synced_at": "2026-09-02T19:00:20+02:00",
   "sync_date": "2026-09-02",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
     "sleep_hours": 7.0,
     "sleep_score": 77,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 34,
     "hrv_balanced_low": 38,
     "hrv_balanced_high": 48,
-    "stress": 23,
+    "stress": 24,
     "resting_hr": 60,
     "body_battery": 74,
-    "training_readiness": 36,
+    "training_readiness": 38,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Rennradfahren",
+        "type": "road_biking",
+        "date": "2026-09-02",
+        "distance_km": 10.2,
+        "duration_min": 29,
+        "pace_min_km": 2.88,
+        "avg_hr": 121.0
+      },
       {
         "name": "Frankfurt am Main Rennradfahren",
         "type": "road_biking",
@@ -131,15 +140,6 @@
         "duration_min": 31,
         "pace_min_km": 3.05,
         "avg_hr": 112.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-08-20",
-        "distance_km": 10.0,
-        "duration_min": 32,
-        "pace_min_km": 3.23,
-        "avg_hr": 110.0
       }
     ],
     "last_run": {
@@ -273,11 +273,11 @@
       },
       {
         "name": "Active September",
-        "current": 3,
+        "current": 4,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 28,
-        "pct": 15
+        "pct": 20
       },
       {
         "name": "September Time to Run",
@@ -296,20 +296,20 @@
         "pct": 12
       },
       {
+        "name": "September Time to Ride",
+        "current": 1.6,
+        "goal": 20.0,
+        "unit": "h",
+        "days_remaining": 28,
+        "pct": 8
+      },
+      {
         "name": "September Step Month",
         "current": 23048,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 28,
         "pct": 8
-      },
-      {
-        "name": "September Time to Ride",
-        "current": 1.1,
-        "goal": 20.0,
-        "unit": "h",
-        "days_remaining": 28,
-        "pct": 5
       },
       {
         "name": "September Gains",
