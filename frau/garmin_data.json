@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-02T07:13:25+02:00",
+  "synced_at": "2026-09-02T08:45:20+02:00",
   "sync_date": "2026-09-02",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.2,
-    "sleep_score": 88,
+    "sleep_hours": 8.1,
+    "sleep_score": 89,
     "hrv_status": "BALANCED",
-    "hrv_value": 30,
-    "hrv_weekly_avg": 30,
+    "hrv_value": 35,
+    "hrv_weekly_avg": 31,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 91,
-    "training_readiness": null,
+    "stress": 15,
+    "resting_hr": 55,
+    "body_battery": 100,
+    "training_readiness": 100,
     "recent_activities": [
       {
         "name": "Yoga",
@@ -135,7 +135,7 @@
       },
       {
         "name": "September Step Month",
-        "current": 6122,
+        "current": 7077,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 28,
@@ -641,7 +641,7 @@
     "hrv": [
       {
         "d": "2026-09-02",
-        "v": 30
+        "v": 35
       },
       {
         "d": "2026-09-01",
@@ -762,6 +762,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-09-02",
+        "v": 55
+      },
+      {
         "d": "2026-09-01",
         "v": 57
       },
@@ -876,10 +880,6 @@
       {
         "d": "2026-08-04",
         "v": 58
-      },
-      {
-        "d": "2026-08-03",
-        "v": 59
       }
     ],
     "weight": [
