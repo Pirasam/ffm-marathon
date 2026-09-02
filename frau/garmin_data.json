@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-02T12:15:19+02:00",
+  "synced_at": "2026-09-02T19:45:23+02:00",
   "sync_date": "2026-09-02",
   "token_days_left": null,
   "metrics": {
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 31,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 18,
+    "stress": 21,
     "resting_hr": 55,
     "body_battery": 100,
     "training_readiness": 100,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Gehen",
+        "type": "walking",
+        "date": "2026-09-02",
+        "distance_km": 3.6,
+        "duration_min": 56,
+        "pace_min_km": 15.67,
+        "avg_hr": 104.0
+      },
       {
         "name": "Yoga",
         "type": "yoga",
@@ -127,19 +136,35 @@
       },
       {
         "name": "Active September",
-        "current": 1,
+        "current": 2,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 28,
-        "pct": 5
+        "pct": 10
+      },
+      {
+        "name": "September Walking",
+        "current": 3.6,
+        "goal": 48.3,
+        "unit": "km",
+        "days_remaining": 28,
+        "pct": 7
       },
       {
         "name": "September Step Month",
-        "current": 8100,
+        "current": 17268,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 28,
-        "pct": 3
+        "pct": 6
+      },
+      {
+        "name": "2026 Walking - Stage 3",
+        "current": 3.6,
+        "goal": 146.4,
+        "unit": "km",
+        "days_remaining": 28,
+        "pct": 2
       },
       {
         "name": "September Likes",
@@ -162,22 +187,6 @@
         "current": 0.0,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 28,
-        "pct": 0
-      },
-      {
-        "name": "September Walking",
-        "current": 0.0,
-        "goal": 48.3,
-        "unit": "km",
-        "days_remaining": 28,
-        "pct": 0
-      },
-      {
-        "name": "September Rundown",
-        "current": 0.0,
-        "goal": 80.5,
-        "unit": "km",
         "days_remaining": 28,
         "pct": 0
       }
