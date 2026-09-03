@@ -24,29 +24,21 @@ CLAUDE_MODEL = "claude-opus-4-8"
 # RECOVERY_MODE True: kein normaler Trainingsplan, sondern Erholungs-/Wiederein-
 #   stiegs-Ansicht. Zum Beenden (voller Trainingsbetrieb) RECOVERY_MODE = False.
 # DOCTOR_CLEARED steuert, ob begrenzte Aktivität erlaubt ist (ärztliche Freigabe).
-RECOVERY_MODE = True
-RECOVERY_REASON = "Wiedereinstieg mit SCHILDDRÜSEN-Erkenntnis: L-Thyroxin 175µg ist auf hohes Trainingsvolumen geeicht (TSH 2,34 unter Vollbelastung, 08.06.). Trainingspausen → relativer T4-Überschuss (Halbwertszeit ~7 Tage) → erhöhter Ruhepuls, gedrückte HRV, unruhiger Schlaf, Puls relativ zur Pace erhöht. Lösung: NICHT Dosis senken, sondern wieder locker trainieren – der Sport verbrennt den Überschuss in ~7–10 Tagen."
-RECOVERY_SINCE = "2026-08-26"
+#
+# 02.09.: Entwarnung Borreliose, voller Trainingsbetrieb wieder freigegeben.
+# Euthyrox wird ärztlich begleitet über 2 Wochen halbiert (Dosis auf Trainings-
+# level geeicht, siehe [[thyroid-training-interplay]] in memory) – Samuel
+# beobachtet Über-/Unterfunktionszeichen selbst, kein Dashboard-Banner dafür.
+RECOVERY_MODE = False
+RECOVERY_REASON = ""
+RECOVERY_SINCE = ""
 
-# 26.08.: NEUINTERPRETATION. Die schlechten Werte (Ruhepuls hoch, HRV niedrig,
-# Schlaf) sind vor allem Folge der Trainingspause via Schilddrüse (relativer
-# L-Thyroxin-Überschuss), nicht mangelnder Fitness/reiner Infekt. Deshalb wieder
-# DOCTOR_CLEARED = True, ABER: Training rein LOCKER nach Gefühl/RPE, Puls
-# ignorieren, KEINE Intensität (~10–14 Tage). Sport ist hier die Therapie.
 DOCTOR_CLEARED = True
 DOCTOR_DATE = "2026-07-27"
-DOCTOR_GUIDANCE = (
-    "Grundfreigabe vom 27.07. gilt weiter. Wiedereinstieg nach Gefühl/RPE, nicht nach Puls "
-    "(aktuell durch relativen L-Thyroxin-Überschuss 'falsch kalibriert'). Umfang halten, "
-    "keine Intervalle/Tempo für ~10–14 Tage; der Sport verbrennt den Hormon-Überschuss in "
-    "~7–10 Tagen, dann sinkt der Puls von allein zurück in Zone 2. Dosis NICHT eigenmächtig "
-    "ändern (TSH war unter Training mit 2,34 gut). TSH/fT3/fT4 messen lassen (einmal nach "
-    "Pause, einmal im Volltraining) und mit Endokrinologen einen Akutplan besprechen. "
-    "STOPP + ärztlich abklären bei Herzstolpern/Rhythmusstörungen, Brustdruck, Fieber, "
-    "Atemnot oder erneut belegter Lunge."
-)
+DOCTOR_GUIDANCE = ""
 
-# Individuelle Normalwerte VOR der Infektion (aus den Daten 27.06.–09.07.)
+# Individuelle Normalwerte VOR der Infektion (aus den Daten 27.06.–09.07.) –
+# nur noch als Referenz, wird bei RECOVERY_MODE=False nicht gerendert.
 BASELINE_RHR = (53, 55)
 BASELINE_HRV = (42, 48)
 

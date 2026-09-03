@@ -552,7 +552,7 @@ def backfill_efficiency(api, history, today, months=12):
     return history
 
 
-def compute_durability(api, history, today, months=8, min_km=12):
+def compute_durability(api, history, today, months=12, min_km=12):
     """Aerobes Decoupling auf langen Läufen = (HF:Tempo 2. Hälfte / 1. Hälfte − 1).
     Niedrig/negativ = gute Ermüdungsresistenz (Durability), DER Marathon-Kernwert.
     Rechnet je Longrun einmal (Detail-Abruf), speichert inkrementell."""
@@ -658,7 +658,11 @@ def backfill_economy(api, history, today, months=12):
     einmal (kein Extra-Detailabruf; Werte stehen in der Aktivitätsliste)."""
     lst = history.get("run_dyn") or []
     have = {x.get("d") for x in lst}
-    if len(lst) >= 25:
+    # Nur ueberspringen, wenn die Historie wirklich schon ~months zurueckreicht
+    # (nicht nur "genug Eintraege" – die koennen alle aus den letzten Wochen sein).
+    oldest = min(have) if have else None
+    coverage_cutoff = (today - timedelta(days=int(months * 30.5) - 20)).isoformat()
+    if oldest and oldest <= coverage_cutoff:
         return history
     start = (today - timedelta(days=int(months * 30.5))).isoformat()
     try:
@@ -867,7 +871,9 @@ def update_history(history, metrics, today_str, weekly_running):
         existing_rd = {x["d"]: x for x in history.get("run_dyn", [])}
         for d_str, vals in rd["history"].items():
             existing_rd[d_str] = {"d": d_str, **vals}
-        history["run_dyn"] = sorted(existing_rd.values(), key=lambda x: x["d"], reverse=True)[:40]
+        # Cap muss >= backfill_economy()s Cap (120) sein, sonst frisst dieser
+        # Merge bei jedem Sync die 12-Monats-Backfill-Historie wieder weg.
+        history["run_dyn"] = sorted(existing_rd.values(), key=lambda x: x["d"], reverse=True)[:120]
 
     return history
 
