@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-04T10:00:21+02:00",
+  "synced_at": "2026-09-04T17:30:23+02:00",
   "sync_date": "2026-09-04",
-  "token_days_left": 29.9,
+  "token_days_left": 29.6,
   "metrics": {
     "sleep_hours": 6.6,
     "sleep_score": 75,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 36,
     "hrv_balanced_low": 37,
     "hrv_balanced_high": 48,
-    "stress": 20,
+    "stress": 21,
     "resting_hr": 58,
     "body_battery": 76,
     "training_readiness": 41,
@@ -301,11 +301,11 @@
       },
       {
         "name": "September Step Month",
-        "current": 46039,
+        "current": 46785,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 26,
-        "pct": 15
+        "pct": 16
       },
       {
         "name": "September Time to Ride",
