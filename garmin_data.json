@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-04T06:58:19+02:00",
+  "synced_at": "2026-09-04T10:00:21+02:00",
   "sync_date": "2026-09-04",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
     "sleep_hours": 6.6,
     "sleep_score": 75,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 36,
     "hrv_balanced_low": 37,
     "hrv_balanced_high": 48,
-    "stress": 19,
+    "stress": 20,
     "resting_hr": 58,
     "body_battery": 76,
-    "training_readiness": 42,
+    "training_readiness": 41,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-09-04",
+        "distance_km": 14.5,
+        "duration_min": 41,
+        "pace_min_km": 2.8,
+        "avg_hr": 117.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -131,15 +140,6 @@
         "duration_min": 119,
         "pace_min_km": 8.75,
         "avg_hr": 129.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-08-21",
-        "distance_km": 5.7,
-        "duration_min": 59,
-        "pace_min_km": 10.39,
-        "avg_hr": 113.0
       }
     ],
     "last_run": {
@@ -276,18 +276,18 @@
         "pct": 45
       },
       {
+        "name": "Active September",
+        "current": 6,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 26,
+        "pct": 30
+      },
+      {
         "name": "September Time to Run",
         "current": 2.5,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 26,
-        "pct": 25
-      },
-      {
-        "name": "Active September",
-        "current": 5,
-        "goal": 20,
-        "unit": "Aktivitäten",
         "days_remaining": 26,
         "pct": 25
       },
@@ -301,7 +301,7 @@
       },
       {
         "name": "September Step Month",
-        "current": 44965,
+        "current": 46039,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 26,
@@ -309,11 +309,11 @@
       },
       {
         "name": "September Time to Ride",
-        "current": 1.6,
+        "current": 2.3,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 26,
-        "pct": 8
+        "pct": 11
       },
       {
         "name": "September Gains",
