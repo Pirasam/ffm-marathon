@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-04T17:30:23+02:00",
+  "synced_at": "2026-09-04T19:00:21+02:00",
   "sync_date": "2026-09-04",
-  "token_days_left": 29.6,
+  "token_days_left": 29.5,
   "metrics": {
     "sleep_hours": 6.6,
     "sleep_score": 75,
@@ -15,6 +15,15 @@
     "body_battery": 76,
     "training_readiness": 41,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-09-04",
+        "distance_km": 16.3,
+        "duration_min": 45,
+        "pace_min_km": 2.76,
+        "avg_hr": 120.0
+      },
       {
         "name": "Frankfurt am Main Radfahren",
         "type": "cycling",
@@ -131,15 +140,6 @@
         "duration_min": 37,
         "pace_min_km": 3.64,
         "avg_hr": 108.0
-      },
-      {
-        "name": "Burg-Reuland Laufen",
-        "type": "running",
-        "date": "2026-08-23",
-        "distance_km": 13.7,
-        "duration_min": 119,
-        "pace_min_km": 8.75,
-        "avg_hr": 129.0
       }
     ],
     "last_run": {
@@ -277,11 +277,11 @@
       },
       {
         "name": "Active September",
-        "current": 6,
+        "current": 7,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 26,
-        "pct": 30
+        "pct": 35
       },
       {
         "name": "September Time to Run",
@@ -309,11 +309,11 @@
       },
       {
         "name": "September Time to Ride",
-        "current": 2.3,
+        "current": 3.0,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 26,
-        "pct": 11
+        "pct": 15
       },
       {
         "name": "September Gains",
