@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-05T10:00:25+02:00",
+  "synced_at": "2026-09-05T16:00:20+02:00",
   "sync_date": "2026-09-05",
-  "token_days_left": 29.9,
+  "token_days_left": 29.6,
   "metrics": {
     "sleep_hours": 7.4,
     "sleep_score": 66,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 36,
     "hrv_balanced_low": 37,
     "hrv_balanced_high": 48,
-    "stress": 17,
+    "stress": 20,
     "resting_hr": 58,
     "body_battery": 88,
-    "training_readiness": 53,
+    "training_readiness": 45,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
@@ -297,11 +297,11 @@
       },
       {
         "name": "September Step Month",
-        "current": 48852,
+        "current": 50891,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 25,
-        "pct": 16
+        "pct": 17
       },
       {
         "name": "September Time to Ride",
