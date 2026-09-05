@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-05T06:58:21+02:00",
+  "synced_at": "2026-09-05T08:30:17+02:00",
   "sync_date": "2026-09-05",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
-    "sleep_hours": 6.6,
-    "sleep_score": 75,
+    "sleep_hours": 9.0,
+    "sleep_score": 73,
     "hrv_status": "UNBALANCED",
-    "hrv_value": 33,
+    "hrv_value": 36,
     "hrv_weekly_avg": 36,
     "hrv_balanced_low": 37,
     "hrv_balanced_high": 48,
     "stress": 16,
     "resting_hr": 59,
     "body_battery": 56,
-    "training_readiness": null,
+    "training_readiness": 53,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
@@ -196,8 +196,9 @@
         }
       }
     },
-    "weight_kg": 90.1,
+    "weight_kg": 90.2,
     "weight_history": {
+      "2026-09-05": 90.2,
       "2026-09-04": 90.1,
       "2026-09-02": 89.6,
       "2026-08-29": 90.1,
@@ -1528,7 +1529,7 @@
     "hrv": [
       {
         "d": "2026-09-05",
-        "v": 33
+        "v": 36
       },
       {
         "d": "2026-09-04",
@@ -1771,6 +1772,10 @@
     ],
     "weight": [
       {
+        "d": "2026-09-05",
+        "v": 90.2
+      },
+      {
         "d": "2026-09-04",
         "v": 90.1
       },
@@ -2005,10 +2010,6 @@
       {
         "d": "2026-05-31",
         "v": 91.3
-      },
-      {
-        "d": "2026-05-30",
-        "v": 91.2
       }
     ],
     "weekly_km": [
