@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-06T06:58:20+02:00",
+  "synced_at": "2026-09-06T11:30:25+02:00",
   "sync_date": "2026-09-06",
-  "token_days_left": 29.0,
+  "token_days_left": 28.8,
   "metrics": {
     "sleep_hours": 7.6,
     "sleep_score": 87,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 36,
     "hrv_balanced_low": 37,
     "hrv_balanced_high": 48,
-    "stress": 13,
+    "stress": 14,
     "resting_hr": 55,
     "body_battery": 100,
-    "training_readiness": 65,
+    "training_readiness": 7,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-09-06",
+        "distance_km": 18.7,
+        "duration_min": 157,
+        "pace_min_km": 8.4,
+        "avg_hr": 136.0
+      },
       {
         "name": "Frankfurt am Main Radfahren",
         "type": "cycling",
@@ -131,44 +140,40 @@
         "duration_min": 45,
         "pace_min_km": 2.79,
         "avg_hr": 125.0
-      },
-      {
-        "name": "Frankfurt am Main Rennradfahren",
-        "type": "road_biking",
-        "date": "2026-08-24",
-        "distance_km": 10.2,
-        "duration_min": 37,
-        "pace_min_km": 3.64,
-        "avg_hr": 108.0
       }
     ],
     "last_run": {
       "name": "Frankfurt am Main Laufen",
       "type": "running",
-      "date": "2026-09-03",
-      "distance_km": 8.9,
-      "duration_min": 70,
-      "pace_min_km": 7.91,
-      "avg_hr": 141.0
+      "date": "2026-09-06",
+      "distance_km": 18.7,
+      "duration_min": 157,
+      "pace_min_km": 8.4,
+      "avg_hr": 136.0
     },
     "weekly_running": {
-      "2026-W36": 18.9,
+      "2026-W36": 37.6,
       "2026-W35": 25.0,
       "2026-W34": 13.7
     },
     "run_dynamics": {
-      "date": "2026-09-03",
-      "distance_km": 8.9,
-      "cadence": 162.0,
-      "stride_length": 77.0,
-      "vertical_oscillation": 10.0,
-      "vertical_ratio": 12.8,
-      "ground_contact_time": 275.0,
-      "ground_contact_balance": 49.3,
-      "avg_power": 330.0,
-      "performance_condition": -5,
-      "step_speed_loss_pct": 4.3,
+      "date": "2026-09-06",
+      "distance_km": 18.7,
+      "cadence": 159.0,
+      "stride_length": 74.0,
+      "vertical_oscillation": 9.9,
+      "vertical_ratio": 13.2,
+      "ground_contact_time": 281.0,
+      "ground_contact_balance": 50.3,
+      "avg_power": 312.0,
+      "performance_condition": -4,
+      "step_speed_loss_pct": 5.2,
       "history": {
+        "2026-09-06": {
+          "cadence": 159.0,
+          "vertical_ratio": 13.2,
+          "gct": 281.0
+        },
         "2026-09-03": {
           "cadence": 162.0,
           "vertical_ratio": 12.8,
@@ -252,55 +257,55 @@
       "2026-06-09": 90.6,
       "2026-06-08": 91.1
     },
-    "vo2max": 42.7,
+    "vo2max": 42.4,
     "challenges": [
       {
-        "name": "2026 Running - Stage 3",
-        "current": 188.8,
-        "goal": 300.0,
-        "unit": "km",
-        "days_remaining": 24,
-        "pct": 63
-      },
-      {
         "name": "Ahotu Marathon Challenge",
-        "current": 18.9,
+        "current": 37.6,
         "goal": 42.1,
         "unit": "km",
         "days_remaining": 24,
-        "pct": 45
+        "pct": 89
       },
       {
-        "name": "Active September",
-        "current": 7,
-        "goal": 20,
-        "unit": "Aktivitäten",
+        "name": "2026 Running - Stage 3",
+        "current": 207.4,
+        "goal": 300.0,
+        "unit": "km",
         "days_remaining": 24,
-        "pct": 35
+        "pct": 69
       },
       {
         "name": "September Time to Run",
-        "current": 2.5,
+        "current": 5.1,
         "goal": 10.0,
         "unit": "h",
         "days_remaining": 24,
-        "pct": 25
+        "pct": 51
       },
       {
         "name": "September Rundown",
-        "current": 18.9,
+        "current": 37.6,
         "goal": 80.5,
         "unit": "km",
         "days_remaining": 24,
-        "pct": 23
+        "pct": 47
+      },
+      {
+        "name": "Active September",
+        "current": 8,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 24,
+        "pct": 40
       },
       {
         "name": "September Step Month",
-        "current": 54957,
+        "current": 80441,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 24,
-        "pct": 18
+        "pct": 27
       },
       {
         "name": "September Time to Ride",
@@ -344,7 +349,7 @@
           "hf": 145.0,
           "maxhf": 156.0,
           "ei": 94.69,
-          "ei_corr": 95.26,
+          "ei_corr": 95.22,
           "dev": 1.2
         },
         {
@@ -356,7 +361,7 @@
           "hf": 146.0,
           "maxhf": 157.0,
           "ei": 99.25,
-          "ei_corr": 99.45,
+          "ei_corr": 99.43,
           "dev": 4.6
         },
         {
@@ -368,7 +373,7 @@
           "hf": 138.0,
           "maxhf": 153.0,
           "ei": 85.58,
-          "ei_corr": 84.46,
+          "ei_corr": 84.54,
           "dev": -3.0
         },
         {
@@ -380,7 +385,7 @@
           "hf": 114.0,
           "maxhf": 143.0,
           "ei": 83.51,
-          "ei_corr": 82.21,
+          "ei_corr": 82.3,
           "dev": 7.8
         },
         {
@@ -392,7 +397,7 @@
           "hf": 138.0,
           "maxhf": 167.0,
           "ei": 76.01,
-          "ei_corr": 76.79,
+          "ei_corr": 76.73,
           "dev": -10.6
         },
         {
@@ -404,7 +409,7 @@
           "hf": 121.0,
           "maxhf": 139.0,
           "ei": 89.01,
-          "ei_corr": 88.36,
+          "ei_corr": 88.41,
           "dev": 8.0
         },
         {
@@ -416,7 +421,7 @@
           "hf": 146.0,
           "maxhf": 168.0,
           "ei": 87.67,
-          "ei_corr": 87.24,
+          "ei_corr": 87.28,
           "dev": -5.2
         },
         {
@@ -428,7 +433,7 @@
           "hf": 137.0,
           "maxhf": 149.0,
           "ei": 85.55,
-          "ei_corr": 84.49,
+          "ei_corr": 84.57,
           "dev": -2.5
         },
         {
@@ -440,7 +445,7 @@
           "hf": 154.0,
           "maxhf": 168.0,
           "ei": 82.79,
-          "ei_corr": 83.29,
+          "ei_corr": 83.26,
           "dev": -13.5
         },
         {
@@ -452,7 +457,7 @@
           "hf": 133.0,
           "maxhf": 192.0,
           "ei": 85.79,
-          "ei_corr": 85.32,
+          "ei_corr": 85.35,
           "dev": -0.3
         },
         {
@@ -464,7 +469,7 @@
           "hf": 149.0,
           "maxhf": 165.0,
           "ei": 85.3,
-          "ei_corr": 85.83,
+          "ei_corr": 85.79,
           "dev": -8.8
         },
         {
@@ -476,7 +481,7 @@
           "hf": 152.0,
           "maxhf": 164.0,
           "ei": 89.61,
-          "ei_corr": 90.17,
+          "ei_corr": 90.13,
           "dev": -6.5
         },
         {
@@ -488,7 +493,7 @@
           "hf": 145.0,
           "maxhf": 167.0,
           "ei": 93.24,
-          "ei_corr": 92.54,
+          "ei_corr": 92.6,
           "dev": -0.1
         },
         {
@@ -500,7 +505,7 @@
           "hf": 149.0,
           "maxhf": 163.0,
           "ei": 90.94,
-          "ei_corr": 91.33,
+          "ei_corr": 91.3,
           "dev": -3.9
         },
         {
@@ -512,7 +517,7 @@
           "hf": 148.0,
           "maxhf": 159.0,
           "ei": 89.53,
-          "ei_corr": 89.91,
+          "ei_corr": 89.88,
           "dev": -4.6
         },
         {
@@ -524,7 +529,7 @@
           "hf": 150.0,
           "maxhf": 169.0,
           "ei": 75.47,
-          "ei_corr": 75.63,
+          "ei_corr": 75.62,
           "dev": -17.8
         },
         {
@@ -536,8 +541,8 @@
           "hf": 125.0,
           "maxhf": 142.0,
           "ei": 88.56,
-          "ei_corr": 87.25,
-          "dev": 5.7
+          "ei_corr": 87.35,
+          "dev": 5.8
         },
         {
           "date": "2026-01-23",
@@ -548,7 +553,7 @@
           "hf": 159.0,
           "maxhf": 177.0,
           "ei": 90.31,
-          "ei_corr": 89.36,
+          "ei_corr": 89.43,
           "dev": -9.2
         },
         {
@@ -560,7 +565,7 @@
           "hf": 154.0,
           "maxhf": 168.0,
           "ei": 82.73,
-          "ei_corr": 83.24,
+          "ei_corr": 83.2,
           "dev": -13.6
         },
         {
@@ -572,7 +577,7 @@
           "hf": 158.0,
           "maxhf": 180.0,
           "ei": 98.61,
-          "ei_corr": 97.47,
+          "ei_corr": 97.56,
           "dev": -1.1
         },
         {
@@ -584,7 +589,7 @@
           "hf": 148.0,
           "maxhf": 165.0,
           "ei": 84.05,
-          "ei_corr": 85.73,
+          "ei_corr": 85.6,
           "dev": -9.3
         },
         {
@@ -596,7 +601,7 @@
           "hf": 149.0,
           "maxhf": 165.0,
           "ei": 85.37,
-          "ei_corr": 84.96,
+          "ei_corr": 84.99,
           "dev": -8.7
         },
         {
@@ -620,7 +625,7 @@
           "hf": 147.0,
           "maxhf": 171.0,
           "ei": 87.55,
-          "ei_corr": 87.65,
+          "ei_corr": 87.64,
           "dev": -5.8
         },
         {
@@ -632,7 +637,7 @@
           "hf": 153.0,
           "maxhf": 170.0,
           "ei": 95.1,
-          "ei_corr": 94.94,
+          "ei_corr": 94.95,
           "dev": -2.1
         },
         {
@@ -644,8 +649,8 @@
           "hf": 129.0,
           "maxhf": 166.0,
           "ei": 84.88,
-          "ei_corr": 83.68,
-          "dev": 1.0
+          "ei_corr": 83.77,
+          "dev": 1.1
         },
         {
           "date": "2026-04-02",
@@ -656,7 +661,7 @@
           "hf": 144.0,
           "maxhf": 169.0,
           "ei": 93.47,
-          "ei_corr": 92.22,
+          "ei_corr": 92.31,
           "dev": 0.6
         },
         {
@@ -668,7 +673,7 @@
           "hf": 141.0,
           "maxhf": 164.0,
           "ei": 90.85,
-          "ei_corr": 91.2,
+          "ei_corr": 91.17,
           "dev": -0.2
         },
         {
@@ -680,7 +685,7 @@
           "hf": 149.0,
           "maxhf": 185.0,
           "ei": 101.95,
-          "ei_corr": 101.02,
+          "ei_corr": 101.09,
           "dev": 5.6
         },
         {
@@ -692,7 +697,7 @@
           "hf": 152.0,
           "maxhf": 163.0,
           "ei": 92.3,
-          "ei_corr": 92.21,
+          "ei_corr": 92.22,
           "dev": -4.1
         },
         {
@@ -704,7 +709,7 @@
           "hf": 149.0,
           "maxhf": 161.0,
           "ei": 101.54,
-          "ei_corr": 99.5,
+          "ei_corr": 99.65,
           "dev": 5.3
         },
         {
@@ -716,7 +721,7 @@
           "hf": 110.0,
           "maxhf": 120.0,
           "ei": 67.18,
-          "ei_corr": 65.19,
+          "ei_corr": 65.34,
           "dev": -0.6
         },
         {
@@ -728,7 +733,7 @@
           "hf": 137.0,
           "maxhf": 179.0,
           "ei": 89.27,
-          "ei_corr": 88.17,
+          "ei_corr": 88.25,
           "dev": 0.5
         },
         {
@@ -740,7 +745,7 @@
           "hf": 152.0,
           "maxhf": 168.0,
           "ei": 92.63,
-          "ei_corr": 94.01,
+          "ei_corr": 93.9,
           "dev": -3.8
         },
         {
@@ -752,7 +757,7 @@
           "hf": 149.0,
           "maxhf": 165.0,
           "ei": 96.04,
-          "ei_corr": 95.43,
+          "ei_corr": 95.48,
           "dev": 0.5
         },
         {
@@ -764,7 +769,7 @@
           "hf": 153.0,
           "maxhf": 176.0,
           "ei": 101.44,
-          "ei_corr": 100.65,
+          "ei_corr": 100.71,
           "dev": 3.5
         },
         {
@@ -776,7 +781,7 @@
           "hf": 150.0,
           "maxhf": 166.0,
           "ei": 94.73,
-          "ei_corr": 95.36,
+          "ei_corr": 95.31,
           "dev": -1.1
         },
         {
@@ -788,7 +793,7 @@
           "hf": 137.0,
           "maxhf": 153.0,
           "ei": 105.33,
-          "ei_corr": 103.95,
+          "ei_corr": 104.05,
           "dev": 13.2
         },
         {
@@ -800,7 +805,7 @@
           "hf": 155.0,
           "maxhf": 182.0,
           "ei": 102.97,
-          "ei_corr": 102.22,
+          "ei_corr": 102.28,
           "dev": 4.1
         },
         {
@@ -812,7 +817,7 @@
           "hf": 151.0,
           "maxhf": 164.0,
           "ei": 87.35,
-          "ei_corr": 88.76,
+          "ei_corr": 88.65,
           "dev": -8.0
         },
         {
@@ -824,7 +829,7 @@
           "hf": 150.0,
           "maxhf": 164.0,
           "ei": 95.47,
-          "ei_corr": 96.1,
+          "ei_corr": 96.05,
           "dev": -0.4
         },
         {
@@ -836,7 +841,7 @@
           "hf": 152.0,
           "maxhf": 176.0,
           "ei": 102.3,
-          "ei_corr": 101.7,
+          "ei_corr": 101.75,
           "dev": 4.7
         },
         {
@@ -848,7 +853,7 @@
           "hf": 152.0,
           "maxhf": 164.0,
           "ei": 92.04,
-          "ei_corr": 93.35,
+          "ei_corr": 93.25,
           "dev": -4.3
         },
         {
@@ -860,7 +865,7 @@
           "hf": 153.0,
           "maxhf": 168.0,
           "ei": 88.1,
-          "ei_corr": 91.88,
+          "ei_corr": 91.58,
           "dev": -8.3
         },
         {
@@ -872,7 +877,7 @@
           "hf": 153.0,
           "maxhf": 168.0,
           "ei": 101.11,
-          "ei_corr": 100.75,
+          "ei_corr": 100.78,
           "dev": 3.2
         },
         {
@@ -884,7 +889,7 @@
           "hf": 148.0,
           "maxhf": 163.0,
           "ei": 98.72,
-          "ei_corr": 99.35,
+          "ei_corr": 99.3,
           "dev": 3.3
         },
         {
@@ -896,7 +901,7 @@
           "hf": 143.0,
           "maxhf": 159.0,
           "ei": 91.68,
-          "ei_corr": 94.52,
+          "ei_corr": 94.3,
           "dev": -0.4
         },
         {
@@ -908,7 +913,7 @@
           "hf": 144.0,
           "maxhf": 158.0,
           "ei": 97.15,
-          "ei_corr": 97.82,
+          "ei_corr": 97.77,
           "dev": 3.7
         },
         {
@@ -920,7 +925,7 @@
           "hf": 142.0,
           "maxhf": 153.0,
           "ei": 98.31,
-          "ei_corr": 98.98,
+          "ei_corr": 98.93,
           "dev": 5.5
         },
         {
@@ -932,7 +937,7 @@
           "hf": 137.0,
           "maxhf": 149.0,
           "ei": 91.24,
-          "ei_corr": 90.89,
+          "ei_corr": 90.92,
           "dev": 2.0
         },
         {
@@ -944,8 +949,8 @@
           "hf": 139.0,
           "maxhf": 161.0,
           "ei": 77.41,
-          "ei_corr": 77.79,
-          "dev": -10.1
+          "ei_corr": 77.76,
+          "dev": -10.0
         },
         {
           "date": "2026-06-23",
@@ -956,7 +961,7 @@
           "hf": 144.0,
           "maxhf": 159.0,
           "ei": 92.85,
-          "ei_corr": 93.48,
+          "ei_corr": 93.43,
           "dev": 0.1
         },
         {
@@ -968,7 +973,7 @@
           "hf": 142.0,
           "maxhf": 154.0,
           "ei": 91.55,
-          "ei_corr": 91.28,
+          "ei_corr": 91.3,
           "dev": -0.1
         },
         {
@@ -980,7 +985,7 @@
           "hf": 148.0,
           "maxhf": 158.0,
           "ei": 92.91,
-          "ei_corr": 93.5,
+          "ei_corr": 93.45,
           "dev": -1.7
         },
         {
@@ -992,7 +997,7 @@
           "hf": 115.0,
           "maxhf": 134.0,
           "ei": 91.04,
-          "ei_corr": 89.44,
+          "ei_corr": 89.56,
           "dev": 12.3
         },
         {
@@ -1004,7 +1009,7 @@
           "hf": 146.0,
           "maxhf": 157.0,
           "ei": 98.01,
-          "ei_corr": 98.64,
+          "ei_corr": 98.59,
           "dev": 3.5
         },
         {
@@ -1016,7 +1021,7 @@
           "hf": 137.0,
           "maxhf": 149.0,
           "ei": 97.15,
-          "ei_corr": 98.53,
+          "ei_corr": 98.43,
           "dev": 6.7
         },
         {
@@ -1028,8 +1033,8 @@
           "hf": 138.0,
           "maxhf": 151.0,
           "ei": 98.99,
-          "ei_corr": 101.81,
-          "dev": 7.7
+          "ei_corr": 101.59,
+          "dev": 7.8
         },
         {
           "date": "2026-07-06",
@@ -1040,7 +1045,7 @@
           "hf": 136.0,
           "maxhf": 148.0,
           "ei": 100.15,
-          "ei_corr": 101.57,
+          "ei_corr": 101.46,
           "dev": 9.5
         },
         {
@@ -1052,7 +1057,7 @@
           "hf": 147.0,
           "maxhf": 173.0,
           "ei": 104.22,
-          "ei_corr": 104.88,
+          "ei_corr": 104.83,
           "dev": 8.4
         },
         {
@@ -1064,7 +1069,7 @@
           "hf": 137.0,
           "maxhf": 157.0,
           "ei": 92.77,
-          "ei_corr": 97.25,
+          "ei_corr": 96.89,
           "dev": 3.2
         },
         {
@@ -1076,7 +1081,7 @@
           "hf": 139.0,
           "maxhf": 146.0,
           "ei": 97.12,
-          "ei_corr": 94.9,
+          "ei_corr": 95.06,
           "dev": 5.8
         },
         {
@@ -1088,7 +1093,7 @@
           "hf": 132.0,
           "maxhf": 144.0,
           "ei": 90.53,
-          "ei_corr": 89.36,
+          "ei_corr": 89.45,
           "dev": 3.8
         },
         {
@@ -1100,7 +1105,7 @@
           "hf": 133.0,
           "maxhf": 150.0,
           "ei": 89.92,
-          "ei_corr": 89.37,
+          "ei_corr": 89.41,
           "dev": 2.9
         },
         {
@@ -1112,7 +1117,7 @@
           "hf": 138.0,
           "maxhf": 150.0,
           "ei": 93.84,
-          "ei_corr": 93.37,
+          "ei_corr": 93.41,
           "dev": 3.6
         },
         {
@@ -1124,7 +1129,7 @@
           "hf": 139.0,
           "maxhf": 150.0,
           "ei": 91.15,
-          "ei_corr": 90.72,
+          "ei_corr": 90.75,
           "dev": 1.0
         },
         {
@@ -1136,7 +1141,7 @@
           "hf": 138.0,
           "maxhf": 149.0,
           "ei": 94.49,
-          "ei_corr": 94.29,
+          "ei_corr": 94.31,
           "dev": 4.2
         },
         {
@@ -1148,7 +1153,7 @@
           "hf": 112.0,
           "maxhf": 126.0,
           "ei": 91.79,
-          "ei_corr": 90.33,
+          "ei_corr": 90.44,
           "dev": 14.2
         },
         {
@@ -1160,8 +1165,8 @@
           "hf": 117.0,
           "maxhf": 131.0,
           "ei": 85.47,
-          "ei_corr": 84.96,
-          "dev": 7.5
+          "ei_corr": 85.0,
+          "dev": 7.6
         },
         {
           "date": "2026-08-16",
@@ -1172,8 +1177,8 @@
           "hf": 117.0,
           "maxhf": null,
           "ei": 85.47,
-          "ei_corr": 84.94,
-          "dev": 7.5
+          "ei_corr": 84.98,
+          "dev": 7.6
         },
         {
           "date": "2026-08-18",
@@ -1184,7 +1189,7 @@
           "hf": 139.0,
           "maxhf": 151.0,
           "ei": 88.13,
-          "ei_corr": 88.72,
+          "ei_corr": 88.67,
           "dev": -1.4
         },
         {
@@ -1196,7 +1201,7 @@
           "hf": 113.0,
           "maxhf": 132.0,
           "ei": 85.22,
-          "ei_corr": 84.36,
+          "ei_corr": 84.42,
           "dev": 9.4
         },
         {
@@ -1208,7 +1213,7 @@
           "hf": 129.0,
           "maxhf": 150.0,
           "ei": 88.6,
-          "ei_corr": 90.49,
+          "ei_corr": 90.34,
           "dev": 3.8
         },
         {
@@ -1220,7 +1225,7 @@
           "hf": 143.0,
           "maxhf": 161.0,
           "ei": 86.08,
-          "ei_corr": 86.35,
+          "ei_corr": 86.33,
           "dev": -5.1
         },
         {
@@ -1232,7 +1237,7 @@
           "hf": 138.0,
           "maxhf": 158.0,
           "ei": 81.74,
-          "ei_corr": 84.07,
+          "ei_corr": 83.89,
           "dev": -6.0
         },
         {
@@ -1244,7 +1249,7 @@
           "hf": 142.0,
           "maxhf": null,
           "ei": 88.03,
-          "ei_corr": 88.6,
+          "ei_corr": 88.56,
           "dev": -3.0
         },
         {
@@ -1256,14 +1261,26 @@
           "hf": 141.0,
           "maxhf": null,
           "ei": 90.14,
-          "ei_corr": 90.39,
+          "ei_corr": 90.37,
           "dev": -0.8
+        },
+        {
+          "date": "2026-09-06",
+          "dist": 18.7,
+          "dur_min": 157,
+          "pace": 8.396,
+          "speed": 119.1,
+          "hf": 136.0,
+          "maxhf": null,
+          "ei": 87.57,
+          "ei_corr": 90.73,
+          "dev": -0.4
         }
       ],
-      "drift": 0.483,
+      "drift": 0.446,
       "ref_dist": 8.1,
-      "fit_a": 66.61,
-      "fit_b": 0.5794,
+      "fit_a": 66.63,
+      "fit_b": 0.5792,
       "generated": "2026-09-06",
       "vo2max": [
         {
@@ -1306,6 +1323,11 @@
     },
     "marathon": {
       "durability": [
+        {
+          "d": "2026-09-06",
+          "km": 18.7,
+          "decoup": 7.8
+        },
         {
           "d": "2026-08-30",
           "km": 16.0,
@@ -1420,7 +1442,7 @@
         },
         {
           "m": "2026-09",
-          "pace_s": 428,
+          "pace_s": 429,
           "ref": 145
         }
       ],
@@ -1499,9 +1521,9 @@
         },
         {
           "m": "2026-09",
-          "vr": 12.4,
-          "gct": 278.0,
-          "cad": 161.5
+          "vr": 12.6,
+          "gct": 279.0,
+          "cad": 160.7
         }
       ],
       "generated": "2026-09-06"
@@ -1997,7 +2019,7 @@
     "weekly_km": [
       {
         "w": "2026-W36",
-        "v": 18.9
+        "v": 37.6
       },
       {
         "w": "2026-W35",
@@ -2029,6 +2051,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-09-06",
+        "cadence": 159.0,
+        "vertical_ratio": 13.2,
+        "gct": 281.0
+      },
       {
         "d": "2026-09-03",
         "cadence": 162.0,
@@ -2495,7 +2523,7 @@
     "vo2max": [
       {
         "d": "2026-09-06",
-        "v": 42.7
+        "v": 42.4
       },
       {
         "d": "2026-09-05",
@@ -2683,6 +2711,12 @@
       }
     ],
     "efficiency": [
+      {
+        "d": "2026-09-06",
+        "dist": 18.7,
+        "dur": 157,
+        "hf": 136.0
+      },
       {
         "d": "2026-09-03",
         "dist": 8.9,
@@ -3273,6 +3307,11 @@
       }
     ],
     "durability": [
+      {
+        "d": "2026-09-06",
+        "km": 18.7,
+        "decoup": 7.8
+      },
       {
         "d": "2026-08-30",
         "km": 16.0,
