@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-06T07:13:23+02:00",
+  "synced_at": "2026-09-06T08:45:27+02:00",
   "sync_date": "2026-09-06",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 7.5,
-    "sleep_score": 83,
+    "sleep_hours": 8.5,
+    "sleep_score": 87,
     "hrv_status": "BALANCED",
-    "hrv_value": 31,
+    "hrv_value": 34,
     "hrv_weekly_avg": 32,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 17,
-    "resting_hr": 61,
-    "body_battery": 61,
-    "training_readiness": null,
+    "stress": 14,
+    "resting_hr": 57,
+    "body_battery": 100,
+    "training_readiness": 97,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Gehen",
@@ -154,7 +154,7 @@
       },
       {
         "name": "September Step Month",
-        "current": 49084,
+        "current": 49338,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 24,
@@ -678,7 +678,7 @@
     "hrv": [
       {
         "d": "2026-09-06",
-        "v": 31
+        "v": 34
       },
       {
         "d": "2026-09-05",
@@ -800,7 +800,7 @@
     "rhr": [
       {
         "d": "2026-09-06",
-        "v": 61
+        "v": 57
       },
       {
         "d": "2026-09-05",
