@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-07T06:58:15+02:00",
+  "synced_at": "2026-09-07T10:00:23+02:00",
   "sync_date": "2026-09-07",
-  "token_days_left": 29.3,
+  "token_days_left": 29.1,
   "metrics": {
     "sleep_hours": 7.7,
     "sleep_score": 85,
@@ -13,8 +13,17 @@
     "stress": 15,
     "resting_hr": 58,
     "body_battery": 80,
-    "training_readiness": 41,
+    "training_readiness": 43,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-09-07",
+        "distance_km": 14.5,
+        "duration_min": 38,
+        "pace_min_km": 2.66,
+        "avg_hr": 119.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -131,15 +140,6 @@
         "duration_min": 73,
         "pace_min_km": 8.12,
         "avg_hr": 143.0
-      },
-      {
-        "name": "Frankfurt am Main Rennradfahren",
-        "type": "road_biking",
-        "date": "2026-08-24",
-        "distance_km": 16.1,
-        "duration_min": 45,
-        "pace_min_km": 2.79,
-        "avg_hr": 125.0
       }
     ],
     "last_run": {
@@ -287,11 +287,11 @@
       },
       {
         "name": "Active September",
-        "current": 8,
+        "current": 9,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 23,
-        "pct": 40
+        "pct": 45
       },
       {
         "name": "September Step Month",
@@ -303,11 +303,11 @@
       },
       {
         "name": "September Time to Ride",
-        "current": 3.0,
+        "current": 3.6,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 23,
-        "pct": 15
+        "pct": 18
       },
       {
         "name": "September Gains",
