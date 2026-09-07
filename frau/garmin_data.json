@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-07T07:13:20+02:00",
+  "synced_at": "2026-09-07T17:15:21+02:00",
   "sync_date": "2026-09-07",
   "token_days_left": null,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 32,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 33,
-    "stress": 15,
+    "stress": 23,
     "resting_hr": 58,
     "body_battery": 95,
     "training_readiness": 87,
@@ -153,18 +153,18 @@
         "pct": 25
       },
       {
+        "name": "September Step Month",
+        "current": 71392,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 23,
+        "pct": 24
+      },
+      {
         "name": "September Time to Run",
         "current": 2.3,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 23,
-        "pct": 23
-      },
-      {
-        "name": "September Step Month",
-        "current": 68077,
-        "goal": 300000,
-        "unit": "Schritte",
         "days_remaining": 23,
         "pct": 23
       },
