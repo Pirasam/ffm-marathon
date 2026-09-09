@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-09T10:00:25+02:00",
+  "synced_at": "2026-09-09T11:30:24+02:00",
   "sync_date": "2026-09-09",
-  "token_days_left": 29.9,
+  "token_days_left": 29.8,
   "metrics": {
     "sleep_hours": 7.4,
     "sleep_score": 80,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 36,
     "hrv_balanced_low": 37,
     "hrv_balanced_high": 48,
-    "stress": 23,
+    "stress": 26,
     "resting_hr": 61,
     "body_battery": 70,
     "training_readiness": 48,
@@ -291,7 +291,7 @@
       },
       {
         "name": "September Step Month",
-        "current": 116796,
+        "current": 118107,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 21,
