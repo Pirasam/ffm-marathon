@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-10T08:45:24+02:00",
+  "synced_at": "2026-09-10T17:15:28+02:00",
   "sync_date": "2026-09-10",
   "token_days_left": null,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 16,
+    "stress": 22,
     "resting_hr": 57,
     "body_battery": 97,
     "training_readiness": 100,
@@ -129,11 +129,11 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 92735,
+        "current": 95718,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 20,
-        "pct": 31
+        "pct": 32
       },
       {
         "name": "2026 Running - Stage 3",
