@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-09T19:00:36+02:00",
-  "sync_date": "2026-09-09",
-  "token_days_left": 29.5,
+  "synced_at": "2026-09-10T06:58:21+02:00",
+  "sync_date": "2026-09-10",
+  "token_days_left": 30.0,
   "metrics": {
-    "sleep_hours": 7.4,
-    "sleep_score": 80,
+    "sleep_hours": 7.5,
+    "sleep_score": 86,
     "hrv_status": "UNBALANCED",
-    "hrv_value": 33,
+    "hrv_value": 37,
     "hrv_weekly_avg": 36,
     "hrv_balanced_low": 37,
     "hrv_balanced_high": 48,
-    "stress": 27,
-    "resting_hr": 61,
-    "body_battery": 70,
-    "training_readiness": 55,
+    "stress": 17,
+    "resting_hr": 60,
+    "body_battery": 87,
+    "training_readiness": 69,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
@@ -201,8 +201,9 @@
         }
       }
     },
-    "weight_kg": 90.2,
+    "weight_kg": 89.9,
     "weight_history": {
+      "2026-09-10": 89.9,
       "2026-09-07": 90.2,
       "2026-09-05": 90.2,
       "2026-09-04": 90.1,
@@ -252,8 +253,7 @@
       "2026-06-15": 90.7,
       "2026-06-14": 91.1,
       "2026-06-13": 91.7,
-      "2026-06-12": 90.6,
-      "2026-06-11": 90.6
+      "2026-06-12": 90.6
     },
     "vo2max": 42.5,
     "challenges": [
@@ -262,7 +262,7 @@
         "current": 217.5,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 72
       },
       {
@@ -270,7 +270,7 @@
         "current": 6.3,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 63
       },
       {
@@ -278,7 +278,7 @@
         "current": 47.6,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 59
       },
       {
@@ -286,23 +286,23 @@
         "current": 11,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 55
       },
       {
         "name": "September Step Month",
-        "current": 120536,
+        "current": 125611,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 21,
-        "pct": 40
+        "days_remaining": 20,
+        "pct": 42
       },
       {
         "name": "September Time to Ride",
         "current": 4.1,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 20
       },
       {
@@ -310,7 +310,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 0
       }
     ],
@@ -1259,7 +1259,7 @@
       "ref_dist": 8.4,
       "fit_a": 66.62,
       "fit_b": 0.579,
-      "generated": "2026-09-09",
+      "generated": "2026-09-10",
       "vo2max": [
         {
           "m": "2025-09",
@@ -1420,7 +1420,7 @@
         },
         {
           "m": "2026-09",
-          "pace_s": 430,
+          "pace_s": 431,
           "ref": 145
         }
       ],
@@ -1504,11 +1504,15 @@
           "cad": 161.0
         }
       ],
-      "generated": "2026-09-09"
+      "generated": "2026-09-10"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-10",
+        "v": 37
+      },
       {
         "d": "2026-09-09",
         "v": 33
@@ -1624,13 +1628,13 @@
       {
         "d": "2026-08-12",
         "v": 42
-      },
-      {
-        "d": "2026-08-11",
-        "v": 46
       }
     ],
     "rhr": [
+      {
+        "d": "2026-09-10",
+        "v": 60
+      },
       {
         "d": "2026-09-09",
         "v": 61
@@ -1746,13 +1750,13 @@
       {
         "d": "2026-08-12",
         "v": 56
-      },
-      {
-        "d": "2026-08-11",
-        "v": 56
       }
     ],
     "weight": [
+      {
+        "d": "2026-09-10",
+        "v": 89.9
+      },
       {
         "d": "2026-09-07",
         "v": 90.2
@@ -1988,10 +1992,6 @@
       {
         "d": "2026-06-02",
         "v": 92.2
-      },
-      {
-        "d": "2026-06-01",
-        "v": 92.3
       }
     ],
     "weekly_km": [
@@ -2509,6 +2509,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-10",
+        "v": 42.5
+      },
       {
         "d": "2026-09-09",
         "v": 42.5
