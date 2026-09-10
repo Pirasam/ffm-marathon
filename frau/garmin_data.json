@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-09T19:45:22+02:00",
-  "sync_date": "2026-09-09",
+  "synced_at": "2026-09-10T07:13:26+02:00",
+  "sync_date": "2026-09-10",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.1,
-    "sleep_score": 82,
+    "sleep_hours": 9.4,
+    "sleep_score": 89,
     "hrv_status": "BALANCED",
-    "hrv_value": 26,
+    "hrv_value": 31,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 24,
-    "resting_hr": 60,
-    "body_battery": 71,
-    "training_readiness": 96,
+    "stress": 15,
+    "resting_hr": 57,
+    "body_battery": 97,
+    "training_readiness": 100,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -129,18 +129,18 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 87496,
+        "current": 91963,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 21,
-        "pct": 29
+        "days_remaining": 20,
+        "pct": 31
       },
       {
         "name": "2026 Running - Stage 3",
         "current": 79.6,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 27
       },
       {
@@ -148,7 +148,7 @@
         "current": 5,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 25
       },
       {
@@ -156,7 +156,7 @@
         "current": 2.3,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 23
       },
       {
@@ -164,7 +164,7 @@
         "current": 14.3,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 18
       },
       {
@@ -172,7 +172,7 @@
         "current": 6.3,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 13
       },
       {
@@ -180,7 +180,7 @@
         "current": 2.0,
         "goal": 25.0,
         "unit": "",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 8
       },
       {
@@ -188,14 +188,14 @@
         "current": 6.3,
         "goal": 146.4,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 4
       }
     ],
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-28",
-      "day_in_cycle": 13,
+      "day_in_cycle": 14,
       "phase": "fruchtbar",
       "phase_raw": 3,
       "period_length": 6,
@@ -203,10 +203,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 4,
-      "next_period_in_days": 15,
+      "days_until_next_phase": 3,
+      "next_period_in_days": 14,
       "next_period_date": "2026-09-24",
-      "next_follicular_in_days": 21
+      "next_follicular_in_days": 20
     },
     "_errors": [],
     "efficiency": {
@@ -576,7 +576,7 @@
       "ref_dist": 4.6,
       "fit_a": 96.85,
       "fit_b": 0.4437,
-      "generated": "2026-09-09",
+      "generated": "2026-09-10",
       "vo2max": [
         {
           "m": "2025-11",
@@ -674,11 +674,15 @@
           "cad": 141.5
         }
       ],
-      "generated": "2026-09-09"
+      "generated": "2026-09-10"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-10",
+        "v": 31
+      },
       {
         "d": "2026-09-09",
         "v": 26
@@ -794,13 +798,13 @@
       {
         "d": "2026-08-11",
         "v": 30
-      },
-      {
-        "d": "2026-08-10",
-        "v": 35
       }
     ],
     "rhr": [
+      {
+        "d": "2026-09-10",
+        "v": 57
+      },
       {
         "d": "2026-09-09",
         "v": 60
@@ -916,10 +920,6 @@
       {
         "d": "2026-08-12",
         "v": 59
-      },
-      {
-        "d": "2026-08-11",
-        "v": 58
       }
     ],
     "weight": [
@@ -1159,6 +1159,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-10",
+        "v": 39.2
+      },
       {
         "d": "2026-09-09",
         "v": 39.2
