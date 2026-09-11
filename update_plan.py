@@ -121,6 +121,23 @@ def get_plan_context(html_content):
                     elif "bike" in badges:
                         base += f" (Radtag — {desc[:80]})"
                     base += f"\nBeschreibung: {desc[:160]}"
+
+            # Plan-Trajektorie: der Longrun waechst planmaessig ueber die Wochen.
+            # Ohne diesen Kontext bewertet Claude den aktuellen Longrun-Stand
+            # faelschlich als "Rueckstand" statt als normalen Zwischenstand vor
+            # der Peak-Woche (REGEL 3 im Prompt nutzt das explizit).
+            peak_km, peak_week = 0, None
+            for wi, wk in enumerate(weeks_data):
+                for d in wk.get("days", []):
+                    if d.get("longrun"):
+                        km_m = re.search(r"(\d+)\s*km", d.get("title", ""))
+                        if km_m and int(km_m.group(1)) > peak_km:
+                            peak_km, peak_week = int(km_m.group(1)), wi + 1
+            if peak_km:
+                base += (f"\nPLAN-VERLAUF: Longrun steigert sich planmässig bis Woche "
+                        f"{peak_week} auf {peak_km} km (Peak), danach Taper. Aktuell "
+                        f"Woche {cur + 1}/{len(week_starts)}. Ein Longrun unter {peak_km} km "
+                        f"JETZT ist normaler Zwischenstand, KEIN Rueckstand.")
     except Exception as e:
         print(f"Plan-Kontext-Fehler: {e}")
 
@@ -260,7 +277,14 @@ def call_claude(metrics, plan_context):
         d, t = lr.get("distance_km", 0), lr.get("duration_min", 0)
         pace = lr.get("pace_min_km")
         pace_str = f"{int(pace)}:{int((pace % 1) * 60):02d} min/km" if pace else "?"
-        last_run_str = (f"\n- Letzter Lauf: {lr['date']}, {d} km, {t} min, Pace {pace_str}"
+        # Relativtag selbst berechnen statt Claude raten zu lassen – sonst wird
+        # ein Lauf von HEUTE frueh in der Textausgabe faelschlich "gestern".
+        try:
+            days_ago = (date.today() - date.fromisoformat(lr["date"])).days
+        except Exception:
+            days_ago = None
+        when = {0: "HEUTE", 1: "GESTERN"}.get(days_ago, f"vor {days_ago} Tagen" if days_ago is not None else "")
+        last_run_str = (f"\n- Letzter Lauf ({when}, {lr['date']}): {d} km, {t} min, Pace {pace_str}"
                         + (f", ∅HR {lr['avg_hr']} bpm" if lr.get("avg_hr") else ""))
 
     is_longrun = "LONGRUN" in plan_context
@@ -305,11 +329,13 @@ REGEL 2 — REALISTISCHE Herzfrequenz (echte Werte, KEINE Lehrbuch-Formeln):
 - Bestes Maß ist der SPRECHTEST (ganze Sätze möglich = richtig), nicht eine starre Zahl.
 - Pace-Logik: niedrigere min/km = SCHNELLER. "Zu intensiv" → nächster Lauf entspannter, NIE eine schnellere Pace als "locker" verkaufen.
 
-REGEL 3 — On-Track ehrlich: on_track_score (0–100) und predicted_finish_h müssen zusammenpassen.
-- Wenn Finish > 5:00 h, darf on_track_score nicht "grün/gut" wirken (also < 70). Wenn Finish < 5:00 h, dann ≥ 70.
-- on_track_note erklärt den Status in 1 Satz und nennt den größten Hebel.
+REGEL 3 — On-Track ehrlich, aber FAIR zur Plan-Phase: on_track_score (0–100) und predicted_finish_h müssen zusammenpassen.
+- predicted_finish_h schätzt die Zeit BEI PLANMÄSSIGER FORTSETZUNG (er erreicht die PLAN-VERLAUF-Peak-Distanz plangemäß), NICHT eine naive Hochrechnung aus dem heutigen Longrun-Stand allein — ein Longrun von z.B. 18 km in Woche 11 von 18 ist bei PLAN-VERLAUF-Peak 30 km KEIN Warnsignal, sondern genau planmäßig.
+- Wenn er laut "HEUTE GEPLANT"/Aktivitäten den Plan einhält: on_track_score ≥ 70, auch wenn die Peak-Distanz noch nicht erreicht ist. Score < 70 NUR bei echtem Rückstand (verpasste/verkürzte Longruns, Verletzung/Krankheit, Volumen deutlich unter Plan) oder wenn Erholungswerte (HRV/Ruhepuls) strukturell schlecht sind.
+- on_track_note erklärt den Status in 1 Satz, nennt den größten Hebel UND macht klar ob es Plan-Fortschritt oder echter Rückstand ist.
 
 REGEL 4 — Laufanalyse konkret & motivierend: Beziehe dich auf echte Zahlen (Pace, Puls, Distanz), sag was gut war UND den einen wichtigsten nächsten Schritt. Kein Fachjargon-Geschwurbel, kein unrealistischer Ratschlag.
+- Zeitbezug im run_feedback: nutze GENAU das Wort in Klammern beim "Letzter Lauf" (HEUTE/GESTERN/"vor N Tagen") für den Zeitbezug – nicht selbst schätzen.
 
 Antworte NUR mit diesem JSON (kein Markdown):
 {{
