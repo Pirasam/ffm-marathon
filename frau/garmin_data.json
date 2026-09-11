@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-11T12:15:22+02:00",
+  "synced_at": "2026-09-11T14:45:22+02:00",
   "sync_date": "2026-09-11",
   "token_days_left": null,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 21,
+    "stress": 25,
     "resting_hr": 58,
     "body_battery": 89,
     "training_readiness": 86,
@@ -143,11 +143,11 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 109266,
+        "current": 110645,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 19,
-        "pct": 36
+        "pct": 37
       },
       {
         "name": "September Time to Run",
@@ -206,6 +206,18 @@
         "pct": 4
       }
     ],
+    "hr_zones": {
+      "sport": "RUNNING",
+      "method": "HR_MAX",
+      "lthr": 194,
+      "max_hr": 215,
+      "resting_hr": 60,
+      "z1_floor": 108,
+      "z2_floor": 129,
+      "z3_floor": 151,
+      "z4_floor": 172,
+      "z5_floor": 194
+    },
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-28",
