@@ -129,7 +129,7 @@ def get_plan_context(html_content):
 
 # ── Claude ────────────────────────────────────────────────────────────────────
 
-def _claude_json(prompt, max_tokens=1100):
+def _claude_json(prompt, max_tokens=4096):
     import anthropic
     client = anthropic.Anthropic()
     response = client.messages.create(
@@ -236,7 +236,7 @@ Antworte NUR mit diesem JSON (kein Markdown):
   "factor_vo2max": <0–100: Ausdauerbasis>,
   "factor_weight": <0–100: Gewicht Richtung 87 kg>
 }}"""
-    return _claude_json(prompt, max_tokens=850)
+    return _claude_json(prompt, max_tokens=3000)
 
 
 def call_claude(metrics, plan_context):
@@ -329,7 +329,7 @@ Antworte NUR mit diesem JSON (kein Markdown):
   "run_feedback": "<falls letzter Lauf vorhanden: 2 konkrete, motivierende Sätze mit echten Zahlen. Sonst leer.>"{longrun_field}
 }}"""
 
-    return _claude_json(prompt, max_tokens=1100)
+    return _claude_json(prompt, max_tokens=4096)
 
 
 # ── HTML injection ────────────────────────────────────────────────────────────
