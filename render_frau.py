@@ -169,6 +169,7 @@ def build_html(data):
     m = data.get("metrics", {}) or {}
     hist = data.get("history", {}) or {}
     cycle = m.get("cycle")
+    hz = m.get("hr_zones")
     today = date.today()
     days_to_marathon = (MARATHON_DATE - today).days
     weeks_to_marathon = days_to_marathon // 7
@@ -203,7 +204,7 @@ def build_html(data):
           <div><b>{_fmt(nfi)}</b><span>Tage bis zum nächsten<br>Follikel-Fenster</span></div>
         </div>
       </section>"""
-        week_plan = _week_plan(pk, cycle)
+        week_plan = _week_plan(pk, cycle, hz)
     else:
         cycle_card = """
       <section class="compass compass-empty">
@@ -278,36 +279,39 @@ def build_html(data):
         weeks=weeks_to_marathon, days=days_to_marathon,
         marathon=esc(MARATHON_NAME), marathon_date="31.10.2027",
         cycle_card=cycle_card, week_plan=week_plan,
+        hr_zones_card=_hr_zones_card(hz),
         charts=charts, chips=chips, runs_table=runs_table, roadmap=road,
         eff_chart=eff_chart,
     )
 
 
-def _week_plan(phase_key, cycle):
+def _week_plan(phase_key, cycle, hz=None):
     nfi = cycle.get("next_follicular_in_days")
+    # Konkrete Ziel-HF statt nur "locker"/"Puls" - aus ihren echten Garmin-Zonen.
+    z2 = f"{hz['z2_floor']}–{hz['z3_floor']-1} bpm" if hz and hz.get("z2_floor") else "locker"
     plans = {
         "menstruation": [
-            "Wenn's gut tut: 1 kurzer, lockerer Lauf (3–4 km). Sonst Pause.",
+            f"Wenn's gut tut: 1 kurzer, lockerer Lauf ({z2}, 3–4 km). Sonst Pause.",
             "Pilates oder ein Spaziergang sind heute vollwertiges Training.",
             "Kein Druck – die ersten Tage darfst du ruhig angehen.",
         ],
         "follikel": [
-            "2 Läufe: 1× locker (4–5 km) + 1× dein längster der Woche.",
+            f"2 Läufe: 1× locker ({z2}, 4–5 km) + 1× dein längster der Woche.",
             "Am langen Lauf optional 3–4 kurze Steigerungen (je ~15 s zügig).",
             "Dein Aufbau-Fenster – hier darf es sich etwas fordernder anfühlen.",
         ],
         "fruchtbar": [
-            "Leg deinen längsten Lauf jetzt – du hast die meiste Energie.",
+            f"Leg deinen längsten Lauf jetzt ({z2}) – du hast die meiste Energie.",
             "Dazu 1 kurzer, lockerer Lauf.",
             "Sauber laufen, ebenes Terrain – die Bänder sind etwas lockerer.",
         ],
         "luteal": [
-            "2 lockere Läufe nach Puls – Tempo bewusst rausnehmen.",
+            f"2 lockere Läufe ({z2}) – Tempo bewusst rausnehmen.",
             "Distanz wie sonst, aber ruhiger; ein höherer Puls ist völlig ok.",
             "Kein Tempo-Training nötig – ruhig und gleichmäßig reicht.",
         ],
         "luteal_late": [
-            "1 kurzer, leichter Lauf (3–4 km) oder eine bewusste Ruhewoche.",
+            f"1 kurzer, leichter Lauf ({z2}, 3–4 km) oder eine bewusste Ruhewoche.",
             "Priorität: Schlaf, Kohlenhydrate, Flüssigkeit.",
             "Kein Leistungsdruck – nächste Woche kommt deine Kraft zurück.",
         ],
@@ -320,6 +324,37 @@ def _week_plan(phase_key, cycle):
                    f'Follikel-Fenster – <b>dann</b> legen wir den längeren Lauf '
                    f'und die erste Steigerung hin.</p>')
     return f"<ul class='week'>{li}</ul>{outlook}"
+
+
+def _hr_zones_card(hz):
+    """Ihre echten, in Garmin hinterlegten HF-Zonen - keine erfundene Formel.
+    Gleiches Prinzip wie bei Samuels Dashboard, aber mit ihren eigenen Zahlen."""
+    if not hz or not hz.get("z2_floor"):
+        return ""
+    rows = [
+        ("Z1 · Sehr locker", hz["z1_floor"], hz["z2_floor"] - 1, "#1f9d6b"),
+        ("Z2 · Locker (Grundlage)", hz["z2_floor"], hz["z3_floor"] - 1, "#1f9d6b"),
+        ("Z3 · Moderat", hz["z3_floor"], hz["z4_floor"] - 1, "#2980b9"),
+        ("Z4 · Tempo/Schwelle", hz["z4_floor"], hz["z5_floor"] - 1, "#7a6cf0"),
+        ("Z5 · Intensiv", hz["z5_floor"], hz.get("max_hr", hz["z5_floor"] + 20), "#dd5f35"),
+    ]
+    lines = "".join(
+        f'<div style="display:flex;align-items:center;gap:8px;padding:4px 0;">'
+        f'<span style="width:8px;height:8px;border-radius:2px;background:{c};flex-shrink:0;"></span>'
+        f'<span style="font-size:.82rem;color:#4a4356;flex:1;">{esc(n)}</span>'
+        f'<span style="font-size:.82rem;font-weight:700;color:{c};font-variant-numeric:tabular-nums;">{lo}–{hi} bpm</span></div>'
+        for n, lo, hi, c in rows
+    )
+    meth = "Laktatschwelle" if hz.get("method") == "LACTATE_THRESHOLD" else "% Maximalpuls"
+    return f"""
+  <section>
+    <h2>Deine HF-Zonen</h2>
+    <p class="effc-sub" style="color:#8a8398;font-size:.82rem;margin:0 0 10px;">
+      Direkt aus Garmin ({esc(meth)}) · Max {hz.get('max_hr')} · Ruhe {hz.get('resting_hr')}
+      {f" · Schwelle {hz['lthr']}" if hz.get('lthr') else ""}
+    </p>
+    {lines}
+  </section>"""
 
 
 def _chart_card(label, value, hint, svg):
@@ -437,6 +472,8 @@ footer{{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}}
     <h2>Diese Woche</h2>
     {week_plan}
   </section>
+
+  {hr_zones_card}
 
   <section>
     <h2>Deine Verläufe</h2>

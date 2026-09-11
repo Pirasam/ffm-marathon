@@ -3,7 +3,7 @@
 
 Drei Kacheln mit den Werten, die für den Marathon zählen:
   - Durability (Ermüdungsresistenz): aerobes Decoupling auf langen Läufen
-  - Aerobe Basis: Tempo bei HF 145 (rollierend)
+  - Aerobe Basis: Tempo am oberen Rand der individuellen Zone 2 (rollierend)
   - Laufökonomie: Kadenz, vertikales Verhältnis, Bodenkontakt
 Alle Mini-Charts teilen eine echte 12-Monats-Zeitachse mit Monats-Ticks, und
 jede Serie ist so orientiert, dass eine steigende Linie IMMER eine Verbesserung
@@ -69,10 +69,10 @@ _TEMPLATE = r"""<section class="mind">
     <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>, darunter läufst du das Tempo bis zum Schluss.</div>
   </div>
   <div class="mcard" data-card="ab">
-    <h3>Aerobe Basis · Tempo @ HF 145</h3>
+    <h3>Aerobe Basis · Tempo @ <span class="ab-ref">HF</span></h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
     <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
-    <div class="meaning">Wie schnell du bei Puls 145 läufst. <b>Schneller = fittere Basis</b> – wächst durch Grundlage, nicht durch Tempo.</div>
+    <div class="meaning">Wie schnell du am oberen Rand deiner Grundlagenzone läufst. <b>Schneller = fittere Basis</b> – wächst durch Grundlage, nicht durch Tempo.</div>
   </div>
   <div class="mcard" data-card="eco">
     <h3>Laufökonomie</h3>
@@ -171,16 +171,18 @@ _TEMPLATE = r"""<section class="mind">
   (function(){
     var c=root.querySelector('[data-card="ab"]');
     var raw=(D.ab||[]).slice().sort(function(a,b){return a.m<b.m?-1:1;})
-      .map(function(x){return {t:Date.parse(x.m+"-15"),v:x.pace_s,m:x.m};})
+      .map(function(x){return {t:Date.parse(x.m+"-15"),v:x.pace_s,m:x.m,ref:x.ref};})
       .filter(function(p){return p.t>=START;});
     if(raw.length<2){c.style.display="none";return;}
     var vals=raw.map(function(p){return p.v;});
     var cur=vals[vals.length-1];
-    c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @145</small>';
+    var last=raw[raw.length-1];
+    var refTxt=last.ref?last.ref:"HF";
+    c.querySelector(".ab-ref").textContent="HF "+refTxt;
+    c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @'+refTxt+'</small>';
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
     var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true);
-    var last=raw[raw.length-1];
-    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF 145");
+    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt);
   })();
 
   // 3) ÖKONOMIE (Kadenz hoch=gut; vert & GCT niedrig=gut)

@@ -128,9 +128,15 @@ def main():
         history = compute_durability(api, history, today)
         history = backfill_economy(api, history, today)
         eff_runs = (metrics.get("efficiency") or {}).get("runs") or []
+        # Referenz-Puls fuers "Aerobe Basis"-Tempo individuell aus den echten
+        # Zonen ableiten (oberes Ende Zone 2 = schnellstes bequemes Grundlagen-
+        # tempo) statt einer fuer alle gleichen Zahl - Leute haben unterschiedliche
+        # Zonen (z.B. Samuel Z2 bis 141, Carina Z2 bis 150).
+        hz = metrics.get("hr_zones") or {}
+        ref_hr = (hz["z3_floor"] - 1) if hz.get("z3_floor") else 145
         metrics["marathon"] = {
             "durability": history.get("durability") or [],
-            "aerobic_base": compute_aerobic_base(eff_runs, today),
+            "aerobic_base": compute_aerobic_base(eff_runs, today, ref_hr=ref_hr),
             "economy": compute_economy(history.get("run_dyn") or [], today),
             "generated": today.isoformat(),
         }

@@ -33,9 +33,14 @@ if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
   rm -rf .git/rebase-merge .git/rebase-apply
 fi
 
-# Nur ihre Datendatei auf Serverstand bringen (nicht das ganze Repo).
+# Datendatei UND den Render-Code auf Serverstand bringen. Dieses Skript laeuft
+# im selben Arbeitsverzeichnis wie interaktive Bearbeitungen (Claude Code) – ohne
+# diesen Schritt konnte der Cron mit veraltetem/halb bearbeitetem Code rendern
+# (z.B. ohne die Marathon-Indikatoren, weil render_frau.py noch alt war).
 git fetch --quiet origin main 2>/dev/null || true
-git checkout --quiet origin/main -- "$DATA" 2>/dev/null || true
+git checkout --quiet origin/main -- "$DATA" \
+  render_frau.py marathon_indicators.py garmin_client.py sync_garmin.py profiles.py \
+  2>/dev/null || true
 
 # Drosselung: nicht oefter als alle 8 Minuten (ausser --force).
 if [ "${1:-}" != "--force" ] && [ -f "$DATA" ]; then

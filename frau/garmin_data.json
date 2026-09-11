@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-11T14:45:22+02:00",
+  "synced_at": "2026-09-11T16:09:27+02:00",
   "sync_date": "2026-09-11",
   "token_days_left": null,
   "metrics": {
@@ -635,13 +635,13 @@
       "aerobic_base": [
         {
           "m": "2026-08",
-          "pace_s": 476,
-          "ref": 145
+          "pace_s": 404,
+          "ref": 150
         },
         {
           "m": "2026-09",
-          "pace_s": 533,
-          "ref": 145
+          "pace_s": 481,
+          "ref": 150
         }
       ],
       "economy": [

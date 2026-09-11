@@ -110,7 +110,17 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 
   <section>
     <h2>Diese Woche</h2>
-    <ul class='week'><li>Leg deinen längsten Lauf jetzt – du hast die meiste Energie.</li><li>Dazu 1 kurzer, lockerer Lauf.</li><li>Sauber laufen, ebenes Terrain – die Bänder sind etwas lockerer.</li></ul>
+    <ul class='week'><li>Leg deinen längsten Lauf jetzt (129–150 bpm) – du hast die meiste Energie.</li><li>Dazu 1 kurzer, lockerer Lauf.</li><li>Sauber laufen, ebenes Terrain – die Bänder sind etwas lockerer.</li></ul>
+  </section>
+
+  
+  <section>
+    <h2>Deine HF-Zonen</h2>
+    <p class="effc-sub" style="color:#8a8398;font-size:.82rem;margin:0 0 10px;">
+      Direkt aus Garmin (% Maximalpuls) · Max 215 · Ruhe 60
+       · Schwelle 194
+    </p>
+    <div style="display:flex;align-items:center;gap:8px;padding:4px 0;"><span style="width:8px;height:8px;border-radius:2px;background:#1f9d6b;flex-shrink:0;"></span><span style="font-size:.82rem;color:#4a4356;flex:1;">Z1 · Sehr locker</span><span style="font-size:.82rem;font-weight:700;color:#1f9d6b;font-variant-numeric:tabular-nums;">108–128 bpm</span></div><div style="display:flex;align-items:center;gap:8px;padding:4px 0;"><span style="width:8px;height:8px;border-radius:2px;background:#1f9d6b;flex-shrink:0;"></span><span style="font-size:.82rem;color:#4a4356;flex:1;">Z2 · Locker (Grundlage)</span><span style="font-size:.82rem;font-weight:700;color:#1f9d6b;font-variant-numeric:tabular-nums;">129–150 bpm</span></div><div style="display:flex;align-items:center;gap:8px;padding:4px 0;"><span style="width:8px;height:8px;border-radius:2px;background:#2980b9;flex-shrink:0;"></span><span style="font-size:.82rem;color:#4a4356;flex:1;">Z3 · Moderat</span><span style="font-size:.82rem;font-weight:700;color:#2980b9;font-variant-numeric:tabular-nums;">151–171 bpm</span></div><div style="display:flex;align-items:center;gap:8px;padding:4px 0;"><span style="width:8px;height:8px;border-radius:2px;background:#7a6cf0;flex-shrink:0;"></span><span style="font-size:.82rem;color:#4a4356;flex:1;">Z4 · Tempo/Schwelle</span><span style="font-size:.82rem;font-weight:700;color:#7a6cf0;font-variant-numeric:tabular-nums;">172–193 bpm</span></div><div style="display:flex;align-items:center;gap:8px;padding:4px 0;"><span style="width:8px;height:8px;border-radius:2px;background:#dd5f35;flex-shrink:0;"></span><span style="font-size:.82rem;color:#4a4356;flex:1;">Z5 · Intensiv</span><span style="font-size:.82rem;font-weight:700;color:#dd5f35;font-variant-numeric:tabular-nums;">194–215 bpm</span></div>
   </section>
 
   <section>
@@ -169,10 +179,10 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>, darunter läufst du das Tempo bis zum Schluss.</div>
   </div>
   <div class="mcard" data-card="ab">
-    <h3>Aerobe Basis · Tempo @ HF 145</h3>
+    <h3>Aerobe Basis · Tempo @ <span class="ab-ref">HF</span></h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
     <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
-    <div class="meaning">Wie schnell du bei Puls 145 läufst. <b>Schneller = fittere Basis</b> – wächst durch Grundlage, nicht durch Tempo.</div>
+    <div class="meaning">Wie schnell du am oberen Rand deiner Grundlagenzone läufst. <b>Schneller = fittere Basis</b> – wächst durch Grundlage, nicht durch Tempo.</div>
   </div>
   <div class="mcard" data-card="eco">
     <h3>Laufökonomie</h3>
@@ -182,7 +192,7 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 </div>
 <script>
 (function(){
-  var D={"dur": [], "ab": [{"m": "2026-08", "pace_s": 476, "ref": 145}, {"m": "2026-09", "pace_s": 533, "ref": 145}], "ec": [{"m": "2025-10", "vr": 10.3, "gct": 305.0, "cad": 127.2}, {"m": "2025-11", "vr": 10.3, "gct": 301.5, "cad": 143.0}, {"m": "2026-01", "vr": 10.4, "gct": 305.0, "cad": 138.0}, {"m": "2026-02", "vr": 10.2, "gct": 298.0, "cad": 137.0}, {"m": "2026-03", "vr": 10.3, "gct": 300.3, "cad": 147.7}, {"m": "2026-04", "vr": 10.1, "gct": 299.0, "cad": 145.5}, {"m": "2026-05", "vr": 10.0, "gct": 298.0, "cad": 149.0}, {"m": "2026-06", "vr": 9.4, "gct": 308.0, "cad": 123.0}, {"m": "2026-07", "vr": 10.7, "gct": 317.7, "cad": 125.8}, {"m": "2026-08", "vr": 11.1, "gct": 310.3, "cad": 134.7}, {"m": "2026-09", "vr": 11.1, "gct": 313.3, "cad": 140.7}]};
+  var D={"dur": [], "ab": [{"m": "2026-08", "pace_s": 404, "ref": 150}, {"m": "2026-09", "pace_s": 481, "ref": 150}], "ec": [{"m": "2025-10", "vr": 10.3, "gct": 305.0, "cad": 127.2}, {"m": "2025-11", "vr": 10.3, "gct": 301.5, "cad": 143.0}, {"m": "2026-01", "vr": 10.4, "gct": 305.0, "cad": 138.0}, {"m": "2026-02", "vr": 10.2, "gct": 298.0, "cad": 137.0}, {"m": "2026-03", "vr": 10.3, "gct": 300.3, "cad": 147.7}, {"m": "2026-04", "vr": 10.1, "gct": 299.0, "cad": 145.5}, {"m": "2026-05", "vr": 10.0, "gct": 298.0, "cad": 149.0}, {"m": "2026-06", "vr": 9.4, "gct": 308.0, "cad": 123.0}, {"m": "2026-07", "vr": 10.7, "gct": 317.7, "cad": 125.8}, {"m": "2026-08", "vr": 11.1, "gct": 310.3, "cad": 134.7}, {"m": "2026-09", "vr": 11.1, "gct": 313.3, "cad": 140.7}]};
   var root=document.currentScript.closest(".mind");
   var tip=document.createElement("div");tip.className="mtip";document.body.appendChild(tip);
   var NS="http://www.w3.org/2000/svg";
@@ -271,16 +281,18 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
   (function(){
     var c=root.querySelector('[data-card="ab"]');
     var raw=(D.ab||[]).slice().sort(function(a,b){return a.m<b.m?-1:1;})
-      .map(function(x){return {t:Date.parse(x.m+"-15"),v:x.pace_s,m:x.m};})
+      .map(function(x){return {t:Date.parse(x.m+"-15"),v:x.pace_s,m:x.m,ref:x.ref};})
       .filter(function(p){return p.t>=START;});
     if(raw.length<2){c.style.display="none";return;}
     var vals=raw.map(function(p){return p.v;});
     var cur=vals[vals.length-1];
-    c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @145</small>';
+    var last=raw[raw.length-1];
+    var refTxt=last.ref?last.ref:"HF";
+    c.querySelector(".ab-ref").textContent="HF "+refTxt;
+    c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @'+refTxt+'</small>';
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
     var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true);
-    var last=raw[raw.length-1];
-    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF 145");
+    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt);
   })();
 
   // 3) ÖKONOMIE (Kadenz hoch=gut; vert & GCT niedrig=gut)
@@ -356,7 +368,7 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     perfekte einzelne Woche.</p>
   </section>
 
-  <footer>Automatisch aus Garmin &amp; Natural Cycles · Stand 2026-09-11 14:45</footer>
+  <footer>Automatisch aus Garmin &amp; Natural Cycles · Stand 2026-09-11 16:09</footer>
 </div>
 </body>
 </html>
