@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-11T07:13:29+02:00",
+  "synced_at": "2026-09-11T08:45:21+02:00",
   "sync_date": "2026-09-11",
   "token_days_left": null,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 17,
+    "stress": 18,
     "resting_hr": 58,
     "body_battery": 89,
     "training_readiness": 100,
@@ -128,7 +128,7 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 97841,
+        "current": 97999,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 19,
