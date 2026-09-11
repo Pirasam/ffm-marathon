@@ -134,10 +134,21 @@ def main():
         # Zonen (z.B. Samuel Z2 bis 141, Carina Z2 bis 150).
         hz = metrics.get("hr_zones") or {}
         ref_hr = (hz["z3_floor"] - 1) if hz.get("z3_floor") else 145
+        # Neben den geglaetteten Monatstrends (90-Tage-Regression / Monatsmittel)
+        # zusaetzlich die ungeglaetteten Rohwerte mitgeben, damit das Dashboard
+        # "aktueller Wert" UND "Trend" zeigen kann, nicht nur die Glaettung.
+        latest_run = max(eff_runs, key=lambda r: r.get("date", ""), default=None) \
+            if eff_runs else None
+        run_dyn_raw = sorted(history.get("run_dyn") or [], key=lambda x: x.get("d", ""))[-60:]
         metrics["marathon"] = {
             "durability": history.get("durability") or [],
             "aerobic_base": compute_aerobic_base(eff_runs, today, ref_hr=ref_hr),
+            "aerobic_base_latest": ({
+                "date": latest_run["date"], "pace_s": round(latest_run["pace"] * 60),
+                "hf": latest_run["hf"],
+            } if latest_run else None),
             "economy": compute_economy(history.get("run_dyn") or [], today),
+            "economy_raw": run_dyn_raw,
             "generated": today.isoformat(),
         }
     except Exception as e:

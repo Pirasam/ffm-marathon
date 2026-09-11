@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-11T16:40:39+02:00",
+  "synced_at": "2026-09-11T16:55:43+02:00",
   "sync_date": "2026-09-11",
   "token_days_left": null,
   "metrics": {
@@ -644,6 +644,11 @@
           "ref": 145.0
         }
       ],
+      "aerobic_base_latest": {
+        "date": "2026-09-11",
+        "pace_s": 582,
+        "hf": 145.0
+      },
       "economy": [
         {
           "m": "2025-10",
@@ -710,6 +715,188 @@
           "vr": 11.1,
           "gct": 313.3,
           "cad": 140.7
+        }
+      ],
+      "economy_raw": [
+        {
+          "d": "2025-10-13",
+          "cadence": 98,
+          "vertical_ratio": 9.9,
+          "gct": 306
+        },
+        {
+          "d": "2025-10-17",
+          "cadence": 123,
+          "vertical_ratio": 10.3,
+          "gct": 304
+        },
+        {
+          "d": "2025-10-25",
+          "cadence": 146,
+          "vertical_ratio": 10.6,
+          "gct": 304
+        },
+        {
+          "d": "2025-10-28",
+          "cadence": 142,
+          "vertical_ratio": 10.5,
+          "gct": 306
+        },
+        {
+          "d": "2025-11-08",
+          "cadence": 151,
+          "vertical_ratio": 10.4,
+          "gct": 303
+        },
+        {
+          "d": "2025-11-16",
+          "cadence": 135,
+          "vertical_ratio": 10.2,
+          "gct": 300
+        },
+        {
+          "d": "2026-01-15",
+          "cadence": 138,
+          "vertical_ratio": 10.4,
+          "gct": 305
+        },
+        {
+          "d": "2026-02-01",
+          "cadence": 137,
+          "vertical_ratio": 10.2,
+          "gct": 298
+        },
+        {
+          "d": "2026-03-07",
+          "cadence": 156,
+          "vertical_ratio": 10.5,
+          "gct": 302
+        },
+        {
+          "d": "2026-03-08",
+          "cadence": 144,
+          "vertical_ratio": 10.3,
+          "gct": 299
+        },
+        {
+          "d": "2026-03-22",
+          "cadence": 143,
+          "vertical_ratio": 10.2,
+          "gct": 300
+        },
+        {
+          "d": "2026-04-25",
+          "cadence": 148,
+          "vertical_ratio": 9.9,
+          "gct": 296
+        },
+        {
+          "d": "2026-04-28",
+          "cadence": 143,
+          "vertical_ratio": 10.3,
+          "gct": 302
+        },
+        {
+          "d": "2026-05-01",
+          "cadence": 149,
+          "vertical_ratio": 10.0,
+          "gct": 298
+        },
+        {
+          "d": "2026-06-29",
+          "cadence": 123,
+          "vertical_ratio": 9.4,
+          "gct": 308
+        },
+        {
+          "d": "2026-07-01",
+          "cadence": 123,
+          "vertical_ratio": 10.7,
+          "gct": 319
+        },
+        {
+          "d": "2026-07-09",
+          "cadence": 133,
+          "vertical_ratio": 10.5,
+          "gct": 309
+        },
+        {
+          "d": "2026-07-12",
+          "cadence": 123,
+          "vertical_ratio": 10.7,
+          "gct": 314
+        },
+        {
+          "d": "2026-07-17",
+          "cadence": 121,
+          "vertical_ratio": 10.2,
+          "gct": 318
+        },
+        {
+          "d": "2026-07-25",
+          "cadence": 123,
+          "vertical_ratio": 11.2,
+          "gct": 321
+        },
+        {
+          "d": "2026-07-30",
+          "cadence": 132,
+          "vertical_ratio": 10.8,
+          "gct": 325
+        },
+        {
+          "d": "2026-08-07",
+          "cadence": 135.0,
+          "vertical_ratio": 11.0,
+          "gct": 308.0
+        },
+        {
+          "d": "2026-08-14",
+          "cadence": 137.0,
+          "vertical_ratio": 11.0,
+          "gct": 311.0
+        },
+        {
+          "d": "2026-08-16",
+          "cadence": 128.0,
+          "vertical_ratio": 11.3,
+          "gct": 313.0
+        },
+        {
+          "d": "2026-08-21",
+          "cadence": 114.0,
+          "vertical_ratio": 11.0,
+          "gct": 310.0
+        },
+        {
+          "d": "2026-08-23",
+          "cadence": 146.0,
+          "vertical_ratio": 11.2,
+          "gct": 309.0
+        },
+        {
+          "d": "2026-08-30",
+          "cadence": 148.0,
+          "vertical_ratio": 11.3,
+          "gct": 311.0
+        },
+        {
+          "d": "2026-09-03",
+          "cadence": 131.0,
+          "vertical_ratio": 10.8,
+          "gct": 315.0
+        },
+        {
+          "d": "2026-09-06",
+          "cadence": 152.0,
+          "vertical_ratio": 11.4,
+          "gct": 311.0
+        },
+        {
+          "d": "2026-09-11",
+          "cadence": 139.0,
+          "vertical_ratio": 11.1,
+          "gct": 314.0
         }
       ],
       "generated": "2026-09-11"

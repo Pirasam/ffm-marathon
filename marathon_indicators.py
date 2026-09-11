@@ -21,7 +21,11 @@ def marathon_indicators(marathon):
     ec = m.get("economy") or []
     if not (dur or ab or ec):
         return ""
-    payload = json.dumps({"dur": dur, "ab": ab, "ec": ec}, ensure_ascii=False)
+    payload = json.dumps({
+        "dur": dur, "ab": ab, "ec": ec,
+        "ab_latest": m.get("aerobic_base_latest"),
+        "ec_raw": m.get("economy_raw") or [],
+    }, ensure_ascii=False)
     return _TEMPLATE.replace("__DATA__", payload)
 
 
@@ -43,10 +47,13 @@ _TEMPLATE = r"""<section class="mind">
   display:flex;align-items:baseline;gap:7px}
 .mcard .big small{font-size:.8rem;color:var(--m-mut);font-weight:500}
 .mcard .arrow{font-size:.85rem;font-weight:700}
+.ab-latest{font-size:.72rem;color:var(--m-mut);font-variant-numeric:tabular-nums;margin:-1px 0 2px}
+.ab-latest b{color:var(--m-ink);font-weight:700}
 .mcard .spark{display:block;width:100%;height:56px;margin:6px 0 2px}
 .mcard .meaning{color:var(--m-mut);font-size:.74rem;line-height:1.4;margin-top:4px}
 .mind .sp-line{fill:none;stroke:var(--m-line);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .mind .sp-dot{fill:var(--m-line)}
+.mind .sp-raw{fill:var(--m-mut);opacity:.45}
 .mind .sp-gl{stroke:var(--m-grid);stroke-width:1}
 .mind .sp-ax{fill:var(--m-mut);font-size:8.5px;font-family:inherit}
 .eco-rows{display:flex;flex-direction:column;gap:10px;margin-top:2px}
@@ -71,13 +78,14 @@ _TEMPLATE = r"""<section class="mind">
   <div class="mcard" data-card="ab">
     <h3>Aerobe Basis · Tempo @ <span class="ab-ref">HF</span></h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
+    <div class="ab-latest"></div>
     <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
-    <div class="meaning">Wie schnell du am oberen Rand deiner Grundlagenzone läufst. <b>Schneller = fittere Basis</b> – wächst durch Grundlage, nicht durch Tempo.</div>
+    <div class="meaning">Trend = geglätteter 90-Tage-Schnitt, wächst durch Grundlage. <b>Letzter Lauf</b> = dein tatsächlich jüngstes Tempo, ungeglättet.</div>
   </div>
   <div class="mcard" data-card="eco">
     <h3>Laufökonomie</h3>
     <div class="eco-rows"></div>
-    <div class="meaning">Niedrigeres vert. Verhältnis &amp; Bodenkontakt, höhere Kadenz = ökonomischer.</div>
+    <div class="meaning">Niedrigeres vert. Verhältnis &amp; Bodenkontakt, höhere Kadenz = ökonomischer. Blasse Punkte = einzelne Läufe, Linie = Monatsschnitt.</div>
   </div>
 </div>
 <script>
@@ -100,13 +108,15 @@ _TEMPLATE = r"""<section class="mind">
 
   // pts: [{t, v}] chronologisch, v = ECHTER Wert (fuer Anzeige/Tooltip).
   // invert:true zeichnet -v, damit "oben am Chart" immer Verbesserung heisst.
-  function drawSpark(svg,pts,invert,quarterly){
+  function drawSpark(svg,pts,invert,quarterly,rawPts){
     while(svg.firstChild)svg.removeChild(svg.firstChild);
     var vb=svg.getAttribute("viewBox").split(" ").map(Number);
     var W=vb[2],H=vb[3],padL=2,padR=2,padT=4,axH=12,plotH=H-axH;
     function X(t){return padL+(t-START)/(END-START)*(W-padL-padR);}
     var vals=pts.map(function(p){return invert?-p.v:p.v;});
-    var lo=Math.min.apply(0,vals),hi=Math.max.apply(0,vals);
+    var rawVals=(rawPts||[]).map(function(p){return invert?-p.v:p.v;});
+    var allVals=vals.concat(rawVals);
+    var lo=Math.min.apply(0,allVals),hi=Math.max.apply(0,allVals);
     var pad=(hi-lo)*0.15||1;lo-=pad;hi+=pad;
     function Y(v){return padT+(hi-v)/(hi-lo)*(plotH-padT);}
     // horizontale Nulllinie/Grid dezent (2 Linien)
@@ -127,6 +137,11 @@ _TEMPLATE = r"""<section class="mind">
       }
       d.setMonth(d.getMonth()+step);
     }
+    // Rohe Tageswerte als blasse Streupunkte im Hintergrund - zeigt die echte
+    // Schwankung, die die geglaettete Trendlinie bewusst herausrechnet.
+    (rawPts||[]).forEach(function(p,i){
+      svg.appendChild(E("circle",{cx:X(p.t),cy:Y(rawVals[i]),r:1.6,"class":"sp-raw"}));
+    });
     if(pts.length<2){
       var only=pts[0];
       svg.appendChild(E("circle",{cx:X(only.t),cy:Y(invert?-only.v:only.v),r:3,"class":"sp-dot"}));
@@ -182,7 +197,15 @@ _TEMPLATE = r"""<section class="mind">
     c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @'+refTxt+'</small>';
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
     var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true);
-    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt);
+    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt+" (90-Tage-Trend)");
+    // Zusaetzlich der ungeglaettete Rohwert: der tatsaechlich juengste Lauf,
+    // nicht durch die 90-Tage-Regression geglaettet.
+    var lr=D.ab_latest;
+    if(lr && lr.pace_s){
+      var days=Math.round((Date.now()-Date.parse(lr.date))/864e5);
+      var when=days<=0?"heute":days===1?"gestern":"vor "+days+" Tagen";
+      c.querySelector(".ab-latest").innerHTML="Letzter Lauf ("+when+"): <b>"+fpace(lr.pace_s)+"/km</b> bei <b>"+Math.round(lr.hf)+" bpm</b> – unangepasst";
+    }
   })();
 
   // 3) ÖKONOMIE (Kadenz hoch=gut; vert & GCT niedrig=gut)
@@ -192,15 +215,21 @@ _TEMPLATE = r"""<section class="mind">
     var wrap=c.querySelector(".eco-rows");
     var rows=[
       {key:"cad",lab:"Kadenz",unit:" spm",higherBetter:true},
-      {key:"vr",lab:"Vert. Verhältnis",unit:" %",higherBetter:false},
-      {key:"gct",lab:"Bodenkontakt",unit:" ms",higherBetter:false}
+      {key:"vr",lab:"Vert. Verhältnis",unit:" %",higherBetter:false,rawKey:"vertical_ratio"},
+      {key:"gct",lab:"Bodenkontakt",unit:" ms",higherBetter:false,rawKey:"gct"}
     ];
+    rows[0].rawKey="cadence";
+    var ecRaw=D.ec_raw||[];
     var any=false;
     rows.forEach(function(r){
       var pts=raw.filter(function(x){return x[r.key]!=null;})
         .map(function(x){return {t:Date.parse(x.m+"-15"),v:x[r.key],m:x.m};})
         .filter(function(p){return p.t>=START;});
       if(pts.length<2)return;
+      // Rohe Tageswerte fuer denselben Zeitraum - zeigt die Streuung hinter dem Monatsmittel.
+      var rawPts=ecRaw.filter(function(x){return x[r.rawKey]!=null && x.d;})
+        .map(function(x){return {t:Date.parse(x.d),v:x[r.rawKey]};})
+        .filter(function(p){return p.t>=START;});
       any=true;
       var vals=pts.map(function(p){return p.v;});
       var cur=vals[vals.length-1];
@@ -213,9 +242,11 @@ _TEMPLATE = r"""<section class="mind">
         '<svg class="mini" viewBox="0 0 200 38" preserveAspectRatio="none"></svg>';
       wrap.appendChild(el);
       var svg=el.querySelector(".mini");
-      drawSpark(svg,pts,!r.higherBetter,false);
+      drawSpark(svg,pts,!r.higherBetter,false,rawPts);
       var last=pts[pts.length-1];
-      hookTip(svg, r.lab+" "+last.m+": "+last.v+r.unit);
+      var lastRaw=rawPts.length?rawPts[rawPts.length-1]:null;
+      var rawTxt=lastRaw?(" · letzter Lauf: "+lastRaw.v+r.unit):"";
+      hookTip(svg, r.lab+" "+last.m+" (Schnitt): "+last.v+r.unit+rawTxt);
     });
     if(!any)c.style.display="none";
   })();

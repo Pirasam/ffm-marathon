@@ -1780,10 +1780,13 @@ window.GARMIN_DATA = {
   display:flex;align-items:baseline;gap:7px}
 .mcard .big small{font-size:.8rem;color:var(--m-mut);font-weight:500}
 .mcard .arrow{font-size:.85rem;font-weight:700}
+.ab-latest{font-size:.72rem;color:var(--m-mut);font-variant-numeric:tabular-nums;margin:-1px 0 2px}
+.ab-latest b{color:var(--m-ink);font-weight:700}
 .mcard .spark{display:block;width:100%;height:56px;margin:6px 0 2px}
 .mcard .meaning{color:var(--m-mut);font-size:.74rem;line-height:1.4;margin-top:4px}
 .mind .sp-line{fill:none;stroke:var(--m-line);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .mind .sp-dot{fill:var(--m-line)}
+.mind .sp-raw{fill:var(--m-mut);opacity:.45}
 .mind .sp-gl{stroke:var(--m-grid);stroke-width:1}
 .mind .sp-ax{fill:var(--m-mut);font-size:8.5px;font-family:inherit}
 .eco-rows{display:flex;flex-direction:column;gap:10px;margin-top:2px}
@@ -1808,18 +1811,19 @@ window.GARMIN_DATA = {
   <div class="mcard" data-card="ab">
     <h3>Aerobe Basis · Tempo @ <span class="ab-ref">HF</span></h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
+    <div class="ab-latest"></div>
     <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
-    <div class="meaning">Wie schnell du am oberen Rand deiner Grundlagenzone läufst. <b>Schneller = fittere Basis</b> – wächst durch Grundlage, nicht durch Tempo.</div>
+    <div class="meaning">Trend = geglätteter 90-Tage-Schnitt, wächst durch Grundlage. <b>Letzter Lauf</b> = dein tatsächlich jüngstes Tempo, ungeglättet.</div>
   </div>
   <div class="mcard" data-card="eco">
     <h3>Laufökonomie</h3>
     <div class="eco-rows"></div>
-    <div class="meaning">Niedrigeres vert. Verhältnis &amp; Bodenkontakt, höhere Kadenz = ökonomischer.</div>
+    <div class="meaning">Niedrigeres vert. Verhältnis &amp; Bodenkontakt, höhere Kadenz = ökonomischer. Blasse Punkte = einzelne Läufe, Linie = Monatsschnitt.</div>
   </div>
 </div>
 <script>
 (function(){
-  var D={"dur": [{"d": "2026-09-06", "km": 18.7, "decoup": 7.8}, {"d": "2026-08-30", "km": 16.0, "decoup": -2.9}, {"d": "2026-08-23", "km": 13.7, "decoup": 18.0}, {"d": "2026-07-12", "km": 21.1, "decoup": 10.3}, {"d": "2026-07-06", "km": 12.0, "decoup": 3.1}, {"d": "2026-07-04", "km": 16.0, "decoup": 4.1}, {"d": "2026-07-02", "km": 12.1, "decoup": 0.6}, {"d": "2026-06-07", "km": 17.0, "decoup": 6.9}, {"d": "2026-05-24", "km": 21.1, "decoup": 9.5}, {"d": "2026-05-21", "km": 12.5, "decoup": 9.1}, {"d": "2026-05-10", "km": 13.1, "decoup": 14.4}, {"d": "2026-04-22", "km": 12.7, "decoup": 7.1}, {"d": "2026-02-07", "km": 14.1, "decoup": 3.6}], "ab": [{"m": "2025-11", "pace_s": 488, "ref": 141}, {"m": "2025-12", "pace_s": 490, "ref": 141}, {"m": "2026-01", "pace_s": 504, "ref": 141}, {"m": "2026-02", "pace_s": 518, "ref": 141}, {"m": "2026-03", "pace_s": 511, "ref": 141}, {"m": "2026-04", "pace_s": 481, "ref": 141}, {"m": "2026-05", "pace_s": 478, "ref": 141}, {"m": "2026-06", "pace_s": 472, "ref": 141}, {"m": "2026-07", "pace_s": 456, "ref": 141}, {"m": "2026-08", "pace_s": 447, "ref": 141}, {"m": "2026-09", "pace_s": 452, "ref": 141}], "ec": [{"m": "2025-09", "vr": 12.3, "gct": 274.0, "cad": 161.0}, {"m": "2025-10", "vr": 9.6, "gct": 315.0, "cad": 136.8}, {"m": "2025-11", "vr": 10.4, "gct": 301.0, "cad": 154.0}, {"m": "2025-12", "vr": 11.6, "gct": 296.0, "cad": 155.0}, {"m": "2026-01", "vr": 11.3, "gct": 284.5, "cad": 157.0}, {"m": "2026-02", "vr": 11.9, "gct": 287.0, "cad": 161.0}, {"m": "2026-03", "vr": 11.3, "gct": 290.4, "cad": 153.2}, {"m": "2026-04", "vr": 10.6, "gct": 306.9, "cad": 147.6}, {"m": "2026-05", "vr": 11.4, "gct": 269.1, "cad": 160.1}, {"m": "2026-06", "vr": 11.9, "gct": 279.5, "cad": 157.5}, {"m": "2026-07", "vr": 12.5, "gct": 268.9, "cad": 161.6}, {"m": "2026-08", "vr": 12.9, "gct": 282.3, "cad": 155.4}, {"m": "2026-09", "vr": 12.7, "gct": 275.8, "cad": 161.2}]};
+  var D={"dur": [{"d": "2026-09-06", "km": 18.7, "decoup": 7.8}, {"d": "2026-08-30", "km": 16.0, "decoup": -2.9}, {"d": "2026-08-23", "km": 13.7, "decoup": 18.0}, {"d": "2026-07-12", "km": 21.1, "decoup": 10.3}, {"d": "2026-07-06", "km": 12.0, "decoup": 3.1}, {"d": "2026-07-04", "km": 16.0, "decoup": 4.1}, {"d": "2026-07-02", "km": 12.1, "decoup": 0.6}, {"d": "2026-06-07", "km": 17.0, "decoup": 6.9}, {"d": "2026-05-24", "km": 21.1, "decoup": 9.5}, {"d": "2026-05-21", "km": 12.5, "decoup": 9.1}, {"d": "2026-05-10", "km": 13.1, "decoup": 14.4}, {"d": "2026-04-22", "km": 12.7, "decoup": 7.1}, {"d": "2026-02-07", "km": 14.1, "decoup": 3.6}], "ab": [{"m": "2025-11", "pace_s": 488, "ref": 141}, {"m": "2025-12", "pace_s": 490, "ref": 141}, {"m": "2026-01", "pace_s": 504, "ref": 141}, {"m": "2026-02", "pace_s": 518, "ref": 141}, {"m": "2026-03", "pace_s": 511, "ref": 141}, {"m": "2026-04", "pace_s": 481, "ref": 141}, {"m": "2026-05", "pace_s": 478, "ref": 141}, {"m": "2026-06", "pace_s": 472, "ref": 141}, {"m": "2026-07", "pace_s": 456, "ref": 141}, {"m": "2026-08", "pace_s": 447, "ref": 141}, {"m": "2026-09", "pace_s": 452, "ref": 141}], "ec": [{"m": "2025-09", "vr": 12.3, "gct": 274.0, "cad": 161.0}, {"m": "2025-10", "vr": 9.6, "gct": 315.0, "cad": 136.8}, {"m": "2025-11", "vr": 10.4, "gct": 301.0, "cad": 154.0}, {"m": "2025-12", "vr": 11.6, "gct": 296.0, "cad": 155.0}, {"m": "2026-01", "vr": 11.3, "gct": 284.5, "cad": 157.0}, {"m": "2026-02", "vr": 11.9, "gct": 287.0, "cad": 161.0}, {"m": "2026-03", "vr": 11.3, "gct": 290.4, "cad": 153.2}, {"m": "2026-04", "vr": 10.6, "gct": 306.9, "cad": 147.6}, {"m": "2026-05", "vr": 11.4, "gct": 269.1, "cad": 160.1}, {"m": "2026-06", "vr": 11.9, "gct": 279.5, "cad": 157.5}, {"m": "2026-07", "vr": 12.5, "gct": 268.9, "cad": 161.6}, {"m": "2026-08", "vr": 12.9, "gct": 282.3, "cad": 155.4}, {"m": "2026-09", "vr": 12.7, "gct": 275.8, "cad": 161.2}], "ab_latest": {"date": "2026-09-11", "pace_s": 457, "hf": 140.0}, "ec_raw": [{"d": "2026-01-25", "cadence": 160, "vertical_ratio": 11.8, "gct": 288}, {"d": "2026-01-31", "cadence": 160, "vertical_ratio": 10.5, "gct": 274}, {"d": "2026-02-07", "cadence": 161, "vertical_ratio": 11.9, "gct": 287}, {"d": "2026-03-08", "cadence": 155, "vertical_ratio": 12.2, "gct": 291}, {"d": "2026-03-15", "cadence": 160, "vertical_ratio": 11.9, "gct": 284}, {"d": "2026-03-19", "cadence": 152, "vertical_ratio": 11.4, "gct": 284}, {"d": "2026-03-21", "cadence": 161, "vertical_ratio": 11.8, "gct": 282}, {"d": "2026-03-22", "cadence": 138, "vertical_ratio": 9.2, "gct": 311}, {"d": "2026-04-02", "cadence": 151, "vertical_ratio": 11.8, "gct": 308}, {"d": "2026-04-07", "cadence": 146, "vertical_ratio": 11.8, "gct": 322}, {"d": "2026-04-11", "cadence": 157, "vertical_ratio": 10.8, "gct": 268}, {"d": "2026-04-15", "cadence": 159, "vertical_ratio": 10.9, "gct": 280}, {"d": "2026-04-17", "cadence": 89, "vertical_ratio": 7.8, "gct": 463}, {"d": "2026-04-18", "cadence": 143, "vertical_ratio": 10.0, "gct": 313}, {"d": "2026-04-22", "cadence": 160, "vertical_ratio": 11.1, "gct": 281}, {"d": "2026-04-28", "cadence": 160, "vertical_ratio": 11.0, "gct": 277}, {"d": "2026-04-30", "cadence": 163, "vertical_ratio": 10.2, "gct": 250}, {"d": "2026-05-03", "cadence": 163, "vertical_ratio": 11.8, "gct": 270}, {"d": "2026-05-05", "cadence": 146, "vertical_ratio": 11.9, "gct": 284}, {"d": "2026-05-07", "cadence": 166, "vertical_ratio": 10.9, "gct": 248}, {"d": "2026-05-10", "cadence": 159, "vertical_ratio": 11.6, "gct": 278}, {"d": "2026-05-13", "cadence": 163, "vertical_ratio": 11.3, "gct": 274}, {"d": "2026-05-17", "cadence": 159, "vertical_ratio": 10.8, "gct": 266}, {"d": "2026-05-21", "cadence": 159, "vertical_ratio": 11.4, "gct": 280}, {"d": "2026-05-24", "cadence": 161, "vertical_ratio": 11.9, "gct": 279}, {"d": "2026-05-30", "cadence": 165, "vertical_ratio": 11.2, "gct": 243}, {"d": "2026-06-03", "cadence": 162, "vertical_ratio": 11.6, "gct": 273}, {"d": "2026-06-07", "cadence": 162, "vertical_ratio": 11.9, "gct": 276}, {"d": "2026-06-09", "cadence": 165, "vertical_ratio": 11.6, "gct": 264}, {"d": "2026-06-11", "cadence": 163, "vertical_ratio": 11.4, "gct": 272}, {"d": "2026-06-16", "cadence": 159, "vertical_ratio": 12.4, "gct": 290}, {"d": "2026-06-18", "cadence": 136, "vertical_ratio": 12.1, "gct": 314}, {"d": "2026-06-23", "cadence": 161, "vertical_ratio": 12.7, "gct": 274}, {"d": "2026-06-25", "cadence": 159, "vertical_ratio": 12.7, "gct": 278}, {"d": "2026-06-28", "cadence": 164, "vertical_ratio": 11.7, "gct": 270}, {"d": "2026-06-29", "cadence": 137, "vertical_ratio": 10.8, "gct": 305}, {"d": "2026-06-30", "cadence": 164, "vertical_ratio": 12.0, "gct": 259}, {"d": "2026-07-02", "cadence": 162, "vertical_ratio": 12.2, "gct": 265}, {"d": "2026-07-04", "cadence": 164, "vertical_ratio": 12.3, "gct": 267}, {"d": "2026-07-06", "cadence": 163.0, "vertical_ratio": 12.2, "gct": 271.0}, {"d": "2026-07-09", "cadence": 165.0, "vertical_ratio": 11.2, "gct": 248.0}, {"d": "2026-07-12", "cadence": 160.0, "vertical_ratio": 12.4, "gct": 268.0}, {"d": "2026-07-15", "cadence": 163.0, "vertical_ratio": 12.9, "gct": 269.0}, {"d": "2026-07-29", "cadence": 161.0, "vertical_ratio": 13.5, "gct": 276.0}, {"d": "2026-07-31", "cadence": 155.0, "vertical_ratio": 13.2, "gct": 287.0}, {"d": "2026-08-02", "cadence": 163.0, "vertical_ratio": 12.5, "gct": 262.0}, {"d": "2026-08-04", "cadence": 161.0, "vertical_ratio": 12.3, "gct": 258.0}, {"d": "2026-08-06", "cadence": 163.0, "vertical_ratio": 12.6, "gct": 271.0}, {"d": "2026-08-07", "cadence": 147.0, "vertical_ratio": 13.0, "gct": 290.0}, {"d": "2026-08-16", "cadence": 146.0, "vertical_ratio": 13.3, "gct": 302.0}, {"d": "2026-08-18", "cadence": 161.0, "vertical_ratio": 13.3, "gct": 285.0}, {"d": "2026-08-21", "cadence": 140.0, "vertical_ratio": 12.1, "gct": 313.0}, {"d": "2026-08-23", "cadence": 157.0, "vertical_ratio": 13.0, "gct": 282.0}, {"d": "2026-08-27", "cadence": 159.0, "vertical_ratio": 13.1, "gct": 280.0}, {"d": "2026-08-30", "cadence": 157.0, "vertical_ratio": 13.6, "gct": 280.0}, {"d": "2026-09-01", "cadence": 161.0, "vertical_ratio": 11.9, "gct": 281.0}, {"d": "2026-09-03", "cadence": 162.0, "vertical_ratio": 12.8, "gct": 275.0}, {"d": "2026-09-06", "cadence": 159.0, "vertical_ratio": 13.2, "gct": 281.0}, {"d": "2026-09-09", "cadence": 162.0, "vertical_ratio": 12.8, "gct": 268.0}, {"d": "2026-09-11", "cadence": 162.0, "vertical_ratio": 13.0, "gct": 274.0}]};
   var root=document.currentScript.closest(".mind");
   var tip=document.createElement("div");tip.className="mtip";document.body.appendChild(tip);
   var NS="http://www.w3.org/2000/svg";
@@ -1837,13 +1841,15 @@ window.GARMIN_DATA = {
 
   // pts: [{t, v}] chronologisch, v = ECHTER Wert (fuer Anzeige/Tooltip).
   // invert:true zeichnet -v, damit "oben am Chart" immer Verbesserung heisst.
-  function drawSpark(svg,pts,invert,quarterly){
+  function drawSpark(svg,pts,invert,quarterly,rawPts){
     while(svg.firstChild)svg.removeChild(svg.firstChild);
     var vb=svg.getAttribute("viewBox").split(" ").map(Number);
     var W=vb[2],H=vb[3],padL=2,padR=2,padT=4,axH=12,plotH=H-axH;
     function X(t){return padL+(t-START)/(END-START)*(W-padL-padR);}
     var vals=pts.map(function(p){return invert?-p.v:p.v;});
-    var lo=Math.min.apply(0,vals),hi=Math.max.apply(0,vals);
+    var rawVals=(rawPts||[]).map(function(p){return invert?-p.v:p.v;});
+    var allVals=vals.concat(rawVals);
+    var lo=Math.min.apply(0,allVals),hi=Math.max.apply(0,allVals);
     var pad=(hi-lo)*0.15||1;lo-=pad;hi+=pad;
     function Y(v){return padT+(hi-v)/(hi-lo)*(plotH-padT);}
     // horizontale Nulllinie/Grid dezent (2 Linien)
@@ -1864,6 +1870,11 @@ window.GARMIN_DATA = {
       }
       d.setMonth(d.getMonth()+step);
     }
+    // Rohe Tageswerte als blasse Streupunkte im Hintergrund - zeigt die echte
+    // Schwankung, die die geglaettete Trendlinie bewusst herausrechnet.
+    (rawPts||[]).forEach(function(p,i){
+      svg.appendChild(E("circle",{cx:X(p.t),cy:Y(rawVals[i]),r:1.6,"class":"sp-raw"}));
+    });
     if(pts.length<2){
       var only=pts[0];
       svg.appendChild(E("circle",{cx:X(only.t),cy:Y(invert?-only.v:only.v),r:3,"class":"sp-dot"}));
@@ -1919,7 +1930,15 @@ window.GARMIN_DATA = {
     c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @'+refTxt+'</small>';
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
     var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true);
-    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt);
+    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt+" (90-Tage-Trend)");
+    // Zusaetzlich der ungeglaettete Rohwert: der tatsaechlich juengste Lauf,
+    // nicht durch die 90-Tage-Regression geglaettet.
+    var lr=D.ab_latest;
+    if(lr && lr.pace_s){
+      var days=Math.round((Date.now()-Date.parse(lr.date))/864e5);
+      var when=days<=0?"heute":days===1?"gestern":"vor "+days+" Tagen";
+      c.querySelector(".ab-latest").innerHTML="Letzter Lauf ("+when+"): <b>"+fpace(lr.pace_s)+"/km</b> bei <b>"+Math.round(lr.hf)+" bpm</b> – unangepasst";
+    }
   })();
 
   // 3) ÖKONOMIE (Kadenz hoch=gut; vert & GCT niedrig=gut)
@@ -1929,15 +1948,21 @@ window.GARMIN_DATA = {
     var wrap=c.querySelector(".eco-rows");
     var rows=[
       {key:"cad",lab:"Kadenz",unit:" spm",higherBetter:true},
-      {key:"vr",lab:"Vert. Verhältnis",unit:" %",higherBetter:false},
-      {key:"gct",lab:"Bodenkontakt",unit:" ms",higherBetter:false}
+      {key:"vr",lab:"Vert. Verhältnis",unit:" %",higherBetter:false,rawKey:"vertical_ratio"},
+      {key:"gct",lab:"Bodenkontakt",unit:" ms",higherBetter:false,rawKey:"gct"}
     ];
+    rows[0].rawKey="cadence";
+    var ecRaw=D.ec_raw||[];
     var any=false;
     rows.forEach(function(r){
       var pts=raw.filter(function(x){return x[r.key]!=null;})
         .map(function(x){return {t:Date.parse(x.m+"-15"),v:x[r.key],m:x.m};})
         .filter(function(p){return p.t>=START;});
       if(pts.length<2)return;
+      // Rohe Tageswerte fuer denselben Zeitraum - zeigt die Streuung hinter dem Monatsmittel.
+      var rawPts=ecRaw.filter(function(x){return x[r.rawKey]!=null && x.d;})
+        .map(function(x){return {t:Date.parse(x.d),v:x[r.rawKey]};})
+        .filter(function(p){return p.t>=START;});
       any=true;
       var vals=pts.map(function(p){return p.v;});
       var cur=vals[vals.length-1];
@@ -1950,9 +1975,11 @@ window.GARMIN_DATA = {
         '<svg class="mini" viewBox="0 0 200 38" preserveAspectRatio="none"></svg>';
       wrap.appendChild(el);
       var svg=el.querySelector(".mini");
-      drawSpark(svg,pts,!r.higherBetter,false);
+      drawSpark(svg,pts,!r.higherBetter,false,rawPts);
       var last=pts[pts.length-1];
-      hookTip(svg, r.lab+" "+last.m+": "+last.v+r.unit);
+      var lastRaw=rawPts.length?rawPts[rawPts.length-1]:null;
+      var rawTxt=lastRaw?(" · letzter Lauf: "+lastRaw.v+r.unit):"";
+      hookTip(svg, r.lab+" "+last.m+" (Schnitt): "+last.v+r.unit+rawTxt);
     });
     if(!any)c.style.display="none";
   })();
