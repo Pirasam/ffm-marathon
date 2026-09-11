@@ -3833,7 +3833,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const NEO='#00e676',VIO='#8b5cf6',COR='#ff6b57';
     const NEO2='rgba(0,230,118,0.09)',VIO2='rgba(139,92,246,0.09)';
     const clr=(v,hi,mid)=>v==null?'#999':v>=hi?'#00c96a':v>=mid?VIO:COR;
-    const hrZone=hr=>hr<142?{n:'Sehr locker',c:'#00c96a'}:hr<=156?{n:'Lockerer DL',c:'#00c96a'}:hr<=166?{n:'Tempo',c:VIO}:hr<=175?{n:'Schwelle',c:'#e8a33d'}:{n:'VO₂max',c:COR};
+    const hrZone=hr=>hr<140?{n:'Sehr locker',c:'#00c96a'}:hr<=149?{n:'Lockerer DL',c:'#00c96a'}:hr<=162?{n:'Marathon-Renntempo',c:'#2980b9'}:hr<=166?{n:'Tempo',c:VIO}:hr<=175?{n:'Schwelle',c:'#e8a33d'}:{n:'VO₂max',c:COR};
 
     // ── Genesungsmodus ──
     if(g.recovery_mode){
@@ -3970,9 +3970,10 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     // HF-Zonen Referenz
     const zones=[
-      {n:'Sehr locker · Recovery',r:'<142',c:'#00c96a'},
-      {n:'Lockerer Dauerlauf · GA1',r:'142–156',c:'#00c96a'},
-      {n:'Marathon-Tempo / Tempo',r:'157–166',c:VIO},
+      {n:'Sehr locker · Recovery',r:'<140',c:'#00c96a'},
+      {n:'Lockerer Dauerlauf · GA1',r:'140–149',c:'#00c96a'},
+      {n:'Marathon-Renntempo',r:'150–162',c:'#2980b9'},
+      {n:'Tempo',r:'163–166',c:VIO},
       {n:'Schwelle',r:'167–175',c:'#e8a33d'},
       {n:'VO₂max / Intervalle',r:'176–201',c:COR},
     ];
