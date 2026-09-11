@@ -137,7 +137,14 @@ def _claude_json(prompt, max_tokens=1100):
         max_tokens=max_tokens,
         messages=[{"role": "user", "content": prompt}],
     )
-    text = response.content[0].text.strip()
+    # response.content[0] ist NICHT verlaesslich der Text-Block – manche Modelle
+    # (u.a. Sonnet 5) stellen z.B. einen ThinkingBlock voran, der kein .text hat.
+    # Gezielt den ersten echten Text-Block suchen statt blind Index 0 zu nehmen.
+    text_block = next((b for b in response.content if getattr(b, "type", None) == "text"), None)
+    if text_block is None:
+        types = [getattr(b, "type", type(b).__name__) for b in response.content]
+        raise RuntimeError(f"Keine Text-Antwort von Claude erhalten (Blocktypen: {types})")
+    text = text_block.text.strip()
     text = re.sub(r"^```(?:json)?\s*", "", text)
     text = re.sub(r"\s*```$", "", text)
     return json.loads(text)
