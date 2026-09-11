@@ -346,6 +346,7 @@ def inject_garmin_data(html_content, metrics, claude_result):
         "run_feedback": claude_result.get("run_feedback", ""),
         "long_run_tips": claude_result.get("long_run_tips") or None,
         "updated": date.today().isoformat(),
+        "_claude_error": claude_result.get("_claude_error"),
     }
     # Genesungs-Modus-Felder durchreichen (nur gesetzt, wenn aktiv)
     for k in ("recovery_mode", "recovery_reason", "recovery_since", "recovery_status",
