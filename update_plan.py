@@ -512,7 +512,8 @@ def main():
     except Exception as e:
         # Kennzahlen trotzdem aktualisieren, aber die vorherigen Texte behalten.
         prev = load_existing_payload(html)
-        print(f"Claude fehlgeschlagen: {e} – behalte vorherige Texte, Werte werden aktualisiert.")
+        err_str = f"{type(e).__name__}: {e}"[:400]
+        print(f"Claude fehlgeschlagen: {err_str} – behalte vorherige Texte, Werte werden aktualisiert.")
         claude_result = {
             "recommendation": prev.get("recommendation", ""),
             "training_intensity": prev.get("training_intensity", "Mittel"),
@@ -528,7 +529,13 @@ def main():
             "factor_weight": prev.get("factor_weight", 50),
             "challenge_alert": prev.get("challenge_alert", ""),
             "run_feedback": prev.get("run_feedback", ""),
+            # Diagnose-Feld: sichtbar im committeten index.html, da wir keinen
+            # Admin-Zugriff auf die GitHub-Actions-Logs haben. Rein informativ,
+            # das Dashboard-JS ignoriert unbekannte Felder.
+            "_claude_error": err_str,
         }
+    else:
+        claude_result["_claude_error"] = None
 
     html = inject_garmin_data(html, metrics, claude_result)
     html = inject_efficiency(html, metrics)
