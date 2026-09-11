@@ -21,6 +21,7 @@ EFFICIENCY_MARKER = ("<!-- EFFICIENCY:START -->", "<!-- EFFICIENCY:END -->")
 # Opus war fuer eine taegliche, strukturierte Trainingsempfehlung Overkill und
 # hat unnoetig API-Guthaben verbraucht. Sonnet ist fuer diese Aufgabe (kurze
 # JSON-Empfehlung aus klaren Regeln) mehr als ausreichend und deutlich guenstiger.
+# Verifiziert 2026-09-11: Credits wieder aufgeladen, Sonnet-Render bestaetigt ok.
 CLAUDE_MODEL = "claude-sonnet-5"
 
 # ── Genesungs- / Wiedereinstiegs-Modus ────────────────────────────────────────
