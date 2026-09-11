@@ -80,7 +80,6 @@
   #gd-longrun-grid{grid-template-columns:1fr!important;}
   #gd-rd-cards{grid-template-columns:repeat(2,1fr)!important;}
   #gd-rc-metrics{grid-template-columns:repeat(3,1fr)!important;gap:6px!important;}
-  #gd-rd-charts{grid-template-columns:1fr!important;}
   #gd-hero-inner{flex-direction:column!important;}
   #gd-ftime{font-size:42px!important;}}
 </style>
@@ -1750,17 +1749,8 @@ window.GARMIN_DATA = {
           <div id="gd-rd-vo-sub" style="font-size:10px;color:#999;">cm</div>
         </div>
       </div>
-      <div id="gd-rd-extra" style="display:flex;flex-wrap:wrap;gap:14px;font-size:10px;color:#777;margin-bottom:10px;padding:0 2px;"></div>
-      <div id="gd-rd-charts" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div>
-          <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Schrittfrequenz · Verlauf <span style="color:#00c96a;">Ziel ≥170</span></div>
-          <div style="background:#fff;border:1px solid #e5e0f0;border-radius:8px;padding:10px;"><div style="position:relative;height:100px;"><canvas id="gd-c5"></canvas></div></div>
-        </div>
-        <div>
-          <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;">Vert. Verhältnis · Verlauf <span style="color:#00c96a;">Ziel ≤10%</span></div>
-          <div style="background:#fff;border:1px solid #e5e0f0;border-radius:8px;padding:10px;"><div style="position:relative;height:100px;"><canvas id="gd-c6"></canvas></div></div>
-        </div>
-      </div>
+      <div id="gd-rd-extra" style="display:flex;flex-wrap:wrap;gap:14px;font-size:10px;color:#777;margin-bottom:2px;padding:0 2px;"></div>
+      <div style="font-size:9px;color:#bbb;padding:0 2px;">Verlauf über mehrere Monate: siehe „Laufökonomie" unten.</div>
     </div>
 
     <!-- Challenges -->
@@ -3205,11 +3195,11 @@ const weeks = [
   {
     "label": "W13",
     "name": "Woche 13",
-    "focus": "Aufbau · Tempo + Radtour (45 km Lauf)",
+    "focus": "Cutback-Woche + Radtour (37 km Lauf)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~45 km"
+        "v": "~37 km"
       },
       {
         "l": "Rad",
@@ -3217,11 +3207,11 @@ const weeks = [
       },
       {
         "l": "Intensität",
-        "v": "Tempo/LT"
+        "v": "Erholung"
       },
       {
         "l": "Longrun",
-        "v": "24 km"
+        "v": "16 km"
       }
     ],
     "days": [
@@ -3238,12 +3228,12 @@ const weeks = [
       {
         "id": "w13di",
         "name": "Di · Büro",
-        "title": "Tempolauf · 10 km",
+        "title": "Rücklauf · 10 km",
         "badges": [
           "run",
-          "lt"
+          "z2"
         ],
-        "desc": "3× 8 Min Schwelle (~170 bpm), 3 Min locker."
+        "desc": "Locker. Cutback-Woche – bewusst reduziert vor dem letzten Aufbau-Block."
       },
       {
         "id": "w13mi",
@@ -3258,12 +3248,12 @@ const weeks = [
       {
         "id": "w13do",
         "name": "Do",
-        "title": "Longrun · 24 km",
+        "title": "Longrun · 16 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "6:00-9:00 Uhr, vor der Arbeit. Letzte 5 km Marathon-Renntempo. Gels + Elektrolyte nicht vergessen.",
+        "desc": "6:00-9:00 Uhr, vor der Arbeit. Cutback – bewusst kuerzer, Erholung vor W14/W15. Gels + Elektrolyte trotzdem mitnehmen.",
         "longrun": true
       },
       {
@@ -3301,11 +3291,11 @@ const weeks = [
   {
     "label": "W14",
     "name": "Woche 14",
-    "focus": "Longrun-Aufbau (44 km)",
+    "focus": "Longrun-Aufbau, Resume nach Cutback (45 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~44 km"
+        "v": "~45 km"
       },
       {
         "l": "Rad",
@@ -3317,7 +3307,7 @@ const weeks = [
       },
       {
         "l": "Longrun",
-        "v": "27 km"
+        "v": "24 km"
       }
     ],
     "days": [
@@ -3382,7 +3372,7 @@ const weeks = [
       {
         "id": "w14so",
         "name": "So",
-        "title": "Longrun · 27 km",
+        "title": "Longrun · 24 km",
         "badges": [
           "run",
           "z2"
@@ -3395,11 +3385,11 @@ const weeks = [
   {
     "label": "W15",
     "name": "Woche 15",
-    "focus": "Letzter Peak (46 km)",
+    "focus": "Letzter Peak (48 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~46 km"
+        "v": "~48 km"
       },
       {
         "l": "Rad",
@@ -3411,7 +3401,7 @@ const weeks = [
       },
       {
         "l": "Longrun",
-        "v": "30 km"
+        "v": "28 km"
       }
     ],
     "days": [
@@ -3476,7 +3466,7 @@ const weeks = [
       {
         "id": "w15so",
         "name": "So",
-        "title": "Longrun-Peak · 30 km",
+        "title": "Longrun-Peak · 28 km",
         "badges": [
           "run",
           "z2"
@@ -3796,6 +3786,34 @@ function renderTabs(){
   document.getElementById('tabs').innerHTML=weeks.map((w,i)=>
     `<button class="week-tab ${i===activeWeek?'active':''} ${i===cur?'current-week':''}" onclick="selectWeek(${i})">${w.label}${i===cur?' ●':''}</button>`).join('');
 }
+// Global (nicht nur in renderDashboard sichtbar) – dayHrTarget() unten und
+// renderWeek() beim Initial-Load brauchen HZ schon vor dem ersten Dashboard-Render.
+const HZ=(window.GARMIN_DATA&&window.GARMIN_DATA.hr_zones)||{z1_floor:102,z2_floor:120,z3_floor:142,z4_floor:160,z5_floor:180,max_hr:200,lthr:174};
+const NEO='#00e676',VIO='#8b5cf6',COR='#ff6b57';
+
+function dayHrTarget(d){
+  // Ziel-HF direkt aus den echten Garmin-Zonen (HZ) ableiten, klar sichtbar auf
+  // jeder Tageskarte statt nur im Fließtext versteckt.
+  const bd=d.badges||[], t=(d.title||'').toLowerCase(), desc=(d.desc||'').toLowerCase();
+  if(bd.includes('rest')) return null;
+  if(bd.includes('kraft')) return null;
+  if(bd.includes('bike')) return {n:'Ziel',r:'<130 bpm · locker',c:'#00c96a'};
+  const isMarathonTempo = /marathon-renntempo|marathonbelastung/.test(t);
+  if(isMarathonTempo){
+    return {n:'Ziel',r:`${HZ.z3_floor}–${HZ.z3_floor+13} bpm · Marathon-Tempo`,c:'#2980b9'};
+  }
+  if(bd.includes('lt')){
+    const lo=(HZ.lthr||174)-9, hi=HZ.lthr||174;
+    return {n:'Ziel',r:`${lo}–${hi} bpm · Schwelle`,c:VIO};
+  }
+  if(bd.includes('z2')){
+    let extra='';
+    if(/renntempo|marathontempo/.test(desc)) extra=` (letzte km ${HZ.z3_floor}–${HZ.z3_floor+13})`;
+    return {n:'Ziel',r:`${HZ.z2_floor}–${HZ.z3_floor-1} bpm · Z2 locker${extra}`,c:'#00c96a'};
+  }
+  return null;
+}
+
 function renderWeek(){
   const w=weeks[activeWeek];
   const stats=w.stats.map(s=>`<div class="stat"><div class="stat-label">${s.l}</div><div class="stat-val">${s.v}</div></div>`).join('');
@@ -3810,6 +3828,7 @@ function renderWeek(){
         <div class="badges">${badges}</div>
       </div>
       <div class="day-desc">${d.desc}</div>
+      ${(()=>{const hz=dayHrTarget(d);return hz?`<div style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;color:${hz.c};background:${hz.c}15;border-radius:12px;padding:3px 9px;margin:4px 0 2px;">${hz.n}: ${hz.r}</div>`:'';})()}
       <div class="day-status">
         <button class="status-btn ${st==='done'?'done':''}" onclick="setStatus('${d.id}','done',event)">✓ done</button>
         <button class="status-btn ${st==='skip'?'skip':''}" onclick="setStatus('${d.id}','skip',event)">✗ skip</button>
@@ -3842,13 +3861,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     const g=window.GARMIN_DATA;
     if(!g)return;
     document.getElementById('gd-root').style.display='block';
-    const NEO='#00e676',VIO='#8b5cf6',COR='#ff6b57';
+    // NEO/VIO/COR/HZ sind jetzt global (siehe Script-Anfang).
     const NEO2='rgba(0,230,118,0.09)',VIO2='rgba(139,92,246,0.09)';
     const clr=(v,hi,mid)=>v==null?'#999':v>=hi?'#00c96a':v>=mid?VIO:COR;
-    // Zonen kommen aus Garmin selbst (g.hr_zones) – kein eigenes Modell mehr.
-    // Fallback nur, falls der Sync mal keine Zonen liefert.
-    const HZ=(window.GARMIN_DATA&&window.GARMIN_DATA.hr_zones)||{z1_floor:102,z2_floor:120,z3_floor:142,z4_floor:160,z5_floor:180,max_hr:200};
-    const hrZone=hr=>hr<HZ.z2_floor?{n:'Z1 · Sehr locker',c:'#00c96a'}:hr<HZ.z3_floor?{n:'Z2 · Locker',c:'#00c96a'}:hr<HZ.z4_floor?{n:'Z3 · Moderat',c:'#2980b9'}:hr<HZ.z5_floor?{n:'Z4 · Tempo/Schwelle',c:VIO}:{n:'Z5 · VO₂max',c:COR};
+    // HZ ist jetzt global (siehe oben, vor dayHrTarget) – keine lokale Neudeklaration.
+    const hrZone=hr=>hr<HZ.z2_floor?{n:'Z1 · Sehr locker',c:'#00c96a'}:hr<HZ.z3_floor?{n:'Z2 · Locker',c:'#00c96a'}:hr<HZ.z4_floor?{n:'Z3 · Marathon-Tempo',c:'#2980b9'}:hr<HZ.z5_floor?{n:'Z4 · Tempo/Schwelle',c:VIO}:{n:'Z5 · VO₂max',c:COR};
 
     // ── Genesungsmodus ──
     if(g.recovery_mode){
@@ -3988,7 +4005,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const zones=[
       {n:'Z1 · Sehr locker',r:`${HZ.z1_floor}–${HZ.z2_floor-1}`,c:'#00c96a'},
       {n:'Z2 · Locker (Grundlage)',r:`${HZ.z2_floor}–${HZ.z3_floor-1}`,c:'#00c96a'},
-      {n:'Z3 · Moderat',r:`${HZ.z3_floor}–${HZ.z4_floor-1}`,c:'#2980b9'},
+      {n:'Z3 · Marathon-Tempo',r:`${HZ.z3_floor}–${HZ.z4_floor-1}`,c:'#2980b9'},
       {n:'Z4 · Tempo/Schwelle',r:`${HZ.z4_floor}–${HZ.z5_floor-1}`,c:VIO},
       {n:'Z5 · VO₂max/Intervalle',r:`${HZ.z5_floor}–${HZ.max_hr}`,c:COR},
     ];
@@ -4035,13 +4052,6 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(rd.performance_condition!=null)ex.push(`Leistungszustand <b style="color:#555;">${rd.performance_condition>0?'+':''}${rd.performance_condition}</b>`);
       if(rd.avg_power!=null)ex.push(`Leistung <b style="color:#555;">${rd.avg_power} W</b>`);
       document.getElementById('gd-rd-extra').innerHTML=ex.join('<span style="color:#ddd;">·</span> ');
-      // Verlaufs-Charts
-      const rdh=(hist.run_dyn||[]).filter(x=>x.cadence).slice().reverse();
-      if(rdh.length>1){
-        const labs=rdh.map(x=>{const d=new Date(x.d);return d.getDate()+'.'+(d.getMonth()+1)+'.';});
-        new Chart(document.getElementById('gd-c5'),{type:'line',data:{labels:labs,datasets:[{data:rdh.map(x=>x.cadence),borderColor:VIO,backgroundColor:VIO2,borderWidth:2,pointRadius:3,tension:0.3,fill:true},{data:rdh.map(()=>170),borderColor:'#00c96a',borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+' spm'}}},scales:{x:{grid:{color:grid},ticks:{maxTicksLimit:6,maxRotation:0}},y:{grid:{color:grid},ticks:{callback:v=>v+''}}}}});
-        new Chart(document.getElementById('gd-c6'),{type:'line',data:{labels:labs,datasets:[{data:rdh.map(x=>x.vertical_ratio),borderColor:COR,backgroundColor:'rgba(255,107,87,0.09)',borderWidth:2,pointRadius:3,tension:0.3,fill:true},{data:rdh.map(()=>10),borderColor:'#00c96a',borderDash:[5,4],borderWidth:1.5,pointRadius:0,fill:false}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'%'}}},scales:{x:{grid:{color:grid},ticks:{maxTicksLimit:6,maxRotation:0}},y:{grid:{color:grid},ticks:{callback:v=>v+'%'}}}}});
-      }else{document.getElementById('gd-rd-charts').style.display='none';}
     }
 
     // Challenges (im Wiedereinstieg ausgeblendet – siehe oben)
