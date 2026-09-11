@@ -24,6 +24,7 @@ def marathon_indicators(marathon):
     payload = json.dumps({
         "dur": dur, "ab": ab, "ec": ec,
         "ab_latest": m.get("aerobic_base_latest"),
+        "ab_raw": m.get("aerobic_base_raw") or [],
         "ec_raw": m.get("economy_raw") or [],
     }, ensure_ascii=False)
     return _TEMPLATE.replace("__DATA__", payload)
@@ -73,14 +74,14 @@ _TEMPLATE = r"""<section class="mind">
     <h3>Durability · Ermüdungsresistenz</h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
     <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
-    <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>, darunter läufst du das Tempo bis zum Schluss.</div>
+    <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>. Blasse Punkte = einzelne Longruns, Linie = gleitender 3-Longrun-Schnitt.</div>
   </div>
   <div class="mcard" data-card="ab">
     <h3>Aerobe Basis · Tempo @ <span class="ab-ref">HF</span></h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
     <div class="ab-latest"></div>
     <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
-    <div class="meaning">Trend = geglätteter 90-Tage-Schnitt, wächst durch Grundlage. <b>Letzter Lauf</b> = dein tatsächlich jüngstes Tempo, ungeglättet.</div>
+    <div class="meaning">Blasse Punkte = einzelne Läufe (echtes Tempo, nicht auf die Ziel-HF umgerechnet), Linie = geglätteter 90-Tage-Trend. Wächst durch Grundlage.</div>
   </div>
   <div class="mcard" data-card="eco">
     <h3>Laufökonomie</h3>
@@ -177,7 +178,15 @@ _TEMPLATE = r"""<section class="mind">
     var col=cur<=5?"var(--m-good)":(cur<=8?"var(--m-warn)":"var(--m-bad)");
     var vEl=c.querySelector(".v");vEl.textContent=(cur>=0?"+":"")+cur+"%";vEl.style.color=col;
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
-    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true);
+    // Geglaetteter Trend (gleitender 3-Longrun-Schnitt) als Linie, die einzelnen
+    // Longruns bleiben als Streupunkte sichtbar - Longruns sind unregelmaessig,
+    // daher Ereignis- statt Zeitfenster fuer die Glaettung.
+    var trend=raw.map(function(p,i){
+      var w=raw.slice(Math.max(0,i-2),i+1);
+      var avg=w.reduce(function(s,x){return s+x.v;},0)/w.length;
+      return {t:p.t,v:avg};
+    });
+    var svg=c.querySelector(".spark");drawSpark(svg,trend,true,true,raw);
     var last=raw[raw.length-1];
     hookTip(svg, fmtD(last.d)+": "+(last.v>=0?"+":"")+last.v+"% ("+last.km+" km)");
   })();
@@ -193,10 +202,15 @@ _TEMPLATE = r"""<section class="mind">
     var cur=vals[vals.length-1];
     var last=raw[raw.length-1];
     var refTxt=last.ref?last.ref:"HF";
+    // Einzelne Laeufe als Streupunkte (ihre echte Pace, nicht auf die Referenz-HF
+    // umgerechnet - daher Streuung um die geglaettete Linie herum normal).
+    var rawRuns=(D.ab_raw||[])
+      .map(function(x){return {t:Date.parse(x.date),v:x.pace_s,hf:x.hf,date:x.date};})
+      .filter(function(p){return p.t>=START;});
     c.querySelector(".ab-ref").textContent="HF "+refTxt;
     c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @'+refTxt+'</small>';
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
-    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true);
+    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true,rawRuns);
     hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt+" (90-Tage-Trend)");
     // Zusaetzlich der ungeglaettete Rohwert: der tatsaechlich juengste Lauf,
     // nicht durch die 90-Tage-Regression geglaettet.

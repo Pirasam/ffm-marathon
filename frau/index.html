@@ -179,14 +179,14 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     <h3>Durability · Ermüdungsresistenz</h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
     <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
-    <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>, darunter läufst du das Tempo bis zum Schluss.</div>
+    <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>. Blasse Punkte = einzelne Longruns, Linie = gleitender 3-Longrun-Schnitt.</div>
   </div>
   <div class="mcard" data-card="ab">
     <h3>Aerobe Basis · Tempo @ <span class="ab-ref">HF</span></h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
     <div class="ab-latest"></div>
     <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
-    <div class="meaning">Trend = geglätteter 90-Tage-Schnitt, wächst durch Grundlage. <b>Letzter Lauf</b> = dein tatsächlich jüngstes Tempo, ungeglättet.</div>
+    <div class="meaning">Blasse Punkte = einzelne Läufe (echtes Tempo, nicht auf die Ziel-HF umgerechnet), Linie = geglätteter 90-Tage-Trend. Wächst durch Grundlage.</div>
   </div>
   <div class="mcard" data-card="eco">
     <h3>Laufökonomie</h3>
@@ -196,7 +196,7 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 </div>
 <script>
 (function(){
-  var D={"dur": [], "ab": [{"m": "2026-08", "pace_s": 565, "ref": 143.0}, {"m": "2026-09", "pace_s": 565, "ref": 145.0}], "ec": [{"m": "2025-10", "vr": 10.3, "gct": 305.0, "cad": 127.2}, {"m": "2025-11", "vr": 10.3, "gct": 301.5, "cad": 143.0}, {"m": "2026-01", "vr": 10.4, "gct": 305.0, "cad": 138.0}, {"m": "2026-02", "vr": 10.2, "gct": 298.0, "cad": 137.0}, {"m": "2026-03", "vr": 10.3, "gct": 300.3, "cad": 147.7}, {"m": "2026-04", "vr": 10.1, "gct": 299.0, "cad": 145.5}, {"m": "2026-05", "vr": 10.0, "gct": 298.0, "cad": 149.0}, {"m": "2026-06", "vr": 9.4, "gct": 308.0, "cad": 123.0}, {"m": "2026-07", "vr": 10.7, "gct": 317.7, "cad": 125.8}, {"m": "2026-08", "vr": 11.1, "gct": 310.3, "cad": 134.7}, {"m": "2026-09", "vr": 11.1, "gct": 313.3, "cad": 140.7}], "ab_latest": {"date": "2026-09-11", "pace_s": 582, "hf": 145.0}, "ec_raw": [{"d": "2025-10-13", "cadence": 98, "vertical_ratio": 9.9, "gct": 306}, {"d": "2025-10-17", "cadence": 123, "vertical_ratio": 10.3, "gct": 304}, {"d": "2025-10-25", "cadence": 146, "vertical_ratio": 10.6, "gct": 304}, {"d": "2025-10-28", "cadence": 142, "vertical_ratio": 10.5, "gct": 306}, {"d": "2025-11-08", "cadence": 151, "vertical_ratio": 10.4, "gct": 303}, {"d": "2025-11-16", "cadence": 135, "vertical_ratio": 10.2, "gct": 300}, {"d": "2026-01-15", "cadence": 138, "vertical_ratio": 10.4, "gct": 305}, {"d": "2026-02-01", "cadence": 137, "vertical_ratio": 10.2, "gct": 298}, {"d": "2026-03-07", "cadence": 156, "vertical_ratio": 10.5, "gct": 302}, {"d": "2026-03-08", "cadence": 144, "vertical_ratio": 10.3, "gct": 299}, {"d": "2026-03-22", "cadence": 143, "vertical_ratio": 10.2, "gct": 300}, {"d": "2026-04-25", "cadence": 148, "vertical_ratio": 9.9, "gct": 296}, {"d": "2026-04-28", "cadence": 143, "vertical_ratio": 10.3, "gct": 302}, {"d": "2026-05-01", "cadence": 149, "vertical_ratio": 10.0, "gct": 298}, {"d": "2026-06-29", "cadence": 123, "vertical_ratio": 9.4, "gct": 308}, {"d": "2026-07-01", "cadence": 123, "vertical_ratio": 10.7, "gct": 319}, {"d": "2026-07-09", "cadence": 133, "vertical_ratio": 10.5, "gct": 309}, {"d": "2026-07-12", "cadence": 123, "vertical_ratio": 10.7, "gct": 314}, {"d": "2026-07-17", "cadence": 121, "vertical_ratio": 10.2, "gct": 318}, {"d": "2026-07-25", "cadence": 123, "vertical_ratio": 11.2, "gct": 321}, {"d": "2026-07-30", "cadence": 132, "vertical_ratio": 10.8, "gct": 325}, {"d": "2026-08-07", "cadence": 135.0, "vertical_ratio": 11.0, "gct": 308.0}, {"d": "2026-08-14", "cadence": 137.0, "vertical_ratio": 11.0, "gct": 311.0}, {"d": "2026-08-16", "cadence": 128.0, "vertical_ratio": 11.3, "gct": 313.0}, {"d": "2026-08-21", "cadence": 114.0, "vertical_ratio": 11.0, "gct": 310.0}, {"d": "2026-08-23", "cadence": 146.0, "vertical_ratio": 11.2, "gct": 309.0}, {"d": "2026-08-30", "cadence": 148.0, "vertical_ratio": 11.3, "gct": 311.0}, {"d": "2026-09-03", "cadence": 131.0, "vertical_ratio": 10.8, "gct": 315.0}, {"d": "2026-09-06", "cadence": 152.0, "vertical_ratio": 11.4, "gct": 311.0}, {"d": "2026-09-11", "cadence": 139.0, "vertical_ratio": 11.1, "gct": 314.0}]};
+  var D={"dur": [], "ab": [{"m": "2026-08", "pace_s": 565, "ref": 143.0}, {"m": "2026-09", "pace_s": 565, "ref": 145.0}], "ec": [{"m": "2025-10", "vr": 10.3, "gct": 305.0, "cad": 127.2}, {"m": "2025-11", "vr": 10.3, "gct": 301.5, "cad": 143.0}, {"m": "2026-01", "vr": 10.4, "gct": 305.0, "cad": 138.0}, {"m": "2026-02", "vr": 10.2, "gct": 298.0, "cad": 137.0}, {"m": "2026-03", "vr": 10.3, "gct": 300.3, "cad": 147.7}, {"m": "2026-04", "vr": 10.1, "gct": 299.0, "cad": 145.5}, {"m": "2026-05", "vr": 10.0, "gct": 298.0, "cad": 149.0}, {"m": "2026-06", "vr": 9.4, "gct": 308.0, "cad": 123.0}, {"m": "2026-07", "vr": 10.7, "gct": 317.7, "cad": 125.8}, {"m": "2026-08", "vr": 11.1, "gct": 310.3, "cad": 134.7}, {"m": "2026-09", "vr": 11.1, "gct": 313.3, "cad": 140.7}], "ab_latest": {"date": "2026-09-11", "pace_s": 582, "hf": 145.0}, "ab_raw": [{"date": "2025-10-13", "pace_s": 706, "hf": 139.0}, {"date": "2025-10-17", "pace_s": 598, "hf": 149.0}, {"date": "2025-10-25", "pace_s": 530, "hf": 154.0}, {"date": "2025-10-28", "pace_s": 526, "hf": 150.0}, {"date": "2025-11-08", "pace_s": 499, "hf": 156.0}, {"date": "2025-11-08", "pace_s": 479, "hf": 148.0}, {"date": "2025-11-16", "pace_s": 530, "hf": 154.0}, {"date": "2026-01-15", "pace_s": 535, "hf": 148.0}, {"date": "2026-02-01", "pace_s": 515, "hf": 143.0}, {"date": "2026-03-07", "pace_s": 478, "hf": 148.0}, {"date": "2026-03-08", "pace_s": 495, "hf": 153.0}, {"date": "2026-03-22", "pace_s": 502, "hf": 150.0}, {"date": "2026-04-25", "pace_s": 480, "hf": 148.0}, {"date": "2026-04-28", "pace_s": 513, "hf": 146.0}, {"date": "2026-05-01", "pace_s": 485, "hf": 158.0}, {"date": "2026-06-29", "pace_s": 586, "hf": 137.0}, {"date": "2026-07-01", "pace_s": 597, "hf": 140.0}, {"date": "2026-07-09", "pace_s": 565, "hf": 143.0}, {"date": "2026-07-12", "pace_s": 599, "hf": 136.0}, {"date": "2026-07-17", "pace_s": 614, "hf": 142.0}, {"date": "2026-07-25", "pace_s": 627, "hf": 143.0}, {"date": "2026-07-30", "pace_s": 617, "hf": 135.0}, {"date": "2026-08-07", "pace_s": 586, "hf": 140.0}, {"date": "2026-08-14", "pace_s": 601, "hf": 140.0}, {"date": "2026-08-16", "pace_s": 622, "hf": 137.0}, {"date": "2026-08-21", "pace_s": 633, "hf": 137.0}, {"date": "2026-08-23", "pace_s": 593, "hf": 139.0}, {"date": "2026-08-30", "pace_s": 591, "hf": 141.0}, {"date": "2026-09-03", "pace_s": 590, "hf": 142.0}, {"date": "2026-09-06", "pace_s": 593, "hf": 143.0}, {"date": "2026-09-11", "pace_s": 582, "hf": 145.0}], "ec_raw": [{"d": "2025-10-13", "cadence": 98, "vertical_ratio": 9.9, "gct": 306}, {"d": "2025-10-17", "cadence": 123, "vertical_ratio": 10.3, "gct": 304}, {"d": "2025-10-25", "cadence": 146, "vertical_ratio": 10.6, "gct": 304}, {"d": "2025-10-28", "cadence": 142, "vertical_ratio": 10.5, "gct": 306}, {"d": "2025-11-08", "cadence": 151, "vertical_ratio": 10.4, "gct": 303}, {"d": "2025-11-16", "cadence": 135, "vertical_ratio": 10.2, "gct": 300}, {"d": "2026-01-15", "cadence": 138, "vertical_ratio": 10.4, "gct": 305}, {"d": "2026-02-01", "cadence": 137, "vertical_ratio": 10.2, "gct": 298}, {"d": "2026-03-07", "cadence": 156, "vertical_ratio": 10.5, "gct": 302}, {"d": "2026-03-08", "cadence": 144, "vertical_ratio": 10.3, "gct": 299}, {"d": "2026-03-22", "cadence": 143, "vertical_ratio": 10.2, "gct": 300}, {"d": "2026-04-25", "cadence": 148, "vertical_ratio": 9.9, "gct": 296}, {"d": "2026-04-28", "cadence": 143, "vertical_ratio": 10.3, "gct": 302}, {"d": "2026-05-01", "cadence": 149, "vertical_ratio": 10.0, "gct": 298}, {"d": "2026-06-29", "cadence": 123, "vertical_ratio": 9.4, "gct": 308}, {"d": "2026-07-01", "cadence": 123, "vertical_ratio": 10.7, "gct": 319}, {"d": "2026-07-09", "cadence": 133, "vertical_ratio": 10.5, "gct": 309}, {"d": "2026-07-12", "cadence": 123, "vertical_ratio": 10.7, "gct": 314}, {"d": "2026-07-17", "cadence": 121, "vertical_ratio": 10.2, "gct": 318}, {"d": "2026-07-25", "cadence": 123, "vertical_ratio": 11.2, "gct": 321}, {"d": "2026-07-30", "cadence": 132, "vertical_ratio": 10.8, "gct": 325}, {"d": "2026-08-07", "cadence": 135.0, "vertical_ratio": 11.0, "gct": 308.0}, {"d": "2026-08-14", "cadence": 137.0, "vertical_ratio": 11.0, "gct": 311.0}, {"d": "2026-08-16", "cadence": 128.0, "vertical_ratio": 11.3, "gct": 313.0}, {"d": "2026-08-21", "cadence": 114.0, "vertical_ratio": 11.0, "gct": 310.0}, {"d": "2026-08-23", "cadence": 146.0, "vertical_ratio": 11.2, "gct": 309.0}, {"d": "2026-08-30", "cadence": 148.0, "vertical_ratio": 11.3, "gct": 311.0}, {"d": "2026-09-03", "cadence": 131.0, "vertical_ratio": 10.8, "gct": 315.0}, {"d": "2026-09-06", "cadence": 152.0, "vertical_ratio": 11.4, "gct": 311.0}, {"d": "2026-09-11", "cadence": 139.0, "vertical_ratio": 11.1, "gct": 314.0}]};
   var root=document.currentScript.closest(".mind");
   var tip=document.createElement("div");tip.className="mtip";document.body.appendChild(tip);
   var NS="http://www.w3.org/2000/svg";
@@ -283,7 +283,15 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     var col=cur<=5?"var(--m-good)":(cur<=8?"var(--m-warn)":"var(--m-bad)");
     var vEl=c.querySelector(".v");vEl.textContent=(cur>=0?"+":"")+cur+"%";vEl.style.color=col;
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
-    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true);
+    // Geglaetteter Trend (gleitender 3-Longrun-Schnitt) als Linie, die einzelnen
+    // Longruns bleiben als Streupunkte sichtbar - Longruns sind unregelmaessig,
+    // daher Ereignis- statt Zeitfenster fuer die Glaettung.
+    var trend=raw.map(function(p,i){
+      var w=raw.slice(Math.max(0,i-2),i+1);
+      var avg=w.reduce(function(s,x){return s+x.v;},0)/w.length;
+      return {t:p.t,v:avg};
+    });
+    var svg=c.querySelector(".spark");drawSpark(svg,trend,true,true,raw);
     var last=raw[raw.length-1];
     hookTip(svg, fmtD(last.d)+": "+(last.v>=0?"+":"")+last.v+"% ("+last.km+" km)");
   })();
@@ -299,10 +307,15 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     var cur=vals[vals.length-1];
     var last=raw[raw.length-1];
     var refTxt=last.ref?last.ref:"HF";
+    // Einzelne Laeufe als Streupunkte (ihre echte Pace, nicht auf die Referenz-HF
+    // umgerechnet - daher Streuung um die geglaettete Linie herum normal).
+    var rawRuns=(D.ab_raw||[])
+      .map(function(x){return {t:Date.parse(x.date),v:x.pace_s,hf:x.hf,date:x.date};})
+      .filter(function(p){return p.t>=START;});
     c.querySelector(".ab-ref").textContent="HF "+refTxt;
     c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @'+refTxt+'</small>';
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
-    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true);
+    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true,rawRuns);
     hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt+" (90-Tage-Trend)");
     // Zusaetzlich der ungeglaettete Rohwert: der tatsaechlich juengste Lauf,
     // nicht durch die 90-Tage-Regression geglaettet.
@@ -395,7 +408,7 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     perfekte einzelne Woche.</p>
   </section>
 
-  <footer>Automatisch aus Garmin &amp; Natural Cycles · Stand 2026-09-11 16:55</footer>
+  <footer>Automatisch aus Garmin &amp; Natural Cycles · Stand 2026-09-11 17:09</footer>
 </div>
 </body>
 </html>

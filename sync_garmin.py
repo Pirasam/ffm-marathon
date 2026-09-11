@@ -15,7 +15,7 @@ Aufruf:
 import json
 import os
 import sys
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 from garmin_client import (garmin_login, fetch_garmin_metrics,
                            backfill_history, update_history,
@@ -140,6 +140,12 @@ def main():
         latest_run = max(eff_runs, key=lambda r: r.get("date", ""), default=None) \
             if eff_runs else None
         run_dyn_raw = sorted(history.get("run_dyn") or [], key=lambda x: x.get("d", ""))[-60:]
+        cutoff_12mo = (today - timedelta(days=365)).isoformat()
+        aerobic_base_raw = [
+            {"date": r["date"], "pace_s": round(r["pace"] * 60), "hf": r["hf"]}
+            for r in eff_runs
+            if r.get("date", "") >= cutoff_12mo and r.get("pace") and r.get("hf")
+        ]
         metrics["marathon"] = {
             "durability": history.get("durability") or [],
             "aerobic_base": compute_aerobic_base(eff_runs, today, ref_hr=ref_hr),
@@ -147,6 +153,7 @@ def main():
                 "date": latest_run["date"], "pace_s": round(latest_run["pace"] * 60),
                 "hf": latest_run["hf"],
             } if latest_run else None),
+            "aerobic_base_raw": aerobic_base_raw,
             "economy": compute_economy(history.get("run_dyn") or [], today),
             "economy_raw": run_dyn_raw,
             "generated": today.isoformat(),
