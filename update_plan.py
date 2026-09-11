@@ -287,6 +287,20 @@ def call_claude(metrics, plan_context):
         last_run_str = (f"\n- Letzter Lauf ({when}, {lr['date']}): {d} km, {t} min, Pace {pace_str}"
                         + (f", ∅HR {lr['avg_hr']} bpm" if lr.get("avg_hr") else ""))
 
+    # Echte, in Garmin hinterlegte HF-Zonen (Laktatschwellen-Methode) statt einer
+    # selbst erfundenen Formel – vermeidet Widersprueche zur Garmin-App/-Uhr.
+    hz = metrics.get("hr_zones") or {}
+    if hz.get("z2_floor"):
+        zone_line = (f"Maximalpuls {hz.get('max_hr')}, Laktatschwelle {hz.get('lthr')}, "
+                     f"Ruhepuls {hz.get('resting_hr')} (echte Garmin-Zonen, Methode Laktatschwelle).\n"
+                     f"- Z1 sehr locker {hz['z1_floor']}–{hz['z2_floor']-1} | "
+                     f"Z2 locker/Grundlage {hz['z2_floor']}–{hz['z3_floor']-1} | "
+                     f"Z3 moderat {hz['z3_floor']}–{hz['z4_floor']-1} | "
+                     f"Z4 Tempo/Schwelle {hz['z4_floor']}–{hz['z5_floor']-1} | "
+                     f"Z5 VO2max {hz['z5_floor']}–{hz.get('max_hr')}.")
+    else:
+        zone_line = "Maximalpuls 201, Laktatschwelle 175, Ruhepuls 57 (Fallback, keine Garmin-Zonen verfuegbar)."
+
     is_longrun = "LONGRUN" in plan_context
     longrun_field = ""
     if is_longrun:
@@ -322,11 +336,10 @@ REGEL 1 — Plan ist bindend: Die Empfehlung MUSS zum heute geplanten Training (
 - Steht dort ein Lauf/Rad: bestätige oder passe an Tagesform an (z.B. bei schlechter Erholung kürzer/langsamer).
 - Erfinde NIEMALS ein Training, das nicht im Plan steht.
 
-REGEL 2 — REALISTISCHE Herzfrequenz (echte Werte, KEINE Lehrbuch-Formeln):
-- Maximalpuls 201, Laktatschwelle 175, Ruhepuls 57. Lockere Läufe aktuell Ø 137–144 bpm.
-- Zonen: lockerer Dauerlauf/GA1 ~140–156 bpm | Marathon-Renntempo ~150–162 | Tempo ~157–166 | Schwelle ~167–175.
-- Easy-/Grundlagen-Empfehlung daher ~140–155 bpm. NIEMALS einen Puls-Deckel <140 nennen (da müsste er gehen).
-- Bestes Maß ist der SPRECHTEST (ganze Sätze möglich = richtig), nicht eine starre Zahl.
+REGEL 2 — REALISTISCHE Herzfrequenz (SEINE ECHTEN Garmin-Zonen, KEINE eigene Formel):
+- {zone_line}
+- Für lockere Läufe/Grundlage IMMER Zone 2 empfehlen (siehe oben) – das deckt sich mit dem, was er in seiner Garmin-App sieht. Zone 3 ("moderat") ist für Grundlagenläufe ZU HART (ineffizienter "Grauzonen"-Bereich) und nicht als "locker" empfehlen.
+- Bestes Maß zusätzlich: der SPRECHTEST (ganze Sätze möglich = richtig).
 - Pace-Logik: niedrigere min/km = SCHNELLER. "Zu intensiv" → nächster Lauf entspannter, NIE eine schnellere Pace als "locker" verkaufen.
 
 REGEL 3 — On-Track ehrlich, aber FAIR zur Plan-Phase: on_track_score (0–100) und predicted_finish_h müssen zusammenpassen.

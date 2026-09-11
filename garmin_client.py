@@ -87,6 +87,34 @@ def garmin_login(retries=4, token_path=None):
 
 # ── Garmin data ───────────────────────────────────────────────────────────────
 
+def fetch_hr_zones(api, sport="RUNNING"):
+    """Die TATSAECHLICH in Garmin hinterlegten HF-Zonen (nicht selbst berechnet!).
+    Quelle der Wahrheit statt eigener Formeln – vermeidet Diskrepanzen zum, was
+    der Nutzer in seiner Garmin-App/-Uhr sieht. Faellt auf DEFAULT zurueck, wenn
+    kein sportspezifischer Satz existiert."""
+    if not hasattr(api, "connectapi"):
+        return None
+    try:
+        zones = api.connectapi("/biometric-service/heartRateZones")
+        if not isinstance(zones, list):
+            return None
+        z = next((x for x in zones if x.get("sport") == sport), None) \
+            or next((x for x in zones if x.get("sport") == "DEFAULT"), None)
+        if not z:
+            return None
+        return {
+            "sport": z.get("sport"), "method": z.get("trainingMethod"),
+            "lthr": z.get("lactateThresholdHeartRateUsed"),
+            "max_hr": z.get("maxHeartRateUsed"), "resting_hr": z.get("restingHeartRateUsed"),
+            "z1_floor": z.get("zone1Floor"), "z2_floor": z.get("zone2Floor"),
+            "z3_floor": z.get("zone3Floor"), "z4_floor": z.get("zone4Floor"),
+            "z5_floor": z.get("zone5Floor"),
+        }
+    except Exception as e:
+        print(f"HF-Zonen-Abruf-Fehler: {e}")
+        return None
+
+
 def fetch_garmin_metrics(api):
     today = date.today()
     yesterday = (today - timedelta(days=1)).isoformat()
@@ -268,6 +296,13 @@ def fetch_garmin_metrics(api):
 
     # Challenges
     metrics["challenges"] = fetch_challenges(api, today)
+
+    # Echte, in Garmin hinterlegte HF-Zonen – nicht selbst berechnet.
+    try:
+        metrics["hr_zones"] = fetch_hr_zones(api)
+    except Exception as e:
+        print(f"HR-Zonen error: {e}")
+        metrics["hr_zones"] = None
 
     # Zyklus (Natural Cycles -> Garmin Connect). None, wenn nicht getrackt.
     try:

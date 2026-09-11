@@ -1653,7 +1653,7 @@ window.GARMIN_DATA = {
 
     <!-- HF-Zonen Referenz -->
     <div id="gd-hrzones" style="background:#fff;border:1px solid #e5e0f0;border-radius:10px;padding:12px 14px;margin-bottom:12px;">
-      <div style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;">Deine HF-Zonen · Max 201 · Schwelle 175 · Ruhe 57</div>
+      <div id="gd-hrzones-head" style="font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;">Deine HF-Zonen</div>
       <div id="gd-hrzones-grid" style="display:flex;flex-direction:column;gap:4px;"></div>
     </div>
 
@@ -3833,7 +3833,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     const NEO='#00e676',VIO='#8b5cf6',COR='#ff6b57';
     const NEO2='rgba(0,230,118,0.09)',VIO2='rgba(139,92,246,0.09)';
     const clr=(v,hi,mid)=>v==null?'#999':v>=hi?'#00c96a':v>=mid?VIO:COR;
-    const hrZone=hr=>hr<140?{n:'Sehr locker',c:'#00c96a'}:hr<=149?{n:'Lockerer DL',c:'#00c96a'}:hr<=162?{n:'Marathon-Renntempo',c:'#2980b9'}:hr<=166?{n:'Tempo',c:VIO}:hr<=175?{n:'Schwelle',c:'#e8a33d'}:{n:'VO₂max',c:COR};
+    // Zonen kommen aus Garmin selbst (g.hr_zones) – kein eigenes Modell mehr.
+    // Fallback nur, falls der Sync mal keine Zonen liefert.
+    const HZ=(window.GARMIN_DATA&&window.GARMIN_DATA.hr_zones)||{z1_floor:102,z2_floor:120,z3_floor:142,z4_floor:160,z5_floor:180,max_hr:200};
+    const hrZone=hr=>hr<HZ.z2_floor?{n:'Z1 · Sehr locker',c:'#00c96a'}:hr<HZ.z3_floor?{n:'Z2 · Locker',c:'#00c96a'}:hr<HZ.z4_floor?{n:'Z3 · Moderat',c:'#2980b9'}:hr<HZ.z5_floor?{n:'Z4 · Tempo/Schwelle',c:VIO}:{n:'Z5 · VO₂max',c:COR};
 
     // ── Genesungsmodus ──
     if(g.recovery_mode){
@@ -3968,15 +3971,17 @@ document.addEventListener('DOMContentLoaded',()=>{
       document.getElementById('gd-lr-feedback').textContent=g.run_feedback||'';
     }
 
-    // HF-Zonen Referenz
+    // HF-Zonen Referenz – 1:1 aus Garmin (Lauf-Zonen, Methode: Laktatschwelle),
+    // keine eigene Berechnung mehr. So stimmt es immer mit der Garmin-App überein.
     const zones=[
-      {n:'Sehr locker · Recovery',r:'<140',c:'#00c96a'},
-      {n:'Lockerer Dauerlauf · GA1',r:'140–149',c:'#00c96a'},
-      {n:'Marathon-Renntempo',r:'150–162',c:'#2980b9'},
-      {n:'Tempo',r:'163–166',c:VIO},
-      {n:'Schwelle',r:'167–175',c:'#e8a33d'},
-      {n:'VO₂max / Intervalle',r:'176–201',c:COR},
+      {n:'Z1 · Sehr locker',r:`${HZ.z1_floor}–${HZ.z2_floor-1}`,c:'#00c96a'},
+      {n:'Z2 · Locker (Grundlage)',r:`${HZ.z2_floor}–${HZ.z3_floor-1}`,c:'#00c96a'},
+      {n:'Z3 · Moderat',r:`${HZ.z3_floor}–${HZ.z4_floor-1}`,c:'#2980b9'},
+      {n:'Z4 · Tempo/Schwelle',r:`${HZ.z4_floor}–${HZ.z5_floor-1}`,c:VIO},
+      {n:'Z5 · VO₂max/Intervalle',r:`${HZ.z5_floor}–${HZ.max_hr}`,c:COR},
     ];
+    document.getElementById('gd-hrzones-head').textContent=
+      `Deine HF-Zonen (aus Garmin) · Max ${HZ.max_hr} · Schwelle ${HZ.lthr||'–'} · Ruhe ${HZ.resting_hr||'–'}`;
     document.getElementById('gd-hrzones-grid').innerHTML=zones.map(z=>
       `<div style="display:flex;align-items:center;gap:8px;"><span style="width:8px;height:8px;border-radius:2px;background:${z.c};flex-shrink:0;"></span><span style="font-size:11px;color:#333;flex:1;">${z.n}</span><span style="font-size:11px;font-weight:700;color:${z.c};font-family:'DM Mono',monospace;">${z.r} bpm</span></div>`
     ).join('');
