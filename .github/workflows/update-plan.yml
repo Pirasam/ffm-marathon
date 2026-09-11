@@ -46,20 +46,29 @@ jobs:
           fi
           python3 - <<'PY' >> "$GITHUB_OUTPUT"
           import json, re
-          KEYS = ("hrv_value","resting_hr","sleep_hours","body_battery",
-                  "weight_kg","training_readiness")
+          # Nur Werte, die sich wirklich ~1x/Tag aendern (nicht Body Battery /
+          # Training Readiness - die schwanken staendig im Tagesverlauf und
+          # loesten dadurch mehrmals taeglich ein teures Opus-Rendern aus).
+          # last_run_* faengt stattdessen den eigentlich relevanten Fall ab:
+          # ein neuer Lauf wurde eingetragen -> Empfehlung soll das sehen.
+          KEYS = ("hrv_value","resting_hr","sleep_hours","weight_kg")
+          def extract(metrics, sync_date):
+              data = {k: metrics.get(k) for k in KEYS}
+              data["sync_date"] = sync_date
+              lr = metrics.get("last_run") or {}
+              data["last_run_date"] = lr.get("date")
+              data["last_run_dist"] = lr.get("distance_km")
+              return data
           try:
               d = json.load(open("garmin_data.json"))
-              data = {k: d["metrics"].get(k) for k in KEYS}
-              data["sync_date"] = d.get("sync_date")
+              data = extract(d["metrics"], d.get("sync_date"))
           except Exception:
               print("render=false"); raise SystemExit(0)
           try:
               html = open("index.html", encoding="utf-8").read()
               cur = json.loads(re.search(r"window\.GARMIN_DATA\s*=\s*(\{.*?\});",
                                          html, re.DOTALL).group(1))
-              shown = {k: cur.get(k) for k in KEYS}
-              shown["sync_date"] = cur.get("data_sync_date")
+              shown = extract(cur, cur.get("data_sync_date"))
           except Exception:
               shown = None
           print("render=" + ("true" if shown != data else "false"))

@@ -18,7 +18,10 @@ GARMIN_MARKER = ("<!-- GARMIN:START -->", "<!-- GARMIN:END -->")
 HISTORY_MARKER = ("<!-- HISTORY:START -->", "<!-- HISTORY:END -->")
 EFFICIENCY_MARKER = ("<!-- EFFICIENCY:START -->", "<!-- EFFICIENCY:END -->")
 
-CLAUDE_MODEL = "claude-opus-4-8"
+# Opus war fuer eine taegliche, strukturierte Trainingsempfehlung Overkill und
+# hat unnoetig API-Guthaben verbraucht. Sonnet ist fuer diese Aufgabe (kurze
+# JSON-Empfehlung aus klaren Regeln) mehr als ausreichend und deutlich guenstiger.
+CLAUDE_MODEL = "claude-sonnet-5"
 
 # ── Genesungs- / Wiedereinstiegs-Modus ────────────────────────────────────────
 # RECOVERY_MODE True: kein normaler Trainingsplan, sondern Erholungs-/Wiederein-
