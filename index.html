@@ -1772,7 +1772,7 @@ window.GARMIN_DATA = {
 .mind-rule{display:inline-flex;align-items:center;gap:5px;color:var(--m-good);
   font-size:.74rem;font-weight:700;background:rgba(47,138,91,.09);border-radius:6px;
   padding:3px 8px;margin-bottom:10px}
-.mind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
+.mind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
 .mcard{background:#fff;border:1px solid rgba(30,20,10,.08);border-radius:13px;
   padding:14px 15px;box-shadow:0 1px 3px rgba(40,30,20,.05)}
 .mcard h3{font-size:.82rem;margin:0;color:var(--m-mut);font-weight:600;letter-spacing:.01em}
@@ -1782,17 +1782,17 @@ window.GARMIN_DATA = {
 .mcard .arrow{font-size:.85rem;font-weight:700}
 .ab-latest{font-size:.72rem;color:var(--m-mut);font-variant-numeric:tabular-nums;margin:-1px 0 2px}
 .ab-latest b{color:var(--m-ink);font-weight:700}
-.mcard .spark{display:block;width:100%;height:56px;margin:6px 0 2px}
+.mcard .spark{display:block;width:100%;height:170px;margin:8px 0 4px}
 .mcard .meaning{color:var(--m-mut);font-size:.74rem;line-height:1.4;margin-top:4px}
-.mind .sp-line{fill:none;stroke:var(--m-line);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.mind .sp-line{fill:none;stroke:var(--m-line);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
 .mind .sp-dot{fill:var(--m-line)}
 .mind .sp-raw{fill:var(--m-mut);opacity:.45}
 .mind .sp-gl{stroke:var(--m-grid);stroke-width:1}
-.mind .sp-ax{fill:var(--m-mut);font-size:8.5px;font-family:inherit}
+.mind .sp-ax{fill:var(--m-mut);font-size:11px;font-family:inherit}
 .eco-rows{display:flex;flex-direction:column;gap:10px;margin-top:2px}
 .eco-row .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:.76rem;color:var(--m-mut)}
 .eco-row .lab .val{font-size:.92rem;font-weight:700;color:var(--m-ink);font-variant-numeric:tabular-nums}
-.eco-row .mini{display:block;width:100%;height:38px;margin-top:2px}
+.eco-row .mini{display:block;width:100%;height:90px;margin-top:4px}
 .mtip{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;z-index:50;
   background:var(--m-ink);color:#fff;border-radius:7px;padding:5px 9px;font-size:.72rem;
   line-height:1.35;box-shadow:0 6px 18px rgba(0,0,0,.25)}
@@ -1805,14 +1805,14 @@ window.GARMIN_DATA = {
   <div class="mcard" data-card="dur">
     <h3>Durability · Ermüdungsresistenz</h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
-    <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
+    <svg class="spark" viewBox="0 0 200 170" preserveAspectRatio="none"></svg>
     <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>. Blasse Punkte = einzelne Longruns, Linie = gleitender 3-Longrun-Schnitt.</div>
   </div>
   <div class="mcard" data-card="ab">
     <h3>Aerobe Basis · Tempo @ <span class="ab-ref">HF</span></h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
     <div class="ab-latest"></div>
-    <svg class="spark" viewBox="0 0 200 56" preserveAspectRatio="none"></svg>
+    <svg class="spark" viewBox="0 0 200 170" preserveAspectRatio="none"></svg>
     <div class="meaning">Blasse Punkte = einzelne Läufe (echtes Tempo, nicht auf die Ziel-HF umgerechnet), Linie = geglätteter 90-Tage-Trend. Wächst durch Grundlage.</div>
   </div>
   <div class="mcard" data-card="eco">
@@ -1844,7 +1844,7 @@ window.GARMIN_DATA = {
   function drawSpark(svg,pts,invert,quarterly,rawPts){
     while(svg.firstChild)svg.removeChild(svg.firstChild);
     var vb=svg.getAttribute("viewBox").split(" ").map(Number);
-    var W=vb[2],H=vb[3],padL=2,padR=2,padT=4,axH=12,plotH=H-axH;
+    var W=vb[2],H=vb[3],padL=4,padR=4,padT=8,axH=18,plotH=H-axH;
     function X(t){return padL+(t-START)/(END-START)*(W-padL-padR);}
     var vals=pts.map(function(p){return invert?-p.v:p.v;});
     var rawVals=(rawPts||[]).map(function(p){return invert?-p.v:p.v;});
@@ -1873,17 +1873,17 @@ window.GARMIN_DATA = {
     // Rohe Tageswerte als blasse Streupunkte im Hintergrund - zeigt die echte
     // Schwankung, die die geglaettete Trendlinie bewusst herausrechnet.
     (rawPts||[]).forEach(function(p,i){
-      svg.appendChild(E("circle",{cx:X(p.t),cy:Y(rawVals[i]),r:1.6,"class":"sp-raw"}));
+      svg.appendChild(E("circle",{cx:X(p.t),cy:Y(rawVals[i]),r:2.6,"class":"sp-raw"}));
     });
     if(pts.length<2){
       var only=pts[0];
-      svg.appendChild(E("circle",{cx:X(only.t),cy:Y(invert?-only.v:only.v),r:3,"class":"sp-dot"}));
+      svg.appendChild(E("circle",{cx:X(only.t),cy:Y(invert?-only.v:only.v),r:4,"class":"sp-dot"}));
       return;
     }
     var line=pts.map(function(p,i){return X(p.t).toFixed(1)+","+Y(vals[i]).toFixed(1);});
     svg.appendChild(E("path",{d:"M"+line.join(" L"),"class":"sp-line"}));
     var lastI=pts.length-1;
-    var dot=E("circle",{cx:X(pts[lastI].t),cy:Y(vals[lastI]),r:3.2,"class":"sp-dot"});
+    var dot=E("circle",{cx:X(pts[lastI].t),cy:Y(vals[lastI]),r:4.2,"class":"sp-dot"});
     svg.appendChild(dot);
   }
 
@@ -1985,7 +1985,7 @@ window.GARMIN_DATA = {
       var el=document.createElement("div");el.className="eco-row";
       el.innerHTML='<div class="lab"><span>'+r.lab+'</span><span class="val">'+cur+r.unit+
         ' <span style="color:'+arrowCol+'">'+arrowTxt+'</span></span></div>'+
-        '<svg class="mini" viewBox="0 0 200 38" preserveAspectRatio="none"></svg>';
+        '<svg class="mini" viewBox="0 0 200 90" preserveAspectRatio="none"></svg>';
       wrap.appendChild(el);
       var svg=el.querySelector(".mini");
       drawSpark(svg,pts,!r.higherBetter,false,rawPts);
