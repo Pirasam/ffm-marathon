@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-11T16:09:11+02:00",
+  "synced_at": "2026-09-11T16:40:48+02:00",
   "sync_date": "2026-09-11",
-  "token_days_left": 29.9,
+  "token_days_left": 29.8,
   "metrics": {
     "sleep_hours": 7.5,
     "sleep_score": 86,
@@ -290,7 +290,7 @@
       },
       {
         "name": "September Step Month",
-        "current": 146219,
+        "current": 146238,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 19,

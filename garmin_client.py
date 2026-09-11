@@ -680,10 +680,23 @@ def compute_aerobic_base(eff_runs, today, ref_hr=145, months=12, window_days=90)
         a = my - b * mx
         if b <= 0.1:               # zu flacher/instabiler Fit -> überspringen
             continue
-        speed = (ref_hr - a) / b
+        # NIE ueber den tatsaechlich beobachteten HF-Bereich hinaus extrapolieren.
+        # Sonst kann eine enge, leicht verrauschte Datenspanne (z.B. bei Einsteigern,
+        # die bisher immer im selben schmalen Pulsbereich laufen) zu einer stark
+        # ueberhoehten, unrealistischen Pace-Vorhersage fuehren, sobald das Ziel-HF
+        # ausserhalb dieser Spanne liegt. Effektive Referenz-HF daher auf das
+        # tatsaechliche Maximum in diesem Fenster kappen.
+        eff_ref = min(ref_hr, max(ys))
+        speed = (eff_ref - a) / b
+        # Bei enger, leicht verrauschter Datenspanne (z.B. Einsteiger, die bisher
+        # immer im selben schmalen Bereich laufen) kann selbst die HF-gekappte
+        # Regression noch eine Pace ausserhalb des je beobachteten Tempos liefern
+        # (instabile Steigung). Deshalb zusaetzlich hart auf das schnellste
+        # tatsaechlich gemessene Tempo in diesem Fenster kappen.
+        speed = min(speed, max(xs))
         if speed <= 90 or speed > 320:
             continue
-        out.append({"m": f"{yy:04d}-{mm:02d}", "pace_s": round(1000 / speed * 60), "ref": ref_hr})
+        out.append({"m": f"{yy:04d}-{mm:02d}", "pace_s": round(1000 / speed * 60), "ref": eff_ref})
     return out
 
 
