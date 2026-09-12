@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-09-11T17:09:16+02:00",
-  "sync_date": "2026-09-11",
+  "synced_at": "2026-09-12T07:13:21+02:00",
+  "sync_date": "2026-09-12",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 7.5,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 25,
-    "resting_hr": 58,
-    "body_battery": 89,
-    "training_readiness": 86,
+    "stress": 24,
+    "resting_hr": 62,
+    "body_battery": 58,
+    "training_readiness": 92,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -143,18 +143,18 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 110645,
+        "current": 112721,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 19,
-        "pct": 37
+        "days_remaining": 18,
+        "pct": 38
       },
       {
         "name": "September Time to Run",
         "current": 3.4,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 19,
+        "days_remaining": 18,
         "pct": 34
       },
       {
@@ -162,7 +162,7 @@
         "current": 6,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 19,
+        "days_remaining": 18,
         "pct": 30
       },
       {
@@ -170,7 +170,7 @@
         "current": 86.3,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 19,
+        "days_remaining": 18,
         "pct": 29
       },
       {
@@ -178,7 +178,7 @@
         "current": 21.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 19,
+        "days_remaining": 18,
         "pct": 26
       },
       {
@@ -186,7 +186,7 @@
         "current": 6.3,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 19,
+        "days_remaining": 18,
         "pct": 13
       },
       {
@@ -194,7 +194,7 @@
         "current": 2.0,
         "goal": 25.0,
         "unit": "",
-        "days_remaining": 19,
+        "days_remaining": 18,
         "pct": 8
       },
       {
@@ -202,7 +202,7 @@
         "current": 6.3,
         "goal": 146.4,
         "unit": "km",
-        "days_remaining": 19,
+        "days_remaining": 18,
         "pct": 4
       }
     ],
@@ -221,7 +221,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-28",
-      "day_in_cycle": 15,
+      "day_in_cycle": 16,
       "phase": "fruchtbar",
       "phase_raw": 3,
       "period_length": 6,
@@ -229,10 +229,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 2,
-      "next_period_in_days": 13,
+      "days_until_next_phase": 1,
+      "next_period_in_days": 12,
       "next_period_date": "2026-09-24",
-      "next_follicular_in_days": 19
+      "next_follicular_in_days": 18
     },
     "_errors": [],
     "efficiency": {
@@ -614,7 +614,7 @@
       "ref_dist": 4.6,
       "fit_a": 97.25,
       "fit_b": 0.4407,
-      "generated": "2026-09-11",
+      "generated": "2026-09-12",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1056,11 +1056,15 @@
           "gct": 314.0
         }
       ],
-      "generated": "2026-09-11"
+      "generated": "2026-09-12"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-12",
+        "v": 30
+      },
       {
         "d": "2026-09-11",
         "v": 30
@@ -1176,13 +1180,13 @@
       {
         "d": "2026-08-13",
         "v": 29
-      },
-      {
-        "d": "2026-08-12",
-        "v": 29
       }
     ],
     "rhr": [
+      {
+        "d": "2026-09-12",
+        "v": 62
+      },
       {
         "d": "2026-09-11",
         "v": 58
@@ -1298,10 +1302,6 @@
       {
         "d": "2026-08-14",
         "v": 60
-      },
-      {
-        "d": "2026-08-13",
-        "v": 59
       }
     ],
     "weight": [
@@ -1551,6 +1551,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-12",
+        "v": 39.2
+      },
       {
         "d": "2026-09-11",
         "v": 39.2
