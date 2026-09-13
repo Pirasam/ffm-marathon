@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-13T10:15:23+02:00",
+  "synced_at": "2026-09-13T14:45:21+02:00",
   "sync_date": "2026-09-13",
   "token_days_left": null,
   "metrics": {
@@ -10,11 +10,29 @@
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 21,
+    "stress": 23,
     "resting_hr": 60,
     "body_battery": 84,
     "training_readiness": 93,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-09-13",
+        "distance_km": 19.1,
+        "duration_min": 161,
+        "pace_min_km": 8.41,
+        "avg_hr": 87.0
+      },
+      {
+        "name": "Frankfurt am Main E-Bike-Fahren",
+        "type": "e_bike_fitness",
+        "date": "2026-09-13",
+        "distance_km": 1.8,
+        "duration_min": 16,
+        "pace_min_km": 9.03,
+        "avg_hr": 95.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -143,11 +161,19 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 120337,
+        "current": 121455,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 17,
         "pct": 40
+      },
+      {
+        "name": "Active September",
+        "current": 7,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 17,
+        "pct": 35
       },
       {
         "name": "September Time to Run",
@@ -156,14 +182,6 @@
         "unit": "h",
         "days_remaining": 17,
         "pct": 34
-      },
-      {
-        "name": "Active September",
-        "current": 6,
-        "goal": 20,
-        "unit": "Aktivitäten",
-        "days_remaining": 17,
-        "pct": 30
       },
       {
         "name": "2026 Running - Stage 3",
@@ -182,6 +200,14 @@
         "pct": 26
       },
       {
+        "name": "September Time to Ride",
+        "current": 2.9,
+        "goal": 20.0,
+        "unit": "h",
+        "days_remaining": 17,
+        "pct": 15
+      },
+      {
         "name": "September Walking",
         "current": 6.3,
         "goal": 48.3,
@@ -196,14 +222,6 @@
         "unit": "",
         "days_remaining": 17,
         "pct": 12
-      },
-      {
-        "name": "2026 Walking - Stage 3",
-        "current": 6.3,
-        "goal": 146.4,
-        "unit": "km",
-        "days_remaining": 17,
-        "pct": 4
       }
     ],
     "hr_zones": {
