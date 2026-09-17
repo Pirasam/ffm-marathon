@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-17T10:00:20+02:00",
+  "synced_at": "2026-09-17T11:30:21+02:00",
   "sync_date": "2026-09-17",
-  "token_days_left": 29.9,
+  "token_days_left": 29.8,
   "metrics": {
     "sleep_hours": 7.5,
     "sleep_score": 86,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 47,
-    "stress": 17,
+    "stress": 18,
     "resting_hr": 58,
     "body_battery": 90,
     "training_readiness": 63,
@@ -20,8 +20,8 @@
         "type": "running",
         "date": "2026-09-17",
         "distance_km": 10.1,
-        "duration_min": 75,
-        "pace_min_km": 7.42,
+        "duration_min": 74,
+        "pace_min_km": 7.28,
         "avg_hr": 139.0
       },
       {
@@ -147,8 +147,8 @@
       "type": "running",
       "date": "2026-09-17",
       "distance_km": 10.1,
-      "duration_min": 75,
-      "pace_min_km": 7.42,
+      "duration_min": 74,
+      "pace_min_km": 7.28,
       "avg_hr": 139.0
     },
     "weekly_running": {
@@ -275,7 +275,7 @@
       },
       {
         "name": "September Step Month",
-        "current": 223761,
+        "current": 224456,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 13,
