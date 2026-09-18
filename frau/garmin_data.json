@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-18T14:45:22+02:00",
+  "synced_at": "2026-09-18T19:45:19+02:00",
   "sync_date": "2026-09-18",
   "token_days_left": null,
   "metrics": {
@@ -15,6 +15,15 @@
     "body_battery": 82,
     "training_readiness": 88,
     "recent_activities": [
+      {
+        "name": "Planegg E-Bike-Fahren",
+        "type": "e_bike_fitness",
+        "date": "2026-09-18",
+        "distance_km": 8.0,
+        "duration_min": 36,
+        "pace_min_km": 4.42,
+        "avg_hr": 99.0
+      },
       {
         "name": "München E-Bike-Fahren",
         "type": "e_bike_fitness",
@@ -124,7 +133,7 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 155771,
+        "current": 156341,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 12,
@@ -132,11 +141,11 @@
       },
       {
         "name": "Active September",
-        "current": 9,
+        "current": 10,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 12,
-        "pct": 45
+        "pct": 50
       },
       {
         "name": "September Time to Run",
@@ -164,11 +173,11 @@
       },
       {
         "name": "September Time to Ride",
-        "current": 4.1,
+        "current": 4.7,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 12,
-        "pct": 21
+        "pct": 24
       },
       {
         "name": "September Walking",
