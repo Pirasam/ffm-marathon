@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-18T12:15:20+02:00",
+  "synced_at": "2026-09-18T14:45:22+02:00",
   "sync_date": "2026-09-18",
   "token_days_left": null,
   "metrics": {
@@ -15,6 +15,15 @@
     "body_battery": 82,
     "training_readiness": 88,
     "recent_activities": [
+      {
+        "name": "München E-Bike-Fahren",
+        "type": "e_bike_fitness",
+        "date": "2026-09-18",
+        "distance_km": 14.0,
+        "duration_min": 70,
+        "pace_min_km": 5.0,
+        "avg_hr": 93.0
+      },
       {
         "name": "Pilates",
         "type": "pilates",
@@ -123,11 +132,11 @@
       },
       {
         "name": "Active September",
-        "current": 8,
+        "current": 9,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 12,
-        "pct": 40
+        "pct": 45
       },
       {
         "name": "September Time to Run",
@@ -155,11 +164,11 @@
       },
       {
         "name": "September Time to Ride",
-        "current": 2.9,
+        "current": 4.1,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 12,
-        "pct": 15
+        "pct": 21
       },
       {
         "name": "September Walking",
