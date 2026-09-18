@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-18T17:30:20+02:00",
+  "synced_at": "2026-09-18T19:00:15+02:00",
   "sync_date": "2026-09-18",
-  "token_days_left": 29.8,
+  "token_days_left": 29.7,
   "metrics": {
     "sleep_hours": 6.8,
     "sleep_score": 77,
@@ -16,15 +16,6 @@
     "training_readiness": 64,
     "recent_activities": [
       {
-        "name": "Tutzing Radfahren",
-        "type": "cycling",
-        "date": "2026-09-18",
-        "distance_km": 7.1,
-        "duration_min": 27,
-        "pace_min_km": 3.86,
-        "avg_hr": 118.0
-      },
-      {
         "name": "München Rennradfahren",
         "type": "road_biking",
         "date": "2026-09-18",
@@ -32,15 +23,6 @@
         "duration_min": 190,
         "pace_min_km": 3.59,
         "avg_hr": null
-      },
-      {
-        "name": "München Radfahren",
-        "type": "cycling",
-        "date": "2026-09-18",
-        "distance_km": 40.6,
-        "duration_min": 143,
-        "pace_min_km": 3.52,
-        "avg_hr": 110.0
       },
       {
         "name": "Frankfurt am Main Laufen",
@@ -140,6 +122,24 @@
         "duration_min": 38,
         "pace_min_km": 2.66,
         "avg_hr": 119.0
+      },
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-09-06",
+        "distance_km": 18.7,
+        "duration_min": 157,
+        "pace_min_km": 8.4,
+        "avg_hr": 136.0
+      },
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-09-04",
+        "distance_km": 16.3,
+        "duration_min": 45,
+        "pace_min_km": 2.76,
+        "avg_hr": 120.0
       }
     ],
     "last_run": {
@@ -262,7 +262,7 @@
       },
       {
         "name": "September Step Month",
-        "current": 230180,
+        "current": 230599,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 12,
