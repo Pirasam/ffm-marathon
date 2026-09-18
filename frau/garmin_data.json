@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-17T19:45:24+02:00",
-  "sync_date": "2026-09-17",
+  "synced_at": "2026-09-18T07:13:24+02:00",
+  "sync_date": "2026-09-18",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.9,
-    "sleep_score": 80,
+    "sleep_hours": 7.4,
+    "sleep_score": 79,
     "hrv_status": "BALANCED",
-    "hrv_value": 30,
+    "hrv_value": 29,
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 25,
-    "resting_hr": 59,
-    "body_battery": 89,
-    "training_readiness": 90,
+    "stress": 19,
+    "resting_hr": 60,
+    "body_battery": 82,
+    "training_readiness": 88,
     "recent_activities": [
       {
         "name": "Pilates",
@@ -59,24 +59,6 @@
         "duration_min": 81,
         "pace_min_km": 9.83,
         "avg_hr": 143.0
-      },
-      {
-        "name": "Frankfurt am Main Gehen",
-        "type": "walking",
-        "date": "2026-09-03",
-        "distance_km": 2.7,
-        "duration_min": 43,
-        "pace_min_km": 16.14,
-        "avg_hr": 97.0
-      },
-      {
-        "name": "Seligenstadt Laufen",
-        "type": "running",
-        "date": "2026-09-03",
-        "distance_km": 6.0,
-        "duration_min": 59,
-        "pace_min_km": 9.78,
-        "avg_hr": 142.0
       }
     ],
     "last_run": {
@@ -90,7 +72,7 @@
     },
     "weekly_running": {
       "2026-W37": 6.7,
-      "2026-W36": 14.3
+      "2026-W36": 8.2
     },
     "run_dynamics": {
       "date": "2026-09-11",
@@ -114,11 +96,6 @@
           "cadence": 152.0,
           "vertical_ratio": 11.4,
           "gct": 311.0
-        },
-        "2026-09-03": {
-          "cadence": 131.0,
-          "vertical_ratio": 10.8,
-          "gct": 315.0
         }
       }
     },
@@ -138,10 +115,10 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 152984,
+        "current": 154243,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 13,
+        "days_remaining": 12,
         "pct": 51
       },
       {
@@ -149,7 +126,7 @@
         "current": 8,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 13,
+        "days_remaining": 12,
         "pct": 40
       },
       {
@@ -157,7 +134,7 @@
         "current": 3.4,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 13,
+        "days_remaining": 12,
         "pct": 34
       },
       {
@@ -165,7 +142,7 @@
         "current": 86.3,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 13,
+        "days_remaining": 12,
         "pct": 29
       },
       {
@@ -173,7 +150,7 @@
         "current": 21.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 13,
+        "days_remaining": 12,
         "pct": 26
       },
       {
@@ -181,7 +158,7 @@
         "current": 2.9,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 13,
+        "days_remaining": 12,
         "pct": 15
       },
       {
@@ -189,7 +166,7 @@
         "current": 6.3,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 13,
+        "days_remaining": 12,
         "pct": 13
       },
       {
@@ -197,7 +174,7 @@
         "current": 3.0,
         "goal": 25.0,
         "unit": "",
-        "days_remaining": 13,
+        "days_remaining": 12,
         "pct": 12
       }
     ],
@@ -216,7 +193,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-28",
-      "day_in_cycle": 21,
+      "day_in_cycle": 22,
       "phase": "luteal",
       "phase_raw": 4,
       "period_length": 6,
@@ -224,12 +201,13 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 7,
-      "next_period_in_days": 7,
+      "days_until_next_phase": 6,
+      "next_period_in_days": 6,
       "next_period_date": "2026-09-24",
-      "next_follicular_in_days": 13
+      "next_follicular_in_days": 12
     },
     "_errors": [],
+    "vo2max_carried": true,
     "efficiency": {
       "runs": [
         {
@@ -609,7 +587,7 @@
       "ref_dist": 4.6,
       "fit_a": 97.25,
       "fit_b": 0.4407,
-      "generated": "2026-09-17",
+      "generated": "2026-09-18",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1051,11 +1029,15 @@
           "gct": 314.0
         }
       ],
-      "generated": "2026-09-17"
+      "generated": "2026-09-18"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-18",
+        "v": 29
+      },
       {
         "d": "2026-09-17",
         "v": 30
@@ -1171,13 +1153,13 @@
       {
         "d": "2026-08-20",
         "v": 31
-      },
-      {
-        "d": "2026-08-19",
-        "v": 28
       }
     ],
     "rhr": [
+      {
+        "d": "2026-09-18",
+        "v": 60
+      },
       {
         "d": "2026-09-17",
         "v": 59
@@ -1293,10 +1275,6 @@
       {
         "d": "2026-08-20",
         "v": 60
-      },
-      {
-        "d": "2026-08-19",
-        "v": 61
       }
     ],
     "weight": [
@@ -1348,7 +1326,7 @@
       },
       {
         "w": "2026-W36",
-        "v": 14.3
+        "v": 8.2
       },
       {
         "w": "2026-W35",
@@ -1550,6 +1528,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-18",
+        "v": 39.2
+      },
       {
         "d": "2026-09-17",
         "v": 39.2
