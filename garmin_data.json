@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-18T11:30:14+02:00",
+  "synced_at": "2026-09-18T17:30:20+02:00",
   "sync_date": "2026-09-18",
-  "token_days_left": 28.8,
+  "token_days_left": 29.8,
   "metrics": {
     "sleep_hours": 6.8,
     "sleep_score": 77,
@@ -10,11 +10,38 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 46,
-    "stress": 18,
+    "stress": 19,
     "resting_hr": 58,
     "body_battery": 86,
-    "training_readiness": 70,
+    "training_readiness": 64,
     "recent_activities": [
+      {
+        "name": "Tutzing Radfahren",
+        "type": "cycling",
+        "date": "2026-09-18",
+        "distance_km": 7.1,
+        "duration_min": 27,
+        "pace_min_km": 3.86,
+        "avg_hr": 118.0
+      },
+      {
+        "name": "München Rennradfahren",
+        "type": "road_biking",
+        "date": "2026-09-18",
+        "distance_km": 52.8,
+        "duration_min": 190,
+        "pace_min_km": 3.59,
+        "avg_hr": null
+      },
+      {
+        "name": "München Radfahren",
+        "type": "cycling",
+        "date": "2026-09-18",
+        "distance_km": 40.6,
+        "duration_min": 143,
+        "pace_min_km": 3.52,
+        "avg_hr": 110.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -113,33 +140,6 @@
         "duration_min": 38,
         "pace_min_km": 2.66,
         "avg_hr": 119.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-09-06",
-        "distance_km": 18.7,
-        "duration_min": 157,
-        "pace_min_km": 8.4,
-        "avg_hr": 136.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-09-04",
-        "distance_km": 16.3,
-        "duration_min": 45,
-        "pace_min_km": 2.76,
-        "avg_hr": 120.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-09-04",
-        "distance_km": 14.5,
-        "duration_min": 41,
-        "pace_min_km": 2.8,
-        "avg_hr": 117.0
       }
     ],
     "last_run": {
@@ -253,14 +253,6 @@
     "vo2max": 43.0,
     "challenges": [
       {
-        "name": "Active September",
-        "current": 19,
-        "goal": 20,
-        "unit": "Aktivitäten",
-        "days_remaining": 12,
-        "pct": 95
-      },
-      {
         "name": "2026 Running - Stage 3",
         "current": 269.3,
         "goal": 300.0,
@@ -270,7 +262,7 @@
       },
       {
         "name": "September Step Month",
-        "current": 229594,
+        "current": 230180,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 12,
@@ -278,11 +270,11 @@
       },
       {
         "name": "September Time to Ride",
-        "current": 6.4,
+        "current": 12.4,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 12,
-        "pct": 32
+        "pct": 62
       },
       {
         "name": "September Gains",
