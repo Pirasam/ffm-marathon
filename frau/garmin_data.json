@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-19T10:15:18+02:00",
+  "synced_at": "2026-09-19T14:45:17+02:00",
   "sync_date": "2026-09-19",
   "token_days_left": null,
   "metrics": {
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 20,
+    "stress": 22,
     "resting_hr": 60,
     "body_battery": 82,
     "training_readiness": 98,
     "recent_activities": [
+      {
+        "name": "Bernried am Starnberger See E-Bike-Fahren",
+        "type": "e_bike_fitness",
+        "date": "2026-09-19",
+        "distance_km": 29.7,
+        "duration_min": 147,
+        "pace_min_km": 4.96,
+        "avg_hr": 92.0
+      },
       {
         "name": "München E-Bike-Fahren",
         "type": "e_bike_fitness",
@@ -124,7 +133,7 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 157903,
+        "current": 159386,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 11,
@@ -132,11 +141,19 @@
       },
       {
         "name": "Active September",
-        "current": 9,
+        "current": 10,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 11,
-        "pct": 45
+        "pct": 50
+      },
+      {
+        "name": "September Time to Ride",
+        "current": 8.6,
+        "goal": 20.0,
+        "unit": "h",
+        "days_remaining": 11,
+        "pct": 43
       },
       {
         "name": "September Time to Run",
@@ -145,14 +162,6 @@
         "unit": "h",
         "days_remaining": 11,
         "pct": 34
-      },
-      {
-        "name": "September Time to Ride",
-        "current": 6.1,
-        "goal": 20.0,
-        "unit": "h",
-        "days_remaining": 11,
-        "pct": 31
       },
       {
         "name": "2026 Running - Stage 3",
