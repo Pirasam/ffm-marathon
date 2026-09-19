@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-19T08:45:16+02:00",
+  "synced_at": "2026-09-19T10:15:18+02:00",
   "sync_date": "2026-09-19",
   "token_days_left": null,
   "metrics": {
@@ -124,11 +124,11 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 156990,
+        "current": 157903,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 11,
-        "pct": 52
+        "pct": 53
       },
       {
         "name": "Active September",
