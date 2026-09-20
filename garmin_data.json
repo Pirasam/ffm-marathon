@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-20T06:58:19+02:00",
+  "synced_at": "2026-09-20T08:30:28+02:00",
   "sync_date": "2026-09-20",
   "token_days_left": 29.1,
   "metrics": {
-    "sleep_hours": 8.0,
-    "sleep_score": 87,
+    "sleep_hours": 7.7,
+    "sleep_score": 69,
     "hrv_status": "BALANCED",
-    "hrv_value": 41,
+    "hrv_value": 34,
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 46,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 87,
-    "training_readiness": null,
+    "stress": 23,
+    "resting_hr": 62,
+    "body_battery": 63,
+    "training_readiness": 59,
     "recent_activities": [
       {
         "name": "Bernried am Starnberger See Rennradfahren",
@@ -274,11 +274,11 @@
       },
       {
         "name": "September Step Month",
-        "current": 258606,
+        "current": 259772,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 10,
-        "pct": 86
+        "pct": 87
       },
       {
         "name": "September Time to Ride",
@@ -2341,7 +2341,7 @@
     "hrv": [
       {
         "d": "2026-09-20",
-        "v": 41
+        "v": 34
       },
       {
         "d": "2026-09-19",
@@ -2462,6 +2462,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-09-20",
+        "v": 62
+      },
+      {
         "d": "2026-09-19",
         "v": 59
       },
@@ -2576,10 +2580,6 @@
       {
         "d": "2026-08-22",
         "v": 59
-      },
-      {
-        "d": "2026-08-21",
-        "v": 57
       }
     ],
     "weight": [
