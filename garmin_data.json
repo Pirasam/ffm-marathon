@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-19T19:00:18+02:00",
-  "sync_date": "2026-09-19",
-  "token_days_left": 29.6,
+  "synced_at": "2026-09-20T06:58:19+02:00",
+  "sync_date": "2026-09-20",
+  "token_days_left": 29.1,
   "metrics": {
     "sleep_hours": 8.0,
     "sleep_score": 87,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 46,
-    "stress": 33,
-    "resting_hr": 59,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 87,
-    "training_readiness": 62,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Bernried am Starnberger See Rennradfahren",
@@ -257,11 +257,19 @@
     "vo2max": 43.2,
     "challenges": [
       {
+        "name": "September Ride to 100",
+        "current": 0.0,
+        "goal": 100.0,
+        "unit": "km",
+        "days_remaining": 6,
+        "pct": 0
+      },
+      {
         "name": "2026 Running - Stage 3",
         "current": 285.5,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 95
       },
       {
@@ -269,7 +277,7 @@
         "current": 258606,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 86
       },
       {
@@ -277,7 +285,7 @@
         "current": 11.2,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 56
       },
       {
@@ -285,7 +293,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 11,
+        "days_remaining": 10,
         "pct": 0
       }
     ],
@@ -1294,7 +1302,7 @@
       "ref_dist": 8.9,
       "fit_a": 66.55,
       "fit_b": 0.5776,
-      "generated": "2026-09-19",
+      "generated": "2026-09-20",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2326,11 +2334,15 @@
           "gct": 274.0
         }
       ],
-      "generated": "2026-09-19"
+      "generated": "2026-09-20"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-20",
+        "v": 41
+      },
       {
         "d": "2026-09-19",
         "v": 41
@@ -2446,10 +2458,6 @@
       {
         "d": "2026-08-22",
         "v": 34
-      },
-      {
-        "d": "2026-08-21",
-        "v": 42
       }
     ],
     "rhr": [
@@ -3365,6 +3373,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-20",
+        "v": 43.2
+      },
       {
         "d": "2026-09-19",
         "v": 43.2
