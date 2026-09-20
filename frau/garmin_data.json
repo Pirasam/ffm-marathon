@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-20T08:45:18+02:00",
+  "synced_at": "2026-09-20T14:45:26+02:00",
   "sync_date": "2026-09-20",
   "token_days_left": null,
   "metrics": {
@@ -15,6 +15,15 @@
     "body_battery": 86,
     "training_readiness": 90,
     "recent_activities": [
+      {
+        "name": "Seefeld E-Bike-Fahren",
+        "type": "e_bike_fitness",
+        "date": "2026-09-20",
+        "distance_km": 32.1,
+        "duration_min": 138,
+        "pace_min_km": 4.29,
+        "avg_hr": 94.0
+      },
       {
         "name": "Bernried am Starnberger See E-Bike-Fahren",
         "type": "e_bike_fitness",
@@ -133,11 +142,19 @@
     "challenges": [
       {
         "name": "September Ride to 100",
-        "current": 0.0,
+        "current": 32.1,
         "goal": 100.0,
         "unit": "km",
         "days_remaining": 6,
-        "pct": 0
+        "pct": 32
+      },
+      {
+        "name": "Active September",
+        "current": 11,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 10,
+        "pct": 55
       },
       {
         "name": "September Step Month",
@@ -148,20 +165,12 @@
         "pct": 55
       },
       {
-        "name": "Active September",
-        "current": 10,
-        "goal": 20,
-        "unit": "Aktivitäten",
-        "days_remaining": 10,
-        "pct": 50
-      },
-      {
         "name": "September Time to Ride",
-        "current": 8.6,
+        "current": 10.9,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 10,
-        "pct": 43
+        "pct": 54
       },
       {
         "name": "September Time to Run",
