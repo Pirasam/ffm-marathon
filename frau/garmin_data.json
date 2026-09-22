@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-22T07:13:25+02:00",
+  "synced_at": "2026-09-22T08:45:23+02:00",
   "sync_date": "2026-09-22",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.2,
-    "sleep_score": 82,
+    "sleep_hours": 7.9,
+    "sleep_score": 81,
     "hrv_status": "BALANCED",
-    "hrv_value": 28,
+    "hrv_value": 29,
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 83,
-    "training_readiness": null,
+    "stress": 19,
+    "resting_hr": 59,
+    "body_battery": 86,
+    "training_readiness": 91,
     "recent_activities": [
       {
         "name": "Seefeld E-Bike-Fahren",
@@ -135,11 +135,11 @@
       },
       {
         "name": "September Step Month",
-        "current": 174448,
+        "current": 176850,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 8,
-        "pct": 58
+        "pct": 59
       },
       {
         "name": "Active September",
@@ -1048,7 +1048,7 @@
     "hrv": [
       {
         "d": "2026-09-22",
-        "v": 28
+        "v": 29
       },
       {
         "d": "2026-09-21",
@@ -1169,6 +1169,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-09-22",
+        "v": 59
+      },
+      {
         "d": "2026-09-21",
         "v": 60
       },
@@ -1283,10 +1287,6 @@
       {
         "d": "2026-08-24",
         "v": 58
-      },
-      {
-        "d": "2026-08-23",
-        "v": 59
       }
     ],
     "weight": [
