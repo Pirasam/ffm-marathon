@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-09-21T19:45:23+02:00",
-  "sync_date": "2026-09-21",
+  "synced_at": "2026-09-22T07:13:25+02:00",
+  "sync_date": "2026-09-22",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.2,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 27,
-    "resting_hr": 60,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 83,
-    "training_readiness": 92,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Seefeld E-Bike-Fahren",
@@ -130,7 +130,7 @@
         "current": 32.1,
         "goal": 100.0,
         "unit": "km",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 32
       },
       {
@@ -138,7 +138,7 @@
         "current": 174448,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 58
       },
       {
@@ -146,7 +146,7 @@
         "current": 11,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 55
       },
       {
@@ -154,7 +154,7 @@
         "current": 10.9,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 54
       },
       {
@@ -162,7 +162,7 @@
         "current": 3.4,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 34
       },
       {
@@ -170,7 +170,7 @@
         "current": 86.3,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 29
       },
       {
@@ -178,7 +178,7 @@
         "current": 21.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 26
       },
       {
@@ -186,7 +186,7 @@
         "current": 6.3,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 9,
+        "days_remaining": 8,
         "pct": 13
       }
     ],
@@ -205,7 +205,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-08-28",
-      "day_in_cycle": 25,
+      "day_in_cycle": 26,
       "phase": "luteal",
       "phase_raw": 4,
       "period_length": 6,
@@ -213,10 +213,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 3,
-      "next_period_in_days": 3,
+      "days_until_next_phase": 2,
+      "next_period_in_days": 2,
       "next_period_date": "2026-09-24",
-      "next_follicular_in_days": 9
+      "next_follicular_in_days": 8
     },
     "_errors": [],
     "vo2max_carried": true,
@@ -599,7 +599,7 @@
       "ref_dist": 4.6,
       "fit_a": 97.25,
       "fit_b": 0.4407,
-      "generated": "2026-09-21",
+      "generated": "2026-09-22",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1041,11 +1041,15 @@
           "gct": 314.0
         }
       ],
-      "generated": "2026-09-21"
+      "generated": "2026-09-22"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-22",
+        "v": 28
+      },
       {
         "d": "2026-09-21",
         "v": 28
@@ -1161,10 +1165,6 @@
       {
         "d": "2026-08-24",
         "v": 33
-      },
-      {
-        "d": "2026-08-23",
-        "v": 30
       }
     ],
     "rhr": [
@@ -1540,6 +1540,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-22",
+        "v": 39.2
+      },
       {
         "d": "2026-09-21",
         "v": 39.2
