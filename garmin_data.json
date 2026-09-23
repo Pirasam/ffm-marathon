@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-22T16:00:25+02:00",
-  "sync_date": "2026-09-22",
-  "token_days_left": 29.9,
+  "synced_at": "2026-09-23T06:58:23+02:00",
+  "sync_date": "2026-09-23",
+  "token_days_left": 29.3,
   "metrics": {
     "sleep_hours": 6.3,
     "sleep_score": 76,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 46,
-    "stress": 21,
-    "resting_hr": 60,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 79,
-    "training_readiness": 66,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -208,6 +208,7 @@
     },
     "weight_kg": 89.4,
     "weight_history": {
+      "2026-09-23": 89.4,
       "2026-09-22": 89.4,
       "2026-09-21": 90.2,
       "2026-09-15": 90.3,
@@ -251,8 +252,7 @@
       "2026-06-29": 89.8,
       "2026-06-27": 89.4,
       "2026-06-26": 90.0,
-      "2026-06-25": 89.8,
-      "2026-06-24": 89.8
+      "2026-06-25": 89.8
     },
     "vo2max": 43.3,
     "challenges": [
@@ -261,7 +261,7 @@
         "current": 42.7,
         "goal": 100.0,
         "unit": "km",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 43
       },
       {
@@ -269,15 +269,15 @@
         "current": 295.5,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 99
       },
       {
         "name": "September Step Month",
-        "current": 286937,
+        "current": 288164,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 96
       },
       {
@@ -285,7 +285,7 @@
         "current": 13.7,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 68
       },
       {
@@ -293,7 +293,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 8,
+        "days_remaining": 7,
         "pct": 0
       }
     ],
@@ -302,7 +302,7 @@
       "method": "LACTATE_THRESHOLD",
       "lthr": 174,
       "max_hr": 199,
-      "resting_hr": 59,
+      "resting_hr": 58,
       "z1_floor": 101,
       "z2_floor": 119,
       "z3_floor": 141,
@@ -1314,7 +1314,7 @@
       "ref_dist": 8.9,
       "fit_a": 66.67,
       "fit_b": 0.5766,
-      "generated": "2026-09-22",
+      "generated": "2026-09-23",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2351,11 +2351,15 @@
           "gct": 267.0
         }
       ],
-      "generated": "2026-09-22"
+      "generated": "2026-09-23"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-23",
+        "v": 36
+      },
       {
         "d": "2026-09-22",
         "v": 36
@@ -2471,10 +2475,6 @@
       {
         "d": "2026-08-25",
         "v": 34
-      },
-      {
-        "d": "2026-08-24",
-        "v": 32
       }
     ],
     "rhr": [
@@ -2600,6 +2600,10 @@
       }
     ],
     "weight": [
+      {
+        "d": "2026-09-23",
+        "v": 89.4
+      },
       {
         "d": "2026-09-22",
         "v": 89.4
@@ -2834,10 +2838,6 @@
       },
       {
         "d": "2026-06-08",
-        "v": 91.1
-      },
-      {
-        "d": "2026-06-07",
         "v": 91.1
       }
     ],
@@ -3401,6 +3401,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-09-23",
+        "v": 43.3
+      },
+      {
         "d": "2026-09-22",
         "v": 43.3
       },
@@ -3634,10 +3638,6 @@
       },
       {
         "d": "2026-07-25",
-        "v": 45.1
-      },
-      {
-        "d": "2026-07-24",
         "v": 45.1
       }
     ],
