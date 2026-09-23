@@ -50,17 +50,19 @@ _TEMPLATE = r"""<section class="mind">
 .mcard .arrow{font-size:.85rem;font-weight:700}
 .ab-latest{font-size:.72rem;color:var(--m-mut);font-variant-numeric:tabular-nums;margin:-1px 0 2px}
 .ab-latest b{color:var(--m-ink);font-weight:700}
-.mcard .spark{display:block;width:100%;height:170px;margin:8px 0 4px}
+.mcard .spark{display:block;width:100%;height:170px;margin:8px 0 4px;overflow:visible}
 .mcard .meaning{color:var(--m-mut);font-size:.74rem;line-height:1.4;margin-top:4px}
 .mind .sp-line{fill:none;stroke:var(--m-line);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
 .mind .sp-dot{fill:var(--m-line)}
 .mind .sp-raw{fill:var(--m-mut);opacity:.45}
 .mind .sp-gl{stroke:var(--m-grid);stroke-width:1}
+.mind .sp-axline{stroke:var(--m-hair);stroke-width:1.3}
 .mind .sp-ax{fill:var(--m-mut);font-size:11px;font-family:inherit}
+.mind .sp-ay{fill:var(--m-mut);font-size:10.5px;font-family:inherit;font-variant-numeric:tabular-nums}
 .eco-rows{display:flex;flex-direction:column;gap:10px;margin-top:2px}
 .eco-row .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:.76rem;color:var(--m-mut)}
 .eco-row .lab .val{font-size:.92rem;font-weight:700;color:var(--m-ink);font-variant-numeric:tabular-nums}
-.eco-row .mini{display:block;width:100%;height:90px;margin-top:4px}
+.eco-row .mini{display:block;width:100%;height:90px;margin-top:4px;overflow:visible}
 .mtip{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;z-index:50;
   background:var(--m-ink);color:#fff;border-radius:7px;padding:5px 9px;font-size:.72rem;
   line-height:1.35;box-shadow:0 6px 18px rgba(0,0,0,.25)}
@@ -109,10 +111,12 @@ _TEMPLATE = r"""<section class="mind">
 
   // pts: [{t, v}] chronologisch, v = ECHTER Wert (fuer Anzeige/Tooltip).
   // invert:true zeichnet -v, damit "oben am Chart" immer Verbesserung heisst.
-  function drawSpark(svg,pts,invert,quarterly,rawPts){
+  // fmtY: formatiert einen ECHTEN Y-Wert fuer die Achsenbeschriftung (z.B. Pace/%/ms).
+  function drawSpark(svg,pts,invert,quarterly,rawPts,fmtY){
     while(svg.firstChild)svg.removeChild(svg.firstChild);
+    fmtY=fmtY||function(v){return Math.round(v);};
     var vb=svg.getAttribute("viewBox").split(" ").map(Number);
-    var W=vb[2],H=vb[3],padL=4,padR=4,padT=8,axH=18,plotH=H-axH;
+    var W=vb[2],H=vb[3],padL=38,padR=6,padT=8,axH=18,plotH=H-axH;
     function X(t){return padL+(t-START)/(END-START)*(W-padL-padR);}
     var vals=pts.map(function(p){return invert?-p.v:p.v;});
     var rawVals=(rawPts||[]).map(function(p){return invert?-p.v:p.v;});
@@ -120,11 +124,20 @@ _TEMPLATE = r"""<section class="mind">
     var lo=Math.min.apply(0,allVals),hi=Math.max.apply(0,allVals);
     var pad=(hi-lo)*0.15||1;lo-=pad;hi+=pad;
     function Y(v){return padT+(hi-v)/(hi-lo)*(plotH-padT);}
-    // horizontale Nulllinie/Grid dezent (2 Linien)
-    svg.appendChild(E("line",{x1:padL,y1:padT,x2:W-padR,y2:padT,"class":"sp-gl"}));
-    svg.appendChild(E("line",{x1:padL,y1:plotH,x2:W-padR,y2:plotH,"class":"sp-gl"}));
-    // X-Achslinie
-    svg.appendChild(E("line",{x1:padL,y1:plotH,x2:W-padR,y2:plotH,"class":"sp-gl"}));
+    // Echte Y-Achse: 4 Gitterlinien MIT Wert-Beschriftung (nicht nur dekorativ) -
+    // ohne das kann man den Chart nicht lesen, nur die Richtung erahnen.
+    var TICKS=4;
+    for(var ti=0;ti<=TICKS;ti++){
+      var yLvl=lo+(hi-lo)*ti/TICKS;
+      var yPix=Y(yLvl);
+      var realVal=invert?-yLvl:yLvl;
+      svg.appendChild(E("line",{x1:padL,y1:yPix,x2:W-padR,y2:yPix,"class":"sp-gl"}));
+      var tx=E("text",{x:padL-6,y:yPix+3,"class":"sp-ay","text-anchor":"end"});
+      tx.textContent=fmtY(realVal);
+      svg.appendChild(tx);
+    }
+    // X-Achslinie (unten, etwas kraeftiger als die Gitterlinien)
+    svg.appendChild(E("line",{x1:padL,y1:plotH,x2:W-padR,y2:plotH,"class":"sp-axline"}));
     // Monats-Ticks (quartalsweise oder alle 2 Monate je nach Platz)
     var step=quarterly?3:2;
     var d=new Date(START);d.setDate(1);
@@ -132,9 +145,9 @@ _TEMPLATE = r"""<section class="mind">
     while(d.getTime()<END){
       var x=X(d.getTime());
       if(x>=padL-1 && x<=W-padR+1){
-        var tx=E("text",{x:x,y:H-1,"class":"sp-ax","text-anchor":x<padL+14?"start":(x>W-padR-14?"end":"middle")});
-        tx.textContent=NM[d.getMonth()];
-        svg.appendChild(tx);
+        var tx2=E("text",{x:x,y:H-1,"class":"sp-ax","text-anchor":x<padL+14?"start":(x>W-padR-14?"end":"middle")});
+        tx2.textContent=NM[d.getMonth()];
+        svg.appendChild(tx2);
       }
       d.setMonth(d.getMonth()+step);
     }
@@ -186,7 +199,7 @@ _TEMPLATE = r"""<section class="mind">
       var avg=w.reduce(function(s,x){return s+x.v;},0)/w.length;
       return {t:p.t,v:avg};
     });
-    var svg=c.querySelector(".spark");drawSpark(svg,trend,true,true,raw);
+    var svg=c.querySelector(".spark");drawSpark(svg,trend,true,true,raw,function(v){return(v>=0?"+":"")+Math.round(v)+"%";});
     var last=raw[raw.length-1];
     hookTip(svg, fmtD(last.d)+": "+(last.v>=0?"+":"")+last.v+"% ("+last.km+" km)");
   })();
@@ -210,7 +223,7 @@ _TEMPLATE = r"""<section class="mind">
     c.querySelector(".ab-ref").textContent="HF "+refTxt;
     c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @'+refTxt+'</small>';
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
-    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true,rawRuns);
+    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true,rawRuns,fpace);
     hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt+" (90-Tage-Trend)");
     // Zusaetzlich der ungeglaettete Rohwert: der tatsaechlich juengste Lauf,
     // nicht durch die 90-Tage-Regression geglaettet.
@@ -256,7 +269,7 @@ _TEMPLATE = r"""<section class="mind">
         '<svg class="mini" viewBox="0 0 200 90" preserveAspectRatio="none"></svg>';
       wrap.appendChild(el);
       var svg=el.querySelector(".mini");
-      drawSpark(svg,pts,!r.higherBetter,false,rawPts);
+      drawSpark(svg,pts,!r.higherBetter,false,rawPts,function(v){return r.key==="vr"?v.toFixed(1):Math.round(v);});
       var last=pts[pts.length-1];
       var lastRaw=rawPts.length?rawPts[rawPts.length-1]:null;
       var rawTxt=lastRaw?(" · letzter Lauf: "+lastRaw.v+r.unit):"";
