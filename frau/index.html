@@ -196,6 +196,17 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     var diff=(cur-pm)*(higherIsBetter?1:-1);
     return diff;
   }
+  // Perzentil statt striktem Min/Max fuer die Achsen-Grenzen - ein einzelner
+  // untypischer Ausreisser (z.B. ein sehr langsamer Reha-Lauf) soll nicht die
+  // ganze Skala auseinanderziehen und den eigentlich interessanten Bereich
+  // unlesbar zusammenquetschen.
+  function percentile(vals,p){
+    var s=vals.slice().sort(function(a,b){return a-b;});
+    var idx=(s.length-1)*p;
+    var lo=Math.floor(idx),hi=Math.ceil(idx);
+    if(lo===hi)return s[lo];
+    return s[lo]+(s[hi]-s[lo])*(idx-lo);
+  }
 
   // Chart.js-Chart mit zwei Datenreihen (rohe Einzelwerte + geglaetteter
   // Trend) auf einer gemeinsamen Zeitachse, echte beschriftete Y-Achse -
@@ -222,8 +233,16 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
     var trendMap={};(trendPts||[]).forEach(function(p){trendMap[p.t]=p.v;});
     var rawData=times.map(function(t){return rawMap.hasOwnProperty(t)?rawMap[t]:null;});
     var trendData=times.map(function(t){return trendMap.hasOwnProperty(t)?trendMap[t]:null;});
-    var allVals=(rawPts||[]).map(function(p){return p.v;}).concat((trendPts||[]).map(function(p){return p.v;}));
-    var lo=Math.min.apply(0,allVals),hi=Math.max.apply(0,allVals);
+    // Trend IMMER voll sichtbar (Kerninformation); rohe Streupunkte nur bis
+    // P5/P95 - ein einzelner extremer Ausreisser darf ausserhalb liegen.
+    var rawVals=(rawPts||[]).map(function(p){return p.v;});
+    var trendVals=(trendPts||[]).map(function(p){return p.v;});
+    var lo=trendVals.length?Math.min.apply(0,trendVals):Infinity;
+    var hi=trendVals.length?Math.max.apply(0,trendVals):-Infinity;
+    if(rawVals.length){
+      lo=Math.min(lo,percentile(rawVals,0.05));
+      hi=Math.max(hi,percentile(rawVals,0.95));
+    }
     var pad=(hi-lo)*0.15||Math.abs(hi)*0.1||1;
     return new Chart(canvas,{
       type:"line",
