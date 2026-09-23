@@ -454,6 +454,7 @@ border-radius:50%;background:#d8cfdd}}
 .reframe p{{color:#4a4356;margin:0}}
 footer{{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 <div class="wrap">

@@ -5,11 +5,14 @@ Drei Kacheln mit den Werten, die für den Marathon zählen:
   - Durability (Ermüdungsresistenz): aerobes Decoupling auf langen Läufen
   - Aerobe Basis: Tempo am oberen Rand der individuellen Zone 2 (rollierend)
   - Laufökonomie: Kadenz, vertikales Verhältnis, Bodenkontakt
-Alle Mini-Charts teilen eine echte 12-Monats-Zeitachse mit Monats-Ticks, und
-jede Serie ist so orientiert, dass eine steigende Linie IMMER eine Verbesserung
-zeigt (Durability/GCT/vert. Verhältnis werden dafür invertiert geplottet; die
-angezeigten Zahlen/Labels bleiben die echten, unveränderten Werte).
-Self-contained (Style + inline-SVG-Mini-Charts + Daten inline), scoped unter .mind.
+Charts laufen über Chart.js (dieselbe Bibliothek wie die HRV/Ruhepuls-Charts
+weiter oben auf der Seite) statt einer eigenen SVG-Loesung - fuer eine echte,
+beschriftete Achse und dieselbe Lesbarkeit wie der Rest des Dashboards.
+Jede Serie ist so orientiert (Y-Achse ggf. gespiegelt), dass eine steigende
+Linie IMMER eine Verbesserung zeigt; die angezeigten Zahlen/Labels bleiben
+die echten, unveraenderten Werte.
+Self-contained (Style + Daten inline), scoped unter .mind. Setzt voraus, dass
+Chart.js bereits auf der Seite geladen ist (bei beiden Dashboards der Fall).
 """
 import json
 
@@ -50,23 +53,14 @@ _TEMPLATE = r"""<section class="mind">
 .mcard .arrow{font-size:.85rem;font-weight:700}
 .ab-latest{font-size:.72rem;color:var(--m-mut);font-variant-numeric:tabular-nums;margin:-1px 0 2px}
 .ab-latest b{color:var(--m-ink);font-weight:700}
-.mcard .spark{display:block;width:100%;height:170px;margin:8px 0 4px;overflow:visible}
+.spark-wrap{position:relative;height:170px;margin:8px 0 4px}
+.spark-wrap canvas{width:100%!important;height:100%!important}
 .mcard .meaning{color:var(--m-mut);font-size:.74rem;line-height:1.4;margin-top:4px}
-.mind .sp-line{fill:none;stroke:var(--m-line);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
-.mind .sp-dot{fill:var(--m-line)}
-.mind .sp-raw{fill:var(--m-mut);opacity:.45}
-.mind .sp-gl{stroke:var(--m-grid);stroke-width:1}
-.mind .sp-axline{stroke:var(--m-hair);stroke-width:1.3}
-.mind .sp-ax{fill:var(--m-mut);font-size:11px;font-family:inherit}
-.mind .sp-ay{fill:var(--m-mut);font-size:10.5px;font-family:inherit;font-variant-numeric:tabular-nums}
 .eco-rows{display:flex;flex-direction:column;gap:10px;margin-top:2px}
 .eco-row .lab{display:flex;justify-content:space-between;align-items:baseline;font-size:.76rem;color:var(--m-mut)}
 .eco-row .lab .val{font-size:.92rem;font-weight:700;color:var(--m-ink);font-variant-numeric:tabular-nums}
-.eco-row .mini{display:block;width:100%;height:90px;margin-top:4px;overflow:visible}
-.mtip{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;z-index:50;
-  background:var(--m-ink);color:#fff;border-radius:7px;padding:5px 9px;font-size:.72rem;
-  line-height:1.35;box-shadow:0 6px 18px rgba(0,0,0,.25)}
-@media (prefers-reduced-motion:reduce){.mind *{transition:none!important}}
+.mini-wrap{position:relative;height:90px;margin-top:4px}
+.mini-wrap canvas{width:100%!important;height:100%!important}
 </style>
 <h2 class="mind-h">Marathon-Indikatoren</h2>
 <p class="mind-sub">Die Werte, die für den Marathon zählen – nicht VO₂max: Ermüdungsresistenz, aerobe Basis, Laufökonomie. 12 Monate.</p>
@@ -75,98 +69,31 @@ _TEMPLATE = r"""<section class="mind">
   <div class="mcard" data-card="dur">
     <h3>Durability · Ermüdungsresistenz</h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
-    <svg class="spark" viewBox="0 0 200 170" preserveAspectRatio="none"></svg>
-    <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>. Blasse Punkte = einzelne Longruns, Linie = gleitender 3-Longrun-Schnitt.</div>
+    <div class="spark-wrap"><canvas class="spark"></canvas></div>
+    <div class="meaning">Puls-Drift 2. vs. 1. Longrun-Hälfte. <b>≤ 5 % = stark</b>. Graue Punkte = einzelne Longruns, Linie = gleitender 3-Longrun-Schnitt.</div>
   </div>
   <div class="mcard" data-card="ab">
     <h3>Aerobe Basis · Tempo @ <span class="ab-ref">HF</span></h3>
     <div class="big"><span class="v">–</span><span class="arrow"></span></div>
     <div class="ab-latest"></div>
-    <svg class="spark" viewBox="0 0 200 170" preserveAspectRatio="none"></svg>
-    <div class="meaning">Blasse Punkte = einzelne Läufe (echtes Tempo, nicht auf die Ziel-HF umgerechnet), Linie = geglätteter 90-Tage-Trend. Wächst durch Grundlage.</div>
+    <div class="spark-wrap"><canvas class="spark"></canvas></div>
+    <div class="meaning">Graue Punkte = einzelne Läufe (echtes Tempo, nicht auf die Ziel-HF umgerechnet), Linie = geglätteter 90-Tage-Trend. Wächst durch Grundlage.</div>
   </div>
   <div class="mcard" data-card="eco">
     <h3>Laufökonomie</h3>
     <div class="eco-rows"></div>
-    <div class="meaning">Niedrigeres vert. Verhältnis &amp; Bodenkontakt, höhere Kadenz = ökonomischer. Blasse Punkte = einzelne Läufe, Linie = Monatsschnitt.</div>
+    <div class="meaning">Niedrigeres vert. Verhältnis &amp; Bodenkontakt, höhere Kadenz = ökonomischer. Graue Punkte = einzelne Läufe, Linie = Monatsschnitt.</div>
   </div>
 </div>
 <script>
 (function(){
   var D=__DATA__;
   var root=document.currentScript.closest(".mind");
-  var tip=document.createElement("div");tip.className="mtip";document.body.appendChild(tip);
-  var NS="http://www.w3.org/2000/svg";
-  function E(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
   function fpace(s){s=Math.round(s);return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2);}
-  function fmtD(iso){var p=iso.split("-");return p[2]+"."+p[1]+"."+p[0].slice(2);}
-  function hookTip(el,txt){el.addEventListener("mousemove",function(e){tip.style.opacity=1;
-    tip.style.left=Math.min(e.clientX+12,innerWidth-170)+"px";tip.style.top=(e.clientY+12)+"px";tip.textContent=txt;});
-    el.addEventListener("mouseleave",function(){tip.style.opacity=0;});}
 
-  // Feste 12-Monats-Zeitachse, gemeinsam fuer alle Charts.
-  var NM=["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
+  // Nur die letzten 12 Monate.
   var END=new Date();END.setHours(0,0,0,0);END=END.getTime();
   var START=END-365*864e5;
-
-  // pts: [{t, v}] chronologisch, v = ECHTER Wert (fuer Anzeige/Tooltip).
-  // invert:true zeichnet -v, damit "oben am Chart" immer Verbesserung heisst.
-  // fmtY: formatiert einen ECHTEN Y-Wert fuer die Achsenbeschriftung (z.B. Pace/%/ms).
-  function drawSpark(svg,pts,invert,quarterly,rawPts,fmtY){
-    while(svg.firstChild)svg.removeChild(svg.firstChild);
-    fmtY=fmtY||function(v){return Math.round(v);};
-    var vb=svg.getAttribute("viewBox").split(" ").map(Number);
-    var W=vb[2],H=vb[3],padL=38,padR=6,padT=8,axH=18,plotH=H-axH;
-    function X(t){return padL+(t-START)/(END-START)*(W-padL-padR);}
-    var vals=pts.map(function(p){return invert?-p.v:p.v;});
-    var rawVals=(rawPts||[]).map(function(p){return invert?-p.v:p.v;});
-    var allVals=vals.concat(rawVals);
-    var lo=Math.min.apply(0,allVals),hi=Math.max.apply(0,allVals);
-    var pad=(hi-lo)*0.15||1;lo-=pad;hi+=pad;
-    function Y(v){return padT+(hi-v)/(hi-lo)*(plotH-padT);}
-    // Echte Y-Achse: 4 Gitterlinien MIT Wert-Beschriftung (nicht nur dekorativ) -
-    // ohne das kann man den Chart nicht lesen, nur die Richtung erahnen.
-    var TICKS=4;
-    for(var ti=0;ti<=TICKS;ti++){
-      var yLvl=lo+(hi-lo)*ti/TICKS;
-      var yPix=Y(yLvl);
-      var realVal=invert?-yLvl:yLvl;
-      svg.appendChild(E("line",{x1:padL,y1:yPix,x2:W-padR,y2:yPix,"class":"sp-gl"}));
-      var tx=E("text",{x:padL-6,y:yPix+3,"class":"sp-ay","text-anchor":"end"});
-      tx.textContent=fmtY(realVal);
-      svg.appendChild(tx);
-    }
-    // X-Achslinie (unten, etwas kraeftiger als die Gitterlinien)
-    svg.appendChild(E("line",{x1:padL,y1:plotH,x2:W-padR,y2:plotH,"class":"sp-axline"}));
-    // Monats-Ticks (quartalsweise oder alle 2 Monate je nach Platz)
-    var step=quarterly?3:2;
-    var d=new Date(START);d.setDate(1);
-    // ersten Tick auf naechstes Vielfaches ausrichten, dann step-weise
-    while(d.getTime()<END){
-      var x=X(d.getTime());
-      if(x>=padL-1 && x<=W-padR+1){
-        var tx2=E("text",{x:x,y:H-1,"class":"sp-ax","text-anchor":x<padL+14?"start":(x>W-padR-14?"end":"middle")});
-        tx2.textContent=NM[d.getMonth()];
-        svg.appendChild(tx2);
-      }
-      d.setMonth(d.getMonth()+step);
-    }
-    // Rohe Tageswerte als blasse Streupunkte im Hintergrund - zeigt die echte
-    // Schwankung, die die geglaettete Trendlinie bewusst herausrechnet.
-    (rawPts||[]).forEach(function(p,i){
-      svg.appendChild(E("circle",{cx:X(p.t),cy:Y(rawVals[i]),r:2.6,"class":"sp-raw"}));
-    });
-    if(pts.length<2){
-      var only=pts[0];
-      svg.appendChild(E("circle",{cx:X(only.t),cy:Y(invert?-only.v:only.v),r:4,"class":"sp-dot"}));
-      return;
-    }
-    var line=pts.map(function(p,i){return X(p.t).toFixed(1)+","+Y(vals[i]).toFixed(1);});
-    svg.appendChild(E("path",{d:"M"+line.join(" L"),"class":"sp-line"}));
-    var lastI=pts.length-1;
-    var dot=E("circle",{cx:X(pts[lastI].t),cy:Y(vals[lastI]),r:4.2,"class":"sp-dot"});
-    svg.appendChild(dot);
-  }
 
   function arrow(el,better){el.textContent=better>0?"▲":(better<0?"▼":"");
     el.style.color=better>0?"var(--m-good)":(better<0?"var(--m-bad)":"var(--m-mut)");}
@@ -179,7 +106,59 @@ _TEMPLATE = r"""<section class="mind">
     return diff;
   }
 
-  // 1) DURABILITY (niedriger Decoupling = besser -> invert=true)
+  // Chart.js-Chart mit zwei Datenreihen (rohe Einzelwerte + geglaetteter
+  // Trend) auf einer gemeinsamen Zeitachse, echte beschriftete Y-Achse -
+  // dieselbe Bibliothek/Optik wie die HRV/Ruhepuls-Charts weiter oben.
+  // rawPts/trendPts: [{t, v}], t = Timestamp (ms), v = ECHTER Wert.
+  // reverse: true dreht die Y-Achse (fuer "niedriger = besser"), sodass
+  // "oben am Chart" immer eine Verbesserung bleibt; die Achsenzahlen zeigen
+  // trotzdem die echten Werte (Chart.js macht das intern, kein Vorzeichentrick noetig).
+  // min/max werden EXPLIZIT aus den echten Daten gesetzt (nicht Chart.js'
+  // Auto-Skalierung ueberlassen) - sonst waehlt Chart.js bei enger Datenspanne
+  // (z.B. Kadenz 150-165) zu grobe, "runde" Ticks (50/150) und die eigentliche
+  // Schwankung verschwindet unlesbar in der Mitte des Charts.
+  function renderChart(canvas,rawPts,trendPts,opts){
+    opts=opts||{};
+    var color=opts.color||"#2f8e9e";
+    var fmtY=opts.fmtY||function(v){return Math.round(v);};
+    var allT={};
+    (rawPts||[]).forEach(function(p){allT[p.t]=1;});
+    (trendPts||[]).forEach(function(p){allT[p.t]=1;});
+    var times=Object.keys(allT).map(Number).sort(function(a,b){return a-b;});
+    if(!times.length)return null;
+    var labels=times.map(function(t){var d=new Date(t);return d.getDate()+"."+(d.getMonth()+1)+"."+String(d.getFullYear()).slice(2);});
+    var rawMap={};(rawPts||[]).forEach(function(p){rawMap[p.t]=p.v;});
+    var trendMap={};(trendPts||[]).forEach(function(p){trendMap[p.t]=p.v;});
+    var rawData=times.map(function(t){return rawMap.hasOwnProperty(t)?rawMap[t]:null;});
+    var trendData=times.map(function(t){return trendMap.hasOwnProperty(t)?trendMap[t]:null;});
+    var allVals=(rawPts||[]).map(function(p){return p.v;}).concat((trendPts||[]).map(function(p){return p.v;}));
+    var lo=Math.min.apply(0,allVals),hi=Math.max.apply(0,allVals);
+    var pad=(hi-lo)*0.15||Math.abs(hi)*0.1||1;
+    return new Chart(canvas,{
+      type:"line",
+      data:{labels:labels,datasets:[
+        {label:"roh",data:rawData,borderColor:"transparent",backgroundColor:"rgba(124,115,106,0.55)",
+         pointRadius:3,pointHoverRadius:4.5,showLine:false,order:2,spanGaps:false},
+        {label:"Trend",data:trendData,borderColor:color,backgroundColor:color+"22",
+         borderWidth:2.4,tension:.35,fill:true,pointRadius:0,pointHoverRadius:5,
+         pointBackgroundColor:color,spanGaps:true,order:1}
+      ]},
+      options:{
+        responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},
+          tooltip:{callbacks:{label:function(c){
+            return (c.dataset.label==="roh"?"Einzelner Lauf: ":"Trend: ")+fmtY(c.raw);
+          }}}},
+        scales:{
+          x:{grid:{color:"rgba(0,0,0,0.04)"},ticks:{maxTicksLimit:6,maxRotation:0}},
+          y:{reverse:!!opts.reverse,min:lo-pad,max:hi+pad,
+             grid:{color:"rgba(0,0,0,0.04)"},ticks:{maxTicksLimit:5,callback:function(v){return fmtY(v);}}}
+        }
+      }
+    });
+  }
+
+  // 1) DURABILITY (niedriger Decoupling = besser -> reverse:true)
   (function(){
     var c=root.querySelector('[data-card="dur"]');
     var raw=(D.dur||[]).slice().sort(function(a,b){return a.d<b.d?-1:1;})
@@ -191,40 +170,35 @@ _TEMPLATE = r"""<section class="mind">
     var col=cur<=5?"var(--m-good)":(cur<=8?"var(--m-warn)":"var(--m-bad)");
     var vEl=c.querySelector(".v");vEl.textContent=(cur>=0?"+":"")+cur+"%";vEl.style.color=col;
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
-    // Geglaetteter Trend (gleitender 3-Longrun-Schnitt) als Linie, die einzelnen
-    // Longruns bleiben als Streupunkte sichtbar - Longruns sind unregelmaessig,
-    // daher Ereignis- statt Zeitfenster fuer die Glaettung.
+    // Geglaetteter Trend (gleitender 3-Longrun-Schnitt) - Longruns sind
+    // unregelmaessig, daher Ereignis- statt Zeitfenster fuer die Glaettung.
     var trend=raw.map(function(p,i){
       var w=raw.slice(Math.max(0,i-2),i+1);
       var avg=w.reduce(function(s,x){return s+x.v;},0)/w.length;
       return {t:p.t,v:avg};
     });
-    var svg=c.querySelector(".spark");drawSpark(svg,trend,true,true,raw,function(v){return(v>=0?"+":"")+Math.round(v)+"%";});
-    var last=raw[raw.length-1];
-    hookTip(svg, fmtD(last.d)+": "+(last.v>=0?"+":"")+last.v+"% ("+last.km+" km)");
+    renderChart(c.querySelector(".spark"),raw,trend,{reverse:true,color:"#2f8e9e",
+      fmtY:function(v){return (v>=0?"+":"")+v.toFixed(1)+"%";}});
   })();
 
-  // 2) AEROBE BASIS (schnelleres Tempo = besser -> invert=true, da pace_s kleiner=schneller)
+  // 2) AEROBE BASIS (schnelleres Tempo = besser -> reverse:true, da pace_s kleiner=schneller)
   (function(){
     var c=root.querySelector('[data-card="ab"]');
-    var raw=(D.ab||[]).slice().sort(function(a,b){return a.m<b.m?-1:1;})
+    var trend=(D.ab||[]).slice().sort(function(a,b){return a.m<b.m?-1:1;})
       .map(function(x){return {t:Date.parse(x.m+"-15"),v:x.pace_s,m:x.m,ref:x.ref};})
       .filter(function(p){return p.t>=START;});
-    if(raw.length<2){c.style.display="none";return;}
-    var vals=raw.map(function(p){return p.v;});
+    if(trend.length<2){c.style.display="none";return;}
+    var vals=trend.map(function(p){return p.v;});
     var cur=vals[vals.length-1];
-    var last=raw[raw.length-1];
+    var last=trend[trend.length-1];
     var refTxt=last.ref?last.ref:"HF";
-    // Einzelne Laeufe als Streupunkte (ihre echte Pace, nicht auf die Referenz-HF
-    // umgerechnet - daher Streuung um die geglaettete Linie herum normal).
     var rawRuns=(D.ab_raw||[])
       .map(function(x){return {t:Date.parse(x.date),v:x.pace_s,hf:x.hf,date:x.date};})
       .filter(function(p){return p.t>=START;});
     c.querySelector(".ab-ref").textContent="HF "+refTxt;
     c.querySelector(".v").innerHTML=fpace(cur)+' <small>/km @'+refTxt+'</small>';
     arrow(c.querySelector(".arrow"), trendArrow(vals,false));
-    var svg=c.querySelector(".spark");drawSpark(svg,raw,true,true,rawRuns,fpace);
-    hookTip(svg, last.m+": "+fpace(last.v)+"/km bei HF "+refTxt+" (90-Tage-Trend)");
+    renderChart(c.querySelector(".spark"),rawRuns,trend,{reverse:true,color:"#2f8e9e",fmtY:fpace});
     // Zusaetzlich der ungeglaettete Rohwert: der tatsaechlich juengste Lauf,
     // nicht durch die 90-Tage-Regression geglaettet.
     var lr=D.ab_latest;
@@ -241,11 +215,10 @@ _TEMPLATE = r"""<section class="mind">
     var raw=(D.ec||[]).slice().sort(function(a,b){return a.m<b.m?-1:1;});
     var wrap=c.querySelector(".eco-rows");
     var rows=[
-      {key:"cad",lab:"Kadenz",unit:" spm",higherBetter:true},
+      {key:"cad",lab:"Kadenz",unit:" spm",higherBetter:true,rawKey:"cadence"},
       {key:"vr",lab:"Vert. Verhältnis",unit:" %",higherBetter:false,rawKey:"vertical_ratio"},
       {key:"gct",lab:"Bodenkontakt",unit:" ms",higherBetter:false,rawKey:"gct"}
     ];
-    rows[0].rawKey="cadence";
     var ecRaw=D.ec_raw||[];
     var any=false;
     rows.forEach(function(r){
@@ -266,18 +239,13 @@ _TEMPLATE = r"""<section class="mind">
       var el=document.createElement("div");el.className="eco-row";
       el.innerHTML='<div class="lab"><span>'+r.lab+'</span><span class="val">'+cur+r.unit+
         ' <span style="color:'+arrowCol+'">'+arrowTxt+'</span></span></div>'+
-        '<svg class="mini" viewBox="0 0 200 90" preserveAspectRatio="none"></svg>';
+        '<div class="mini-wrap"><canvas class="mini"></canvas></div>';
       wrap.appendChild(el);
-      var svg=el.querySelector(".mini");
-      drawSpark(svg,pts,!r.higherBetter,false,rawPts,function(v){return r.key==="vr"?v.toFixed(1):Math.round(v);});
-      var last=pts[pts.length-1];
-      var lastRaw=rawPts.length?rawPts[rawPts.length-1]:null;
-      var rawTxt=lastRaw?(" · letzter Lauf: "+lastRaw.v+r.unit):"";
-      hookTip(svg, r.lab+" "+last.m+" (Schnitt): "+last.v+r.unit+rawTxt);
+      var fmtY=function(v){return (r.key==="vr"?v.toFixed(1):Math.round(v))+r.unit;};
+      renderChart(el.querySelector(".mini"),rawPts,pts,{reverse:!r.higherBetter,color:"#7a6cf0",fmtY:fmtY});
     });
     if(!any)c.style.display="none";
   })();
-  addEventListener("scroll",function(){tip.style.opacity=0;},{passive:true});
 })();
 </script>
 </section>"""
