@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-25T12:15:20+02:00",
+  "synced_at": "2026-09-25T14:45:21+02:00",
   "sync_date": "2026-09-25",
   "token_days_left": null,
   "metrics": {
@@ -135,11 +135,11 @@
       },
       {
         "name": "September Step Month",
-        "current": 201951,
+        "current": 202791,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 5,
-        "pct": 67
+        "pct": 68
       },
       {
         "name": "Active September",
