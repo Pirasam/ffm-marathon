@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-26T20:30:21+02:00",
-  "sync_date": "2026-09-26",
-  "token_days_left": 29.6,
+  "synced_at": "2026-09-27T06:58:23+02:00",
+  "sync_date": "2026-09-27",
+  "token_days_left": 29.2,
   "metrics": {
     "sleep_hours": 8.2,
     "sleep_score": 85,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 41,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 45,
-    "stress": 20,
-    "resting_hr": 56,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 94,
-    "training_readiness": 85,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
@@ -250,19 +250,11 @@
     "vo2max": 43.3,
     "challenges": [
       {
-        "name": "September Ride to 100",
-        "current": 73.6,
-        "goal": 100.0,
-        "unit": "km",
-        "days_remaining": 0,
-        "pct": 74
-      },
-      {
         "name": "September Time to Ride",
         "current": 15.1,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 75
       },
       {
@@ -270,7 +262,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 0
       }
     ],
@@ -1303,7 +1295,7 @@
       "ref_dist": 9.0,
       "fit_a": 66.68,
       "fit_b": 0.5761,
-      "generated": "2026-09-26",
+      "generated": "2026-09-27",
       "vo2max": [
         {
           "m": "2025-09",
@@ -1478,7 +1470,7 @@
         },
         {
           "m": "2026-09",
-          "pace_s": 453,
+          "pace_s": 452,
           "ref": 140
         }
       ],
@@ -2345,11 +2337,15 @@
           "gct": 277.0
         }
       ],
-      "generated": "2026-09-26"
+      "generated": "2026-09-27"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-27",
+        "v": 43
+      },
       {
         "d": "2026-09-26",
         "v": 43
@@ -2465,10 +2461,6 @@
       {
         "d": "2026-08-29",
         "v": 34
-      },
-      {
-        "d": "2026-08-28",
-        "v": 30
       }
     ],
     "rhr": [
@@ -3401,6 +3393,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-09-27",
+        "v": 43.3
+      },
+      {
         "d": "2026-09-26",
         "v": 43.3
       },
@@ -3634,10 +3630,6 @@
       },
       {
         "d": "2026-07-29",
-        "v": 45.1
-      },
-      {
-        "d": "2026-07-28",
         "v": 45.1
       }
     ],
