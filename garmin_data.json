@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-09-27T13:01:53+02:00",
+  "synced_at": "2026-09-27T14:30:41+02:00",
   "sync_date": "2026-09-27",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
     "sleep_hours": 6.8,
     "sleep_score": 79,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 41,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 45,
-    "stress": 21,
+    "stress": 25,
     "resting_hr": 57,
     "body_battery": 81,
     "training_readiness": 35,
@@ -166,8 +166,8 @@
       "ground_contact_time": 281.0,
       "ground_contact_balance": 51.0,
       "avg_power": 314.0,
-      "performance_condition": null,
-      "step_speed_loss_pct": null,
+      "performance_condition": -6,
+      "step_speed_loss_pct": 4.1,
       "history": {
         "2026-09-27": {
           "cadence": 160.0,
@@ -1358,6 +1358,11 @@
     },
     "marathon": {
       "durability": [
+        {
+          "d": "2026-09-27",
+          "km": 25.1,
+          "decoup": 15.5
+        },
         {
           "d": "2026-09-19",
           "km": 16.2,
@@ -4316,6 +4321,11 @@
       }
     ],
     "durability": [
+      {
+        "d": "2026-09-27",
+        "km": 25.1,
+        "decoup": 15.5
+      },
       {
         "d": "2026-09-19",
         "km": 16.2,
