@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-09-26T19:45:19+02:00",
-  "sync_date": "2026-09-26",
+  "synced_at": "2026-09-27T07:13:21+02:00",
+  "sync_date": "2026-09-27",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.4,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 23,
-    "resting_hr": 57,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 86,
-    "training_readiness": 95,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Seefeld E-Bike-Fahren",
@@ -88,27 +88,19 @@
     "vo2max": 39.2,
     "challenges": [
       {
-        "name": "September Ride to 100",
-        "current": 32.1,
-        "goal": 100.0,
-        "unit": "km",
-        "days_remaining": 0,
-        "pct": 32
-      },
-      {
         "name": "September Step Month",
-        "current": 210591,
+        "current": 211525,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 4,
-        "pct": 70
+        "days_remaining": 3,
+        "pct": 71
       },
       {
         "name": "Active September",
         "current": 11,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 55
       },
       {
@@ -116,7 +108,7 @@
         "current": 10.9,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 54
       },
       {
@@ -124,7 +116,7 @@
         "current": 3.4,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 34
       },
       {
@@ -132,7 +124,7 @@
         "current": 86.3,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 29
       },
       {
@@ -140,7 +132,7 @@
         "current": 21.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 26
       },
       {
@@ -148,8 +140,16 @@
         "current": 4.0,
         "goal": 25.0,
         "unit": "",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 16
+      },
+      {
+        "name": "September Walking",
+        "current": 6.3,
+        "goal": 48.3,
+        "unit": "km",
+        "days_remaining": 3,
+        "pct": 13
       }
     ],
     "hr_zones": {
@@ -167,7 +167,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-09-24",
-      "day_in_cycle": 3,
+      "day_in_cycle": 4,
       "phase": "menstruation",
       "phase_raw": 1,
       "period_length": 6,
@@ -175,10 +175,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 4,
-      "next_period_in_days": 25,
+      "days_until_next_phase": 3,
+      "next_period_in_days": 24,
       "next_period_date": "2026-10-21",
-      "next_follicular_in_days": 31
+      "next_follicular_in_days": 30
     },
     "_errors": [],
     "vo2max_carried": true,
@@ -561,7 +561,7 @@
       "ref_dist": 4.6,
       "fit_a": 97.25,
       "fit_b": 0.4407,
-      "generated": "2026-09-26",
+      "generated": "2026-09-27",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1003,11 +1003,15 @@
           "gct": 314.0
         }
       ],
-      "generated": "2026-09-26"
+      "generated": "2026-09-27"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-27",
+        "v": 29
+      },
       {
         "d": "2026-09-26",
         "v": 29
@@ -1123,10 +1127,6 @@
       {
         "d": "2026-08-29",
         "v": 31
-      },
-      {
-        "d": "2026-08-28",
-        "v": 28
       }
     ],
     "rhr": [
@@ -1502,6 +1502,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-27",
+        "v": 39.2
+      },
       {
         "d": "2026-09-26",
         "v": 39.2
