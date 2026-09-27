@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-09-27T14:45:23+02:00",
+  "synced_at": "2026-09-27T19:45:23+02:00",
   "sync_date": "2026-09-27",
   "token_days_left": null,
   "metrics": {
@@ -175,11 +175,11 @@
       },
       {
         "name": "September Likes",
-        "current": 5.0,
+        "current": 6.0,
         "goal": 25.0,
         "unit": "",
         "days_remaining": 3,
-        "pct": 20
+        "pct": 24
       },
       {
         "name": "September Walking",
