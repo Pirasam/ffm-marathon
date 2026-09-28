@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-09-28T07:13:23+02:00",
+  "synced_at": "2026-09-28T14:45:25+02:00",
   "sync_date": "2026-09-28",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 9.6,
-    "sleep_score": 81,
+    "sleep_hours": 8.6,
+    "sleep_score": 85,
     "hrv_status": "BALANCED",
-    "hrv_value": 32,
+    "hrv_value": 29,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 97,
-    "training_readiness": null,
+    "stress": 23,
+    "resting_hr": 59,
+    "body_battery": 85,
+    "training_readiness": 97,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -109,11 +109,11 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 226471,
+        "current": 230128,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 2,
-        "pct": 75
+        "pct": 77
       },
       {
         "name": "Active September",
@@ -1056,7 +1056,7 @@
     "hrv": [
       {
         "d": "2026-09-28",
-        "v": 32
+        "v": 29
       },
       {
         "d": "2026-09-27",
@@ -1177,6 +1177,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-09-28",
+        "v": 59
+      },
+      {
         "d": "2026-09-27",
         "v": 57
       },
@@ -1291,10 +1295,6 @@
       {
         "d": "2026-08-30",
         "v": 56
-      },
-      {
-        "d": "2026-08-29",
-        "v": 58
       }
     ],
     "weight": [
