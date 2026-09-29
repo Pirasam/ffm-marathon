@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-09-28T14:45:25+02:00",
-  "sync_date": "2026-09-28",
+  "synced_at": "2026-09-29T07:13:22+02:00",
+  "sync_date": "2026-09-29",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.6,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 23,
-    "resting_hr": 59,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 85,
-    "training_readiness": 97,
+    "training_readiness": null,
     "recent_activities": [
+      {
+        "name": "Yoga",
+        "type": "yoga",
+        "date": "2026-09-28",
+        "distance_km": 0.0,
+        "duration_min": 112,
+        "pace_min_km": null,
+        "avg_hr": 92.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -93,8 +102,9 @@
         }
       }
     },
-    "weight_kg": 67.4,
+    "weight_kg": 66.7,
     "weight_history": {
+      "2026-09-29": 66.7,
       "2026-09-17": 67.4,
       "2026-09-07": 66.9,
       "2026-09-01": 66.8,
@@ -109,26 +119,26 @@
     "challenges": [
       {
         "name": "September Step Month",
-        "current": 230128,
+        "current": 232785,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 2,
-        "pct": 77
+        "days_remaining": 1,
+        "pct": 78
       },
       {
         "name": "Active September",
-        "current": 12,
+        "current": 13,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 2,
-        "pct": 60
+        "days_remaining": 1,
+        "pct": 65
       },
       {
         "name": "September Time to Ride",
         "current": 10.9,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 54
       },
       {
@@ -136,7 +146,7 @@
         "current": 4.4,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 44
       },
       {
@@ -144,7 +154,7 @@
         "current": 27.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 34
       },
       {
@@ -152,7 +162,7 @@
         "current": 92.4,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 31
       },
       {
@@ -160,7 +170,7 @@
         "current": 6.0,
         "goal": 25.0,
         "unit": "",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 24
       },
       {
@@ -168,7 +178,7 @@
         "current": 6.3,
         "goal": 48.3,
         "unit": "km",
-        "days_remaining": 2,
+        "days_remaining": 1,
         "pct": 13
       }
     ],
@@ -187,7 +197,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-09-24",
-      "day_in_cycle": 5,
+      "day_in_cycle": 6,
       "phase": "menstruation",
       "phase_raw": 1,
       "period_length": 6,
@@ -195,10 +205,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 2,
-      "next_period_in_days": 23,
+      "days_until_next_phase": 1,
+      "next_period_in_days": 22,
       "next_period_date": "2026-10-21",
-      "next_follicular_in_days": 29
+      "next_follicular_in_days": 28
     },
     "_errors": [],
     "efficiency": {
@@ -592,7 +602,7 @@
       "ref_dist": 4.7,
       "fit_a": 99.15,
       "fit_b": 0.4253,
-      "generated": "2026-09-28",
+      "generated": "2026-09-29",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1049,11 +1059,15 @@
           "gct": 313.0
         }
       ],
-      "generated": "2026-09-28"
+      "generated": "2026-09-29"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-09-29",
+        "v": 29
+      },
       {
         "d": "2026-09-28",
         "v": 29
@@ -1169,10 +1183,6 @@
       {
         "d": "2026-08-31",
         "v": 34
-      },
-      {
-        "d": "2026-08-30",
-        "v": 30
       }
     ],
     "rhr": [
@@ -1298,6 +1308,10 @@
       }
     ],
     "weight": [
+      {
+        "d": "2026-09-29",
+        "v": 66.7
+      },
       {
         "d": "2026-09-17",
         "v": 67.4
@@ -1558,6 +1572,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-09-29",
+        "v": 39.1
+      },
       {
         "d": "2026-09-28",
         "v": 39.1
