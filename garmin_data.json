@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-02T15:21:56+02:00",
+  "synced_at": "2026-10-02T17:30:17+02:00",
   "sync_date": "2026-10-02",
-  "token_days_left": 29.7,
+  "token_days_left": 29.6,
   "metrics": {
     "sleep_hours": 8.2,
     "sleep_score": 86,
@@ -302,7 +302,7 @@
       "method": "LACTATE_THRESHOLD",
       "lthr": 173,
       "max_hr": 199,
-      "resting_hr": 57,
+      "resting_hr": 58,
       "z1_floor": 100,
       "z2_floor": 118,
       "z3_floor": 140,
