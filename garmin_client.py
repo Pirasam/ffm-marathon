@@ -618,7 +618,10 @@ def compute_durability(api, history, today, months=12, min_km=12):
                 return [r["metrics"][i] for r in rows
                         if r.get("metrics") and len(r["metrics"]) > i and r["metrics"][i] is not None]
             hr = ser("directHeartRate")
-            sp = ser("directGradeAdjustedSpeed") or ser("directSpeed")
+            # Normales Tempo statt Grade-Adjusted-Speed: die Hoehendaten der Uhr sind
+            # bei uns verrauscht (Barometer, +300-400 m auf flachen Runden), das
+            # wuerde die Steigungskorrektur verzerren.
+            sp = ser("directSpeed") or ser("directGradeAdjustedSpeed")
             n = min(len(hr), len(sp))
             if n < 40:
                 continue
