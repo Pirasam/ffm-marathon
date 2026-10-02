@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-02T08:45:22+02:00",
+  "synced_at": "2026-10-02T14:45:18+02:00",
   "sync_date": "2026-10-02",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.5,
-    "sleep_score": 93,
+    "sleep_hours": 8.3,
+    "sleep_score": 81,
     "hrv_status": "BALANCED",
     "hrv_value": 29,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 94,
-    "training_readiness": null,
+    "stress": 20,
+    "resting_hr": 56,
+    "body_battery": 91,
+    "training_readiness": 100,
     "recent_activities": [
       {
         "name": "Yoga",
@@ -1117,6 +1117,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-10-02",
+        "v": 56
+      },
+      {
         "d": "2026-10-01",
         "v": 56
       },
@@ -1231,10 +1235,6 @@
       {
         "d": "2026-09-03",
         "v": 61
-      },
-      {
-        "d": "2026-09-02",
-        "v": 55
       }
     ],
     "weight": [
