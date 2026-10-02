@@ -4434,15 +4434,15 @@ const weeks = [
   {
     "label": "W16",
     "name": "Woche 16",
-    "focus": "Taperbeginn (34 km)",
+    "focus": "Taperbeginn · Urlaub, kein Rad (37 km)",
     "stats": [
       {
         "l": "Laufen",
-        "v": "~34 km"
+        "v": "~37 km"
       },
       {
         "l": "Rad",
-        "v": "Pendeln"
+        "v": "– (Urlaub)"
       },
       {
         "l": "Intensität",
@@ -4456,72 +4456,70 @@ const weeks = [
     "days": [
       {
         "id": "w16mo",
-        "name": "Mo · Büro",
-        "title": "Rad-Pendeln locker",
+        "name": "Mo",
+        "title": "Ruhetag",
         "badges": [
-          "bike",
-          "z2"
+          "rest"
         ],
-        "desc": "Locker pendeln, Puls <130 – Erholung, kein Reiz."
+        "desc": "Urlaub, kein Rad. Frei."
       },
       {
         "id": "w16di",
-        "name": "Di · Büro",
+        "name": "Di",
         "title": "Rücklauf · 9 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Locker. Ab jetzt runterfahren."
+        "desc": "Locker, Zone 2. Ab jetzt runterfahren."
       },
       {
         "id": "w16mi",
-        "name": "Mi · Büro",
-        "title": "Renntempo kurz · 8 km",
+        "name": "Mi",
+        "title": "Ruhetag",
         "badges": [
-          "run",
-          "lt"
+          "rest"
         ],
-        "desc": "2× 2 km Zieltempo, spritzig."
+        "desc": "Frei – Beine schonen."
       },
       {
         "id": "w16do",
         "name": "Do",
+        "title": "Marathon-Renntempo kurz · 8 km",
+        "badges": [
+          "run",
+          "lt"
+        ],
+        "desc": "2× 2 km Zieltempo (~7:00/km, ~150 bpm), spritzig. Bei Waden-/Schienbeinbeschwerden streichen – Longrun hat Vorrang."
+      },
+      {
+        "id": "w16fr",
+        "name": "Fr",
         "title": "Ruhetag",
         "badges": [
           "rest"
         ],
-        "desc": "Pause. Erholung ist Teil des Aufbaus."
-      },
-      {
-        "id": "w16fr",
-        "name": "Fr · Büro",
-        "title": "Rad-Pendeln locker",
-        "badges": [
-          "bike",
-          "z2"
-        ],
-        "desc": "Locker pendeln, Puls <130 – Erholung, kein Reiz."
+        "desc": "Frei – Tag vor dem Longrun, nicht viel auf den Beinen stehen/wandern."
       },
       {
         "id": "w16sa",
         "name": "Sa",
-        "title": "Ruhetag",
-        "badges": [
-          "rest"
-        ],
-        "desc": "Pause. Erholung ist Teil des Aufbaus."
-      },
-      {
-        "id": "w16so",
-        "name": "So",
         "title": "Longrun reduziert · 20 km",
         "badges": [
           "run",
           "z2"
         ],
-        "desc": "Deutlich kürzer als Peak, entspannt.",
+        "desc": "Vorgezogen auf Samstag. Deutlich kürzer als der Peak, entspannt, strikt Zone 2. Verpflegung wie am Renntag.",
         "longrun": true
+      },
+      {
+        "id": "w16so",
+        "name": "So",
+        "title": "Ruhetag",
+        "badges": [
+          "rest"
+        ],
+        "desc": "Frei. Nichts nachholen."
       }
     ]
   },
@@ -4570,7 +4568,7 @@ const weeks = [
       {
         "id": "w17mi",
         "name": "Mi · Büro",
-        "title": "Renntempo · 6 km",
+        "title": "Marathon-Renntempo · 6 km",
         "badges": [
           "run",
           "lt"
