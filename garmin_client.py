@@ -625,6 +625,14 @@ def compute_durability(api, history, today, months=12, min_km=12):
             pairs = [(h, s) for h, s in zip(hr[:n], sp[:n]) if s and s > 0.5 and h and h > 0]
             if len(pairs) < 40:
                 continue
+            # Deutliche Tempoeinbrueche (z.B. letzte km bewusst langsam mit
+            # Begleitung, Gehpausen) wuerden das Decoupling kuenstlich aufblaehen:
+            # der Puls faellt dort nicht im gleichen Mass wie das Tempo. Daher
+            # Samples unter 80 % des Median-Tempos ignorieren.
+            med = _st.median([p[1] for p in pairs])
+            pairs = [p for p in pairs if p[1] >= 0.8 * med]
+            if len(pairs) < 40:
+                continue
             half = len(pairs) // 2
             hh = [p[0] for p in pairs]; ss = [p[1] for p in pairs]
             r1 = _st.mean(hh[:half]) / _st.mean(ss[:half])
