@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-10-02T14:45:18+02:00",
-  "sync_date": "2026-10-02",
+  "synced_at": "2026-10-03T07:13:21+02:00",
+  "sync_date": "2026-10-03",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.3,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 20,
-    "resting_hr": 56,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 91,
-    "training_readiness": 100,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Yoga",
@@ -50,15 +50,6 @@
         "duration_min": 147,
         "pace_min_km": 4.96,
         "avg_hr": 92.0
-      },
-      {
-        "name": "München E-Bike-Fahren",
-        "type": "e_bike_fitness",
-        "date": "2026-09-18",
-        "distance_km": 52.8,
-        "duration_min": 190,
-        "pace_min_km": 3.6,
-        "avg_hr": 93.0
       }
     ],
     "last_run": {
@@ -122,18 +113,18 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-09-24",
-      "day_in_cycle": 9,
-      "phase": "follikel",
-      "phase_raw": 2,
+      "day_in_cycle": 10,
+      "phase": "fruchtbar",
+      "phase_raw": 3,
       "period_length": 6,
       "predicted_cycle_length": 27,
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 1,
-      "next_period_in_days": 19,
+      "days_until_next_phase": 7,
+      "next_period_in_days": 18,
       "next_period_date": "2026-10-21",
-      "next_follicular_in_days": 25
+      "next_follicular_in_days": 24
     },
     "_errors": [],
     "efficiency": {
@@ -527,7 +518,7 @@
       "ref_dist": 4.7,
       "fit_a": 99.15,
       "fit_b": 0.4253,
-      "generated": "2026-10-02",
+      "generated": "2026-10-03",
       "vo2max": [
         {
           "m": "2025-11",
@@ -989,11 +980,15 @@
           "gct": 313.0
         }
       ],
-      "generated": "2026-10-02"
+      "generated": "2026-10-03"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-03",
+        "v": 29
+      },
       {
         "d": "2026-10-02",
         "v": 29
@@ -1109,10 +1104,6 @@
       {
         "d": "2026-09-04",
         "v": 31
-      },
-      {
-        "d": "2026-09-03",
-        "v": 35
       }
     ],
     "rhr": [
@@ -1502,6 +1493,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-10-03",
+        "v": 39.1
+      },
       {
         "d": "2026-10-02",
         "v": 39.1
