@@ -1,10 +1,10 @@
 {
-  "synced_at": "2026-10-03T19:45:13+02:00",
-  "sync_date": "2026-10-03",
+  "synced_at": "2026-10-04T07:13:14+02:00",
+  "sync_date": "2026-10-04",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.3,
-    "sleep_score": 81,
+    "sleep_hours": null,
+    "sleep_score": null,
     "hrv_status": "BALANCED",
     "hrv_value": 33,
     "hrv_weekly_avg": 31,
@@ -12,7 +12,7 @@
     "hrv_balanced_high": 33,
     "stress": null,
     "resting_hr": null,
-    "body_battery": 91,
+    "body_battery": null,
     "training_readiness": null,
     "recent_activities": [
       {
@@ -41,15 +41,6 @@
         "duration_min": 138,
         "pace_min_km": 4.29,
         "avg_hr": 94.0
-      },
-      {
-        "name": "Bernried am Starnberger See E-Bike-Fahren",
-        "type": "e_bike_fitness",
-        "date": "2026-09-19",
-        "distance_km": 29.7,
-        "duration_min": 147,
-        "pace_min_km": 4.96,
-        "avg_hr": 92.0
       }
     ],
     "last_run": {
@@ -93,8 +84,7 @@
       "2026-08-31": 67.1,
       "2026-08-22": 67.6,
       "2026-08-06": 66.3,
-      "2026-07-14": 66.3,
-      "2026-07-05": 66.2
+      "2026-07-14": 66.3
     },
     "vo2max": 39.1,
     "challenges": [],
@@ -113,7 +103,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-09-24",
-      "day_in_cycle": 10,
+      "day_in_cycle": 11,
       "phase": "fruchtbar",
       "phase_raw": 3,
       "period_length": 6,
@@ -121,12 +111,13 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 7,
-      "next_period_in_days": 18,
+      "days_until_next_phase": 6,
+      "next_period_in_days": 17,
       "next_period_date": "2026-10-21",
-      "next_follicular_in_days": 24
+      "next_follicular_in_days": 23
     },
     "_errors": [],
+    "vo2max_carried": true,
     "efficiency": {
       "runs": [
         {
@@ -518,7 +509,7 @@
       "ref_dist": 4.7,
       "fit_a": 99.15,
       "fit_b": 0.4253,
-      "generated": "2026-10-03",
+      "generated": "2026-10-04",
       "vo2max": [
         {
           "m": "2025-11",
@@ -980,11 +971,15 @@
           "gct": 313.0
         }
       ],
-      "generated": "2026-10-03"
+      "generated": "2026-10-04"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-04",
+        "v": 33
+      },
       {
         "d": "2026-10-03",
         "v": 33
@@ -1099,10 +1094,6 @@
       },
       {
         "d": "2026-09-05",
-        "v": 31
-      },
-      {
-        "d": "2026-09-04",
         "v": 31
       }
     ],
@@ -1493,6 +1484,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-10-04",
+        "v": 39.1
+      },
       {
         "d": "2026-10-03",
         "v": 39.1
