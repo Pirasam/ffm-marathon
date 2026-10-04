@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-04T19:00:20+02:00",
+  "synced_at": "2026-10-04T20:30:21+02:00",
   "sync_date": "2026-10-04",
   "token_days_left": 29.7,
   "metrics": {
@@ -13,7 +13,7 @@
     "stress": 32,
     "resting_hr": 58,
     "body_battery": 84,
-    "training_readiness": 15,
+    "training_readiness": 25,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
