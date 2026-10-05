@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-04T20:30:21+02:00",
-  "sync_date": "2026-10-04",
-  "token_days_left": 29.7,
+  "synced_at": "2026-10-05T06:58:17+02:00",
+  "sync_date": "2026-10-05",
+  "token_days_left": 29.3,
   "metrics": {
     "sleep_hours": 8.9,
     "sleep_score": 85,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 45,
-    "stress": 32,
-    "resting_hr": 58,
-    "body_battery": 84,
-    "training_readiness": 25,
+    "stress": 20,
+    "resting_hr": 62,
+    "body_battery": 18,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
@@ -122,15 +122,6 @@
         "duration_min": 71,
         "pace_min_km": 7.11,
         "avg_hr": 146.0
-      },
-      {
-        "name": "Herrsching a. Ammersee Rennradfahren",
-        "type": "road_biking",
-        "date": "2026-09-20",
-        "distance_km": 42.7,
-        "duration_min": 148,
-        "pace_min_km": 3.46,
-        "avg_hr": 114.0
       }
     ],
     "last_run": {
@@ -231,41 +222,40 @@
       "2026-07-10": 90.5,
       "2026-07-09": 90.4,
       "2026-07-08": 92.4,
-      "2026-07-07": 89.9,
-      "2026-07-06": 90.1
+      "2026-07-07": 89.9
     },
     "vo2max": 43.6,
     "challenges": [
       {
         "name": "Step into October",
-        "current": 77874,
+        "current": 81039,
         "goal": 100000,
         "unit": "Schritte",
-        "days_remaining": 10,
-        "pct": 78
+        "days_remaining": 9,
+        "pct": 81
       },
       {
         "name": "October Rundown",
         "current": 40.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 27,
+        "days_remaining": 26,
         "pct": 50
       },
       {
         "name": "October Step Month",
-        "current": 77874,
+        "current": 81039,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 27,
-        "pct": 26
+        "days_remaining": 26,
+        "pct": 27
       },
       {
         "name": "Active October",
         "current": 2,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 27,
+        "days_remaining": 26,
         "pct": 10
       },
       {
@@ -273,7 +263,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 27,
+        "days_remaining": 26,
         "pct": 0
       },
       {
@@ -281,7 +271,7 @@
         "current": 0.0,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 27,
+        "days_remaining": 26,
         "pct": 0
       },
       {
@@ -289,7 +279,7 @@
         "current": 40.0,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 88,
+        "days_remaining": 87,
         "pct": 13
       }
     ],
@@ -1370,7 +1360,7 @@
       "ref_dist": 9.4,
       "fit_a": 67.22,
       "fit_b": 0.5722,
-      "generated": "2026-10-04",
+      "generated": "2026-10-05",
       "vo2max": [
         {
           "m": "2025-09",
@@ -1564,7 +1554,7 @@
         },
         {
           "m": "2026-10",
-          "pace_s": 462,
+          "pace_s": 463,
           "ref": 139
         }
       ],
@@ -2457,11 +2447,15 @@
           "gct": 282.0
         }
       ],
-      "generated": "2026-10-04"
+      "generated": "2026-10-05"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-05",
+        "v": 37
+      },
       {
         "d": "2026-10-04",
         "v": 37
@@ -2577,13 +2571,13 @@
       {
         "d": "2026-09-06",
         "v": 43
-      },
-      {
-        "d": "2026-09-05",
-        "v": 36
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-05",
+        "v": 62
+      },
       {
         "d": "2026-10-04",
         "v": 58
@@ -2699,10 +2693,6 @@
       {
         "d": "2026-09-06",
         "v": 55
-      },
-      {
-        "d": "2026-09-05",
-        "v": 58
       }
     ],
     "weight": [
@@ -3541,6 +3531,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-05",
+        "v": 43.6
+      },
+      {
         "d": "2026-10-04",
         "v": 43.6
       },
@@ -3775,10 +3769,6 @@
       {
         "d": "2026-08-05",
         "v": 44.2
-      },
-      {
-        "d": "2026-08-04",
-        "v": 44.5
       }
     ],
     "efficiency": [
