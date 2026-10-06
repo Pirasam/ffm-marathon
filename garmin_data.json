@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-06T11:30:13+02:00",
+  "synced_at": "2026-10-06T13:00:17+02:00",
   "sync_date": "2026-10-06",
-  "token_days_left": 29.1,
+  "token_days_left": 29.0,
   "metrics": {
     "sleep_hours": 7.1,
     "sleep_score": 81,
@@ -13,7 +13,7 @@
     "stress": 17,
     "resting_hr": 57,
     "body_battery": 87,
-    "training_readiness": 73,
+    "training_readiness": 75,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
