@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-05T17:30:15+02:00",
-  "sync_date": "2026-10-05",
-  "token_days_left": 29.8,
+  "synced_at": "2026-10-06T06:58:21+02:00",
+  "sync_date": "2026-10-06",
+  "token_days_left": 29.3,
   "metrics": {
     "sleep_hours": 8.1,
     "sleep_score": 85,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 45,
-    "stress": 20,
-    "resting_hr": 60,
-    "body_battery": 70,
-    "training_readiness": 50,
+    "stress": 16,
+    "resting_hr": 57,
+    "body_battery": 82,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
@@ -113,15 +113,6 @@
         "duration_min": 76,
         "pace_min_km": 7.55,
         "avg_hr": 139.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-09-21",
-        "distance_km": 10.0,
-        "duration_min": 71,
-        "pace_min_km": 7.11,
-        "avg_hr": 146.0
       }
     ],
     "last_run": {
@@ -135,7 +126,7 @@
     },
     "weekly_running": {
       "2026-W40": 50.1,
-      "2026-W39": 45.1
+      "2026-W39": 35.1
     },
     "run_dynamics": {
       "date": "2026-10-04",
@@ -174,11 +165,6 @@
           "cadence": 162.0,
           "vertical_ratio": 12.6,
           "gct": 277.0
-        },
-        "2026-09-21": {
-          "cadence": 164.0,
-          "vertical_ratio": 12.0,
-          "gct": 267.0
         }
       }
     },
@@ -221,41 +207,40 @@
       "2026-07-11": 90.2,
       "2026-07-10": 90.5,
       "2026-07-09": 90.4,
-      "2026-07-08": 92.4,
-      "2026-07-07": 89.9
+      "2026-07-08": 92.4
     },
     "vo2max": 43.6,
     "challenges": [
       {
         "name": "Step into October",
-        "current": 87579,
+        "current": 90854,
         "goal": 100000,
         "unit": "Schritte",
-        "days_remaining": 9,
-        "pct": 88
+        "days_remaining": 8,
+        "pct": 91
       },
       {
         "name": "October Rundown",
         "current": 40.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 26,
+        "days_remaining": 25,
         "pct": 50
       },
       {
         "name": "October Step Month",
-        "current": 87579,
+        "current": 90854,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 26,
-        "pct": 29
+        "days_remaining": 25,
+        "pct": 30
       },
       {
         "name": "Active October",
         "current": 2,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 26,
+        "days_remaining": 25,
         "pct": 10
       },
       {
@@ -263,7 +248,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 26,
+        "days_remaining": 25,
         "pct": 0
       },
       {
@@ -271,7 +256,7 @@
         "current": 0.0,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 26,
+        "days_remaining": 25,
         "pct": 0
       },
       {
@@ -279,7 +264,7 @@
         "current": 40.0,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 87,
+        "days_remaining": 86,
         "pct": 13
       }
     ],
@@ -1360,7 +1345,7 @@
       "ref_dist": 9.4,
       "fit_a": 67.22,
       "fit_b": 0.5722,
-      "generated": "2026-10-05",
+      "generated": "2026-10-06",
       "vo2max": [
         {
           "m": "2025-09",
@@ -1564,11 +1549,6 @@
         "hf": 141.0
       },
       "aerobic_base_raw": [
-        {
-          "date": "2025-10-05",
-          "pace_s": 508,
-          "hf": 138.0
-        },
         {
           "date": "2025-10-13",
           "pace_s": 630,
@@ -2447,11 +2427,15 @@
           "gct": 282.0
         }
       ],
-      "generated": "2026-10-05"
+      "generated": "2026-10-06"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-06",
+        "v": 38
+      },
       {
         "d": "2026-10-05",
         "v": 38
@@ -2567,13 +2551,13 @@
       {
         "d": "2026-09-07",
         "v": 37
-      },
-      {
-        "d": "2026-09-06",
-        "v": 43
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-06",
+        "v": 57
+      },
       {
         "d": "2026-10-05",
         "v": 60
@@ -2689,10 +2673,6 @@
       {
         "d": "2026-09-07",
         "v": 58
-      },
-      {
-        "d": "2026-09-06",
-        "v": 55
       }
     ],
     "weight": [
@@ -2944,7 +2924,7 @@
       },
       {
         "w": "2026-W39",
-        "v": 45.1
+        "v": 35.1
       },
       {
         "w": "2026-W38",
@@ -3531,6 +3511,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-06",
+        "v": 43.6
+      },
+      {
         "d": "2026-10-05",
         "v": 43.6
       },
@@ -3765,10 +3749,6 @@
       {
         "d": "2026-08-06",
         "v": 43.8
-      },
-      {
-        "d": "2026-08-05",
-        "v": 44.2
       }
     ],
     "efficiency": [
