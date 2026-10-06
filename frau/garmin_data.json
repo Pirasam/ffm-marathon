@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-06T14:45:13+02:00",
+  "synced_at": "2026-10-06T17:15:14+02:00",
   "sync_date": "2026-10-06",
   "token_days_left": null,
   "metrics": {
@@ -10,9 +10,9 @@
     "hrv_weekly_avg": 31,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 97,
+    "stress": 23,
+    "resting_hr": 57,
+    "body_battery": 96,
     "training_readiness": 91,
     "recent_activities": [
       {
@@ -1175,6 +1175,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-10-06",
+        "v": 57
+      },
+      {
         "d": "2026-10-05",
         "v": 57
       },
@@ -1289,10 +1293,6 @@
       {
         "d": "2026-09-07",
         "v": 58
-      },
-      {
-        "d": "2026-09-06",
-        "v": 57
       }
     ],
     "weight": [
