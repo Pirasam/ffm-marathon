@@ -1,20 +1,29 @@
 {
-  "synced_at": "2026-10-06T07:13:18+02:00",
+  "synced_at": "2026-10-06T14:45:13+02:00",
   "sync_date": "2026-10-06",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.3,
-    "sleep_score": 90,
+    "sleep_hours": 7.2,
+    "sleep_score": 79,
     "hrv_status": "BALANCED",
-    "hrv_value": 33,
+    "hrv_value": 32,
     "hrv_weekly_avg": 31,
     "hrv_balanced_low": 28,
-    "hrv_balanced_high": 33,
+    "hrv_balanced_high": 34,
     "stress": null,
     "resting_hr": null,
     "body_battery": 97,
-    "training_readiness": null,
+    "training_readiness": 91,
     "recent_activities": [
+      {
+        "name": "Kössen Laufen",
+        "type": "running",
+        "date": "2026-10-06",
+        "distance_km": 6.0,
+        "duration_min": 58,
+        "pace_min_km": 9.68,
+        "avg_hr": 145.0
+      },
       {
         "name": "Kössen Laufen",
         "type": "running",
@@ -46,29 +55,35 @@
     "last_run": {
       "name": "Kössen Laufen",
       "type": "running",
-      "date": "2026-10-04",
+      "date": "2026-10-06",
       "distance_km": 6.0,
       "duration_min": 58,
-      "pace_min_km": 9.65,
+      "pace_min_km": 9.68,
       "avg_hr": 145.0
     },
     "weekly_running": {
+      "2026-W41": 6.0,
       "2026-W40": 6.0,
       "2026-W39": 6.1
     },
     "run_dynamics": {
-      "date": "2026-10-04",
+      "date": "2026-10-06",
       "distance_km": 6.0,
-      "cadence": 141.0,
-      "stride_length": 70.0,
+      "cadence": 152.0,
+      "stride_length": 66.0,
       "vertical_oscillation": 7.5,
-      "vertical_ratio": 10.9,
-      "ground_contact_time": 321.0,
+      "vertical_ratio": 11.3,
+      "ground_contact_time": 309.0,
       "ground_contact_balance": null,
-      "avg_power": 169.0,
+      "avg_power": 175.0,
       "performance_condition": null,
       "step_speed_loss_pct": null,
       "history": {
+        "2026-10-06": {
+          "cadence": 152.0,
+          "vertical_ratio": 11.3,
+          "gct": 309.0
+        },
         "2026-10-04": {
           "cadence": 141.0,
           "vertical_ratio": 10.9,
@@ -134,8 +149,8 @@
           "hf": 139.0,
           "maxhf": 175.0,
           "ei": 61.15,
-          "ei_corr": 61.19,
-          "dev": -3.6
+          "ei_corr": 61.14,
+          "dev": -3.5
         },
         {
           "date": "2025-10-17",
@@ -146,7 +161,7 @@
           "hf": 149.0,
           "maxhf": 172.0,
           "ei": 67.32,
-          "ei_corr": 67.68,
+          "ei_corr": 67.64,
           "dev": -7.1
         },
         {
@@ -158,7 +173,7 @@
           "hf": 154.0,
           "maxhf": 174.0,
           "ei": 73.57,
-          "ei_corr": 73.41,
+          "ei_corr": 73.36,
           "dev": -6.6
         },
         {
@@ -170,7 +185,7 @@
           "hf": 150.0,
           "maxhf": 171.0,
           "ei": 76.0,
-          "ei_corr": 75.96,
+          "ei_corr": 75.91,
           "dev": -2.3
         },
         {
@@ -182,7 +197,7 @@
           "hf": 156.0,
           "maxhf": 166.0,
           "ei": 76.99,
-          "ei_corr": 76.23,
+          "ei_corr": 76.17,
           "dev": -5.7
         },
         {
@@ -194,7 +209,7 @@
           "hf": 148.0,
           "maxhf": 167.0,
           "ei": 84.66,
-          "ei_corr": 83.65,
+          "ei_corr": 83.58,
           "dev": 4.5
         },
         {
@@ -206,7 +221,7 @@
           "hf": 154.0,
           "maxhf": 172.0,
           "ei": 73.57,
-          "ei_corr": 73.88,
+          "ei_corr": 73.84,
           "dev": -6.6
         },
         {
@@ -218,7 +233,7 @@
           "hf": 148.0,
           "maxhf": 165.0,
           "ei": 75.74,
-          "ei_corr": 75.63,
+          "ei_corr": 75.58,
           "dev": -1.1
         },
         {
@@ -230,7 +245,7 @@
           "hf": 143.0,
           "maxhf": 173.0,
           "ei": 81.4,
-          "ei_corr": 81.17,
+          "ei_corr": 81.11,
           "dev": 5.7
         },
         {
@@ -242,7 +257,7 @@
           "hf": 148.0,
           "maxhf": 162.0,
           "ei": 84.86,
-          "ei_corr": 83.84,
+          "ei_corr": 83.78,
           "dev": 4.6
         },
         {
@@ -254,7 +269,7 @@
           "hf": 153.0,
           "maxhf": 176.0,
           "ei": 79.22,
-          "ei_corr": 78.84,
+          "ei_corr": 78.78,
           "dev": -2.3
         },
         {
@@ -266,7 +281,7 @@
           "hf": 150.0,
           "maxhf": 180.0,
           "ei": 79.67,
-          "ei_corr": 79.34,
+          "ei_corr": 79.29,
           "dev": 0.0
         },
         {
@@ -278,8 +293,8 @@
           "hf": 148.0,
           "maxhf": 164.0,
           "ei": 84.46,
-          "ei_corr": 83.45,
-          "dev": 4.3
+          "ei_corr": 83.38,
+          "dev": 4.4
         },
         {
           "date": "2026-04-28",
@@ -290,8 +305,8 @@
           "hf": 146.0,
           "maxhf": 169.0,
           "ei": 80.14,
-          "ei_corr": 79.64,
-          "dev": 2.9
+          "ei_corr": 79.58,
+          "dev": 3.0
         },
         {
           "date": "2026-05-01",
@@ -302,7 +317,7 @@
           "hf": 158.0,
           "maxhf": 179.0,
           "ei": 78.35,
-          "ei_corr": 77.95,
+          "ei_corr": 77.89,
           "dev": -6.2
         },
         {
@@ -314,8 +329,8 @@
           "hf": 137.0,
           "maxhf": 161.0,
           "ei": 74.67,
-          "ei_corr": 74.24,
-          "dev": 5.7
+          "ei_corr": 74.18,
+          "dev": 5.8
         },
         {
           "date": "2026-07-01",
@@ -326,8 +341,8 @@
           "hf": 140.0,
           "maxhf": 162.0,
           "ei": 71.71,
-          "ei_corr": 71.72,
-          "dev": 1.9
+          "ei_corr": 71.67,
+          "dev": 2.0
         },
         {
           "date": "2026-07-09",
@@ -338,7 +353,7 @@
           "hf": 143.0,
           "maxhf": 159.0,
           "ei": 74.27,
-          "ei_corr": 74.12,
+          "ei_corr": 74.06,
           "dev": 1.4
         },
         {
@@ -350,8 +365,8 @@
           "hf": 136.0,
           "maxhf": 155.0,
           "ei": 73.68,
-          "ei_corr": 73.85,
-          "dev": 5.8
+          "ei_corr": 73.79,
+          "dev": 5.9
         },
         {
           "date": "2026-07-17",
@@ -362,7 +377,7 @@
           "hf": 142.0,
           "maxhf": 180.0,
           "ei": 68.8,
-          "ei_corr": 69.39,
+          "ei_corr": 69.35,
           "dev": -1.2
         },
         {
@@ -374,8 +389,8 @@
           "hf": 143.0,
           "maxhf": 158.0,
           "ei": 66.85,
-          "ei_corr": 66.93,
-          "dev": -3.1
+          "ei_corr": 66.89,
+          "dev": -3.0
         },
         {
           "date": "2026-07-30",
@@ -386,7 +401,7 @@
           "hf": 135.0,
           "maxhf": 154.0,
           "ei": 72.0,
-          "ei_corr": 72.06,
+          "ei_corr": 72.0,
           "dev": 5.6
         },
         {
@@ -398,7 +413,7 @@
           "hf": 140.0,
           "maxhf": 155.0,
           "ei": 73.14,
-          "ei_corr": 73.05,
+          "ei_corr": 72.99,
           "dev": 2.8
         },
         {
@@ -410,7 +425,7 @@
           "hf": 140.0,
           "maxhf": 157.0,
           "ei": 71.29,
-          "ei_corr": 71.14,
+          "ei_corr": 71.08,
           "dev": 1.7
         },
         {
@@ -422,7 +437,7 @@
           "hf": 137.0,
           "maxhf": 156.0,
           "ei": 70.44,
-          "ei_corr": 70.92,
+          "ei_corr": 70.87,
           "dev": 3.3
         },
         {
@@ -434,8 +449,8 @@
           "hf": 137.0,
           "maxhf": 164.0,
           "ei": 69.2,
-          "ei_corr": 69.45,
-          "dev": 2.5
+          "ei_corr": 69.4,
+          "dev": 2.6
         },
         {
           "date": "2026-08-23",
@@ -446,8 +461,8 @@
           "hf": 139.0,
           "maxhf": 159.0,
           "ei": 72.73,
-          "ei_corr": 73.16,
-          "dev": 3.2
+          "ei_corr": 73.11,
+          "dev": 3.3
         },
         {
           "date": "2026-08-30",
@@ -458,8 +473,8 @@
           "hf": 141.0,
           "maxhf": 160.0,
           "ei": 72.06,
-          "ei_corr": 72.7,
-          "dev": 1.4
+          "ei_corr": 72.65,
+          "dev": 1.5
         },
         {
           "date": "2026-09-03",
@@ -470,7 +485,7 @@
           "hf": 142.0,
           "maxhf": null,
           "ei": 71.62,
-          "ei_corr": 71.95,
+          "ei_corr": 71.9,
           "dev": 0.5
         },
         {
@@ -482,7 +497,7 @@
           "hf": 143.0,
           "maxhf": null,
           "ei": 70.77,
-          "ei_corr": 71.65,
+          "ei_corr": 71.61,
           "dev": -0.7
         },
         {
@@ -494,7 +509,7 @@
           "hf": 145.0,
           "maxhf": null,
           "ei": 71.1,
-          "ei_corr": 71.6,
+          "ei_corr": 71.56,
           "dev": -1.9
         },
         {
@@ -506,8 +521,8 @@
           "hf": 149.0,
           "maxhf": null,
           "ei": 67.11,
-          "ei_corr": 67.43,
-          "dev": -7.3
+          "ei_corr": 67.39,
+          "dev": -7.2
         },
         {
           "date": "2026-10-04",
@@ -518,14 +533,26 @@
           "hf": 145.0,
           "maxhf": null,
           "ei": 71.31,
-          "ei_corr": 71.63,
+          "ei_corr": 71.59,
+          "dev": -1.8
+        },
+        {
+          "date": "2026-10-06",
+          "dist": 6.0,
+          "dur_min": 58,
+          "pace": 9.667,
+          "speed": 103.4,
+          "hf": 145.0,
+          "maxhf": null,
+          "ei": 71.31,
+          "ei_corr": 71.59,
           "dev": -1.8
         }
       ],
-      "drift": 0.505,
-      "ref_dist": 4.7,
-      "fit_a": 99.41,
-      "fit_b": 0.4233,
+      "drift": 0.51,
+      "ref_dist": 4.9,
+      "fit_a": 99.66,
+      "fit_b": 0.4215,
       "generated": "2026-10-06",
       "vo2max": [
         {
@@ -570,7 +597,7 @@
         }
       ],
       "aerobic_base_latest": {
-        "date": "2026-10-04",
+        "date": "2026-10-06",
         "pace_s": 580,
         "hf": 145.0
       },
@@ -739,6 +766,11 @@
           "date": "2026-10-04",
           "pace_s": 580,
           "hf": 145.0
+        },
+        {
+          "date": "2026-10-06",
+          "pace_s": 580,
+          "hf": 145.0
         }
       ],
       "economy": [
@@ -810,9 +842,9 @@
         },
         {
           "m": "2026-10",
-          "vr": 10.9,
-          "gct": 321.0,
-          "cad": 141.0
+          "vr": 11.1,
+          "gct": 315.0,
+          "cad": 146.5
         }
       ],
       "economy_raw": [
@@ -1007,6 +1039,12 @@
           "cadence": 141.0,
           "vertical_ratio": 10.9,
           "gct": 321.0
+        },
+        {
+          "d": "2026-10-06",
+          "cadence": 152.0,
+          "vertical_ratio": 11.3,
+          "gct": 309.0
         }
       ],
       "generated": "2026-10-06"
@@ -1016,7 +1054,7 @@
     "hrv": [
       {
         "d": "2026-10-06",
-        "v": 33
+        "v": 32
       },
       {
         "d": "2026-10-05",
@@ -1305,6 +1343,10 @@
     ],
     "weekly_km": [
       {
+        "w": "2026-W41",
+        "v": 6.0
+      },
+      {
         "w": "2026-W40",
         "v": 6.0
       },
@@ -1338,6 +1380,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-10-06",
+        "cadence": 152.0,
+        "vertical_ratio": 11.3,
+        "gct": 309.0
+      },
       {
         "d": "2026-10-04",
         "cadence": 141.0,
@@ -1714,6 +1762,12 @@
       }
     ],
     "efficiency": [
+      {
+        "d": "2026-10-06",
+        "dist": 6.0,
+        "dur": 58,
+        "hf": 145.0
+      },
       {
         "d": "2026-10-04",
         "dist": 6.0,
