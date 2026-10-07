@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-10-06T17:15:14+02:00",
-  "sync_date": "2026-10-06",
+  "synced_at": "2026-10-07T07:13:16+02:00",
+  "sync_date": "2026-10-07",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 7.2,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 31,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 23,
-    "resting_hr": 57,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 96,
-    "training_readiness": 91,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
@@ -124,7 +124,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-09-24",
-      "day_in_cycle": 13,
+      "day_in_cycle": 14,
       "phase": "fruchtbar",
       "phase_raw": 3,
       "period_length": 6,
@@ -132,10 +132,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 4,
-      "next_period_in_days": 15,
+      "days_until_next_phase": 3,
+      "next_period_in_days": 14,
       "next_period_date": "2026-10-21",
-      "next_follicular_in_days": 21
+      "next_follicular_in_days": 20
     },
     "_errors": [],
     "efficiency": {
@@ -553,7 +553,7 @@
       "ref_dist": 4.9,
       "fit_a": 99.66,
       "fit_b": 0.4215,
-      "generated": "2026-10-06",
+      "generated": "2026-10-07",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1047,11 +1047,15 @@
           "gct": 309.0
         }
       ],
-      "generated": "2026-10-06"
+      "generated": "2026-10-07"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-07",
+        "v": 32
+      },
       {
         "d": "2026-10-06",
         "v": 32
@@ -1167,10 +1171,6 @@
       {
         "d": "2026-09-08",
         "v": 27
-      },
-      {
-        "d": "2026-09-07",
-        "v": 35
       }
     ],
     "rhr": [
@@ -1580,6 +1580,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-10-07",
+        "v": 39.3
+      },
       {
         "d": "2026-10-06",
         "v": 39.3
