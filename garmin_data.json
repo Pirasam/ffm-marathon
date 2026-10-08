@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-08T06:58:22+02:00",
+  "synced_at": "2026-10-08T08:30:20+02:00",
   "sync_date": "2026-10-08",
-  "token_days_left": 29.4,
+  "token_days_left": 29.3,
   "metrics": {
-    "sleep_hours": 8.0,
-    "sleep_score": 91,
+    "sleep_hours": 7.7,
+    "sleep_score": 86,
     "hrv_status": "BALANCED",
-    "hrv_value": 43,
-    "hrv_weekly_avg": 39,
+    "hrv_value": 38,
+    "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 45,
-    "stress": 22,
-    "resting_hr": 62,
-    "body_battery": 41,
-    "training_readiness": null,
+    "stress": 16,
+    "resting_hr": 57,
+    "body_battery": 89,
+    "training_readiness": 89,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
@@ -234,7 +234,7 @@
       },
       {
         "name": "October Step Month",
-        "current": 112756,
+        "current": 112766,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 23,
@@ -2444,7 +2444,7 @@
     "hrv": [
       {
         "d": "2026-10-08",
-        "v": 43
+        "v": 38
       },
       {
         "d": "2026-10-07",
@@ -2566,7 +2566,7 @@
     "rhr": [
       {
         "d": "2026-10-08",
-        "v": 62
+        "v": 57
       },
       {
         "d": "2026-10-07",
