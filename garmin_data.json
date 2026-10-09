@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-08T20:30:16+02:00",
-  "sync_date": "2026-10-08",
-  "token_days_left": 29.7,
+  "synced_at": "2026-10-09T06:58:13+02:00",
+  "sync_date": "2026-10-09",
+  "token_days_left": 29.3,
   "metrics": {
     "sleep_hours": 7.7,
     "sleep_score": 86,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 45,
-    "stress": 21,
-    "resting_hr": 57,
-    "body_battery": 90,
-    "training_readiness": 75,
+    "stress": 17,
+    "resting_hr": 59,
+    "body_battery": 86,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
@@ -122,15 +122,6 @@
         "duration_min": 39,
         "pace_min_km": 2.71,
         "avg_hr": 122.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-09-24",
-        "distance_km": 10.0,
-        "duration_min": 76,
-        "pace_min_km": 7.55,
-        "avg_hr": 139.0
       }
     ],
     "last_run": {
@@ -145,7 +136,7 @@
     "weekly_running": {
       "2026-W41": 14.1,
       "2026-W40": 50.1,
-      "2026-W39": 35.1
+      "2026-W39": 25.1
     },
     "run_dynamics": {
       "date": "2026-10-08",
@@ -189,11 +180,6 @@
           "cadence": 160.0,
           "vertical_ratio": 12.2,
           "gct": 281.0
-        },
-        "2026-09-24": {
-          "cadence": 162.0,
-          "vertical_ratio": 12.6,
-          "gct": 277.0
         }
       }
     },
@@ -233,8 +219,7 @@
       "2026-07-14": 90.0,
       "2026-07-13": 90.2,
       "2026-07-12": 90.8,
-      "2026-07-11": 90.2,
-      "2026-07-10": 90.5
+      "2026-07-11": 90.2
     },
     "vo2max": 44.2,
     "challenges": [
@@ -243,23 +228,23 @@
         "current": 54.1,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 23,
+        "days_remaining": 22,
         "pct": 67
       },
       {
         "name": "October Step Month",
-        "current": 124191,
+        "current": 125682,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 23,
-        "pct": 41
+        "days_remaining": 22,
+        "pct": 42
       },
       {
         "name": "Active October",
         "current": 4,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 23,
+        "days_remaining": 22,
         "pct": 20
       },
       {
@@ -267,7 +252,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 23,
+        "days_remaining": 22,
         "pct": 0
       },
       {
@@ -275,7 +260,7 @@
         "current": 0.0,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 23,
+        "days_remaining": 22,
         "pct": 0
       },
       {
@@ -283,7 +268,7 @@
         "current": 54.1,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 84,
+        "days_remaining": 83,
         "pct": 18
       }
     ],
@@ -1376,7 +1361,7 @@
       "ref_dist": 9.2,
       "fit_a": 65.78,
       "fit_b": 0.5818,
-      "generated": "2026-10-08",
+      "generated": "2026-10-09",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2468,11 +2453,15 @@
           "gct": 263.0
         }
       ],
-      "generated": "2026-10-08"
+      "generated": "2026-10-09"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-09",
+        "v": 38
+      },
       {
         "d": "2026-10-08",
         "v": 38
@@ -2588,13 +2577,13 @@
       {
         "d": "2026-09-10",
         "v": 37
-      },
-      {
-        "d": "2026-09-09",
-        "v": 33
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-09",
+        "v": 59
+      },
       {
         "d": "2026-10-08",
         "v": 57
@@ -2710,10 +2699,6 @@
       {
         "d": "2026-09-10",
         "v": 60
-      },
-      {
-        "d": "2026-09-09",
-        "v": 61
       }
     ],
     "weight": [
@@ -2969,7 +2954,7 @@
       },
       {
         "w": "2026-W39",
-        "v": 35.1
+        "v": 25.1
       },
       {
         "w": "2026-W38",
@@ -3564,6 +3549,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-09",
+        "v": 44.2
+      },
+      {
         "d": "2026-10-08",
         "v": 44.2
       },
@@ -3797,10 +3786,6 @@
       },
       {
         "d": "2026-08-09",
-        "v": 43.8
-      },
-      {
-        "d": "2026-08-08",
         "v": 43.8
       }
     ],
