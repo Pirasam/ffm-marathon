@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-10-10T19:45:15+02:00",
-  "sync_date": "2026-10-10",
+  "synced_at": "2026-10-11T07:13:14+02:00",
+  "sync_date": "2026-10-11",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.1,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 31,
     "hrv_balanced_low": 28,
     "hrv_balanced_high": 34,
-    "stress": 27,
-    "resting_hr": 60,
-    "body_battery": 90,
-    "training_readiness": 79,
+    "stress": 21,
+    "resting_hr": 62,
+    "body_battery": 73,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
@@ -147,7 +147,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-09-24",
-      "day_in_cycle": 17,
+      "day_in_cycle": 18,
       "phase": "luteal",
       "phase_raw": 4,
       "period_length": 6,
@@ -155,10 +155,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 11,
-      "next_period_in_days": 11,
+      "days_until_next_phase": 10,
+      "next_period_in_days": 10,
       "next_period_date": "2026-10-21",
-      "next_follicular_in_days": 17
+      "next_follicular_in_days": 16
     },
     "_errors": [],
     "efficiency": {
@@ -588,7 +588,7 @@
       "ref_dist": 4.9,
       "fit_a": 99.65,
       "fit_b": 0.4213,
-      "generated": "2026-10-10",
+      "generated": "2026-10-11",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1093,11 +1093,15 @@
           "gct": 314.0
         }
       ],
-      "generated": "2026-10-10"
+      "generated": "2026-10-11"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-11",
+        "v": 32
+      },
       {
         "d": "2026-10-10",
         "v": 32
@@ -1213,13 +1217,13 @@
       {
         "d": "2026-09-12",
         "v": 25
-      },
-      {
-        "d": "2026-09-11",
-        "v": 30
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-11",
+        "v": 62
+      },
       {
         "d": "2026-10-10",
         "v": 60
@@ -1335,10 +1339,6 @@
       {
         "d": "2026-09-12",
         "v": 62
-      },
-      {
-        "d": "2026-09-11",
-        "v": 58
       }
     ],
     "weight": [
@@ -1632,6 +1632,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-10-11",
+        "v": 39.1
+      },
       {
         "d": "2026-10-10",
         "v": 39.1
