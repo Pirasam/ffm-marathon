@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-11T07:13:14+02:00",
+  "synced_at": "2026-10-11T08:45:13+02:00",
   "sync_date": "2026-10-11",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.1,
-    "sleep_score": 85,
+    "sleep_hours": 9.5,
+    "sleep_score": 78,
     "hrv_status": "BALANCED",
-    "hrv_value": 32,
+    "hrv_value": 28,
     "hrv_weekly_avg": 31,
-    "hrv_balanced_low": 28,
+    "hrv_balanced_low": 29,
     "hrv_balanced_high": 34,
     "stress": 21,
-    "resting_hr": 62,
-    "body_battery": 73,
-    "training_readiness": null,
+    "resting_hr": 61,
+    "body_battery": 77,
+    "training_readiness": 87,
     "recent_activities": [
       {
         "name": "Kössen Laufen",
@@ -1100,7 +1100,7 @@
     "hrv": [
       {
         "d": "2026-10-11",
-        "v": 32
+        "v": 28
       },
       {
         "d": "2026-10-10",
@@ -1222,7 +1222,7 @@
     "rhr": [
       {
         "d": "2026-10-11",
-        "v": 62
+        "v": 61
       },
       {
         "d": "2026-10-10",
