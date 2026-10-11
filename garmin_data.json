@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-10T19:00:19+02:00",
-  "sync_date": "2026-10-10",
-  "token_days_left": 28.9,
+  "synced_at": "2026-10-11T06:58:16+02:00",
+  "sync_date": "2026-10-11",
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 6.4,
     "sleep_score": 73,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 44,
-    "stress": 35,
-    "resting_hr": 60,
-    "body_battery": 71,
-    "training_readiness": 51,
+    "stress": 32,
+    "resting_hr": 63,
+    "body_battery": 15,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Kuftstein 21km",
@@ -213,8 +213,7 @@
       "2026-07-18": 89.2,
       "2026-07-15": 90.7,
       "2026-07-14": 90.0,
-      "2026-07-13": 90.2,
-      "2026-07-12": 90.8
+      "2026-07-13": 90.2
     },
     "vo2max": 44.4,
     "challenges": [
@@ -223,23 +222,23 @@
         "current": 75.2,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 93
       },
       {
         "name": "October Step Month",
-        "current": 162431,
+        "current": 164019,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 21,
-        "pct": 54
+        "days_remaining": 20,
+        "pct": 55
       },
       {
         "name": "Active October",
         "current": 5,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 25
       },
       {
@@ -247,7 +246,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 0
       },
       {
@@ -255,7 +254,7 @@
         "current": 0.0,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 0
       },
       {
@@ -263,7 +262,7 @@
         "current": 75.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 82,
+        "days_remaining": 81,
         "pct": 25
       }
     ],
@@ -1368,7 +1367,7 @@
       "ref_dist": 9.4,
       "fit_a": 65.83,
       "fit_b": 0.5812,
-      "generated": "2026-10-10",
+      "generated": "2026-10-11",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2470,11 +2469,15 @@
           "gct": 269.0
         }
       ],
-      "generated": "2026-10-10"
+      "generated": "2026-10-11"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-11",
+        "v": 33
+      },
       {
         "d": "2026-10-10",
         "v": 33
@@ -2590,13 +2593,13 @@
       {
         "d": "2026-09-12",
         "v": 39
-      },
-      {
-        "d": "2026-09-11",
-        "v": 40
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-11",
+        "v": 63
+      },
       {
         "d": "2026-10-10",
         "v": 60
@@ -2712,10 +2715,6 @@
       {
         "d": "2026-09-12",
         "v": 60
-      },
-      {
-        "d": "2026-09-11",
-        "v": 57
       }
     ],
     "weight": [
@@ -3572,6 +3571,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-11",
+        "v": 44.4
+      },
+      {
         "d": "2026-10-10",
         "v": 44.4
       },
@@ -3805,10 +3808,6 @@
       },
       {
         "d": "2026-08-11",
-        "v": 43.8
-      },
-      {
-        "d": "2026-08-10",
         "v": 43.8
       }
     ],
