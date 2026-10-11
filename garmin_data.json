@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-11T06:58:16+02:00",
+  "synced_at": "2026-10-11T08:30:17+02:00",
   "sync_date": "2026-10-11",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
-    "sleep_hours": 6.4,
-    "sleep_score": 73,
+    "sleep_hours": 8.5,
+    "sleep_score": 83,
     "hrv_status": "BALANCED",
-    "hrv_value": 33,
-    "hrv_weekly_avg": 38,
+    "hrv_value": 31,
+    "hrv_weekly_avg": 37,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 44,
-    "stress": 32,
+    "stress": 25,
     "resting_hr": 63,
-    "body_battery": 15,
-    "training_readiness": null,
+    "body_battery": 49,
+    "training_readiness": 68,
     "recent_activities": [
       {
         "name": "Kuftstein 21km",
@@ -227,7 +227,7 @@
       },
       {
         "name": "October Step Month",
-        "current": 164019,
+        "current": 164043,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 20,
@@ -2476,7 +2476,7 @@
     "hrv": [
       {
         "d": "2026-10-11",
-        "v": 33
+        "v": 31
       },
       {
         "d": "2026-10-10",
