@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-12T14:30:19+02:00",
+  "synced_at": "2026-10-12T20:30:24+02:00",
   "sync_date": "2026-10-12",
-  "token_days_left": 29.7,
+  "token_days_left": 29.5,
   "metrics": {
     "sleep_hours": 7.8,
     "sleep_score": 84,
@@ -212,11 +212,11 @@
       },
       {
         "name": "October Step Month",
-        "current": 174964,
+        "current": 179149,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 19,
-        "pct": 58
+        "pct": 60
       },
       {
         "name": "Active October",
