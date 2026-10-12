@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-12T08:30:20+02:00",
+  "synced_at": "2026-10-12T11:30:18+02:00",
   "sync_date": "2026-10-12",
-  "token_days_left": 30.0,
+  "token_days_left": 29.9,
   "metrics": {
     "sleep_hours": 7.8,
     "sleep_score": 84,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 44,
-    "stress": 18,
+    "stress": 19,
     "resting_hr": 59,
     "body_battery": 83,
     "training_readiness": 81,
@@ -212,7 +212,7 @@
       },
       {
         "name": "October Step Month",
-        "current": 173010,
+        "current": 174334,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 19,
