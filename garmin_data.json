@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-11T19:00:22+02:00",
-  "sync_date": "2026-10-11",
-  "token_days_left": 29.5,
+  "synced_at": "2026-10-12T06:58:18+02:00",
+  "sync_date": "2026-10-12",
+  "token_days_left": 29.0,
   "metrics": {
-    "sleep_hours": 8.5,
-    "sleep_score": 83,
+    "sleep_hours": 7.8,
+    "sleep_score": 84,
     "hrv_status": "BALANCED",
-    "hrv_value": 31,
+    "hrv_value": 39,
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 44,
-    "stress": 32,
-    "resting_hr": 63,
-    "body_battery": 49,
-    "training_readiness": 75,
+    "stress": 17,
+    "resting_hr": 59,
+    "body_battery": 83,
+    "training_readiness": 81,
     "recent_activities": [
       {
         "name": "Kuftstein 21km",
@@ -104,15 +104,6 @@
         "duration_min": 41,
         "pace_min_km": 2.85,
         "avg_hr": 121.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-09-27",
-        "distance_km": 25.1,
-        "duration_min": 201,
-        "pace_min_km": 8.0,
-        "avg_hr": 143.0
       }
     ],
     "last_run": {
@@ -126,8 +117,7 @@
     },
     "weekly_running": {
       "2026-W41": 35.2,
-      "2026-W40": 50.1,
-      "2026-W39": 25.1
+      "2026-W40": 50.1
     },
     "run_dynamics": {
       "date": "2026-10-10",
@@ -171,11 +161,6 @@
           "cadence": 164.0,
           "vertical_ratio": 12.1,
           "gct": 277.0
-        },
-        "2026-09-27": {
-          "cadence": 160.0,
-          "vertical_ratio": 12.2,
-          "gct": 281.0
         }
       }
     },
@@ -212,8 +197,7 @@
       "2026-07-19": 89.9,
       "2026-07-18": 89.2,
       "2026-07-15": 90.7,
-      "2026-07-14": 90.0,
-      "2026-07-13": 90.2
+      "2026-07-14": 90.0
     },
     "vo2max": 44.4,
     "challenges": [
@@ -222,23 +206,23 @@
         "current": 75.2,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 20,
+        "days_remaining": 19,
         "pct": 93
       },
       {
         "name": "October Step Month",
-        "current": 168418,
+        "current": 172995,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 20,
-        "pct": 56
+        "days_remaining": 19,
+        "pct": 58
       },
       {
         "name": "Active October",
         "current": 5,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 20,
+        "days_remaining": 19,
         "pct": 25
       },
       {
@@ -246,7 +230,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 20,
+        "days_remaining": 19,
         "pct": 0
       },
       {
@@ -254,7 +238,7 @@
         "current": 0.0,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 20,
+        "days_remaining": 19,
         "pct": 0
       },
       {
@@ -262,7 +246,7 @@
         "current": 75.2,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 81,
+        "days_remaining": 80,
         "pct": 25
       }
     ],
@@ -271,7 +255,7 @@
       "method": "LACTATE_THRESHOLD",
       "lthr": 172,
       "max_hr": 197,
-      "resting_hr": 58,
+      "resting_hr": 59,
       "z1_floor": 98,
       "z2_floor": 115,
       "z3_floor": 138,
@@ -1367,7 +1351,7 @@
       "ref_dist": 9.4,
       "fit_a": 65.83,
       "fit_b": 0.5812,
-      "generated": "2026-10-11",
+      "generated": "2026-10-12",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2469,11 +2453,15 @@
           "gct": 269.0
         }
       ],
-      "generated": "2026-10-11"
+      "generated": "2026-10-12"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-12",
+        "v": 39
+      },
       {
         "d": "2026-10-11",
         "v": 31
@@ -2589,13 +2577,13 @@
       {
         "d": "2026-09-13",
         "v": 35
-      },
-      {
-        "d": "2026-09-12",
-        "v": 39
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-12",
+        "v": 59
+      },
       {
         "d": "2026-10-11",
         "v": 63
@@ -2711,10 +2699,6 @@
       {
         "d": "2026-09-13",
         "v": 58
-      },
-      {
-        "d": "2026-09-12",
-        "v": 60
       }
     ],
     "weight": [
@@ -3571,6 +3555,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-12",
+        "v": 44.4
+      },
+      {
         "d": "2026-10-11",
         "v": 44.4
       },
@@ -3804,10 +3792,6 @@
       },
       {
         "d": "2026-08-12",
-        "v": 43.8
-      },
-      {
-        "d": "2026-08-11",
         "v": 43.8
       }
     ],
