@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-14T17:30:21+02:00",
+  "synced_at": "2026-10-14T19:00:23+02:00",
   "sync_date": "2026-10-14",
-  "token_days_left": 29.6,
+  "token_days_left": 29.5,
   "metrics": {
     "sleep_hours": 8.4,
     "sleep_score": 94,
@@ -187,7 +187,7 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 199744,
+        "current": 199968,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 17,
