@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-15T13:00:22+02:00",
+  "synced_at": "2026-10-15T14:30:24+02:00",
   "sync_date": "2026-10-15",
   "token_days_left": 29.7,
   "metrics": {
@@ -13,7 +13,7 @@
     "stress": 23,
     "resting_hr": 58,
     "body_battery": 85,
-    "training_readiness": 91,
+    "training_readiness": 95,
     "recent_activities": [
       {
         "name": "Frankfurt am Main - 6km / 3x1km Zieltempo",
