@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-16T07:13:19+02:00",
-  "sync_date": "2026-10-16",
+  "synced_at": "2026-10-17T17:15:18+02:00",
+  "sync_date": "2026-10-17",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.9,
-    "sleep_score": 80,
-    "hrv_status": "BALANCED",
+    "sleep_hours": 8.2,
+    "sleep_score": 83,
+    "hrv_status": "UNBALANCED",
     "hrv_value": 29,
-    "hrv_weekly_avg": 29,
+    "hrv_weekly_avg": 28,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 34,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 83,
-    "training_readiness": null,
+    "stress": 24,
+    "resting_hr": 57,
+    "body_battery": 88,
+    "training_readiness": 84,
     "recent_activities": [
       {
         "name": "Frankfurt am Main - Lauftraining - Jeff",
@@ -138,18 +138,18 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 177549,
+        "current": 196834,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 15,
-        "pct": 59
+        "days_remaining": 14,
+        "pct": 66
       },
       {
         "name": "October Rundown",
         "current": 30.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 15,
+        "days_remaining": 14,
         "pct": 37
       },
       {
@@ -157,7 +157,7 @@
         "current": 6,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 15,
+        "days_remaining": 14,
         "pct": 30
       },
       {
@@ -165,7 +165,7 @@
         "current": 1.9,
         "goal": 15.0,
         "unit": "h",
-        "days_remaining": 15,
+        "days_remaining": 14,
         "pct": 13
       },
       {
@@ -173,7 +173,7 @@
         "current": 30.0,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 76,
+        "days_remaining": 75,
         "pct": 10
       },
       {
@@ -181,7 +181,7 @@
         "current": 5.5,
         "goal": 148.1,
         "unit": "km",
-        "days_remaining": 76,
+        "days_remaining": 75,
         "pct": 4
       }
     ],
@@ -200,7 +200,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-09-24",
-      "day_in_cycle": 23,
+      "day_in_cycle": 24,
       "phase": "luteal",
       "phase_raw": 4,
       "period_length": 6,
@@ -208,10 +208,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 5,
-      "next_period_in_days": 5,
+      "days_until_next_phase": 4,
+      "next_period_in_days": 4,
       "next_period_date": "2026-10-21",
-      "next_follicular_in_days": 11
+      "next_follicular_in_days": 10
     },
     "_errors": [],
     "efficiency": {
@@ -653,7 +653,7 @@
       "ref_dist": 4.9,
       "fit_a": 97.03,
       "fit_b": 0.4459,
-      "generated": "2026-10-16",
+      "generated": "2026-10-17",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1175,11 +1175,15 @@
           "gct": 307.0
         }
       ],
-      "generated": "2026-10-16"
+      "generated": "2026-10-17"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-17",
+        "v": 29
+      },
       {
         "d": "2026-10-16",
         "v": 29
@@ -1295,13 +1299,17 @@
       {
         "d": "2026-09-18",
         "v": 29
-      },
-      {
-        "d": "2026-09-17",
-        "v": 30
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-17",
+        "v": 57
+      },
+      {
+        "d": "2026-10-16",
+        "v": 60
+      },
       {
         "d": "2026-10-15",
         "v": 59
@@ -1413,14 +1421,6 @@
       {
         "d": "2026-09-18",
         "v": 60
-      },
-      {
-        "d": "2026-09-17",
-        "v": 59
-      },
-      {
-        "d": "2026-09-16",
-        "v": 61
       }
     ],
     "weight": [
@@ -1730,6 +1730,10 @@
       }
     ],
     "vo2max": [
+      {
+        "d": "2026-10-17",
+        "v": 38.9
+      },
       {
         "d": "2026-10-16",
         "v": 38.9
