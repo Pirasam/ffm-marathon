@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-18T08:30:20+02:00",
+  "synced_at": "2026-10-18T10:00:24+02:00",
   "sync_date": "2026-10-18",
   "token_days_left": 29.9,
   "metrics": {
@@ -168,7 +168,7 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 227775,
+        "current": 228124,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 13,
