@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-19T07:13:15+02:00",
+  "synced_at": "2026-10-19T10:15:15+02:00",
   "sync_date": "2026-10-19",
   "token_days_left": null,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 30,
     "hrv_balanced_high": 33,
-    "stress": 17,
+    "stress": 20,
     "resting_hr": 59,
     "body_battery": 81,
     "training_readiness": 83,
@@ -137,7 +137,7 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 205710,
+        "current": 207895,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 12,
