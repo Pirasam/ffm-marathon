@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-20T08:30:16+02:00",
+  "synced_at": "2026-10-20T20:30:16+02:00",
   "sync_date": "2026-10-20",
-  "token_days_left": 29.9,
+  "token_days_left": 29.4,
   "metrics": {
     "sleep_hours": 8.2,
     "sleep_score": 82,
@@ -10,11 +10,29 @@
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 44,
-    "stress": 20,
+    "stress": 29,
     "resting_hr": 61,
     "body_battery": 71,
-    "training_readiness": 69,
+    "training_readiness": 72,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-10-20",
+        "distance_km": 9.6,
+        "duration_min": 32,
+        "pace_min_km": 3.32,
+        "avg_hr": 115.0
+      },
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-10-20",
+        "distance_km": 9.3,
+        "duration_min": 28,
+        "pace_min_km": 2.97,
+        "avg_hr": 127.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -201,27 +219,27 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 264118,
+        "current": 268811,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 11,
-        "pct": 88
+        "pct": 90
       },
       {
         "name": "Active October",
-        "current": 11,
+        "current": 13,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 11,
-        "pct": 55
+        "pct": 65
       },
       {
         "name": "October Time to Ride",
-        "current": 1.5,
+        "current": 2.4,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 11,
-        "pct": 7
+        "pct": 12
       },
       {
         "name": "October Gains",
