@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-23T12:15:23+02:00",
+  "synced_at": "2026-10-23T19:45:22+02:00",
   "sync_date": "2026-10-23",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.7,
-    "sleep_score": 87,
+    "sleep_hours": 8.0,
+    "sleep_score": 82,
     "hrv_status": "BALANCED",
     "hrv_value": 31,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 94,
-    "training_readiness": null,
+    "stress": 25,
+    "resting_hr": 57,
+    "body_battery": 95,
+    "training_readiness": 99,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -124,11 +124,11 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 230758,
+        "current": 238341,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 8,
-        "pct": 77
+        "pct": 79
       },
       {
         "name": "October Rundown",
@@ -1296,6 +1296,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-10-23",
+        "v": 57
+      },
+      {
         "d": "2026-10-22",
         "v": 58
       },
@@ -1410,10 +1414,6 @@
       {
         "d": "2026-09-24",
         "v": 60
-      },
-      {
-        "d": "2026-09-23",
-        "v": 57
       }
     ],
     "weight": [
