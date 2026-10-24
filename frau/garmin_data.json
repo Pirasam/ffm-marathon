@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-24T10:15:20+02:00",
+  "synced_at": "2026-10-24T14:45:14+02:00",
   "sync_date": "2026-10-24",
   "token_days_left": null,
   "metrics": {
@@ -10,8 +10,8 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": null,
-    "resting_hr": null,
+    "stress": 19,
+    "resting_hr": 56,
     "body_battery": 95,
     "training_readiness": 100,
     "recent_activities": [
@@ -115,11 +115,11 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 239323,
+        "current": 242775,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 7,
-        "pct": 80
+        "pct": 81
       },
       {
         "name": "October Rundown",
@@ -1287,6 +1287,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-10-24",
+        "v": 56
+      },
+      {
         "d": "2026-10-23",
         "v": 57
       },
@@ -1401,10 +1405,6 @@
       {
         "d": "2026-09-25",
         "v": 58
-      },
-      {
-        "d": "2026-09-24",
-        "v": 60
       }
     ],
     "weight": [
