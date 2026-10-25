@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-10-25T14:45:15+01:00",
+  "synced_at": "2026-10-25T19:45:14+01:00",
   "sync_date": "2026-10-25",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.3,
-    "sleep_score": 86,
+    "sleep_hours": 9.1,
+    "sleep_score": 88,
     "hrv_status": "BALANCED",
-    "hrv_value": 31,
+    "hrv_value": 27,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 95,
+    "stress": 26,
+    "resting_hr": 58,
+    "body_battery": 88,
     "training_readiness": 100,
     "recent_activities": [
       {
@@ -115,11 +115,11 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 253472,
+        "current": 266841,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 6,
-        "pct": 84
+        "pct": 89
       },
       {
         "name": "October Rundown",
@@ -1188,7 +1188,7 @@
     "hrv": [
       {
         "d": "2026-10-25",
-        "v": 31
+        "v": 27
       },
       {
         "d": "2026-10-24",
@@ -1309,6 +1309,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-10-25",
+        "v": 58
+      },
+      {
         "d": "2026-10-24",
         "v": 56
       },
@@ -1423,10 +1427,6 @@
       {
         "d": "2026-09-26",
         "v": 57
-      },
-      {
-        "d": "2026-09-25",
-        "v": 58
       }
     ],
     "weight": [
