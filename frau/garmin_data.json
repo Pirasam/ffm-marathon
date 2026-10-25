@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-10-24T17:15:14+02:00",
-  "sync_date": "2026-10-24",
+  "synced_at": "2026-10-25T07:13:32+01:00",
+  "sync_date": "2026-10-25",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.3,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": 19,
-    "resting_hr": 56,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 95,
-    "training_readiness": 87,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -50,15 +50,6 @@
         "duration_min": 67,
         "pace_min_km": 9.75,
         "avg_hr": 144.0
-      },
-      {
-        "name": "Kössen Laufen",
-        "type": "running",
-        "date": "2026-10-10",
-        "distance_km": 7.0,
-        "duration_min": 65,
-        "pace_min_km": 9.26,
-        "avg_hr": 144.0
       }
     ],
     "last_run": {
@@ -72,8 +63,7 @@
     },
     "weekly_running": {
       "2026-W43": 6.0,
-      "2026-W42": 19.9,
-      "2026-W41": 7.0
+      "2026-W42": 19.9
     },
     "run_dynamics": {
       "date": "2026-10-24",
@@ -107,11 +97,6 @@
           "cadence": 155.0,
           "vertical_ratio": 11.5,
           "gct": 310.0
-        },
-        "2026-10-10": {
-          "cadence": 142.0,
-          "vertical_ratio": 10.9,
-          "gct": 314.0
         }
       }
     },
@@ -130,10 +115,10 @@
     "challenges": [
       {
         "name": "October Step Month",
-        "current": 253156,
+        "current": 253472,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 84
       },
       {
@@ -141,7 +126,7 @@
         "current": 45.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 56
       },
       {
@@ -149,7 +134,7 @@
         "current": 8,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 40
       },
       {
@@ -157,7 +142,7 @@
         "current": 1.9,
         "goal": 15.0,
         "unit": "h",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 13
       },
       {
@@ -165,7 +150,7 @@
         "current": 45.0,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 68,
+        "days_remaining": 67,
         "pct": 15
       },
       {
@@ -173,7 +158,7 @@
         "current": 5.5,
         "goal": 148.1,
         "unit": "km",
-        "days_remaining": 68,
+        "days_remaining": 67,
         "pct": 4
       }
     ],
@@ -192,7 +177,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-10-21",
-      "day_in_cycle": 4,
+      "day_in_cycle": 5,
       "phase": "menstruation",
       "phase_raw": 1,
       "period_length": 6,
@@ -200,10 +185,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 3,
-      "next_period_in_days": 24,
+      "days_until_next_phase": 2,
+      "next_period_in_days": 23,
       "next_period_date": "2026-11-17",
-      "next_follicular_in_days": 30
+      "next_follicular_in_days": 29
     },
     "_errors": [],
     "efficiency": {
@@ -657,7 +642,7 @@
       "ref_dist": 4.9,
       "fit_a": 94.4,
       "fit_b": 0.4669,
-      "generated": "2026-10-24",
+      "generated": "2026-10-25",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1196,11 +1181,15 @@
           "gct": 315.0
         }
       ],
-      "generated": "2026-10-24"
+      "generated": "2026-10-25"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-25",
+        "v": 31
+      },
       {
         "d": "2026-10-24",
         "v": 31
@@ -1316,10 +1305,6 @@
       {
         "d": "2026-09-26",
         "v": 29
-      },
-      {
-        "d": "2026-09-25",
-        "v": 30
       }
     ],
     "rhr": [
@@ -1772,6 +1757,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-25",
+        "v": 39.2
+      },
+      {
         "d": "2026-10-24",
         "v": 39.2
       },
@@ -2005,10 +1994,6 @@
       },
       {
         "d": "2026-08-23",
-        "v": 39.3
-      },
-      {
-        "d": "2026-08-22",
         "v": 39.3
       }
     ],
