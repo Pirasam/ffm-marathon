@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-24T19:00:18+02:00",
-  "sync_date": "2026-10-24",
-  "token_days_left": 29.5,
+  "synced_at": "2026-10-25T06:58:13+01:00",
+  "sync_date": "2026-10-25",
+  "token_days_left": 29.0,
   "metrics": {
-    "sleep_hours": 6.5,
-    "sleep_score": 79,
+    "sleep_hours": 8.3,
+    "sleep_score": 89,
     "hrv_status": "BALANCED",
-    "hrv_value": 36,
-    "hrv_weekly_avg": 36,
+    "hrv_value": 41,
+    "hrv_weekly_avg": 37,
     "hrv_balanced_low": 36,
-    "hrv_balanced_high": 44,
-    "stress": 25,
-    "resting_hr": 60,
-    "body_battery": 80,
-    "training_readiness": 74,
+    "hrv_balanced_high": 43,
+    "stress": 14,
+    "resting_hr": 58,
+    "body_battery": 96,
+    "training_readiness": 83,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -113,15 +113,6 @@
         "duration_min": 67,
         "pace_min_km": 9.71,
         "avg_hr": 118.0
-      },
-      {
-        "name": "Kuftstein 21km",
-        "type": "running",
-        "date": "2026-10-10",
-        "distance_km": 21.1,
-        "duration_min": 155,
-        "pace_min_km": 7.35,
-        "avg_hr": 143.0
       }
     ],
     "last_run": {
@@ -135,8 +126,7 @@
     },
     "weekly_running": {
       "2026-W43": 11.1,
-      "2026-W42": 27.7,
-      "2026-W41": 21.1
+      "2026-W42": 27.7
     },
     "run_dynamics": {
       "date": "2026-10-22",
@@ -175,11 +165,6 @@
           "cadence": 156.0,
           "vertical_ratio": 13.9,
           "gct": 304.0
-        },
-        "2026-10-10": {
-          "cadence": 164.0,
-          "vertical_ratio": 11.9,
-          "gct": 269.0
         }
       }
     },
@@ -214,8 +199,7 @@
       "2026-08-05": 89.9,
       "2026-08-04": 90.4,
       "2026-08-03": 90.9,
-      "2026-07-28": 89.5,
-      "2026-07-26": 90.3
+      "2026-07-28": 89.5
     },
     "vo2max": 44.4,
     "challenges": [
@@ -224,7 +208,7 @@
         "current": 16,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 80
       },
       {
@@ -232,7 +216,7 @@
         "current": 3.5,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 17
       },
       {
@@ -240,7 +224,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 0
       },
       {
@@ -248,7 +232,7 @@
         "current": 114.0,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 68,
+        "days_remaining": 67,
         "pct": 38
       }
     ],
@@ -1377,7 +1361,7 @@
       "ref_dist": 9.2,
       "fit_a": 65.16,
       "fit_b": 0.5844,
-      "generated": "2026-10-24",
+      "generated": "2026-10-25",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2483,11 +2467,15 @@
           "gct": 280.0
         }
       ],
-      "generated": "2026-10-24"
+      "generated": "2026-10-25"
     }
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-25",
+        "v": 41
+      },
       {
         "d": "2026-10-24",
         "v": 36
@@ -2603,13 +2591,13 @@
       {
         "d": "2026-09-26",
         "v": 43
-      },
-      {
-        "d": "2026-09-25",
-        "v": 45
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-25",
+        "v": 58
+      },
       {
         "d": "2026-10-24",
         "v": 60
@@ -2725,10 +2713,6 @@
       {
         "d": "2026-09-26",
         "v": 56
-      },
-      {
-        "d": "2026-09-25",
-        "v": 55
       }
     ],
     "weight": [
@@ -3615,6 +3599,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-25",
+        "v": 44.4
+      },
+      {
         "d": "2026-10-24",
         "v": 44.4
       },
@@ -3848,10 +3836,6 @@
       },
       {
         "d": "2026-08-25",
-        "v": 43.3
-      },
-      {
-        "d": "2026-08-24",
         "v": 43.3
       }
     ],
