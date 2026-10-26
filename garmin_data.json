@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-26T14:30:23+01:00",
+  "synced_at": "2026-10-26T20:30:23+01:00",
   "sync_date": "2026-10-26",
-  "token_days_left": 29.9,
+  "token_days_left": 29.6,
   "metrics": {
     "sleep_hours": 6.0,
     "sleep_score": 56,
@@ -10,8 +10,8 @@
     "hrv_weekly_avg": 34,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 44,
-    "stress": 31,
-    "resting_hr": 63,
+    "stress": 28,
+    "resting_hr": 65,
     "body_battery": 24,
     "training_readiness": 1,
     "recent_activities": [
@@ -2790,7 +2790,7 @@
     "rhr": [
       {
         "d": "2026-10-26",
-        "v": 63
+        "v": 65
       },
       {
         "d": "2026-10-25",
