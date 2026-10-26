@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-26T10:09:43+01:00",
+  "synced_at": "2026-10-26T11:30:21+01:00",
   "sync_date": "2026-10-26",
-  "token_days_left": 28.9,
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 6.0,
     "sleep_score": 56,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 34,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 44,
-    "stress": 33,
+    "stress": 31,
     "resting_hr": 63,
     "body_battery": 24,
     "training_readiness": 1,
