@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-26T06:58:20+01:00",
+  "synced_at": "2026-10-26T08:30:21+01:00",
   "sync_date": "2026-10-26",
-  "token_days_left": 29.1,
+  "token_days_left": 29.0,
   "metrics": {
-    "sleep_hours": 8.3,
-    "sleep_score": 89,
-    "hrv_status": "BALANCED",
-    "hrv_value": 41,
-    "hrv_weekly_avg": 37,
+    "sleep_hours": 6.0,
+    "sleep_score": 56,
+    "hrv_status": "UNBALANCED",
+    "hrv_value": 24,
+    "hrv_weekly_avg": 34,
     "hrv_balanced_low": 36,
-    "hrv_balanced_high": 43,
-    "stress": 54,
+    "hrv_balanced_high": 44,
+    "stress": 33,
     "resting_hr": 63,
-    "body_battery": 5,
-    "training_readiness": null,
+    "body_battery": 24,
+    "training_readiness": 1,
     "recent_activities": [
       {
         "name": "Frankfurt am Main - Frankfurt Marathon",
@@ -2510,7 +2510,7 @@
     "hrv": [
       {
         "d": "2026-10-26",
-        "v": 41
+        "v": 24
       },
       {
         "d": "2026-10-25",
