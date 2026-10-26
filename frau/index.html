@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Carinas erster Marathon</title>
+<title>Carinas Halbmarathon</title>
 <style>
 :root{--bg:#f7f3f5;--card:#ffffff;--soft:#f1ecf1;--txt:#2c2733;--mut:#8a8398;
 --line:#ece4ee;--accent:#d64d6e;--shadow:0 1px 3px rgba(60,40,70,.06),0 6px 20px rgba(60,40,70,.05);}
@@ -75,19 +75,49 @@ border-radius:50%;background:#d8cfdd}
 .reframe h2{color:#7a4da8}
 .reframe p{color:#4a4356;margin:0}
 footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
+.today{border-left:4px solid var(--tc);background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 9%,#fff),#fff)}
+.today-head{display:flex;justify-content:space-between;align-items:baseline}
+.today-tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tc);font-weight:800}
+.today-date{color:var(--mut);font-size:.8rem}
+.today-title{margin:4px 0 6px;font-size:1.3rem}
+.today-detail{margin:0 0 10px;color:#4a4356}
+ul.today-why{margin:0;padding-left:18px;color:var(--mut);font-size:.84rem}
+ul.today-why li{margin:2px 0}
+.today-stale{margin:10px 0 0;font-size:.8rem;color:#b5452f;font-weight:600}
+.p-sub{color:var(--mut);font-size:.85rem;margin:-6px 0 4px}
+.pweeks{display:flex;gap:6px;align-items:flex-end;height:64px;margin-top:16px}
+.pw{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.pw-bar{width:100%;max-width:34px;border-radius:4px 4px 0 0;min-height:3px}
+.pw span{font-size:.7rem;color:var(--mut);margin-top:3px}
+.pw-cap{color:var(--mut);font-size:.72rem;margin-top:4px}
+.pcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:16px}
+.pcols h3{font-size:.95rem;margin:0 0 6px}
+.pcols ul{margin:0;padding-left:18px;font-size:.9rem;color:#4a4356}
+.pcols li{margin:6px 0}
+ul.pgood li::marker{color:#1f9d6b} ul.ptodo li::marker{color:#d9971a}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>Carinas erster Marathon 🏁</h1>
+    <h1>Carinas Halbmarathon 🏞️</h1>
     <div class="count">
-      <div><b>52</b> <span>Wochen</span></div>
-      <div><b>370</b> <span>Tage</span></div>
+      <div><b>46</b> <span>Wochen</span></div>
+      <div><b>328</b> <span>Tage</span></div>
     </div>
-    <div class="sub">Ziel: Frankfurt Marathon · 31.10.2027</div>
+    <div class="sub">Ziel: Tegernsee-Halbmarathon · 19.09.2027 · 21,1 km</div>
   </header>
+
+  
+      <section class="today" style="--tc:#1f9d6b" data-day="2026-10-26">
+        <div class="today-head"><span class="today-tag">Heute · Lockerer Lauf</span>
+          <span class="today-date">26.10.</span></div>
+        <h2 class="today-title">Lockerer Lauf · 5 km</h2>
+        <p class="today-detail">Ziel-Puls 129–150 bpm · ca. 45 Min. Sprechtempo: ganze Sätze müssen möglich sein.</p>
+        <ul class="today-why"><li>Menstruation (Zyklustag 6)</li><li>Diese Woche: 0 von 2 Läufen</li><li>Letzter Lauf vor 2 Tagen (6 km)</li><li>Ruhepuls 59 – normal für dich</li><li>HRV 31 ms – im grünen Bereich</li></ul>
+        <p class="today-stale" hidden>Diese Empfehlung ist vom 26.10. – die neue kommt mit dem nächsten Sync.</p>
+      </section>
 
   
       <section class="compass" style="--phase:#d64d6e">
@@ -136,6 +166,19 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
           <th>Pace</th><th>Ø Puls</th></tr></thead><tbody><tr><td>2026-10-24</td><td>6.0 km</td><td>9:02/km</td><td>148.0 bpm</td></tr><tr><td>2026-10-18</td><td>9.0 km</td><td>9:20/km</td><td>137.0 bpm</td></tr><tr><td>2026-10-15</td><td>4.1 km</td><td>8:59/km</td><td>149.0 bpm</td></tr><tr><td>2026-10-13</td><td>6.8 km</td><td>9:45/km</td><td>144.0 bpm</td></tr></tbody></table>
   </section>
 
+  
+  <section class="progress">
+    <h2>Dein Fortschritt</h2>
+    <p class="p-sub">Phase „Basis &amp; Rhythmus“ · Ziel: 2 Läufe/Woche, langer Lauf ~9 km</p>
+    <div class="chips"><div class="chip"><span>Läufe/Woche</span><b>1,8</b></div><div class="chip"><span>km/Woche</span><b>11</b></div><div class="chip"><span>Längster (4 Wo.)</span><b>9 km</b></div><div class="chip"><span>Effizienz</span><b>+5 %</b></div></div>
+    <div class="pweeks" title="Läufe pro Woche, letzte 8 Wochen"><div class="pw"><div class="pw-bar" style="height:70%;background:#1f9d6b"></div><span>2</span></div><div class="pw"><div class="pw-bar" style="height:35%;background:#d9971a"></div><span>1</span></div><div class="pw"><div class="pw-bar" style="height:0%;background:#ece4ee"></div><span>0</span></div><div class="pw"><div class="pw-bar" style="height:35%;background:#d9971a"></div><span>1</span></div><div class="pw"><div class="pw-bar" style="height:35%;background:#d9971a"></div><span>1</span></div><div class="pw"><div class="pw-bar" style="height:70%;background:#1f9d6b"></div><span>2</span></div><div class="pw"><div class="pw-bar" style="height:100%;background:#1f9d6b"></div><span>3</span></div><div class="pw"><div class="pw-bar" style="height:35%;background:#d9971a"></div><span>1</span></div></div>
+    <div class="pw-cap">Läufe pro Woche · letzte 8 Wochen (grün = Ziel erreicht)</div>
+    <div class="pcols">
+      <div><h3>Das läuft gut</h3><ul class="pgood"><li>Langer Lauf: 9 km in den letzten 4 Wochen – im Plan (Ziel jetzt ~9 km).</li><li>Umfang wächst behutsam: 7 → 11 km pro Woche.</li><li>Effizienz +5 %: du läufst bei gleichem Puls schneller als vor ein paar Wochen.</li><li>Locker laufen klappt: 100 % der letzten Läufe im lockeren Pulsbereich (unter 151 bpm).</li></ul></div>
+      <div><h3>So wirst du besser</h3><ul class="ptodo"><li>Konstanz ist der größte Hebel: nur 3 von 8 Wochen hatten 2 Läufe (Ø 1,8/Woche). Zwei feste Lauftermine in den Kalender – z.B. Di + Sa – und den zweiten Lauf notfalls nur 3 km kurz halten.</li><li>VO₂max 39.9 (Nov 25) → 38.9: sinkt, wenn Wochen ohne Laufen dabei sind. Mit 2 Läufen pro Woche steigt sie meist innerhalb von 6–8 Wochen wieder.</li><li>Kräftigung 1× pro Woche (Po, Rumpf, Waden, 20 Min) macht dich robust für die längeren Läufe ab Januar.</li></ul></div>
+    </div>
+  </section>
+
   <section class="mind">
 <style>
 .mind{--m-ink:#221f1c;--m-mut:#7c736a;--m-hair:#e6e0d8;--m-grid:#ece7e0;
@@ -165,8 +208,8 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 .mini-wrap{position:relative;height:90px;margin-top:4px}
 .mini-wrap canvas{width:100%!important;height:100%!important}
 </style>
-<h2 class="mind-h">Marathon-Indikatoren</h2>
-<p class="mind-sub">Die Werte, die für den Marathon zählen – nicht VO₂max: Ermüdungsresistenz, aerobe Basis, Laufökonomie. 12 Monate.</p>
+<h2 class="mind-h">Halbmarathon-Indikatoren</h2>
+<p class="mind-sub">Die Werte, die für den Halbmarathon zählen – nicht VO₂max: Ermüdungsresistenz, aerobe Basis, Laufökonomie. 12 Monate.</p>
 <div class="mind-rule">↑ auf jedem Chart = Verbesserung</div>
 <div class="mind-grid">
   <div class="mcard" data-card="dur">
@@ -373,27 +416,27 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 </section>
 
   <section>
-    <h2>Der Weg zum Marathon</h2>
+    <h2>Der Weg zum Halbmarathon</h2>
     
         <div class="road road-active">
-          <div class="road-span">Aug – Dez 2026 · jetzt</div>
+          <div class="road-span">Nov – Dez 2026 · jetzt</div>
           <div class="road-phase">Basis &amp; Rhythmus</div>
-          <div class="road-goal">Konstante 2×/Woche als feste Gewohnheit etablieren – später ganz sanft Richtung 3×. Lockeres Laufen (Z2), langer Lauf wächst auf ~8–10 km. Wichtigstes Ziel: der Zyklus wirft dich nicht mehr raus.</div>
+          <div class="road-goal">2 Läufe pro Woche als feste Gewohnheit. Alles locker (Z2), der lange Lauf wächst auf ~9 km. Wichtigstes Ziel: der Zyklus wirft dich nicht mehr raus.</div>
         </div>
         <div class="road ">
-          <div class="road-span">Jan – Apr 2027</div>
+          <div class="road-span">Jan – Mär 2027</div>
           <div class="road-phase">Ausdauer</div>
-          <div class="road-goal">2–3×/Woche. Langer Lauf auf 14–16 km. Erste sanfte Tempo-Reize – immer ins Follikel-Fenster gelegt.</div>
+          <div class="road-goal">2, gern 3 Läufe pro Woche. Langer Lauf auf 12 km. Am Ende lockerer Läufe ein paar kurze Steigerungen – immer ins Follikel-Fenster gelegt.</div>
         </div>
         <div class="road ">
-          <div class="road-span">Mai – Aug 2027</div>
-          <div class="road-phase">Marathon-Aufbau</div>
-          <div class="road-goal">3–4×/Woche. Langer Lauf auf 24–28 km. Strukturiert, aber weiter zyklus-periodisiert: mehr im Follikel, Deload in der Lutealphase.</div>
+          <div class="road-span">Apr – Jun 2027</div>
+          <div class="road-phase">Aufbau</div>
+          <div class="road-goal">3 Läufe pro Woche. Langer Lauf auf 16 km. 1× pro Woche ein ruhiger Tempo-Reiz (im Follikel-Fenster), Deload in der späten Lutealphase.</div>
         </div>
         <div class="road ">
-          <div class="road-span">Sep – Okt 2027</div>
-          <div class="road-phase">Marathonblock &amp; Taper</div>
-          <div class="road-goal">Längste Läufe (30–32 km), dann Taper. Am 31.10. entspannt an die Startlinie in Frankfurt.</div>
+          <div class="road-span">Jul – 19. Sep 2027</div>
+          <div class="road-phase">Halbmarathon-Block &amp; Taper</div>
+          <div class="road-goal">Längste Läufe 18–19 km, Renntempo-Abschnitte üben, Läufe bei Sommerhitze früh legen. Die letzten 2 Wochen Taper – am 19.9. frisch an den Tegernsee.</div>
         </div>
   </section>
 
@@ -408,5 +451,11 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}
 
   <footer>Automatisch aus Garmin &amp; Natural Cycles · Stand 2026-10-26 08:45</footer>
 </div>
+<script>
+// Tagesempfehlung gilt nur fuer den Tag, an dem gerendert wurde.
+(function(){var c=document.querySelector('.today');if(!c)return;
+var t=new Date(),iso=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');
+if(c.dataset.day!==iso)c.querySelector('.today-stale').hidden=false;})();
+</script>
 </body>
 </html>

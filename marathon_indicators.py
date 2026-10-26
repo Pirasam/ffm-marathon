@@ -17,7 +17,8 @@ Chart.js bereits auf der Seite geladen ist (bei beiden Dashboards der Fall).
 import json
 
 
-def marathon_indicators(marathon):
+def marathon_indicators(marathon, race="Marathon"):
+    """race: Name des Zielrennens in Ueberschrift/Untertitel (z.B. "Halbmarathon")."""
     m = marathon or {}
     dur = m.get("durability") or []
     ab = m.get("aerobic_base") or []
@@ -30,7 +31,7 @@ def marathon_indicators(marathon):
         "ab_raw": m.get("aerobic_base_raw") or [],
         "ec_raw": m.get("economy_raw") or [],
     }, ensure_ascii=False)
-    return _TEMPLATE.replace("__DATA__", payload)
+    return _TEMPLATE.replace("__RACE__", race).replace("__DATA__", payload)
 
 
 _TEMPLATE = r"""<section class="mind">
@@ -62,8 +63,8 @@ _TEMPLATE = r"""<section class="mind">
 .mini-wrap{position:relative;height:90px;margin-top:4px}
 .mini-wrap canvas{width:100%!important;height:100%!important}
 </style>
-<h2 class="mind-h">Marathon-Indikatoren</h2>
-<p class="mind-sub">Die Werte, die für den Marathon zählen – nicht VO₂max: Ermüdungsresistenz, aerobe Basis, Laufökonomie. 12 Monate.</p>
+<h2 class="mind-h">__RACE__-Indikatoren</h2>
+<p class="mind-sub">Die Werte, die für den __RACE__ zählen – nicht VO₂max: Ermüdungsresistenz, aerobe Basis, Laufökonomie. 12 Monate.</p>
 <div class="mind-rule">↑ auf jedem Chart = Verbesserung</div>
 <div class="mind-grid">
   <div class="mcard" data-card="dur">

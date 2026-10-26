@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministischer Dashboard-Renderer fuer Carinas Marathon-Seite.
+"""Deterministischer Dashboard-Renderer fuer Carinas Halbmarathon-Seite.
 
 Liest frau/garmin_data.json und schreibt frau/index.html. Braucht KEINEN
 API-Key und KEINE Cloud – die zyklus-basierten Empfehlungen sind hier fest und
@@ -15,7 +15,8 @@ Aufruf (lokal oder in Carinas Sync-Job):
 """
 import json
 import os
-from datetime import date
+import statistics
+from datetime import date, timedelta
 
 from marathon_indicators import marathon_indicators
 
@@ -23,8 +24,9 @@ REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "frau", "garmin_data.json")
 HTML_PATH = os.path.join(REPO_DIR, "frau", "index.html")
 
-MARATHON_DATE = date(2027, 10, 31)   # Frankfurt Marathon
-MARATHON_NAME = "Frankfurt Marathon"
+RACE_DATE = date(2027, 9, 19)   # Tegernsee-Halbmarathon
+RACE_NAME = "Tegernsee-Halbmarathon"
+RACE_KM = 21.1
 
 # ── Zyklusphasen: Botschaft + Trainingsfokus (fest, medizinisch fundiert) ──────
 PHASES = {
@@ -75,21 +77,27 @@ PHASES = {
     },
 }
 
-# ── Roadmap zum Marathon ───────────────────────────────────────────────────────
+# ── Roadmap zum Halbmarathon ───────────────────────────────────────────────────
+# runs: Laeufe/Woche (Ziel) · long: langer Lauf (Start, Ende der Phase) in km ·
+# easy: lockerer Lauf in km. Die Tageskachel und die Fortschrittsanalyse lesen
+# ihre Zielwerte von hier – Aenderungen am Plan also nur an dieser Stelle.
 ROADMAP = [
-    {"phase": "Basis & Rhythmus", "span": "Aug – Dez 2026", "active_until": date(2026, 12, 31),
-     "goal": "Konstante 2×/Woche als feste Gewohnheit etablieren – später ganz "
-             "sanft Richtung 3×. Lockeres Laufen (Z2), langer Lauf wächst auf "
-             "~8–10 km. Wichtigstes Ziel: der Zyklus wirft dich nicht mehr raus."},
-    {"phase": "Ausdauer", "span": "Jan – Apr 2027", "active_until": date(2027, 4, 30),
-     "goal": "2–3×/Woche. Langer Lauf auf 14–16 km. Erste sanfte Tempo-Reize – "
-             "immer ins Follikel-Fenster gelegt."},
-    {"phase": "Marathon-Aufbau", "span": "Mai – Aug 2027", "active_until": date(2027, 8, 31),
-     "goal": "3–4×/Woche. Langer Lauf auf 24–28 km. Strukturiert, aber weiter "
-             "zyklus-periodisiert: mehr im Follikel, Deload in der Lutealphase."},
-    {"phase": "Marathonblock & Taper", "span": "Sep – Okt 2027", "active_until": date(2027, 10, 31),
-     "goal": "Längste Läufe (30–32 km), dann Taper. Am 31.10. entspannt an die "
-             "Startlinie in Frankfurt."},
+    {"phase": "Basis & Rhythmus", "span": "Nov – Dez 2026", "start": date(2026, 10, 26),
+     "active_until": date(2026, 12, 31), "runs": 2, "long": (7, 9), "easy": 5,
+     "goal": "2 Läufe pro Woche als feste Gewohnheit. Alles locker (Z2), der lange "
+             "Lauf wächst auf ~9 km. Wichtigstes Ziel: der Zyklus wirft dich nicht mehr raus."},
+    {"phase": "Ausdauer", "span": "Jan – Mär 2027", "start": date(2027, 1, 1),
+     "active_until": date(2027, 3, 31), "runs": 2, "long": (9, 12), "easy": 5.5,
+     "goal": "2, gern 3 Läufe pro Woche. Langer Lauf auf 12 km. Am Ende lockerer Läufe "
+             "ein paar kurze Steigerungen – immer ins Follikel-Fenster gelegt."},
+    {"phase": "Aufbau", "span": "Apr – Jun 2027", "start": date(2027, 4, 1),
+     "active_until": date(2027, 6, 30), "runs": 3, "long": (12, 16), "easy": 6,
+     "goal": "3 Läufe pro Woche. Langer Lauf auf 16 km. 1× pro Woche ein ruhiger "
+             "Tempo-Reiz (im Follikel-Fenster), Deload in der späten Lutealphase."},
+    {"phase": "Halbmarathon-Block & Taper", "span": "Jul – 19. Sep 2027", "start": date(2027, 7, 1),
+     "active_until": RACE_DATE, "runs": 3, "long": (16, 19), "easy": 7,
+     "goal": "Längste Läufe 18–19 km, Renntempo-Abschnitte üben, Läufe bei Sommerhitze "
+             "früh legen. Die letzten 2 Wochen Taper – am 19.9. frisch an den Tegernsee."},
 ]
 
 
@@ -171,8 +179,8 @@ def build_html(data):
     cycle = m.get("cycle")
     hz = m.get("hr_zones")
     today = date.today()
-    days_to_marathon = (MARATHON_DATE - today).days
-    weeks_to_marathon = days_to_marathon // 7
+    days_to_race = (RACE_DATE - today).days
+    weeks_to_race = days_to_race // 7
     synced = data.get("synced_at", "")[:16].replace("T", " ")
 
     # ── Zyklus-Kompass ────────────────────────────────────────────────────────
@@ -272,17 +280,338 @@ def build_html(data):
           <div class="road-goal">{esc(r['goal'])}</div>
         </div>"""
 
-    eff_chart = marathon_indicators(m.get("marathon"))
+    eff_chart = marathon_indicators(m.get("marathon"), race="Halbmarathon")
+    today_card = _today_card(m, hist, cycle, hz, today)
+    progress_card = _progress_card(m, hist, hz, today)
 
     return PAGE.format(
         updated=esc(synced or today.isoformat()),
-        weeks=weeks_to_marathon, days=days_to_marathon,
-        marathon=esc(MARATHON_NAME), marathon_date="31.10.2027",
+        weeks=weeks_to_race, days=days_to_race,
+        race=esc(RACE_NAME), race_date=RACE_DATE.strftime("%d.%m.%Y"),
+        today_card=today_card, progress_card=progress_card,
         cycle_card=cycle_card, week_plan=week_plan,
         hr_zones_card=_hr_zones_card(hz),
         charts=charts, chips=chips, runs_table=runs_table, roadmap=road,
         eff_chart=eff_chart,
     )
+
+
+# ── Gemeinsame Helfer fuer Tages- und Fortschrittskachel ──────────────────────
+def _roadmap_phase(today):
+    for r in ROADMAP:
+        if today <= r["active_until"]:
+            return r
+    return ROADMAP[-1]
+
+
+def _long_target(today, longest_recent):
+    """Ziel fuer den langen Lauf: linear ueber die Roadmap-Phase, aber nie mehr
+    als +1,5 km ueber dem laengsten Lauf der letzten 3 Wochen (Verletzungsschutz)."""
+    r = _roadmap_phase(today)
+    span = max(1, (r["active_until"] - r["start"]).days)
+    prog = min(1.0, max(0.0, (today - r["start"]).days / span))
+    lo, hi = r["long"]
+    t = lo + (hi - lo) * prog
+    if longest_recent:
+        t = max(t, min(longest_recent, hi))
+        t = min(t, longest_recent + 1.5)
+    # Taper: die letzten 14 Tage vor dem Rennen kuerzer
+    days_to_race = (RACE_DATE - today).days
+    if 0 <= days_to_race <= 7:
+        t = 6
+    elif 7 < days_to_race <= 14:
+        t = min(t, 12)
+    return round(t * 2) / 2
+
+
+def _all_runs(m):
+    """Alle Laeufe (12 Monate) aus der Effizienz-Historie + die letzten 14 Tage aus
+    recent_activities (die sind dort u.U. noch nicht eingetragen). Alt -> neu."""
+    runs = {}
+    for r in ((m.get("efficiency") or {}).get("runs") or []):
+        try:
+            d = date.fromisoformat(r["date"])
+        except Exception:
+            continue
+        runs[(d, round(r.get("dist") or 0, 1))] = {
+            "d": d, "km": r.get("dist") or 0, "hr": r.get("hf"), "pace": r.get("pace"),
+            "ei": r.get("ei_corr") or r.get("ei")}
+    for a in (m.get("recent_activities") or []):
+        t = a.get("type") or ""
+        if "running" not in t and "trail" not in t:
+            continue
+        try:
+            d = date.fromisoformat(a["date"])
+        except Exception:
+            continue
+        key = (d, round(a.get("distance_km") or 0, 1))
+        if key not in runs:
+            runs[key] = {"d": d, "km": a.get("distance_km") or 0, "hr": a.get("avg_hr"),
+                         "pace": a.get("pace_min_km"), "ei": None}
+    return sorted(runs.values(), key=lambda x: x["d"])
+
+
+def _week_start(d):
+    return d - timedelta(days=d.weekday())
+
+
+def _rhr_baseline(hist, today):
+    vals = [x.get("v") for x in (hist.get("rhr") or [])
+            if x.get("v") and x.get("d") != today.isoformat()][:30]
+    return statistics.median(vals) if len(vals) >= 5 else None
+
+
+def _z2_text(hz):
+    return f"{hz['z2_floor']}–{hz['z3_floor'] - 1} bpm" if hz and hz.get("z2_floor") else "locker (Sprechtempo)"
+
+
+def _dur_text(km, pace):
+    if not pace:
+        return ""
+    mins = int(round(km * pace / 5.0) * 5)
+    return f" · ca. {mins} Min" if mins < 60 else f" · ca. {mins // 60}:{mins % 60:02d} h"
+
+
+# ── Kachel: Heute ─────────────────────────────────────────────────────────────
+def _today_card(m, hist, cycle, hz, today):
+    runs = _all_runs(m)
+    r = _roadmap_phase(today)
+    pk = _phase_key(cycle) if cycle and cycle.get("tracked") else None
+    luteal = bool(pk and pk.startswith("luteal"))
+    last = runs[-1] if runs else None
+    days_since = (today - last["d"]).days if last else None
+    wk = [x for x in runs if x["d"] >= _week_start(today)]
+    recent3w = [x["km"] for x in runs if (today - x["d"]).days <= 21]
+    longest3w = max(recent3w) if recent3w else 0
+    long_t = _long_target(today, longest3w)
+    easy_t = r["easy"]
+    long_done = any(x["km"] >= 0.85 * long_t for x in wk)
+    paces = [x["pace"] for x in runs[-6:] if x.get("pace")]
+    pace = statistics.median(paces) if paces else None
+    z2 = _z2_text(hz)
+
+    # Erholungssignale – in der Lutealphase sind etwas hoeherer Ruhepuls und
+    # niedrigere HRV normal, daher dort toleranter.
+    rhr = m.get("resting_hr"); base = _rhr_baseline(hist, today)
+    rhr_d = (rhr - base) if (rhr is not None and base is not None) else None
+    tol = 2 if luteal else 0
+    hrv_st = m.get("hrv_status"); sleep = m.get("sleep_hours"); bb = m.get("body_battery")
+    red, yellow, reasons = [], [], []
+    if rhr_d is not None:
+        if rhr_d >= 6 + tol: red.append(f"Ruhepuls {rhr} (+{rhr_d:g} über deinem Normalwert)")
+        elif rhr_d >= 3 + tol: yellow.append(f"Ruhepuls leicht erhöht ({rhr}, +{rhr_d:g})")
+        else: reasons.append(f"Ruhepuls {rhr} – normal für dich")
+    if hrv_st in ("LOW", "POOR"):
+        red.append(f"HRV niedrig ({m.get('hrv_value')} ms)")
+    elif hrv_st == "UNBALANCED" and not luteal:
+        yellow.append(f"HRV unausgeglichen ({m.get('hrv_value')} ms)")
+    elif m.get("hrv_value") is not None:
+        reasons.append(f"HRV {m.get('hrv_value')} ms – im grünen Bereich" if hrv_st == "BALANCED"
+                       else f"HRV {m.get('hrv_value')} ms – in der Lutealphase normal niedriger")
+    if sleep is not None:
+        if sleep < 5: red.append(f"nur {sleep:g} h Schlaf")
+        elif sleep < 6.5: yellow.append(f"wenig Schlaf ({sleep:g} h)")
+        else: reasons.append(f"{sleep:g} h Schlaf")
+    if bb is not None:
+        if bb < 25: red.append(f"Body Battery {bb}")
+        elif bb < 50: yellow.append(f"Body Battery nur {bb}")
+
+    def card(kind, color, title, detail, why):
+        why_li = "".join(f"<li>{esc(w)}</li>" for w in why[:5])
+        return f"""
+      <section class="today" style="--tc:{color}" data-day="{today.isoformat()}">
+        <div class="today-head"><span class="today-tag">Heute · {esc(kind)}</span>
+          <span class="today-date">{today.strftime('%d.%m.')}</span></div>
+        <h2 class="today-title">{esc(title)}</h2>
+        <p class="today-detail">{detail}</p>
+        <ul class="today-why">{why_li}</ul>
+        <p class="today-stale" hidden>Diese Empfehlung ist vom {today.strftime('%d.%m.')} – die neue kommt mit dem nächsten Sync.</p>
+      </section>"""
+
+    # Renn-Woche: kurz und frisch, Renntag eigene Botschaft
+    dtr = (RACE_DATE - today).days
+    if dtr == 0:
+        return card("Renntag", "#d64d6e", "Tegernsee – heute ist dein Tag! 🏞️",
+                    "Frühstück ~3 h vor dem Start, ruhig loslaufen, die ersten 5 km bewusst langsamer als "
+                    "du möchtest. Ab km 15 darfst du freigeben. Genieß den See!", [])
+    if dtr == 1:
+        return card("Vor dem Rennen", "#7a6cf0", "Ausschütteln oder Ruhe.",
+                    "Höchstens 15 Min ganz locker mit 2 kurzen Steigerungen. Startunterlagen, Kleidung und "
+                    "Verpflegung bereitlegen, kohlenhydratreich essen, früh ins Bett.", [])
+    if 1 < dtr <= 7:
+        easy_t, long_done = 4, True
+
+    phase_why = []
+    if pk:
+        phase_why.append(f"{PHASES[pk]['label']} (Zyklustag {cycle.get('day_in_cycle')})")
+    week_why = f"Diese Woche: {len(wk)} von {r['runs']} Läufen"
+
+    if red:
+        return card("Erholung", "#d64d6e", "Heute ist Erholung dran.",
+                    "Kein Lauf heute. Ein Spaziergang, sanftes Dehnen oder Pilates tun gut – "
+                    "dein Körper meldet, dass er Pause braucht. Bei Fieber oder Krankheitsgefühl: ganz ruhen.",
+                    red + phase_why)
+    if last and days_since == 0:
+        return card("Erledigt", "#1f9d6b", f"Lauf erledigt – {last['km']:g} km ✓",
+                    "Jetzt erholen: etwas mit Kohlenhydraten und Eiweiß essen, trinken, früh schlafen.",
+                    [week_why] + phase_why)
+    if days_since == 1:
+        return card("Pause", "#7a6cf0", "Pause nach dem gestrigen Lauf.",
+                    "Zwischen zwei Läufen liegt in dieser Phase immer ein Tag ohne Laufen – da passiert die "
+                    "Anpassung. Wenn du dich bewegen magst: Spaziergang, Pilates oder 20 Min Kräftigung "
+                    "(Po, Rumpf, Waden).", [f"Gestern: {last['km']:g} km", week_why] + phase_why)
+    if len(wk) >= r["runs"] and long_done:
+        return card("Optional", "#1f9d6b", "Wochenziel erreicht 🎉",
+                    "Heute ist alles freiwillig: Ruhe, Spaziergang oder Kräftigung. Ein zusätzlicher Lauf "
+                    "ist nicht nötig – Konstanz schlägt Extra-Kilometer.", [week_why] + phase_why)
+    if pk == "menstruation" and (cycle.get("day_in_cycle") or 9) <= 3:
+        return card("Nach Gefühl", PHASES["menstruation"]["color"], "Nach Gefühl – kurz oder Pause.",
+                    f"Wenn es gut tut: {max(3, easy_t - 2):g} km ganz locker ({z2}){_dur_text(max(3, easy_t - 2), pace)}. "
+                    "Wenn nicht: Pause oder Spaziergang ist genauso richtig.",
+                    phase_why + reasons + yellow)
+
+    # Lauf heute: lang oder locker?
+    days_left = 6 - today.weekday()  # inkl. heute
+    weekend = today.weekday() >= 5
+    want_long = (not long_done) and (pk in ("follikel", "fruchtbar") or weekend or days_left <= 2)
+    if pk == "luteal_late":
+        want_long = False
+    km = long_t if want_long else (easy_t - 1 if pk == "luteal_late" else easy_t)
+    if yellow:
+        km = round(min(km, easy_t) * 0.75 * 2) / 2
+        want_long = False
+    kind = "Langer Lauf" if want_long else "Lockerer Lauf"
+    title = (f"Langer Lauf · {km:g} km" if want_long else f"Lockerer Lauf · {km:g} km")
+    detail = f"Ziel-Puls {z2}{_dur_text(km, pace)}. "
+    if want_long:
+        detail += "Ruhig starten, gleichmäßig bleiben – Gehpausen sind erlaubt. Ab 75 Min Wasser mitnehmen."
+    elif luteal:
+        detail += "Bewusst ruhiger als sonst – ein etwas höherer Puls ist in dieser Phase normal."
+    elif pk in ("follikel", "fruchtbar") and r["phase"] != "Basis & Rhythmus":
+        detail += "Am Ende 4× 20 Sekunden zügig (Steigerungen), dazwischen locker traben."
+    else:
+        detail += "Sprechtempo: ganze Sätze müssen möglich sein."
+    if yellow:
+        detail += " Heute kürzer, weil die Erholung nicht ganz da ist."
+    why = (yellow + phase_why + [week_why] +
+           ([f"Letzter Lauf vor {days_since} Tagen ({last['km']:g} km)"] if last and days_since else []) +
+           reasons)
+    return card(kind, "#1f9d6b" if not yellow else "#d9971a", title, detail, why)
+
+
+def _de(x, nd=1):
+    return f"{x:.{nd}f}".replace(".", ",")
+
+
+def _month(ym):
+    mn = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
+    try:
+        y, mo = ym.split("-")
+        return f"{mn[int(mo) - 1]} {y[2:]}"
+    except Exception:
+        return ym
+
+
+# ── Kachel: Fortschritt & Tipps ───────────────────────────────────────────────
+def _progress_card(m, hist, hz, today):
+    runs = _all_runs(m)
+    if len(runs) < 4:
+        return ""
+    r = _roadmap_phase(today)
+    ws = _week_start(today)
+    # 8 abgeschlossene Wochen (ohne die laufende)
+    weeks = []
+    for i in range(8, 0, -1):
+        a = ws - timedelta(weeks=i); b = a + timedelta(days=7)
+        wr = [x for x in runs if a <= x["d"] < b]
+        weeks.append((a, len(wr), sum(x["km"] for x in wr)))
+    runs_4 = sum(w[1] for w in weeks[-4:]) / 4
+    km_4 = sum(w[2] for w in weeks[-4:]) / 4
+    km_prev4 = sum(w[2] for w in weeks[:4]) / 4
+    good_weeks = sum(1 for w in weeks if w[1] >= r["runs"])
+    longest28 = max([x["km"] for x in runs if (today - x["d"]).days <= 28] or [0])
+    long_t = _long_target(today, max([x["km"] for x in runs if (today - x["d"]).days <= 21] or [0]))
+
+    # Aerobe Effizienz (Meter pro Minute je Herzschlag): letzte 5 vs. die 10 davor
+    eis = [x["ei"] for x in runs if x.get("ei")]
+    ei_delta = None
+    if len(eis) >= 10:
+        recent, before = statistics.mean(eis[-5:]), statistics.mean(eis[-15:-5])
+        ei_delta = (recent / before - 1) * 100
+    z3 = (hz or {}).get("z3_floor")
+    hr_runs = [x for x in runs[-10:] if x.get("hr")]
+    easy_share = (sum(1 for x in hr_runs if x["hr"] < z3) / len(hr_runs)) if (z3 and hr_runs) else None
+    vo2 = (m.get("efficiency") or {}).get("vo2max") or []
+    vo2_delta = (vo2[-1]["v"] - vo2[0]["v"]) if len(vo2) >= 2 else None
+
+    good, todo = [], []
+    if good_weeks >= 6:
+        good.append(f"Konstanz: in {good_weeks} der letzten 8 Wochen {r['runs']}+ Läufe – genau das bringt dich an den Tegernsee.")
+    else:
+        todo.append(f"Konstanz ist der größte Hebel: nur {good_weeks} von 8 Wochen hatten {r['runs']} Läufe "
+                    f"(Ø {_de(runs_4)}/Woche). Zwei feste Lauftermine in den Kalender – z.B. Di + Sa – "
+                    "und den zweiten Lauf notfalls nur 3 km kurz halten.")
+    if longest28 >= long_t - 0.5:
+        good.append(f"Langer Lauf: {longest28:g} km in den letzten 4 Wochen – im Plan (Ziel jetzt ~{long_t:g} km).")
+    else:
+        todo.append(f"Langer Lauf: zuletzt max. {longest28:g} km, Ziel jetzt ~{long_t:g} km. "
+                    "Pro Woche um höchstens 1 km verlängern, am liebsten im Follikel-Fenster.")
+    # Erst ab nennenswertem Umfang warnen – 7 → 11 km/Woche ist kein Risiko.
+    if km_prev4 > 0 and km_4 >= 15 and km_4 > km_prev4 * 1.3 and km_4 - km_prev4 > 6:
+        todo.append(f"Umfang ist schnell gestiegen ({km_prev4:.0f} → {km_4:.0f} km/Woche). "
+                    "Eine ruhigere Woche einplanen, bevor du weiter steigerst – das schützt Sehnen und Knochen.")
+    elif km_4 > km_prev4 and km_prev4 > 0:
+        good.append(f"Umfang wächst behutsam: {km_prev4:.0f} → {km_4:.0f} km pro Woche.")
+    if ei_delta is not None:
+        if ei_delta >= 2:
+            good.append(f"Effizienz +{ei_delta:.0f} %: du läufst bei gleichem Puls schneller als vor ein paar Wochen.")
+        elif ei_delta <= -3:
+            todo.append(f"Effizienz {ei_delta:.0f} %: bei gleichem Puls etwas langsamer als zuvor. Oft stecken "
+                        "Lutealphase, Wärme oder wenig Schlaf dahinter – kein Grund zur Sorge, Konstanz dreht das.")
+    if easy_share is not None:
+        if easy_share >= 0.7:
+            good.append(f"Locker laufen klappt: {easy_share * 100:.0f} % der letzten Läufe im lockeren Pulsbereich (unter {z3} bpm).")
+        else:
+            todo.append(f"Nur {easy_share * 100:.0f} % der letzten Läufe waren wirklich locker (unter {z3} bpm). "
+                        "Langsamer laufen baut die Ausdauer schneller auf als zu schnelles Laufen.")
+    if vo2_delta is not None and vo2_delta <= -1:
+        todo.append(f"VO₂max {vo2[0]['v']:g} ({_month(vo2[0]['m'])}) → {vo2[-1]['v']:g}: sinkt, wenn Wochen ohne Laufen dabei sind. "
+                    "Mit 2 Läufen pro Woche steigt sie meist innerhalb von 6–8 Wochen wieder.")
+    elif vo2_delta is not None and vo2_delta >= 1:
+        good.append(f"VO₂max steigt: {vo2[0]['v']:g} ({_month(vo2[0]['m'])}) → {vo2[-1]['v']:g}.")
+    # Phasen-Tipp fuer das Rennen
+    phase_tip = {
+        "Basis & Rhythmus": "Kräftigung 1× pro Woche (Po, Rumpf, Waden, 20 Min) macht dich robust für die längeren Läufe ab Januar.",
+        "Ausdauer": "Ab jetzt 1× pro Woche am Ende eines lockeren Laufs 4–6 Steigerungen (20 s zügig) – das macht den Schritt ökonomischer.",
+        "Aufbau": "Einmal im Monat einen langen Lauf mit Gel oder Riegel üben – ab 90 Minuten braucht dein Körper Nachschub.",
+        "Halbmarathon-Block & Taper": "Die Strecke um den Tegernsee vorher anschauen (Höhenmeter!) und lange Läufe bei Hitze früh morgens legen.",
+    }[r["phase"]]
+    todo.append(phase_tip)
+
+    kpis = "".join([
+        _chip("Läufe/Woche", _de(runs_4)),
+        _chip("km/Woche", f"{km_4:.0f}"),
+        _chip("Längster (4 Wo.)", f"{longest28:g} km"),
+        _chip("Effizienz", f"{ei_delta:+.0f} %" if ei_delta is not None else "–"),
+    ])
+    bars = "".join(
+        f'<div class="pw"><div class="pw-bar" style="height:{min(100, n / max(r["runs"], 1) * 70):.0f}%;'
+        f'background:{"#1f9d6b" if n >= r["runs"] else "#d9971a" if n else "#ece4ee"}"></div>'
+        f'<span>{n}</span></div>' for _, n, _ in weeks)
+    good_li = "".join(f"<li>{esc(x)}</li>" for x in good[:4]) or "<li>Noch zu wenig Daten für eine Stärken-Analyse.</li>"
+    todo_li = "".join(f"<li>{esc(x)}</li>" for x in todo[:4])
+    return f"""
+  <section class="progress">
+    <h2>Dein Fortschritt</h2>
+    <p class="p-sub">Phase „{esc(r['phase'])}“ · Ziel: {r['runs']} Läufe/Woche, langer Lauf ~{long_t:g} km</p>
+    <div class="chips">{kpis}</div>
+    <div class="pweeks" title="Läufe pro Woche, letzte 8 Wochen">{bars}</div>
+    <div class="pw-cap">Läufe pro Woche · letzte 8 Wochen (grün = Ziel erreicht)</div>
+    <div class="pcols">
+      <div><h3>Das läuft gut</h3><ul class="pgood">{good_li}</ul></div>
+      <div><h3>So wirst du besser</h3><ul class="ptodo">{todo_li}</ul></div>
+    </div>
+  </section>"""
 
 
 def _week_plan(phase_key, cycle, hz=None):
@@ -381,7 +710,7 @@ PAGE = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Carinas erster Marathon</title>
+<title>Carinas Halbmarathon</title>
 <style>
 :root{{--bg:#f7f3f5;--card:#ffffff;--soft:#f1ecf1;--txt:#2c2733;--mut:#8a8398;
 --line:#ece4ee;--accent:#d64d6e;--shadow:0 1px 3px rgba(60,40,70,.06),0 6px 20px rgba(60,40,70,.05);}}
@@ -453,19 +782,41 @@ border-radius:50%;background:#d8cfdd}}
 .reframe h2{{color:#7a4da8}}
 .reframe p{{color:#4a4356;margin:0}}
 footer{{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}}
+.today{{border-left:4px solid var(--tc);background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 9%,#fff),#fff)}}
+.today-head{{display:flex;justify-content:space-between;align-items:baseline}}
+.today-tag{{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--tc);font-weight:800}}
+.today-date{{color:var(--mut);font-size:.8rem}}
+.today-title{{margin:4px 0 6px;font-size:1.3rem}}
+.today-detail{{margin:0 0 10px;color:#4a4356}}
+ul.today-why{{margin:0;padding-left:18px;color:var(--mut);font-size:.84rem}}
+ul.today-why li{{margin:2px 0}}
+.today-stale{{margin:10px 0 0;font-size:.8rem;color:#b5452f;font-weight:600}}
+.p-sub{{color:var(--mut);font-size:.85rem;margin:-6px 0 4px}}
+.pweeks{{display:flex;gap:6px;align-items:flex-end;height:64px;margin-top:16px}}
+.pw{{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}}
+.pw-bar{{width:100%;max-width:34px;border-radius:4px 4px 0 0;min-height:3px}}
+.pw span{{font-size:.7rem;color:var(--mut);margin-top:3px}}
+.pw-cap{{color:var(--mut);font-size:.72rem;margin-top:4px}}
+.pcols{{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:16px}}
+.pcols h3{{font-size:.95rem;margin:0 0 6px}}
+.pcols ul{{margin:0;padding-left:18px;font-size:.9rem;color:#4a4356}}
+.pcols li{{margin:6px 0}}
+ul.pgood li::marker{{color:#1f9d6b}} ul.ptodo li::marker{{color:#d9971a}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>Carinas erster Marathon 🏁</h1>
+    <h1>Carinas Halbmarathon 🏞️</h1>
     <div class="count">
       <div><b>{weeks}</b> <span>Wochen</span></div>
       <div><b>{days}</b> <span>Tage</span></div>
     </div>
-    <div class="sub">Ziel: {marathon} · {marathon_date}</div>
+    <div class="sub">Ziel: {race} · {race_date} · 21,1 km</div>
   </header>
+
+  {today_card}
 
   {cycle_card}
 
@@ -487,10 +838,12 @@ footer{{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}}
     {runs_table}
   </section>
 
+  {progress_card}
+
   {eff_chart}
 
   <section>
-    <h2>Der Weg zum Marathon</h2>
+    <h2>Der Weg zum Halbmarathon</h2>
     {roadmap}
   </section>
 
@@ -505,6 +858,12 @@ footer{{text-align:center;color:var(--mut);font-size:.75rem;margin-top:28px}}
 
   <footer>Automatisch aus Garmin &amp; Natural Cycles · Stand {updated}</footer>
 </div>
+<script>
+// Tagesempfehlung gilt nur fuer den Tag, an dem gerendert wurde.
+(function(){{var c=document.querySelector('.today');if(!c)return;
+var t=new Date(),iso=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');
+if(c.dataset.day!==iso)c.querySelector('.today-stale').hidden=false;}})();
+</script>
 </body>
 </html>"""
 

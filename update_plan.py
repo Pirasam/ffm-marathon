@@ -24,6 +24,18 @@ EFFICIENCY_MARKER = ("<!-- EFFICIENCY:START -->", "<!-- EFFICIENCY:END -->")
 # Verifiziert 2026-09-11: Credits wieder aufgeladen, Sonnet-Render bestaetigt ok.
 CLAUDE_MODEL = "claude-sonnet-5"
 
+# ── Rennziel ──────────────────────────────────────────────────────────────────
+# Neues Ziel nach dem ersten Marathon (25.10.2026: 5:15:19, Ø HF 162, ab km 29
+# Gehpausen). Plan dazu: build_plan_2027.py. GOAL_H muss zu GOAL_H in index.html passen.
+RACE_DATE = date(2027, 10, 31)
+RACE_NAME = "Frankfurt Marathon"
+GOAL_H = 5.0
+GOAL_TXT = "unter 5:00 h"
+LAST_RACE = ("Erster Marathon Frankfurt 25.10.2026 in 5:15:19 gefinisht: 1. Hälfte 2:30:48 (auf Kurs), "
+             "2. Hälfte 2:44 mit Gehpausen ab km 29; Ø HF 162 (Leistungszustand schon ab km 2 bei −9, "
+             "nach stressiger Woche + Regen). Längster Trainingslauf vorher nur 1× 30 km. Engpass waren die Beine, "
+             "nicht der Kreislauf. Plan 2027 setzt deshalb auf fünf Longruns ≥30 km, MT-Blöcke und Kraft.")
+
 # ── Genesungs- / Wiedereinstiegs-Modus ────────────────────────────────────────
 # RECOVERY_MODE True: kein normaler Trainingsplan, sondern Erholungs-/Wiederein-
 #   stiegs-Ansicht. Zum Beenden (voller Trainingsbetrieb) RECOVERY_MODE = False.
@@ -172,7 +184,7 @@ def call_claude_recovery(metrics, history):
     rhr_hist = [x["v"] for x in (history.get("rhr") or [])[:10]]
     hrv_hist = [x["v"] for x in (history.get("hrv") or [])[:10]]
     today = date.today()
-    days_to_marathon = (date(2026, 10, 25) - today).days
+    days_to_marathon = (RACE_DATE - today).days
 
     if DOCTOR_CLEARED:
         frame = f"""Der Sportler erholt sich von: {RECOVERY_REASON}.
@@ -235,10 +247,10 @@ Verlauf (neueste zuerst):
 Beurteile NÜCHTERN. Beachte: schlechter Schlaf allein drückt HRV und hebt den Ruhepuls –
 unterscheide das von einem echten Rückschlag.
 
-ZUSÄTZLICH – Marathon-On-Track (Ziel: Frankfurt 25.10.2026 unter 5:00 h, in {days_to_marathon} Tagen):
+ZUSÄTZLICH – Marathon-On-Track (Ziel: {RACE_NAME} {RACE_DATE.strftime('%d.%m.%Y')} {GOAL_TXT}, in {days_to_marathon} Tagen):
 Er hatte vor der Krankheit eine solide Basis (21-km-Longrun, VO₂max ~45, ~40 km/Woche) und ist
 jetzt im Wiedereinstieg. Schätze REALISTISCH und ehrlich, ob das Ziel noch machbar ist – die
-Krankheit hat Wochen gekostet, aber die Basis ist da. Wenn Finish > 5:00 h, dann on_track_score < 70.
+Krankheit hat Wochen gekostet, aber die Basis ist da. Wenn Finish > {GOAL_H:.2f} h, dann on_track_score < 70.
 
 Antworte NUR mit diesem JSON (kein Markdown):
 {{
@@ -317,7 +329,9 @@ def call_claude(metrics, plan_context):
     hrv_hi = metrics.get("hrv_balanced_high")
     hrv_range = f" (sein ausgeglichener Bereich: {hrv_lo}–{hrv_hi} ms)" if hrv_lo and hrv_hi else ""
 
-    prompt = f"""Du bist sein persönlicher Laufcoach. Ziel: Frankfurt Marathon 25.10.2026 unter 5:00 h, aktuell {metrics.get("weight_kg")} kg → Ziel 87 kg.
+    days_to_race = (RACE_DATE - date.today()).days
+    prompt = f"""Du bist sein persönlicher Laufcoach. Ziel: {RACE_NAME} {RACE_DATE.strftime('%d.%m.%Y')} {GOAL_TXT} (in {days_to_race} Tagen), aktuell {metrics.get("weight_kg")} kg → Ziel 87 kg.
+Vorgeschichte: {LAST_RACE}
 
 Garmin-Daten heute:
 - Schlaf: {metrics.get("sleep_hours")} h (Score {metrics.get("sleep_score")}/100)
