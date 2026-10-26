@@ -19,6 +19,7 @@ import statistics
 from datetime import date, timedelta
 
 from marathon_indicators import marathon_indicators
+from threshold_card import threshold_card
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "frau", "garmin_data.json")
@@ -283,12 +284,13 @@ def build_html(data):
     eff_chart = marathon_indicators(m.get("marathon"), race="Halbmarathon")
     today_card = _today_card(m, hist, cycle, hz, today)
     progress_card = _progress_card(m, hist, hz, today)
+    thr_card = threshold_card(m.get("threshold"), "Halbmarathon")
 
     return PAGE.format(
         updated=esc(synced or today.isoformat()),
         weeks=weeks_to_race, days=days_to_race,
         race=esc(RACE_NAME), race_date=RACE_DATE.strftime("%d.%m.%Y"),
-        today_card=today_card, progress_card=progress_card,
+        today_card=today_card, progress_card=progress_card, thr_card=thr_card,
         cycle_card=cycle_card, week_plan=week_plan,
         hr_zones_card=_hr_zones_card(hz),
         charts=charts, chips=chips, runs_table=runs_table, roadmap=road,
@@ -839,6 +841,8 @@ ul.pgood li::marker{{color:#1f9d6b}} ul.ptodo li::marker{{color:#d9971a}}
   </section>
 
   {progress_card}
+
+  {thr_card}
 
   {eff_chart}
 

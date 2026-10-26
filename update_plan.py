@@ -11,12 +11,14 @@ import json
 from datetime import date, timedelta
 
 from marathon_indicators import marathon_indicators
+from threshold_card import threshold_card
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "garmin_data.json")
 GARMIN_MARKER = ("<!-- GARMIN:START -->", "<!-- GARMIN:END -->")
 HISTORY_MARKER = ("<!-- HISTORY:START -->", "<!-- HISTORY:END -->")
 EFFICIENCY_MARKER = ("<!-- EFFICIENCY:START -->", "<!-- EFFICIENCY:END -->")
+THRESHOLD_MARKER = ("<!-- THRESHOLD:START -->", "<!-- THRESHOLD:END -->")
 
 # Opus war fuer eine taegliche, strukturierte Trainingsempfehlung Overkill und
 # hat unnoetig API-Guthaben verbraucht. Sonnet ist fuer diese Aufgabe (kurze
@@ -450,6 +452,16 @@ def inject_efficiency(html_content, metrics):
                   lambda m: block, html_content, flags=re.DOTALL)
 
 
+def inject_threshold(html_content, metrics):
+    """Schwellentempo-Kachel zwischen die THRESHOLD-Marker rendern (deterministisch)."""
+    start, end = THRESHOLD_MARKER
+    if start not in html_content:
+        return html_content
+    block = f"{start}\n{threshold_card((metrics or {}).get('threshold'), 'Marathon')}\n{end}"
+    return re.sub(re.escape(start) + r".*?" + re.escape(end),
+                  lambda m: block, html_content, flags=re.DOTALL)
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def load_existing_payload(html_content):
@@ -561,6 +573,7 @@ def main():
         }
         html = inject_garmin_data(html, metrics, claude_result)
         html = inject_efficiency(html, metrics)
+        html = inject_threshold(html, metrics)
         with open(html_path, "w", encoding="utf-8") as f:
             f.write(html)
         print("index.html aktualisiert (Genesungs-Modus).")
@@ -600,6 +613,7 @@ def main():
 
     html = inject_garmin_data(html, metrics, claude_result)
     html = inject_efficiency(html, metrics)
+    html = inject_threshold(html, metrics)
 
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html)

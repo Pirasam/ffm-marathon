@@ -650,6 +650,29 @@ def compute_durability(api, history, today, months=12, min_km=12):
     return history
 
 
+def fetch_threshold_pace(api, today, days=365):
+    """Laktatschwellen-TEMPO (Lauf) der letzten 12 Monate aus Garmin.
+
+    Garmin ermittelt die Schwelle automatisch waehrend der Laeufe und speichert
+    sie taeglich. Der Wert kommt als Geschwindigkeit in 1/10 m/s (0,297 = 2,97 m/s
+    = 5:37/km). Rueckgabe alt->neu: [{"d": "YYYY-MM-DD", "pace_s": Sekunden/km}].
+    Bewusst NUR das Tempo: der Schwellenpuls haengt am Maximalpuls und sagt ueber
+    Fortschritt kaum etwas aus.
+    """
+    start = (today - timedelta(days=days)).isoformat()
+    rows = api.connectapi(
+        f"/biometric-service/stats/lactateThresholdSpeed/range/{start}/{today.isoformat()}",
+        params={"sport": "RUNNING", "aggregation": "daily", "aggregationStrategy": "LATEST"},
+    ) or []
+    out = []
+    for r in rows:
+        v = r.get("value")
+        if not v or v <= 0:
+            continue
+        out.append({"d": r.get("from"), "pace_s": round(1000 / (v * 10))})
+    return sorted(out, key=lambda x: x["d"])
+
+
 def compute_aerobic_base(eff_runs, today, ref_hr=145, months=12, window_days=90):
     """Tempo bei Referenz-HF (Default 145 bpm) = aerobe Basis. Je Monatsanker aus
     einem ROLLIERENDEN 90-Tage-Fit HF~Geschwindigkeit interpoliert (stabil, nicht

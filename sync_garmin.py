@@ -22,7 +22,8 @@ from garmin_client import (garmin_login, fetch_garmin_metrics,
                            backfill_efficiency, merge_efficiency, compute_efficiency,
                            backfill_vo2max_monthly,
                            compute_durability, compute_aerobic_base,
-                           compute_economy, backfill_economy)
+                           compute_economy, backfill_economy,
+                           fetch_threshold_pace)
 from profiles import get_profile
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -161,6 +162,14 @@ def main():
     except Exception as e:
         print(f"WARNUNG: Marathon-Indikatoren fehlgeschlagen ({e}).")
         metrics["marathon"] = (existing.get("metrics") or {}).get("marathon")
+
+    # Laktatschwellen-Tempo (12 Monate) – Kennzahl fuer die "Schwelle"-Kachel
+    try:
+        metrics["threshold"] = fetch_threshold_pace(api, today)
+        print(f"Schwellentempo: {len(metrics['threshold'])} Werte")
+    except Exception as e:
+        print(f"WARNUNG: Schwellentempo nicht abrufbar ({e}).")
+        metrics["threshold"] = (existing.get("metrics") or {}).get("threshold")
 
     # Wie lange traegt der Garmin-Login noch? Der Refresh-Token laeuft nach
     # ~30 Tagen ab; danach hilft nur generate_session.py. Rechtzeitig warnen.
