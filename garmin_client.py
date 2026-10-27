@@ -439,9 +439,18 @@ def fetch_run_dynamics(api, running_acts):
                     if row.get("metrics") and len(row["metrics"]) > i and row["metrics"][i] is not None]
         pc = series("directPerformanceCondition")
         sl = series("directStepSpeedLossPercent")
-        ev = api.get_activity_evaluation(aid).get("summaryDTO", {})
         dyn["performance_condition"] = round(pc[-1]) if pc else None
-        dyn["step_speed_loss_pct"] = round(ev.get("stepSpeedLossPercent"), 1) if ev.get("stepSpeedLossPercent") is not None else (round(sum(sl)/len(sl), 1) if sl else None)
+        # Aktivitaets-Zusammenfassung direkt abrufen: die alte Bibliothek (Samuel)
+        # hiess dafuer get_activity_evaluation(), die neue (Carina) kennt den Namen
+        # nicht mehr – die URL ist dieselbe. Eigener try, damit ein Fehler hier den
+        # Leistungszustand nicht mit auf None setzt.
+        ev = {}
+        try:
+            ev = (api.connectapi(f"/activity-service/activity/{aid}") or {}).get("summaryDTO", {})
+        except Exception as e:
+            print(f"Aktivitaets-Zusammenfassung nicht abrufbar: {e}")
+        ssl = ev.get("stepSpeedLossPercent")
+        dyn["step_speed_loss_pct"] = round(ssl, 1) if ssl is not None else (round(sum(sl)/len(sl), 1) if sl else None)
     except Exception as e:
         print(f"Run-Dynamics-Detail-Fehler: {e}")
         dyn["performance_condition"] = None
