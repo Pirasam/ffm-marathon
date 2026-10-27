@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-10-27T17:30:18+01:00",
+  "synced_at": "2026-10-27T19:00:20+01:00",
   "sync_date": "2026-10-27",
   "token_days_left": 29.7,
   "metrics": {
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 35,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 43,
-    "stress": 19,
+    "stress": 18,
     "resting_hr": 58,
     "body_battery": 86,
-    "training_readiness": 4,
+    "training_readiness": 20,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-10-27",
+        "distance_km": 13.0,
+        "duration_min": 39,
+        "pace_min_km": 3.0,
+        "avg_hr": 106.0
+      },
       {
         "name": "Frankfurt am Main Radfahren",
         "type": "cycling",
@@ -227,19 +236,19 @@
     "challenges": [
       {
         "name": "Active October",
-        "current": 18,
+        "current": 19,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 4,
-        "pct": 90
+        "pct": 95
       },
       {
         "name": "October Time to Ride",
-        "current": 4.2,
+        "current": 4.9,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 4,
-        "pct": 21
+        "pct": 24
       },
       {
         "name": "October Gains",
