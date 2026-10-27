@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-27T06:58:21+01:00",
+  "synced_at": "2026-10-27T08:30:23+01:00",
   "sync_date": "2026-10-27",
-  "token_days_left": 29.2,
+  "token_days_left": 29.1,
   "metrics": {
     "sleep_hours": 7.1,
     "sleep_score": 80,
@@ -13,7 +13,7 @@
     "stress": 15,
     "resting_hr": 58,
     "body_battery": 86,
-    "training_readiness": 1,
+    "training_readiness": 4,
     "recent_activities": [
       {
         "name": "Frankfurt am Main - Frankfurt Marathon",
