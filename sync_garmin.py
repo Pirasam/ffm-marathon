@@ -23,7 +23,7 @@ from garmin_client import (garmin_login, fetch_garmin_metrics,
                            backfill_vo2max_monthly,
                            compute_durability, compute_aerobic_base,
                            compute_economy, backfill_economy,
-                           fetch_threshold_pace)
+                           fetch_threshold_pace, fetch_weekly_running)
 from profiles import get_profile
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -109,8 +109,14 @@ def main():
         metrics["vo2max_carried"] = True
         print(f"VO2max aus Historie uebernommen: {metrics['vo2max']}")
 
-    history = update_history(history, metrics, today.isoformat(),
-                             metrics.get("weekly_running", {}))
+    # Wochen-km lueckenlos fuer 12 Wochen neu holen (Fallback: nur die Wochen,
+    # die komplett im 14-Tage-Fenster liegen).
+    try:
+        weekly = fetch_weekly_running(api, today)
+    except Exception as e:
+        print(f"WARNUNG: Wochen-km nicht abrufbar ({e}) – nutze 14-Tage-Fenster.")
+        weekly = metrics.get("weekly_running", {})
+    history = update_history(history, metrics, today.isoformat(), weekly)
 
     # Laufeffizienz (12 Monate): einmal backfillen, dann inkrementell fortschreiben.
     try:

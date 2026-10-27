@@ -232,16 +232,21 @@ def fetch_garmin_metrics(api):
              if "running" in a.get("type", "") or "trail" in a.get("type", "")),
             None
         )
-        # Weekly running km grouped by ISO week
+        # Weekly running km grouped by ISO week – NUR Wochen, die komplett im
+        # 14-Tage-Fenster liegen. Sonst ueberschrieb die angeschnittene aelteste
+        # Woche jeden Tag den richtigen Wert (es blieb nur der Wochenend-Longrun).
+        # Die vollstaendige Historie liefert fetch_weekly_running().
         weekly = defaultdict(float)
         running_acts = []
+        window_start = date.fromisoformat(two_weeks_ago)
         for a in acts:
             atype = (a.get("activityType") or {}).get("typeKey", "")
             if "running" in atype or "trail" in atype:
                 d = date.fromisoformat((a.get("startTimeLocal") or today_str)[:10])
-                wk = f"{d.year}-W{d.isocalendar()[1]:02d}"
-                weekly[wk] += (a.get("distance") or 0) / 1000
                 running_acts.append(a)
+                if d - timedelta(days=d.weekday()) < window_start:
+                    continue
+                weekly[_iso_week(d)] += (a.get("distance") or 0) / 1000
         metrics["weekly_running"] = {k: round(v, 1) for k, v in weekly.items()}
 
         # Laufdynamik des jüngsten Laufs (+ Historie der Kernwerte)
@@ -648,6 +653,27 @@ def compute_durability(api, history, today, months=12, min_km=12):
     history["durability"] = sorted(have.values(), key=lambda x: x["d"], reverse=True)[:40]
     print(f"Durability: {added} neue Longruns, gesamt {len(history['durability'])}")
     return history
+
+
+def _iso_week(d):
+    y, w, _ = d.isocalendar()
+    return f"{y}-W{w:02d}"
+
+
+def fetch_weekly_running(api, today, weeks=12):
+    """Lauf-km je ISO-Woche fuer die letzten `weeks` Wochen (inkl. laufender
+    Woche), lueckenlos – Wochen ohne Lauf (Urlaub, Krankheit) zaehlen als 0."""
+    start = today - timedelta(days=today.weekday()) - timedelta(weeks=weeks - 1)
+    out = {_iso_week(start + timedelta(weeks=k)): 0.0 for k in range(weeks)}
+    for a in api.get_activities_by_date(start.isoformat(), today.isoformat(), "") or []:
+        atype = (a.get("activityType") or {}).get("typeKey", "")
+        if "running" not in atype and "trail" not in atype:
+            continue
+        d = date.fromisoformat((a.get("startTimeLocal") or today.isoformat())[:10])
+        wk = _iso_week(d)
+        if wk in out:
+            out[wk] += (a.get("distance") or 0) / 1000
+    return {k: round(v, 1) for k, v in out.items()}
 
 
 def fetch_threshold_pace(api, today, days=365):

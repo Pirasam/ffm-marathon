@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-27T08:30:23+01:00",
+  "synced_at": "2026-10-27T11:00:33+01:00",
   "sync_date": "2026-10-27",
-  "token_days_left": 29.1,
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 7.1,
     "sleep_score": 80,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 35,
     "hrv_balanced_low": 36,
     "hrv_balanced_high": 43,
-    "stress": 15,
+    "stress": 17,
     "resting_hr": 58,
     "body_battery": 86,
     "training_readiness": 4,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-10-27",
+        "distance_km": 14.7,
+        "duration_min": 47,
+        "pace_min_km": 3.19,
+        "avg_hr": 108.0
+      },
       {
         "name": "Frankfurt am Main - Frankfurt Marathon",
         "type": "running",
@@ -134,8 +143,7 @@
       "avg_hr": 162.0
     },
     "weekly_running": {
-      "2026-W43": 53.8,
-      "2026-W42": 27.7
+      "2026-W43": 53.8
     },
     "run_dynamics": {
       "date": "2026-10-25",
@@ -219,19 +227,19 @@
     "challenges": [
       {
         "name": "Active October",
-        "current": 17,
+        "current": 18,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 4,
-        "pct": 85
+        "pct": 90
       },
       {
         "name": "October Time to Ride",
-        "current": 3.5,
+        "current": 4.2,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 4,
-        "pct": 17
+        "pct": 21
       },
       {
         "name": "October Gains",
@@ -3153,6 +3161,10 @@
     ],
     "weekly_km": [
       {
+        "w": "2026-W44",
+        "v": 0.0
+      },
+      {
         "w": "2026-W43",
         "v": 53.8
       },
@@ -3162,43 +3174,39 @@
       },
       {
         "w": "2026-W41",
-        "v": 21.1
+        "v": 35.2
       },
       {
         "w": "2026-W40",
-        "v": 30.0
+        "v": 50.1
       },
       {
         "w": "2026-W39",
-        "v": 25.1
+        "v": 45.1
       },
       {
         "w": "2026-W38",
-        "v": 16.2
+        "v": 36.3
       },
       {
         "w": "2026-W37",
-        "v": 21.6
+        "v": 41.8
       },
       {
         "w": "2026-W36",
-        "v": 18.7
+        "v": 37.6
       },
       {
         "w": "2026-W35",
-        "v": 16.0
+        "v": 25.0
       },
       {
         "w": "2026-W34",
-        "v": 13.7
+        "v": 29.4
       },
       {
         "w": "2026-W33",
         "v": 6.6
-      },
-      {
-        "w": "2026-W32",
-        "v": 4.4
       }
     ],
     "run_dyn": [
