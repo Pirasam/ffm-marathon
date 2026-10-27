@@ -326,20 +326,14 @@ ist eine grobe Faustregel (~90 % der Schwellengeschwindigkeit) und setzt passend
     opts=opts||{};
     var color=opts.color||"#2f8e9e";
     var fmtY=opts.fmtY||function(v){return Math.round(v);};
-    var allT={};
-    (rawPts||[]).forEach(function(p){allT[p.t]=1;});
-    (trendPts||[]).forEach(function(p){allT[p.t]=1;});
-    var times=Object.keys(allT).map(Number).sort(function(a,b){return a-b;});
-    if(!times.length)return null;
-    var labels=times.map(function(t){var d=new Date(t);return d.getDate()+"."+(d.getMonth()+1)+"."+String(d.getFullYear()).slice(2);});
-    var rawMap={};(rawPts||[]).forEach(function(p){rawMap[p.t]=p.v;});
-    var trendMap={};(trendPts||[]).forEach(function(p){trendMap[p.t]=p.v;});
-    var rawData=times.map(function(t){return rawMap.hasOwnProperty(t)?rawMap[t]:null;});
-    var trendData=times.map(function(t){return trendMap.hasOwnProperty(t)?trendMap[t]:null;});
+    rawPts=(rawPts||[]).slice().sort(function(a,b){return a.t-b.t;});
+    trendPts=(trendPts||[]).slice().sort(function(a,b){return a.t-b.t;});
+    if(!rawPts.length&&!trendPts.length)return null;
     // Trend IMMER voll sichtbar (Kerninformation); rohe Streupunkte nur bis
-    // P5/P95 - ein einzelner extremer Ausreisser darf ausserhalb liegen.
-    var rawVals=(rawPts||[]).map(function(p){return p.v;});
-    var trendVals=(trendPts||[]).map(function(p){return p.v;});
+    // P5/P95 - Ausreisser werden an den Rand geklemmt und als Dreieck markiert
+    // (Tooltip zeigt den echten Wert), statt ueber den Chart hinaus zu malen.
+    var rawVals=rawPts.map(function(p){return p.v;});
+    var trendVals=trendPts.map(function(p){return p.v;});
     var lo=trendVals.length?Math.min.apply(0,trendVals):Infinity;
     var hi=trendVals.length?Math.max.apply(0,trendVals):-Infinity;
     if(rawVals.length){
@@ -347,24 +341,43 @@ ist eine grobe Faustregel (~90 % der Schwellengeschwindigkeit) und setzt passend
       hi=Math.max(hi,percentile(rawVals,0.95));
     }
     var pad=(hi-lo)*0.15||Math.abs(hi)*0.1||1;
+    var ymin=lo-pad,ymax=hi+pad;
+    var rawData=rawPts.map(function(p){
+      var c=Math.min(ymax,Math.max(ymin,p.v));
+      return {x:p.t,y:c,real:p.v,out:c!==p.v};
+    });
+    var trendData=trendPts.map(function(p){return {x:p.t,y:p.v,real:p.v};});
+    // Echte Zeitachse (linear in ms): Abstaende entsprechen der Zeit, und alle
+    // Punkte liegen innerhalb von [erster Wert, heute].
+    var tAll=rawPts.concat(trendPts).map(function(p){return p.t;});
+    var xmin=Math.min.apply(0,tAll),xmax=Math.max(END,Math.max.apply(0,tAll));
+    function fdate(t){var d=new Date(t);return d.getDate()+"."+(d.getMonth()+1)+"."+String(d.getFullYear()).slice(2);}
     return new Chart(canvas,{
       type:"line",
-      data:{labels:labels,datasets:[
+      data:{datasets:[
         {label:"roh",data:rawData,borderColor:"transparent",backgroundColor:"rgba(124,115,106,0.55)",
-         pointRadius:3,pointHoverRadius:4.5,showLine:false,order:2,spanGaps:false},
-        {label:"Trend",data:trendData,borderColor:color,backgroundColor:color+"22",
-         borderWidth:2.4,tension:.35,fill:true,pointRadius:0,pointHoverRadius:5,
-         pointBackgroundColor:color,spanGaps:true,order:1}
+         pointRadius:function(c){return c.raw&&c.raw.out?4:3;},
+         pointStyle:function(c){return c.raw&&c.raw.out?"triangle":"circle";},
+         pointRotation:function(c){
+           if(!c.raw||!c.raw.out)return 0;
+           var atTop=(c.raw.real>ymax)!==!!opts.reverse;   // reverse dreht oben/unten
+           return atTop?0:180;},
+         pointHoverRadius:4.5,showLine:false,order:2,clip:4},
+        {label:"Trend",data:trendData,borderColor:color,borderWidth:2.4,cubicInterpolationMode:"monotone",fill:false,
+         pointRadius:0,pointHoverRadius:5,pointBackgroundColor:color,order:1,clip:4}
       ]},
       options:{
-        responsive:true,maintainAspectRatio:false,
+        responsive:true,maintainAspectRatio:false,parsing:false,
         plugins:{legend:{display:false},
-          tooltip:{callbacks:{label:function(c){
-            return (c.dataset.label==="roh"?"Einzelner Lauf: ":"Trend: ")+fmtY(c.raw);
+          tooltip:{callbacks:{
+            title:function(items){return items.length?fdate(items[0].raw.x):"";},
+            label:function(c){
+              return (c.dataset.label==="roh"?"Einzelner Lauf: ":"Trend: ")+fmtY(c.raw.real);
           }}}},
         scales:{
-          x:{grid:{color:"rgba(0,0,0,0.04)"},ticks:{maxTicksLimit:6,maxRotation:0}},
-          y:{reverse:!!opts.reverse,min:lo-pad,max:hi+pad,
+          x:{type:"linear",min:xmin,max:xmax,grid:{color:"rgba(0,0,0,0.04)"},
+             ticks:{maxTicksLimit:5,maxRotation:0,callback:function(v){return fdate(v);}}},
+          y:{reverse:!!opts.reverse,min:ymin,max:ymax,
              grid:{color:"rgba(0,0,0,0.04)"},ticks:{maxTicksLimit:5,callback:function(v){return fmtY(v);}}}
         }
       }
