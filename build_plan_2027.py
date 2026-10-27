@@ -28,16 +28,24 @@ RAD = ("Rad-Pendeln locker", ["bike", "z2"], "Locker pendeln, Puls <130 – Erho
 KRAFT = ("Kraft · Beine & Rumpf", ["kraft", "rest"],
          "Kniebeugen, RDL, Ausfallschritte, Wadenheben, Nordic Curls, Rumpf. Kein Lauf.")
 REST = ("Ruhetag", ["rest"], "Pause. Erholung ist Teil des Aufbaus.")
+# Vor dem Snowboard-Urlaub (ab 19.12.2026): Kraft 2x/Woche, snowboard-spezifisch
+# (exzentrische Beinkraft, Knie-/Sprunggelenk-Stabilitaet, Rumpf-Rotation).
+KRAFT_SNOW = ("Kraft · Snowboard-Vorbereitung", ["kraft", "rest"],
+              "Bulgarian Split Squats, Wandsitzen (3× 45–60 s), langsame Kniebeugen (3 s runter), "
+              "seitliche Sprünge, Einbeinstand auf Kissen, Pallof Press, Seitstütz. Kein Lauf.")
+RAD_KRAFT = ("Rad-Pendeln + Kraft", ["bike", "kraft"],
+             "Locker pendeln (Puls <130), abends 30 Min Kraft: Split Squats, Wandsitzen, Sprünge, Rumpf.")
 
 # Longrun je Woche (Index 1..53). None = kein klassischer Longrun.
 # 0 = Regeneration, "T10"/"T21" = Formtest, "MT<n>" = Longrun mit Marathontempo-Block.
 LONGRUN = {
     1: None, 2: 8,
     3: 10, 4: 11, 5: 12, 6: 9,
-    7: 13, 8: 14, 9: 15, 10: 10,
-    11: 15, 12: 16, 13: 17, 14: 12,
-    15: 17, 16: 18, 17: 19, 18: 13,
-    19: 18, 20: 20, 21: 21, 22: "T10",
+    7: 13, 8: 12,                        # 8: Longrun schon Do 17.12., Sa Abreise
+    9: None, 10: None, 11: None,         # Snowboard-Urlaub 19.12.–10.1.
+    12: 12, 13: 14, 14: 15, 15: 11,
+    16: 16, 17: 17, 18: 18, 19: 13,
+    20: 18, 21: 20, 22: "T10",
     23: 20, 24: 21, 25: 22, 26: 15,
     27: 22, 28: 23, 29: 24, 30: 16,
     31: 24, 32: 25, 33: 26, 34: "T21",
@@ -47,14 +55,17 @@ LONGRUN = {
     47: 32, 48: 20, 49: "MT28", 50: 35,
     51: 24, 52: 16, 53: "RACE",
 }
-DELOAD = {6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 48}
+DELOAD = {6, 15, 19, 22, 26, 30, 34, 38, 42, 46, 48}
+VACATION = {9, 10, 11}   # Snowboard 19.12.2026 – ~10.1.2027
 
 
 def phase(i):
     if i <= 2:
         return "regen"
-    if i <= 10:
+    if i <= 8:
         return "basis1"
+    if i in VACATION:
+        return "urlaub"
     if i <= 22:
         return "basis2"
     if i <= 34:
@@ -65,7 +76,7 @@ def phase(i):
 
 
 PHASE_NAME = {
-    "regen": "Regeneration", "basis1": "Basis I", "basis2": "Basis II",
+    "regen": "Regeneration", "basis1": "Basis I", "urlaub": "Snowboard-Urlaub", "basis2": "Basis II",
     "aufbau": "Aufbau", "block": "Marathonblock", "taper": "Taper",
 }
 
@@ -174,12 +185,68 @@ def taper_week(i):
     ]
 
 
+def _hard_saturday(i):
+    """Longrun >= 30 km, Formtest oder MT-Longrun am Samstag -> Do nur ein Weg."""
+    lr = LONGRUN.get(i)
+    return isinstance(lr, str) or (isinstance(lr, int) and lr >= 30)
+
+
+def commute_days(i):
+    """Anzahl Doppel-Pendeltage (morgens hin, abends zurueck laufen) in Woche i.
+    Auf Samuels Wunsch (26.10.2026): Ziel 2x/Woche, behutsam aufgebaut.
+      bis Urlaub + erste Woche danach: 0 · ab 18.1.2027: 1 (Di) · ab 29.3.2027: 2 (Di + Do)
+      Entlastungswoche: eine Stufe weniger · Taper: 0.
+    Netto-Mehraufwand laut Samuel nur die Laufzeit (~1:10 statt ~40 Min pro Weg),
+    kein Rucksack noetig (Kleidung/Dusche im Buero vorhanden)."""
+    if i < 13 or phase(i) == "taper":
+        return 0
+    n = 1 if i <= 22 else 2
+    if i in DELOAD:
+        n -= 1
+    return n
+
+
+def snowboard_week(i):
+    """Urlaub: Snowboarden ist selbst harte Beinarbeit (exzentrisch wie bergab
+    laufen) – Laufen nur optional und kurz, kein Longrun."""
+    board = ("Snowboard", ["kraft", "rest"], "Pistentag. Aufwärmen vor der ersten Abfahrt, viel trinken.")
+    opt = ("Optional: locker · 5 km", ["run", "z2"],
+           "Nur an einem Pausentag ohne Piste und wenn die Beine frisch sind. Sonst Spaziergang.")
+    if i == 9:
+        return [board, board, REST, board, board, opt, board]
+    if i == 11:
+        return [board, board, REST, board, opt, ("Abreise", ["rest"], "Reisetag."),
+                ("Locker · 6 km", ["run", "z2"], "Erster Lauf nach dem Urlaub, ganz entspannt.")]
+    return [board, board, REST, opt, board, board, board]
+
+
+def pre_vacation_week(i):
+    """Woche 14.–20.12.: Longrun schon Donnerstag, Samstag Abreise."""
+    return [RAD_KRAFT,
+            ("Rücklauf · 7 km", ["run", "z2"], "Locker, am Ende 4× 20 s Steigerungen."),
+            REST,
+            (f"Longrun · {LONGRUN[i]} km", ["run", "z2", "longrun"],
+             "Vorgezogen wegen Abreise. Zone 2, Sprechtempo."),
+            KRAFT_SNOW,
+            ("Abreise · Snowboard-Urlaub", ["rest"], "Reisetag. Ab morgen Piste."),
+            ("Snowboard", ["kraft", "rest"], "Erster Pistentag – locker reinkommen.")]
+
+
 def normal_week(i, ph):
     deload = i in DELOAD
     a, b = EASY[ph]
     if deload:
         a, b = max(5, round(a * 0.7)), max(5, round(b * 0.7))
+    n_double = commute_days(i)
     tue = (f"Rücklauf · {a} km", ["run", "z2"], "Locker, Sprechtempo. Frequenz Richtung 168.")
+    if n_double >= 1:
+        if i <= 24:
+            tue = ("Pendeln hin & zurück · 20 km (10 + 10)", ["run", "z2"],
+                   "Morgens 10 km durch die Stadt, abends 10 km zurück – beides ganz locker, Z2.")
+        else:
+            tue = ("Pendeln hin & zurück · 25 km (10 + 15)", ["run", "z2"],
+                   "Morgens 10 km durch die Stadt, abends 15 km am Main – beides locker, Z2. "
+                   "Abends ruhig noch langsamer als morgens.")
     if deload or ph in ("basis1",):
         thu = (f"Rücklauf · {b} km", ["run", "z2"], "Locker." if deload else
                "Locker, am Ende 4× 20 s Steigerungen.")
@@ -190,12 +257,35 @@ def normal_week(i, ph):
         thu = QUALITY_AUFBAU[i % len(QUALITY_AUFBAU)]
     else:
         thu = QUALITY_BLOCK[i % len(QUALITY_BLOCK)]
-    return [RAD, tue, REST, thu, RAD, longrun_day(i, LONGRUN[i], ph), KRAFT]
+    # Erste zwei Pendelwochen: Do wird Rad, damit der Umfang nicht springt
+    if i in (13, 14):
+        thu = ("Rad-Pendeln locker", ["bike", "z2"],
+               "Statt Lauf: die ersten Wochen mit Doppel-Pendeltag bekommt der Do Rad, "
+               "damit der Umfang nicht springt.")
+    elif n_double >= 2 and not _hard_saturday(i):
+        t, bd, desc = thu
+        if "lt" in bd or "Marathonbelastung" in t:
+            thu = (f"{t.split(' · ')[0]} hin + locker zurück · 20 km", bd,
+                   f"Morgens 10 km: {desc} Abends 10 km ganz locker zurück.")
+        else:
+            thu = ("Pendeln hin & zurück · 20 km (10 + 10)", ["run", "z2"],
+                   "Morgens 10 km mit 6× 20 s Steigerungen, abends 10 km locker zurück.")
+    elif n_double >= 2:
+        t, bd, desc = thu
+        thu = (t, bd, desc + " Nur ein Weg laufen – Samstag steht ein großer Lauf an.")
+    # Vor dem Snowboard-Urlaub: Kraft 2x/Woche, snowboard-spezifisch
+    mon, sun = RAD, KRAFT
+    if ph == "basis1":
+        mon, sun = RAD_KRAFT, KRAFT_SNOW
+    return [mon, tue, REST, thu, RAD, longrun_day(i, LONGRUN[i], ph), sun]
 
 
 def km_of(title):
     m = re.search(r"(\d+)\s*km", title)
     return int(m.group(1)) if m else 0
+
+
+MONTHS = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
 
 
 def build():
@@ -207,27 +297,37 @@ def build():
             days = regen_week(i)
         elif ph == "taper":
             days = taper_week(i)
+        elif ph == "urlaub":
+            days = snowboard_week(i)
+        elif i == 8:
+            days = pre_vacation_week(i)
         else:
             days = normal_week(i, ph)
-        run_km = sum(km_of(t) for t, bd, _ in days if "run" in bd and t != "MARATHON FRANKFURT")
+        run_km = sum(km_of(t) for t, bd, _ in days
+                     if "run" in bd and t != "MARATHON FRANKFURT" and not t.startswith("Optional"))
         lr = LONGRUN[i]
         lr_txt = ("–" if lr is None else "42,2 km" if lr == "RACE" else "10 km Test" if lr == "T10"
                   else "21 km Test" if lr == "T21" else f"{lr[2:]} km (MT)" if isinstance(lr, str)
                   else f"{lr} km")
-        intensity = {"regen": "keine", "basis1": "nur locker", "basis2": "locker + Steigerungen",
-                     "aufbau": "1× Qualität", "block": "1× Qualität", "taper": "kurz & frisch"}[ph]
+        intensity = {"regen": "keine", "basis1": "locker + 2× Kraft", "urlaub": "Piste",
+                     "basis2": "locker + Steigerungen", "aufbau": "1× Qualität",
+                     "block": "1× Qualität", "taper": "kurz & frisch"}[ph]
         if i in DELOAD:
             intensity = "Entlastung"
-        focus = f"{PHASE_NAME[ph]}{' · Entlastung' if i in DELOAD else ''} ({run_km} km)" if ph != "regen" \
-            else "Regeneration nach dem Marathon"
+        n_double = commute_days(i)
+        focus = {"regen": "nach dem Marathon", "urlaub": "Snowboarden statt Laufen"}.get(
+            ph, f"~{run_km} km Laufen" + (f" · {n_double}× hin & zurück" if n_double else ""))
+        if i in DELOAD:
+            focus = "Entlastung · " + focus
         if i == 53:
             focus = "Frisch bleiben · MARATHON"
         week = {
-            "label": f"W{i}",
-            "name": f"Woche {i}" if i != 53 else "Renn-Woche",
+            # Datum statt Wochennummer (Wunsch Samuel): Tab = Montag der Woche
+            "label": f"{ws.day}.{ws.month}.",
+            "name": PHASE_NAME[ph] if i != 53 else "Renn-Woche",
             "focus": focus,
-            "stats": [{"l": "Laufen", "v": f"~{run_km} km" if run_km else "0 km"},
-                      {"l": "Rad", "v": "Pendeln" if ph != "regen" or i == 2 else "locker"},
+            "stats": [{"l": "Laufen", "v": f"~{run_km} km" if run_km else "optional"},
+                      {"l": "Rad", "v": "–" if ph == "urlaub" else "Pendeln" if ph != "regen" or i == 2 else "locker"},
                       {"l": "Intensität", "v": intensity},
                       {"l": "Longrun", "v": lr_txt}],
             "days": [],
@@ -248,14 +348,25 @@ def build():
 PHASE_NOTE = {
     "regen": "Zwei Wochen Regeneration nach dem Marathon. Erst laufen, wenn Treppen wieder normal gehen. "
              "Brustdruck, Herzstolpern oder Fieber → Arzt, kein Training.",
-    "basis1": "Basis I: Laufen wieder zur Routine machen. Alles locker, Gewicht Richtung 87 kg ohne hartes Defizit.",
-    "basis2": "Basis II: Longrun wächst langsam. Steigerungen halten die Beine schnell, ohne zu ermüden.",
+    "basis1": "Basis I: Laufen wieder zur Routine machen, alles locker. Dazu Kraft 2× pro Woche als "
+              "Vorbereitung auf den Snowboard-Urlaub (Beine, Knie-Stabilität, Rumpf).",
+    "urlaub": "Snowboard-Urlaub: Die Piste ist das Training. Laufen nur optional und kurz – kein Longrun, "
+              "kein schlechtes Gewissen.",
+    "basis2": "Basis II: Longrun wächst wieder, dazu 1 Pendel-Tag (morgens hin, abends zurück laufen). "
+              "Steigerungen halten die Beine schnell.",
     "aufbau": "Aufbau: 1 Qualitätseinheit pro Woche (Do). Fühlt sich die Woche schwer an, Qualität zuerst streichen.",
     "block": "Marathonblock: Die 30er sind das Wichtigste. Verpflegung jedes Mal üben (~50–60 g KH/h).",
     "taper": "Taper: Umfang runter, Frische rauf. Keine neuen Schuhe, kein neues Essen.",
 }
 NOTES = {
-    10: "Weihnachten/Silvester: Entlastungswoche, Longrun gern flexibel verschieben.",
+    3: "Ab jetzt Kraft 2× pro Woche (Mo abends + So) bis zum Urlaub – die Oberschenkel danken es dir auf der Piste.",
+    8: "Letzte Woche vor dem Urlaub: Longrun auf Donnerstag vorgezogen, Samstag Abreise.",
+    12: "Zurück vom Urlaub: eine Woche locker wieder reinkommen. Die Beine sind vom Boarden oft müder als gedacht.",
+    13: "Neu: Dienstag morgens hin UND abends zurück laufen (~1 h mehr Zeit als mit Rad/U-Bahn). Die ersten "
+        "2 Wochen ist Donnerstag dafür Rad. Abbruch-Regel: Ruhepuls/HRV eine Woche auffällig oder Schmerz "
+        "> 1 Tag → zurück auf ein Weg.",
+    23: "Ab jetzt 2 Pendel-Tage (Di + Do), Di die ersten 2 Wochen noch 10 + 10. Vor 30ern, Tests und MT-Longruns am Do nur ein Weg. "
+        "Abbruch-Regel: Ruhepuls/HRV eine Woche auffällig oder Schmerz > 1 Tag → zurück auf 1 Pendel-Tag.",
     22: "Formtest 10 km: Ergebnis legt die Tempobereiche für den Aufbau fest.",
     34: "Formtest Halbmarathon: realistische Marathon-Prognose ≈ HM-Zeit × 2,2 (für Erstlings-Marathonis eher × 2,25).",
     40: "Erster 30er des Jahres. 2026 gab es nur einen – dieses Mal werden es fünf.",
@@ -284,4 +395,4 @@ if __name__ == "__main__":
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
     peak = max((km_of(d["title"]), w["label"]) for w in weeks for d in w["days"] if d.get("longrun"))
-    print(f"OK: {len(weeks)} Wochen ({starts[0]} – {starts[-1]}), Peak-Longrun {peak[0]} km in {peak[1]}")
+    print(f"OK: {len(weeks)} Wochen ({starts[0]} – {starts[-1]}), Peak-Longrun {peak[0]} km in Woche ab {peak[1]}")

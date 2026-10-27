@@ -107,7 +107,8 @@ def get_plan_context(html_content):
         if today >= date.fromisoformat(ws):
             cur = i
     day_de = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
-    base = f"Woche {cur + 1} von {len(week_starts)}, heute {day_de[today.weekday()]} ({today.isoformat()})"
+    base = (f"Planwoche ab {date.fromisoformat(week_starts[cur]).strftime('%d.%m.%Y')}, heute "
+            f"{day_de[today.weekday()]} ({today.isoformat()}). Wochen IMMER mit Datum benennen, nie mit Nummer.")
 
     # Extract today's planned training from the weeks array
     try:
@@ -148,10 +149,13 @@ def get_plan_context(html_content):
                         if km_m and int(km_m.group(1)) > peak_km:
                             peak_km, peak_week = int(km_m.group(1)), wi + 1
             if peak_km:
-                base += (f"\nPLAN-VERLAUF: Longrun steigert sich planmässig bis Woche "
-                        f"{peak_week} auf {peak_km} km (Peak), danach Taper. Aktuell "
-                        f"Woche {cur + 1}/{len(week_starts)}. Ein Longrun unter {peak_km} km "
-                        f"JETZT ist normaler Zwischenstand, KEIN Rueckstand.")
+                peak_date = date.fromisoformat(week_starts[peak_week - 1]).strftime("%d.%m.%Y")
+                base += (f"\nPLAN-VERLAUF: Longrun steigert sich planmässig bis zur Woche ab "
+                        f"{peak_date} auf {peak_km} km (Peak), danach Taper. Ein Longrun unter "
+                        f"{peak_km} km JETZT ist normaler Zwischenstand, KEIN Rueckstand.")
+                note = weeks_data[cur].get("note")
+                if note:
+                    base += f"\nHINWEIS DIESER WOCHE: {note}"
     except Exception as e:
         print(f"Plan-Kontext-Fehler: {e}")
 
