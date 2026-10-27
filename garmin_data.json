@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-10-26T20:30:23+01:00",
-  "sync_date": "2026-10-26",
-  "token_days_left": 29.6,
+  "synced_at": "2026-10-27T06:58:21+01:00",
+  "sync_date": "2026-10-27",
+  "token_days_left": 29.2,
   "metrics": {
-    "sleep_hours": 6.0,
-    "sleep_score": 56,
+    "sleep_hours": 7.1,
+    "sleep_score": 80,
     "hrv_status": "UNBALANCED",
-    "hrv_value": 24,
-    "hrv_weekly_avg": 34,
+    "hrv_value": 41,
+    "hrv_weekly_avg": 35,
     "hrv_balanced_low": 36,
-    "hrv_balanced_high": 44,
-    "stress": 28,
-    "resting_hr": 65,
-    "body_battery": 24,
+    "hrv_balanced_high": 43,
+    "stress": 15,
+    "resting_hr": 58,
+    "body_battery": 86,
     "training_readiness": 1,
     "recent_activities": [
       {
@@ -182,8 +182,9 @@
         }
       }
     },
-    "weight_kg": 90.2,
+    "weight_kg": 90.0,
     "weight_history": {
+      "2026-10-27": 90.0,
       "2026-10-19": 90.2,
       "2026-10-16": 92.1,
       "2026-10-14": 89.7,
@@ -212,8 +213,7 @@
       "2026-08-06": 90.3,
       "2026-08-05": 89.9,
       "2026-08-04": 90.4,
-      "2026-08-03": 90.9,
-      "2026-07-28": 89.5
+      "2026-08-03": 90.9
     },
     "vo2max": 43.9,
     "challenges": [
@@ -222,7 +222,7 @@
         "current": 17,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 85
       },
       {
@@ -230,7 +230,7 @@
         "current": 3.5,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 17
       },
       {
@@ -238,7 +238,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 0
       },
       {
@@ -246,7 +246,7 @@
         "current": 156.7,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 66,
+        "days_remaining": 65,
         "pct": 52
       }
     ],
@@ -255,7 +255,7 @@
       "method": "LACTATE_THRESHOLD",
       "lthr": 171,
       "max_hr": 197,
-      "resting_hr": 59,
+      "resting_hr": 60,
       "z1_floor": 97,
       "z2_floor": 115,
       "z3_floor": 137,
@@ -1387,7 +1387,7 @@
       "ref_dist": 9.2,
       "fit_a": 64.76,
       "fit_b": 0.5889,
-      "generated": "2026-10-26",
+      "generated": "2026-10-27",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2503,7 +2503,7 @@
           "gct": 268.0
         }
       ],
-      "generated": "2026-10-26"
+      "generated": "2026-10-27"
     },
     "threshold": [
       {
@@ -2667,6 +2667,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-10-27",
+        "v": 41
+      },
+      {
         "d": "2026-10-26",
         "v": 24
       },
@@ -2781,13 +2785,13 @@
       {
         "d": "2026-09-28",
         "v": 34
-      },
-      {
-        "d": "2026-09-27",
-        "v": 36
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-27",
+        "v": 58
+      },
       {
         "d": "2026-10-26",
         "v": 65
@@ -2903,13 +2907,13 @@
       {
         "d": "2026-09-28",
         "v": 60
-      },
-      {
-        "d": "2026-09-27",
-        "v": 57
       }
     ],
     "weight": [
+      {
+        "d": "2026-10-27",
+        "v": 90.0
+      },
       {
         "d": "2026-10-19",
         "v": 90.2
@@ -3145,10 +3149,6 @@
       {
         "d": "2026-06-20",
         "v": 90.7
-      },
-      {
-        "d": "2026-06-18",
-        "v": 91.0
       }
     ],
     "weekly_km": [
@@ -3799,6 +3799,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-27",
+        "v": 43.9
+      },
+      {
         "d": "2026-10-26",
         "v": 43.9
       },
@@ -4033,10 +4037,6 @@
       {
         "d": "2026-08-27",
         "v": 43.1
-      },
-      {
-        "d": "2026-08-26",
-        "v": 43.3
       }
     ],
     "efficiency": [
