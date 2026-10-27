@@ -40,6 +40,7 @@ fi
 git fetch --quiet origin main 2>/dev/null || true
 git checkout --quiet origin/main -- "$DATA" \
   render_frau.py marathon_indicators.py garmin_client.py sync_garmin.py profiles.py \
+  threshold_card.py page_checks.py check_dashboards.py \
   2>/dev/null || true
 
 # Drosselung: nicht oefter als alle 8 Minuten (ausser --force).
@@ -104,7 +105,10 @@ if ! "$PY" render_frau.py; then
   exit 1
 fi
 
-git add "$DATA" "$HTML"
+# 3b) Automatische Pruefung (Kontrollschleife): Daten + frisch gerenderte Seite.
+"$PY" check_dashboards.py --profile frau || echo "Pruefung meldet Fehler (siehe checks/frau.json)."
+
+git add "$DATA" "$HTML" checks/frau.json
 git -c user.name="Garmin Sync" -c user.email="garmin-sync@local" \
     commit -q -m "Carina: Garmin-Daten + Dashboard $(date +%Y-%m-%d)"
 
@@ -113,8 +117,8 @@ for i in 1 2 3; do
   if ! git pull --rebase --autostash --quiet origin main 2>/dev/null; then
     if [ -n "$(git diff --name-only --diff-filter=U 2>/dev/null)" ]; then
       echo "Konflikt – behalte die frisch gesyncten Daten."
-      git checkout --theirs -- "$DATA" "$HTML" 2>/dev/null || true
-      git add "$DATA" "$HTML" 2>/dev/null || true
+      git checkout --theirs -- "$DATA" "$HTML" checks/frau.json 2>/dev/null || true
+      git add "$DATA" "$HTML" checks/frau.json 2>/dev/null || true
       GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || {
         git rebase --abort 2>/dev/null || true
         rm -rf .git/rebase-merge .git/rebase-apply

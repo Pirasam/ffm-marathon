@@ -12,6 +12,7 @@ from datetime import date, timedelta
 
 from marathon_indicators import marathon_indicators
 from threshold_card import threshold_card
+import page_checks
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "garmin_data.json")
@@ -578,6 +579,7 @@ def main():
         html = inject_garmin_data(html, metrics, claude_result)
         html = inject_efficiency(html, metrics)
         html = inject_threshold(html, metrics)
+        html = page_checks.inject(html, "checks/samuel.json")
         with open(html_path, "w", encoding="utf-8") as f:
             f.write(html)
         print("index.html aktualisiert (Genesungs-Modus).")
@@ -618,6 +620,7 @@ def main():
     html = inject_garmin_data(html, metrics, claude_result)
     html = inject_efficiency(html, metrics)
     html = inject_threshold(html, metrics)
+    html = page_checks.inject(html, "checks/samuel.json")
 
     with open(html_path, "w", encoding="utf-8") as f:
         f.write(html)

@@ -65,6 +65,21 @@ if ! "$PY" sync_garmin.py; then
   exit 1
 fi
 
+# 1b) Automatische Pruefung (Kontrollschleife): Daten + veroeffentlichte Seite.
+#     Ergebnis -> checks/samuel.json (das Dashboard zeigt daraus ein Banner).
+"$PY" check_dashboards.py --profile samuel --html-from-origin || echo "Pruefung meldet Fehler (siehe checks/samuel.json)."
+CHECKS_CHANGED=$("$PY" - checks/samuel.json <<'PY' 2>/dev/null || echo yes
+import json, subprocess, sys
+def core(src):
+    try: return json.dumps(json.loads(src).get("issues"), sort_keys=True)
+    except Exception: return None
+now = core(open(sys.argv[1]).read())
+try: prev = core(subprocess.check_output(["git","show","origin/main:"+sys.argv[1]]).decode())
+except Exception: prev = None
+print("no" if (now is not None and now == prev) else "yes")
+PY
+)
+
 # 2) Nur committen, wenn sich die WERTE geaendert haben (synced_at/Token-Restlauf
 #    aendern sich jeden Lauf – die zaehlen nicht, sonst Push-Spam alle paar Minuten).
 CHANGED=$("$PY" - <<'PY' 2>/dev/null || echo yes
@@ -84,14 +99,14 @@ except Exception:
 print("no" if (now is not None and now == prev) else "yes")
 PY
 )
-if [ "$CHANGED" = "no" ]; then
+if [ "$CHANGED" = "no" ] && [ "$CHECKS_CHANGED" = "no" ]; then
   echo "Werte unveraendert – nichts zu pushen."
-  git checkout --quiet -- garmin_data.json 2>/dev/null || true
+  git checkout --quiet -- garmin_data.json checks/samuel.json 2>/dev/null || true
   echo "[$(date '+%H:%M:%S')] Fertig (unveraendert)"
   exit 0
 fi
 
-git add garmin_data.json
+git add garmin_data.json checks/samuel.json
 git -c user.name="Garmin Sync" -c user.email="garmin-sync@local" \
     commit -q -m "Garmin-Daten $(date +%Y-%m-%d)"
 
@@ -101,8 +116,8 @@ for i in 1 2 3; do
   if ! git pull --rebase --autostash --quiet origin main 2>/dev/null; then
     if [ -n "$(git diff --name-only --diff-filter=U 2>/dev/null)" ]; then
       echo "Konflikt – behalte die frisch gesyncten Daten."
-      git checkout --theirs -- garmin_data.json 2>/dev/null || true
-      git add garmin_data.json 2>/dev/null || true
+      git checkout --theirs -- garmin_data.json checks/samuel.json 2>/dev/null || true
+      git add garmin_data.json checks/samuel.json 2>/dev/null || true
       GIT_EDITOR=true git rebase --continue >/dev/null 2>&1 || {
         git rebase --abort 2>/dev/null || true
         rm -rf .git/rebase-merge .git/rebase-apply

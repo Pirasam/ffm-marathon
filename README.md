@@ -59,6 +59,18 @@ ausgewiesen — statt so zu tun, als wäre alles frisch.
 | `daily_sync.sh` + `com.pirasam.garmin-sync.plist` | Optionale Mac-Redundanz |
 | `generate_session.py` | Garmin-Login erneuern |
 
+## Automatische Kontrolle
+
+Nach jedem Sync läuft `check_dashboards.py` (Daten-Plausibilität, Wochen-km
+gegen Einzelläufe, fehlende Werte, Seite im Headless-Browser: JS-Fehler und
+Chart-Punkte außerhalb der Achsen). Ergebnis: `checks/samuel.json` bzw.
+`checks/frau.json` – die Dashboards zeigen daraus oben ein Banner.
+
+Täglich ~07:45 läuft eine Wartungs-Routine (Claude Code in der Cloud): sie
+prüft erneut inkl. Screenshot-Sichtung, repariert Code-Fehler selbstständig
+direkt auf `main` und schickt eine Push-/Mail-Zusammenfassung, wenn etwas
+gefunden wurde.
+
 ## Nachschauen, was passiert ist
 
 - **Cloud:** https://github.com/Pirasam/ffm-marathon/actions

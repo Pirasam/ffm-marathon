@@ -20,6 +20,7 @@ from datetime import date, timedelta
 
 from marathon_indicators import marathon_indicators
 from threshold_card import threshold_card
+import page_checks
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(REPO_DIR, "frau", "garmin_data.json")
@@ -876,6 +877,8 @@ def main():
     with open(DATA_PATH, encoding="utf-8") as f:
         data = json.load(f)
     html = build_html(data)
+    # Selbsttest + Pruef-Banner (Kontrollschleife, siehe check_dashboards.py)
+    html = page_checks.inject(html, "../checks/frau.json")
     os.makedirs(os.path.dirname(HTML_PATH), exist_ok=True)
     tmp = HTML_PATH + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
