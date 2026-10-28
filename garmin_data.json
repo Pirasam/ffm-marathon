@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-10-27T19:00:20+01:00",
-  "sync_date": "2026-10-27",
-  "token_days_left": 29.7,
+  "synced_at": "2026-10-28T06:58:21+01:00",
+  "sync_date": "2026-10-28",
+  "token_days_left": 29.2,
   "metrics": {
-    "sleep_hours": 7.1,
-    "sleep_score": 80,
-    "hrv_status": "UNBALANCED",
-    "hrv_value": 41,
-    "hrv_weekly_avg": 35,
-    "hrv_balanced_low": 36,
+    "sleep_hours": 9.3,
+    "sleep_score": 88,
+    "hrv_status": "BALANCED",
+    "hrv_value": 37,
+    "hrv_weekly_avg": 36,
+    "hrv_balanced_low": 35,
     "hrv_balanced_high": 43,
-    "stress": 18,
-    "resting_hr": 58,
-    "body_battery": 86,
-    "training_readiness": 20,
+    "stress": 15,
+    "resting_hr": 57,
+    "body_battery": 96,
+    "training_readiness": 52,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
@@ -131,15 +131,6 @@
         "duration_min": 47,
         "pace_min_km": 7.43,
         "avg_hr": 137.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-10-13",
-        "distance_km": 6.9,
-        "duration_min": 67,
-        "pace_min_km": 9.71,
-        "avg_hr": 118.0
       }
     ],
     "last_run": {
@@ -191,16 +182,12 @@
           "cadence": 165.0,
           "vertical_ratio": 12.3,
           "gct": 273.0
-        },
-        "2026-10-13": {
-          "cadence": 156.0,
-          "vertical_ratio": 13.9,
-          "gct": 304.0
         }
       }
     },
-    "weight_kg": 90.0,
+    "weight_kg": 89.5,
     "weight_history": {
+      "2026-10-28": 89.5,
       "2026-10-27": 90.0,
       "2026-10-19": 90.2,
       "2026-10-16": 92.1,
@@ -239,7 +226,7 @@
         "current": 19,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 95
       },
       {
@@ -247,7 +234,7 @@
         "current": 4.9,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 24
       },
       {
@@ -255,7 +242,7 @@
         "current": 0.0,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 4,
+        "days_remaining": 3,
         "pct": 0
       },
       {
@@ -263,7 +250,7 @@
         "current": 156.7,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 65,
+        "days_remaining": 64,
         "pct": 52
       }
     ],
@@ -1404,7 +1391,7 @@
       "ref_dist": 9.2,
       "fit_a": 64.76,
       "fit_b": 0.5889,
-      "generated": "2026-10-27",
+      "generated": "2026-10-28",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2520,7 +2507,7 @@
           "gct": 268.0
         }
       ],
-      "generated": "2026-10-27"
+      "generated": "2026-10-28"
     },
     "threshold": [
       {
@@ -2684,6 +2671,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-10-28",
+        "v": 37
+      },
+      {
         "d": "2026-10-27",
         "v": 41
       },
@@ -2798,13 +2789,13 @@
       {
         "d": "2026-09-29",
         "v": 37
-      },
-      {
-        "d": "2026-09-28",
-        "v": 34
       }
     ],
     "rhr": [
+      {
+        "d": "2026-10-28",
+        "v": 57
+      },
       {
         "d": "2026-10-27",
         "v": 58
@@ -2920,13 +2911,13 @@
       {
         "d": "2026-09-29",
         "v": 60
-      },
-      {
-        "d": "2026-09-28",
-        "v": 60
       }
     ],
     "weight": [
+      {
+        "d": "2026-10-28",
+        "v": 89.5
+      },
       {
         "d": "2026-10-27",
         "v": 90.0
@@ -3162,10 +3153,6 @@
       {
         "d": "2026-06-22",
         "v": 91.0
-      },
-      {
-        "d": "2026-06-20",
-        "v": 90.7
       }
     ],
     "weekly_km": [
@@ -3816,6 +3803,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-28",
+        "v": 43.9
+      },
+      {
         "d": "2026-10-27",
         "v": 43.9
       },
@@ -4049,10 +4040,6 @@
       },
       {
         "d": "2026-08-28",
-        "v": 43.1
-      },
-      {
-        "d": "2026-08-27",
         "v": 43.1
       }
     ],
