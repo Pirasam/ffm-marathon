@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-10-29T10:00:25+01:00",
+  "synced_at": "2026-10-29T13:00:34+01:00",
   "sync_date": "2026-10-29",
-  "token_days_left": 29.9,
+  "token_days_left": 29.8,
   "metrics": {
     "sleep_hours": 8.2,
     "sleep_score": 94,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 36,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 43,
-    "stress": 14,
+    "stress": 18,
     "resting_hr": 57,
     "body_battery": 100,
     "training_readiness": 78,
@@ -260,7 +260,7 @@
       "method": "LACTATE_THRESHOLD",
       "lthr": 171,
       "max_hr": 197,
-      "resting_hr": 59,
+      "resting_hr": 58,
       "z1_floor": 97,
       "z2_floor": 115,
       "z3_floor": 137,
