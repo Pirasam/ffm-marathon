@@ -1,12 +1,17 @@
 {
   "profile": "samuel",
-  "checked_at": "2026-10-30T14:30:42+01:00",
+  "checked_at": "2026-10-30T16:02:41+01:00",
   "ok": true,
   "issues": [
     {
       "sev": "warn",
       "code": "claude",
       "msg": "KI-Empfehlung fehlgeschlagen: JSONDecodeError: Expecting property name enclosed in double quotes: line 16 column 1 (char 1272)"
+    },
+    {
+      "sev": "warn",
+      "code": "page",
+      "msg": "Browser-Render fehlgeschlagen: Command '['/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '--headless=new', '--disable-gpu', '--no-sandbox', '--user-data-dir=/var/folders/2x/t6g3g0qs2b94jwgt9dj399fw0000gn/T/tmpkoeff9a3', '--window-size=420,3000', '--virtual-time-budget=8000', '--dump-dom', 'file:///Users/samuelpirard/ffm-marathon/.check_tmp.html']' timed out after 120 seconds"
     }
   ]
 }
