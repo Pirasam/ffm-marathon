@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-10-30T17:15:21+01:00",
-  "sync_date": "2026-10-30",
+  "synced_at": "2026-10-31T07:13:22+01:00",
+  "sync_date": "2026-10-31",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.5,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": 22,
-    "resting_hr": 57,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 89,
-    "training_readiness": 100,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -105,7 +105,7 @@
         "current": 50.7,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 63
       },
       {
@@ -113,7 +113,7 @@
         "current": 9,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 45
       },
       {
@@ -121,7 +121,7 @@
         "current": 1.9,
         "goal": 15.0,
         "unit": "h",
-        "days_remaining": 1,
+        "days_remaining": 0,
         "pct": 13
       },
       {
@@ -129,7 +129,7 @@
         "current": 50.7,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 62,
+        "days_remaining": 61,
         "pct": 17
       },
       {
@@ -137,7 +137,7 @@
         "current": 5.5,
         "goal": 148.1,
         "unit": "km",
-        "days_remaining": 62,
+        "days_remaining": 61,
         "pct": 4
       }
     ],
@@ -156,7 +156,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-10-21",
-      "day_in_cycle": 10,
+      "day_in_cycle": 11,
       "phase": "fruchtbar",
       "phase_raw": 3,
       "period_length": 6,
@@ -164,10 +164,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 7,
-      "next_period_in_days": 18,
+      "days_until_next_phase": 6,
+      "next_period_in_days": 17,
       "next_period_date": "2026-11-17",
-      "next_follicular_in_days": 24
+      "next_follicular_in_days": 23
     },
     "_errors": [],
     "efficiency": {
@@ -609,7 +609,7 @@
       "ref_dist": 5.3,
       "fit_a": 96.04,
       "fit_b": 0.4491,
-      "generated": "2026-10-30",
+      "generated": "2026-10-31",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1143,7 +1143,7 @@
           "gct": 303.0
         }
       ],
-      "generated": "2026-10-30"
+      "generated": "2026-10-31"
     },
     "threshold": [
       {
@@ -1182,6 +1182,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-10-31",
+        "v": 29
+      },
       {
         "d": "2026-10-30",
         "v": 29
@@ -1296,10 +1300,6 @@
       },
       {
         "d": "2026-10-02",
-        "v": 29
-      },
-      {
-        "d": "2026-10-01",
         "v": 29
       }
     ],
@@ -1767,6 +1767,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-10-31",
+        "v": 39.3
+      },
+      {
         "d": "2026-10-30",
         "v": 39.3
       },
@@ -2000,10 +2004,6 @@
       },
       {
         "d": "2026-08-29",
-        "v": 39.3
-      },
-      {
-        "d": "2026-08-28",
         "v": 39.3
       }
     ],
