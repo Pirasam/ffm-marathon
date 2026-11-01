@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-01T17:30:24+01:00",
+  "synced_at": "2026-11-01T20:30:32+01:00",
   "sync_date": "2026-11-01",
-  "token_days_left": 28.9,
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 7.0,
     "sleep_score": 87,
@@ -244,11 +244,11 @@
       },
       {
         "name": "November Step Month",
-        "current": 3944,
+        "current": 5670,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 29,
-        "pct": 1
+        "pct": 2
       },
       {
         "name": "November Time to Run",
