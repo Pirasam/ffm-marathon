@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-01T06:58:47+01:00",
+  "synced_at": "2026-11-01T10:00:26+01:00",
   "sync_date": "2026-11-01",
-  "token_days_left": 29.4,
+  "token_days_left": 29.2,
   "metrics": {
     "sleep_hours": 7.0,
     "sleep_score": 87,
@@ -226,6 +226,54 @@
     },
     "vo2max": 43.9,
     "challenges": [
+      {
+        "name": "November Gains",
+        "current": 0.0,
+        "goal": 4.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "November Time to Run",
+        "current": 0.0,
+        "goal": 10.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "November Time to Ride",
+        "current": 0.0,
+        "goal": 20.0,
+        "unit": "h",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "Active November",
+        "current": 0,
+        "goal": 20,
+        "unit": "Aktivitäten",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "November Rundown",
+        "current": 0.0,
+        "goal": 80.5,
+        "unit": "km",
+        "days_remaining": 29,
+        "pct": 0
+      },
+      {
+        "name": "November Step Month",
+        "current": 198,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 29,
+        "pct": 0
+      },
       {
         "name": "2026 Running - Stage 4",
         "current": 156.7,
