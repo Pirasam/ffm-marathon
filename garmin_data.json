@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-02T19:00:31+01:00",
+  "synced_at": "2026-11-02T20:30:28+01:00",
   "sync_date": "2026-11-02",
-  "token_days_left": 29.1,
+  "token_days_left": 29.0,
   "metrics": {
     "sleep_hours": 6.3,
     "sleep_score": 80,
@@ -13,7 +13,7 @@
     "stress": 22,
     "resting_hr": 60,
     "body_battery": 85,
-    "training_readiness": 68,
+    "training_readiness": 75,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
@@ -246,7 +246,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 8228,
+        "current": 10345,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 28,
