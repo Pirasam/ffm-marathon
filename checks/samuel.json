@@ -1,12 +1,6 @@
 {
   "profile": "samuel",
-  "checked_at": "2026-11-02T14:30:48+01:00",
+  "checked_at": "2026-11-02T16:01:00+01:00",
   "ok": true,
-  "issues": [
-    {
-      "sev": "warn",
-      "code": "sync_error",
-      "msg": "Sync-Fehler: sleep: HTTPSConnectionPool(host='connectapi.garmin.com', port=443): Read timed out."
-    }
-  ]
+  "issues": []
 }
