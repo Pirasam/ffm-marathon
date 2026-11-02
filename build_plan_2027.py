@@ -39,9 +39,9 @@ RAD_KRAFT = ("Rad-Pendeln + Kraft", ["bike", "kraft"],
 # Longrun je Woche (Index 1..53). None = kein klassischer Longrun.
 # 0 = Regeneration, "T10"/"T21" = Formtest, "MT<n>" = Longrun mit Marathontempo-Block.
 LONGRUN = {
-    1: None, 2: 8,
-    3: 10, 4: 11, 5: 12, 6: 9,
-    7: 13, 8: 12,                        # 8: Longrun schon Do 17.12., Sa Abreise
+    1: None, 2: 11,                     # 2: Sa 7.11. Test 10-12 km vor dem HM
+    3: 21, 4: None, 5: 12, 6: 13,       # 3: Sa 14.11. Halbmarathon als Genusslauf, 4: Entlastung
+    7: 14, 8: 12,                        # 8: Longrun schon Do 17.12., Sa Abreise
     9: None, 10: None, 11: None,         # Snowboard-Urlaub 19.12.–10.1.
     12: 12, 13: 14, 14: 15, 15: 11,
     16: 16, 17: 17, 18: 18, 19: 13,
@@ -55,7 +55,7 @@ LONGRUN = {
     47: 32, 48: 20, 49: "MT28", 50: 35,
     51: 24, 52: 16, 53: "RACE",
 }
-DELOAD = {6, 15, 19, 22, 26, 30, 34, 38, 42, 46, 48}
+DELOAD = {4, 15, 19, 22, 26, 30, 34, 38, 42, 46, 48}
 VACATION = {9, 10, 11}   # Snowboard 19.12.2026 – ~10.1.2027
 
 
@@ -285,6 +285,28 @@ def km_of(title):
     return int(m.group(1)) if m else 0
 
 
+# Einzelne Tage, die vom Wochenschema abweichen: (Woche, Tag 0=Mo) -> Tag
+GENUSS_HM = ("Halbmarathon-Genusslauf · 21 km", ["run", "z2", "longrun"],
+             "Kein Rennen! Ab ~8:00/km, Puls möglichst < 145, an jeder Verpflegung 1–2 Min gehen, "
+             "kein Schlussspurt. Gel ab Min 45, dann alle 30–40 Min. Ziehen/Stechen, das nicht "
+             "nach ein paar Minuten weggeht → aussteigen oder ins Ziel gehen.")
+OVERRIDES = {
+    (2, 5): ("Test-Longrun · 11 km", ["run", "z2", "longrun"],
+             "10–12 km locker als Test für den Halbmarathon am 14.11. Fühlt es sich gut an: HM passt. "
+             "Wenn nicht: HM nur halb oder auslassen."),
+    (3, 0): RAD,
+    (3, 1): ("Rücklauf · 6 km", ["run", "z2"], "Locker, Sprechtempo."),
+    (3, 3): ("Locker · 5 km", ["run", "z2"], "Kurz und locker, Beine frisch halten für Samstag."),
+    (3, 4): ("Ruhetag", ["rest"], "Ruhe vor dem Halbmarathon. Kohlenhydratreich essen."),
+    (3, 5): GENUSS_HM,
+    (3, 6): ("Spaziergang · 30–45 Min", ["rest"], "Beine lockern, keine Kraft heute."),
+    (4, 0): RAD,
+    (4, 1): ("Locker · 5 km", ["run", "z2"], "Entlastung nach dem Halbmarathon. Ganz ruhig."),
+    (4, 3): ("Locker · 6 km", ["run", "z2"], "Locker, am Ende 4× 20 s Steigerungen, wenn die Beine frisch sind."),
+    (4, 5): ("Spaziergang oder Rad · 60 Min", ["rest"], "Kein Longrun diese Woche."),
+}
+
+
 MONTHS = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
 
 
@@ -303,10 +325,11 @@ def build():
             days = pre_vacation_week(i)
         else:
             days = normal_week(i, ph)
+        days = [OVERRIDES.get((i, k), dd) for k, dd in enumerate(days)]
         run_km = sum(km_of(t) for t, bd, _ in days
                      if "run" in bd and t != "MARATHON FRANKFURT" and not t.startswith("Optional"))
         lr = LONGRUN[i]
-        lr_txt = ("–" if lr is None else "42,2 km" if lr == "RACE" else "10 km Test" if lr == "T10"
+        lr_txt = ("HM 21 km" if i == 3 else "–" if lr is None else "42,2 km" if lr == "RACE" else "10 km Test" if lr == "T10"
                   else "21 km Test" if lr == "T21" else f"{lr[2:]} km (MT)" if isinstance(lr, str)
                   else f"{lr} km")
         intensity = {"regen": "keine", "basis1": "locker + 2× Kraft", "urlaub": "Piste",
@@ -359,7 +382,12 @@ PHASE_NOTE = {
     "taper": "Taper: Umfang runter, Frische rauf. Keine neuen Schuhe, kein neues Essen.",
 }
 NOTES = {
-    3: "Ab jetzt Kraft 2× pro Woche (Mo abends + So) bis zum Urlaub – die Oberschenkel danken es dir auf der Piste.",
+    2: "Samstag Test-Longrun 10–12 km: Grundlage für die Entscheidung über den Halbmarathon am 14.11.",
+    3: "Samstag 14.11.: Halbmarathon als Genusslauf (ersetzt den Longrun). Kein Rennen, Gehpausen erlaubt. "
+       "Kraft 2× pro Woche startet erst nächste Woche richtig.",
+    4: "Entlastung nach dem Halbmarathon: 2 kurze lockere Läufe, kein Longrun. Kraft erst wieder am Sonntag, "
+       "ab nächster Woche dann 2× pro Woche.",
+    5: "Ab jetzt Kraft 2× pro Woche (Mo abends + So) bis zum Urlaub – die Oberschenkel danken es dir auf der Piste.",
     8: "Letzte Woche vor dem Urlaub: Longrun auf Donnerstag vorgezogen, Samstag Abreise.",
     12: "Zurück vom Urlaub: eine Woche locker wieder reinkommen. Die Beine sind vom Boarden oft müder als gedacht.",
     13: "Neu: Dienstag morgens hin UND abends zurück laufen (~1 h mehr Zeit als mit Rad/U-Bahn). Die ersten "
