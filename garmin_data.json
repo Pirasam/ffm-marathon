@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-11-02T10:00:25+01:00",
+  "synced_at": "2026-11-02T11:30:24+01:00",
   "sync_date": "2026-11-02",
   "token_days_left": 29.4,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
-    "stress": 18,
+    "stress": 20,
     "resting_hr": 60,
     "body_battery": 85,
     "training_readiness": 68,
@@ -246,7 +246,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 6602,
+        "current": 7274,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 28,
@@ -282,7 +282,7 @@
       "method": "LACTATE_THRESHOLD",
       "lthr": 171,
       "max_hr": 197,
-      "resting_hr": 58,
+      "resting_hr": 57,
       "z1_floor": 97,
       "z2_floor": 115,
       "z3_floor": 137,
