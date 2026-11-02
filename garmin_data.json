@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-11-01T20:30:32+01:00",
-  "sync_date": "2026-11-01",
-  "token_days_left": 30.0,
+  "synced_at": "2026-11-02T06:58:16+01:00",
+  "sync_date": "2026-11-02",
+  "token_days_left": 29.6,
   "metrics": {
-    "sleep_hours": 7.0,
-    "sleep_score": 87,
+    "sleep_hours": 6.3,
+    "sleep_score": 80,
     "hrv_status": "BALANCED",
-    "hrv_value": 39,
-    "hrv_weekly_avg": 36,
-    "hrv_balanced_low": 36,
-    "hrv_balanced_high": 43,
-    "stress": 19,
-    "resting_hr": 56,
-    "body_battery": 96,
-    "training_readiness": 83,
+    "hrv_value": 36,
+    "hrv_weekly_avg": 38,
+    "hrv_balanced_low": 35,
+    "hrv_balanced_high": 44,
+    "stress": 17,
+    "resting_hr": 60,
+    "body_battery": 85,
+    "training_readiness": 79,
     "recent_activities": [
       {
         "name": "Krafttraining",
@@ -181,11 +181,6 @@
           "cadence": 163.0,
           "vertical_ratio": 11.7,
           "gct": 277.0
-        },
-        "2026-10-18": {
-          "cadence": 159.0,
-          "vertical_ratio": 13.1,
-          "gct": 296.0
         }
       }
     },
@@ -221,8 +216,7 @@
       "2026-08-11": 90.1,
       "2026-08-06": 90.3,
       "2026-08-05": 89.9,
-      "2026-08-04": 90.4,
-      "2026-08-03": 90.9
+      "2026-08-04": 90.4
     },
     "vo2max": 43.9,
     "challenges": [
@@ -231,7 +225,7 @@
         "current": 0.7,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 29,
+        "days_remaining": 28,
         "pct": 19
       },
       {
@@ -239,15 +233,15 @@
         "current": 1,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 29,
+        "days_remaining": 28,
         "pct": 5
       },
       {
         "name": "November Step Month",
-        "current": 5670,
+        "current": 6036,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 29,
+        "days_remaining": 28,
         "pct": 2
       },
       {
@@ -255,7 +249,7 @@
         "current": 0.0,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 29,
+        "days_remaining": 28,
         "pct": 0
       },
       {
@@ -263,7 +257,7 @@
         "current": 0.0,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 29,
+        "days_remaining": 28,
         "pct": 0
       },
       {
@@ -271,7 +265,7 @@
         "current": 0.0,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 29,
+        "days_remaining": 28,
         "pct": 0
       },
       {
@@ -279,7 +273,7 @@
         "current": 156.7,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 60,
+        "days_remaining": 59,
         "pct": 52
       }
     ],
@@ -1421,7 +1415,7 @@
       "ref_dist": 9.2,
       "fit_a": 64.76,
       "fit_b": 0.5889,
-      "generated": "2026-11-01",
+      "generated": "2026-11-02",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2542,7 +2536,7 @@
           "gct": 268.0
         }
       ],
-      "generated": "2026-11-01"
+      "generated": "2026-11-02"
     },
     "threshold": [
       {
@@ -2706,6 +2700,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-11-02",
+        "v": 36
+      },
+      {
         "d": "2026-11-01",
         "v": 39
       },
@@ -2820,13 +2818,13 @@
       {
         "d": "2026-10-04",
         "v": 37
-      },
-      {
-        "d": "2026-10-03",
-        "v": 37
       }
     ],
     "rhr": [
+      {
+        "d": "2026-11-02",
+        "v": 60
+      },
       {
         "d": "2026-11-01",
         "v": 56
@@ -2942,10 +2940,6 @@
       {
         "d": "2026-10-04",
         "v": 58
-      },
-      {
-        "d": "2026-10-03",
-        "v": 59
       }
     ],
     "weight": [
@@ -3192,6 +3186,10 @@
     ],
     "weekly_km": [
       {
+        "w": "2026-W45",
+        "v": 0.0
+      },
+      {
         "w": "2026-W44",
         "v": 0.0
       },
@@ -3234,10 +3232,6 @@
       {
         "w": "2026-W34",
         "v": 29.4
-      },
-      {
-        "w": "2026-W33",
-        "v": 6.6
       }
     ],
     "run_dyn": [
@@ -3838,6 +3832,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-02",
+        "v": 43.9
+      },
+      {
         "d": "2026-11-01",
         "v": 43.9
       },
@@ -4071,10 +4069,6 @@
       },
       {
         "d": "2026-09-02",
-        "v": 42.7
-      },
-      {
-        "d": "2026-09-01",
         "v": 42.7
       }
     ],
