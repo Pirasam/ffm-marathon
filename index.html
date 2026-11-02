@@ -86,18 +86,27 @@
 <!-- GARMIN:START -->
 <script>
 window.GARMIN_DATA = {
-  "sleep_hours": 6.3,
-  "sleep_score": 80,
+  "sleep_hours": null,
+  "sleep_score": null,
   "hrv_status": "BALANCED",
   "hrv_value": 36,
   "hrv_weekly_avg": 38,
   "hrv_balanced_low": 35,
   "hrv_balanced_high": 44,
-  "stress": 17,
+  "stress": 20,
   "resting_hr": 60,
   "body_battery": 85,
-  "training_readiness": 79,
+  "training_readiness": 68,
   "recent_activities": [
+    {
+      "name": "Frankfurt am Main Radfahren",
+      "type": "cycling",
+      "date": "2026-11-02",
+      "distance_km": 14.5,
+      "duration_min": 39,
+      "pace_min_km": 2.72,
+      "avg_hr": 131.0
+    },
     {
       "name": "Krafttraining",
       "type": "strength_training",
@@ -214,15 +223,6 @@ window.GARMIN_DATA = {
       "duration_min": 29,
       "pace_min_km": 2.96,
       "avg_hr": 121.0
-    },
-    {
-      "name": "Frankfurt am Main Radfahren",
-      "type": "cycling",
-      "date": "2026-10-20",
-      "distance_km": 9.6,
-      "duration_min": 32,
-      "pace_min_km": 3.32,
-      "avg_hr": 115.0
     }
   ],
   "last_run": {
@@ -260,32 +260,32 @@ window.GARMIN_DATA = {
     },
     {
       "name": "Active November",
-      "current": 1,
+      "current": 2,
       "goal": 20,
       "unit": "Aktivitäten",
       "days_remaining": 28,
-      "pct": 5
+      "pct": 10
+    },
+    {
+      "name": "November Time to Ride",
+      "current": 0.7,
+      "goal": 20.0,
+      "unit": "h",
+      "days_remaining": 28,
+      "pct": 3
     },
     {
       "name": "November Step Month",
-      "current": 6036,
+      "current": 7748,
       "goal": 300000,
       "unit": "Schritte",
       "days_remaining": 28,
-      "pct": 2
+      "pct": 3
     },
     {
       "name": "November Time to Run",
       "current": 0.0,
       "goal": 10.0,
-      "unit": "h",
-      "days_remaining": 28,
-      "pct": 0
-    },
-    {
-      "name": "November Time to Ride",
-      "current": 0.0,
-      "goal": 20.0,
       "unit": "h",
       "days_remaining": 28,
       "pct": 0
@@ -312,7 +312,7 @@ window.GARMIN_DATA = {
     "method": "LACTATE_THRESHOLD",
     "lthr": 171,
     "max_hr": 197,
-    "resting_hr": 58,
+    "resting_hr": 57,
     "z1_floor": 97,
     "z2_floor": 115,
     "z3_floor": 137,
@@ -320,7 +320,9 @@ window.GARMIN_DATA = {
     "z5_floor": 173
   },
   "cycle": null,
-  "_errors": [],
+  "_errors": [
+    "sleep: HTTPSConnectionPool(host='connectapi.garmin.com', port=443): Read timed out."
+  ],
   "vo2max_carried": true,
   "efficiency": {
     "runs": [
@@ -2728,21 +2730,21 @@ window.GARMIN_DATA = {
   ],
   "data_sync_date": "2026-11-02",
   "data_age_days": 0,
-  "token_days_left": 29.6,
-  "recommendation": "Heute steht lockeres Rad-Pendeln mit Puls unter 130 auf dem Plan – genau richtig für deine Regenerationswoche nach dem Marathon. Deine Werte (Body Battery 85, Readiness 79, HRV grün) zeigen gute Erholung, aber warte mit dem Laufen, bis Treppensteigen wieder ganz normal klappt.",
+  "token_days_left": 29.2,
+  "recommendation": "Bleib heute beim lockeren Rad-Pendeln mit Puls unter 130 – genau richtig für die Regenerationswoche nach deinem Marathon. Kein Lauftraining, einfach den Körper sanft bewegen lassen.",
   "training_intensity": "Leicht",
-  "slider_sleep": 6.5,
+  "slider_sleep": 7,
   "slider_wellbeing": 4,
   "slider_hrv": 3,
-  "predicted_finish_h": 4.95,
+  "predicted_finish_h": 4.92,
   "on_track_score": 78,
-  "on_track_note": "Du befindest dich planmäßig in der Regenerationsphase nach dem Marathon – kein Rückstand, der größte Hebel für die Sub-5h bleibt der geplante Aufbau der Longruns bis auf 35 km.",
+  "on_track_note": "Du liegst planmäßig in der Regenerationsphase nach dem Marathon – kein Rückstand, der größte Hebel für Sub-5:00 wird der geplante Aufbau auf 5× Longruns ≥30 km sein.",
   "factor_volume": 55,
   "factor_hrv": 85,
   "factor_vo2max": 70,
-  "factor_weight": 65,
+  "factor_weight": 70,
   "challenge_alert": "",
-  "run_feedback": "Vor 8 Tagen hast du deinen ersten Marathon in 5:15:19 gefinisht – die erste Hälfte in starken 2:30:48 bei Puls 162 zeigt, dass dein Kreislauf topfit war und locker Luft nach oben hatte. Der nächste Schritt ist klar: Mit den geplanten Longruns bis 35 km trainierst du gezielt deine Beine, damit sie auch nach km 29 nicht mehr einbrechen.",
+  "run_feedback": "Vor 8 Tagen hast du deinen Marathon in 5:15:19 gefinisht – die erste Hälfte in 2:30:48 war voll auf Sub-5:00-Kurs, stark bei Regen und nach stressiger Woche! Die zweite Hälfte mit Gehpausen ab km 29 zeigt klar: die Beine waren der Engpass, nicht der Kreislauf (Ø HF 162) – genau da setzt dein neuer Plan mit mehr 30+ km Longruns und Kraft an.",
   "long_run_tips": null,
   "updated": "2026-11-02",
   "_claude_error": null
