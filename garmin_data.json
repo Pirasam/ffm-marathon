@@ -1,10 +1,10 @@
 {
-  "synced_at": "2026-11-02T13:00:29+01:00",
+  "synced_at": "2026-11-02T14:30:37+01:00",
   "sync_date": "2026-11-02",
-  "token_days_left": 29.3,
+  "token_days_left": 29.2,
   "metrics": {
-    "sleep_hours": 6.3,
-    "sleep_score": 80,
+    "sleep_hours": null,
+    "sleep_score": null,
     "hrv_status": "BALANCED",
     "hrv_value": 36,
     "hrv_weekly_avg": 38,
@@ -290,7 +290,9 @@
       "z5_floor": 173
     },
     "cycle": null,
-    "_errors": [],
+    "_errors": [
+      "sleep: HTTPSConnectionPool(host='connectapi.garmin.com', port=443): Read timed out."
+    ],
     "vo2max_carried": true,
     "efficiency": {
       "runs": [
