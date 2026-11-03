@@ -1,12 +1,12 @@
 {
   "profile": "samuel",
-  "checked_at": "2026-11-03T06:59:18+01:00",
+  "checked_at": "2026-11-03T08:30:33+01:00",
   "ok": true,
   "issues": [
     {
       "sev": "warn",
       "code": "claude",
-      "msg": "KI-Empfehlung fehlgeschlagen: JSONDecodeError: Expecting property name enclosed in double quotes: line 16 column 1 (char 1167)"
+      "msg": "KI-Empfehlung fehlgeschlagen: JSONDecodeError: Expecting property name enclosed in double quotes: line 16 column 1 (char 1093)"
     }
   ]
 }
