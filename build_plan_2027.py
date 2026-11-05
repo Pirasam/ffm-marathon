@@ -84,6 +84,9 @@ PHASE_NAME = {
 EASY = {"basis1": (6, 7), "basis2": (8, 8), "aufbau": (9, 9), "block": (10, 10), "taper": (8, 6)}
 
 # Qualitaet am Donnerstag (nur Aufbau/Block, nicht in Entlastungswochen) – rotierend
+# Basis II ab Februar: alle 2 Wochen ein milder Schwellenreiz am Donnerstag (statt Steigerungen)
+BASIS2_SCHWELLE = {16: "2× 8 Min", 18: "2× 8 Min", 21: "2× 10 Min"}   # 8.2., 22.2., 15.3.2027
+
 # Aufbau: echte Steigerung ueber die 9 Qualitaetswochen (ohne Entlastung), Index = n-te Qualitaetswoche
 QUALITY_AUFBAU = [
     ("Schwelle · 10 km", ["run", "lt"], "2 km einlaufen, 2× 10 Min an der Schwelle (2 Min Trabpause), Rest locker."),
@@ -257,6 +260,11 @@ def normal_week(i, ph):
     if deload or ph in ("basis1",):
         thu = (f"Rücklauf · {b} km", ["run", "z2"], "Locker." if deload else
                "Locker, am Ende 4× 20 s Steigerungen.")
+    elif ph == "basis2" and i in BASIS2_SCHWELLE:
+        # Milder Schwellen-Einstieg ab Februar, alle 2 Wochen (Wunsch Samuel, 5.11.2026)
+        thu = ("Schwelle · 10 km", ["run", "lt"],
+               f"2 km einlaufen, {BASIS2_SCHWELLE[i]} an der Schwelle (3 Min Trabpause), Rest locker. "
+               "Kontrolliert – fühlt es sich hart an, stattdessen Steigerungen.")
     elif ph == "basis2":
         thu = (f"Rücklauf · {b} km + Steigerungen", ["run", "z2"],
                "Locker, am Ende 6× 20 s Steigerungen (zügig, nicht sprinten).")
