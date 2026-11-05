@@ -84,10 +84,17 @@ PHASE_NAME = {
 EASY = {"basis1": (6, 7), "basis2": (8, 8), "aufbau": (9, 9), "block": (10, 10), "taper": (8, 6)}
 
 # Qualitaet am Donnerstag (nur Aufbau/Block, nicht in Entlastungswochen) – rotierend
+# Aufbau: echte Steigerung ueber die 9 Qualitaetswochen (ohne Entlastung), Index = n-te Qualitaetswoche
 QUALITY_AUFBAU = [
-    ("Schwelle · 9 km", ["run", "lt"], "2 km einlaufen, 2× 10 Min an der Schwelle (2 Min Trabpause), Rest locker."),
-    ("Fahrtspiel · 9 km", ["run", "z2"], "Locker mit 6× 1 Min zügig nach Gefühl, dazwischen 2 Min locker."),
+    ("Schwelle · 10 km", ["run", "lt"], "2 km einlaufen, 2× 10 Min an der Schwelle (2 Min Trabpause), Rest locker."),
+    ("Fahrtspiel · 10 km", ["run", "lt"], "Locker mit 6× 1 Min zügig nach Gefühl, dazwischen 2 Min locker."),
     ("Schwelle · 10 km", ["run", "lt"], "2 km einlaufen, 3× 10 Min an der Schwelle (2 Min Trabpause), Rest locker."),
+    ("Schwelle · 10 km", ["run", "lt"], "2 km einlaufen, 2× 12 Min an der Schwelle (2 Min Trabpause), Rest locker."),
+    ("Fahrtspiel · 10 km", ["run", "lt"], "Locker mit 8× 1 Min zügig nach Gefühl, dazwischen 90 s locker."),
+    ("Schwelle · 10 km", ["run", "lt"], "2 km einlaufen, 3× 12 Min an der Schwelle (2 Min Trabpause), Rest locker."),
+    ("Schwelle · 10 km", ["run", "lt"], "2 km einlaufen, 2× 15 Min an der Schwelle (3 Min Trabpause), Rest locker."),
+    ("Fahrtspiel · 10 km", ["run", "lt"], "Locker mit 6× 2 Min zügig nach Gefühl, dazwischen 2 Min locker."),
+    ("Schwelle · 10 km", ["run", "lt"], "2 km einlaufen, 3× 10 Min an der Schwelle – kontrolliert, die Woche endet mit dem HM-Test."),
 ]
 QUALITY_BLOCK = [
     ("Marathonbelastung · 10 km", ["run", "z2"], "2× 20 Min im Marathontempo, 5 Min locker dazwischen. Puls notieren."),
@@ -254,7 +261,8 @@ def normal_week(i, ph):
         thu = (f"Rücklauf · {b} km + Steigerungen", ["run", "z2"],
                "Locker, am Ende 6× 20 s Steigerungen (zügig, nicht sprinten).")
     elif ph == "aufbau":
-        thu = QUALITY_AUFBAU[i % len(QUALITY_AUFBAU)]
+        n = sum(1 for k in range(23, i) if phase(k) == "aufbau" and k not in DELOAD)
+        thu = QUALITY_AUFBAU[min(n, len(QUALITY_AUFBAU) - 1)]
     else:
         thu = QUALITY_BLOCK[i % len(QUALITY_BLOCK)]
     # Erste zwei Pendelwochen: Do wird Rad, damit der Umfang nicht springt
@@ -326,6 +334,10 @@ def fix_commute(i, ph, days):
         if k == 3 and light:
             out[k] = ("Rad-Pendeln locker", ["bike", "z2"],
                       "Statt eines kurzen Laufs: Rad. Der lange Pendellauf am Dienstag deckt den Umfang ab.")
+            # Steigerungen, die am Do geplant waren, wandern auf den Dienstag
+            if "Steigerung" in desc and ph == "basis1" and i not in DELOAD and i != 3:
+                t1, bd1, _ = out[1]
+                out[1] = (t1, bd1, "Locker, am Ende 4× 20 s Steigerungen (zügig, nicht sprinten).")
         else:
             out[k] = (f"Rücklauf · {COMMUTE_KM} km{m.group(3) or ''}", bd,
                       desc if m.group(1) == "Rücklauf" else "Locker, Sprechtempo – ganze Strecke zur Arbeit oder zurück.")
