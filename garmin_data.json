@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-11-05T06:58:24+01:00",
+  "synced_at": "2026-11-05T08:30:23+01:00",
   "sync_date": "2026-11-05",
-  "token_days_left": 29.3,
+  "token_days_left": 29.2,
   "metrics": {
-    "sleep_hours": 6.8,
-    "sleep_score": 80,
+    "sleep_hours": 7.2,
+    "sleep_score": 71,
     "hrv_status": "BALANCED",
-    "hrv_value": 36,
-    "hrv_weekly_avg": 39,
+    "hrv_value": 25,
+    "hrv_weekly_avg": 36,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
-    "stress": 48,
+    "stress": 32,
     "resting_hr": 61,
-    "body_battery": 16,
-    "training_readiness": null,
+    "body_battery": 47,
+    "training_readiness": 71,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
@@ -235,7 +235,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 32534,
+        "current": 32646,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 25,
@@ -2720,7 +2720,7 @@
     "hrv": [
       {
         "d": "2026-11-05",
-        "v": 36
+        "v": 25
       },
       {
         "d": "2026-11-04",
