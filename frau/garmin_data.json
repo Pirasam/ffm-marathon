@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-11-04T08:45:20+01:00",
-  "sync_date": "2026-11-04",
+  "synced_at": "2026-11-05T07:13:22+01:00",
+  "sync_date": "2026-11-05",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 7.8,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": 21,
-    "resting_hr": 58,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 82,
-    "training_readiness": 92,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -94,8 +94,7 @@
       "2026-09-07": 66.9,
       "2026-09-01": 66.8,
       "2026-08-31": 67.1,
-      "2026-08-22": 67.6,
-      "2026-08-06": 66.3
+      "2026-08-22": 67.6
     },
     "vo2max": 39.4,
     "challenges": [
@@ -104,7 +103,7 @@
         "current": 59.7,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 57,
+        "days_remaining": 56,
         "pct": 20
       },
       {
@@ -112,7 +111,7 @@
         "current": 5.5,
         "goal": 148.1,
         "unit": "km",
-        "days_remaining": 57,
+        "days_remaining": 56,
         "pct": 4
       }
     ],
@@ -131,7 +130,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-10-21",
-      "day_in_cycle": 15,
+      "day_in_cycle": 16,
       "phase": "fruchtbar",
       "phase_raw": 3,
       "period_length": 6,
@@ -139,10 +138,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 2,
-      "next_period_in_days": 13,
+      "days_until_next_phase": 1,
+      "next_period_in_days": 12,
       "next_period_date": "2026-11-17",
-      "next_follicular_in_days": 19
+      "next_follicular_in_days": 18
     },
     "_errors": [],
     "efficiency": {
@@ -596,7 +595,7 @@
       "ref_dist": 5.3,
       "fit_a": 96.03,
       "fit_b": 0.4491,
-      "generated": "2026-11-04",
+      "generated": "2026-11-05",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1152,7 +1151,7 @@
           "gct": 321.0
         }
       ],
-      "generated": "2026-11-04"
+      "generated": "2026-11-05"
     },
     "threshold": [
       {
@@ -1195,6 +1194,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-11-05",
+        "v": 26
+      },
       {
         "d": "2026-11-04",
         "v": 26
@@ -1309,10 +1312,6 @@
       },
       {
         "d": "2026-10-07",
-        "v": 32
-      },
-      {
-        "d": "2026-10-06",
         "v": 32
       }
     ],
@@ -1786,6 +1785,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-05",
+        "v": 39.4
+      },
+      {
         "d": "2026-11-04",
         "v": 39.4
       },
@@ -2020,10 +2023,6 @@
       {
         "d": "2026-09-03",
         "v": 39.2
-      },
-      {
-        "d": "2026-09-02",
-        "v": 39.1
       }
     ],
     "efficiency": [
