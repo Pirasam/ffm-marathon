@@ -307,6 +307,35 @@ OVERRIDES = {
 }
 
 
+COMMUTE_KM = 10   # Samuels Arbeitsweg (Stadt). Kuerzere Pendellaeufe = halbe Strecke U-Bahn.
+
+
+def fix_commute(i, ph, days):
+    """Kurze Pendellaeufe (< 10 km) auf die volle Strecke bringen (Wunsch Samuel,
+    5.11.2026): normale Wochen -> 10 km; leichte Wochen (Entlastung, Basis I,
+    Taper) -> Di 10 km, Do Rad, damit der Wochenumfang etwa gleich bleibt."""
+    if i in (1, 2, 53) or phase(i) == "urlaub":
+        return days
+    light = i in DELOAD or ph in ("basis1", "regen", "taper")
+    out = list(days)
+    for k in (1, 3):
+        t, bd, desc = out[k]
+        m = re.match(r"^(Rücklauf|Locker) · (\d+) km( \+ Steigerungen)?$", t)
+        if not m or int(m.group(2)) >= COMMUTE_KM:
+            continue
+        if k == 3 and light:
+            out[k] = ("Rad-Pendeln locker", ["bike", "z2"],
+                      "Statt eines kurzen Laufs: Rad. Der lange Pendellauf am Dienstag deckt den Umfang ab.")
+        else:
+            out[k] = (f"Rücklauf · {COMMUTE_KM} km{m.group(3) or ''}", bd,
+                      desc if m.group(1) == "Rücklauf" else "Locker, Sprechtempo – ganze Strecke zur Arbeit oder zurück.")
+    if i == 4:
+        # Woche nach dem Halbmarathon: erst Do laufen, Di noch Rad
+        out[1] = ("Rad-Pendeln locker", ["bike", "z2"], "3 Tage nach dem Halbmarathon: noch Rad.")
+        out[3] = (f"Rücklauf · {COMMUTE_KM} km", ["run", "z2"], "Ganz locker, erster Lauf nach dem Halbmarathon.")
+    return out
+
+
 MONTHS = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
 
 
@@ -326,6 +355,7 @@ def build():
         else:
             days = normal_week(i, ph)
         days = [OVERRIDES.get((i, k), dd) for k, dd in enumerate(days)]
+        days = fix_commute(i, ph, days)
         run_km = sum(km_of(t) for t, bd, _ in days
                      if "run" in bd and t != "MARATHON FRANKFURT" and not t.startswith("Optional"))
         lr = LONGRUN[i]
@@ -385,7 +415,7 @@ NOTES = {
     2: "Samstag Test-Longrun 10–12 km: Grundlage für die Entscheidung über den Halbmarathon am 14.11.",
     3: "Samstag 14.11.: Halbmarathon als Genusslauf (ersetzt den Longrun). Kein Rennen, Gehpausen erlaubt. "
        "Kraft 2× pro Woche startet erst nächste Woche richtig.",
-    4: "Entlastung nach dem Halbmarathon: 2 kurze lockere Läufe, kein Longrun. Kraft erst wieder am Sonntag, "
+    4: "Entlastung nach dem Halbmarathon: Di noch Rad, Do 10 km locker, kein Longrun. Kraft erst wieder am Sonntag, "
        "ab nächster Woche dann 2× pro Woche.",
     5: "Ab jetzt Kraft 2× pro Woche (Mo abends + So) bis zum Urlaub – die Oberschenkel danken es dir auf der Piste.",
     8: "Letzte Woche vor dem Urlaub: Longrun auf Donnerstag vorgezogen, Samstag Abreise.",
