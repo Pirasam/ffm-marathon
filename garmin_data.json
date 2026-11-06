@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-06T06:58:30+01:00",
+  "synced_at": "2026-11-06T08:30:23+01:00",
   "sync_date": "2026-11-06",
-  "token_days_left": 29.3,
+  "token_days_left": 29.2,
   "metrics": {
     "sleep_hours": 8.0,
     "sleep_score": 85,
@@ -221,7 +221,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 39006,
+        "current": 39081,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 24,
