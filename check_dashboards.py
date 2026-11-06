@@ -193,11 +193,52 @@ def find_chrome():
     return None
 
 
+PLAYWRIGHT_JS = r"""
+const {chromium}=require('playwright');
+(async()=>{
+  const b=await chromium.launch();const p=await b.newPage({viewport:{width:420,height:3000}});
+  await p.route(/^https?:/,r=>r.abort());          // nur lokale Dateien (Chart.js liegt unter vendor/)
+  await p.goto(process.argv[2],{waitUntil:'load',timeout:30000});
+  await p.waitForTimeout(4000);
+  process.stdout.write(await p.content());await b.close();
+})().catch(e=>{console.error(e);process.exit(1);});
+"""
+
+
+def _dump_dom_playwright(html_path):
+    """Rueckfall fuer die Cloud: dort haengt Chrome --dump-dom, Playwright (Node) geht."""
+    node = shutil.which("node")
+    if not node:
+        return None
+    with tempfile.TemporaryDirectory() as tmp:
+        js = os.path.join(tmp, "dump.js")
+        with open(js, "w") as f:
+            f.write(PLAYWRIGHT_JS)
+        env = dict(os.environ)
+        env.setdefault("NODE_PATH", subprocess.run(["npm", "root", "-g"], capture_output=True,
+                                                   text=True).stdout.strip())
+        try:
+            res = subprocess.run([node, js, "file://" + os.path.abspath(html_path)],
+                                 capture_output=True, text=True, timeout=90, env=env)
+            return res.stdout if res.returncode == 0 else None
+        except Exception:
+            return None
+
+
 def check_page(r, html_path):
     chrome = find_chrome()
-    if not chrome:
-        r.warn("page", "Kein Browser gefunden – Seitenprüfung übersprungen.")
+    out = None
+    if chrome:
+        out = _dump_dom_chrome(chrome, html_path)
+    if not out or '<pre id="selfcheck"' not in out:
+        out = _dump_dom_playwright(html_path) or out
+    if not out:
+        r.warn("page", "Kein Browser lief durch (Chrome/Playwright) – Seitenprüfung übersprungen.")
         return
+    _eval_selfcheck(r, out)
+
+
+def _dump_dom_chrome(chrome, html_path):
     with tempfile.TemporaryDirectory() as tmp:
         try:
             out = subprocess.run(
@@ -205,12 +246,15 @@ def check_page(r, html_path):
                  # Schriften sind fuer die Pruefung egal; in der Cloud-Sandbox haengt der
                  # Abruf sonst bis zum Timeout. Chart.js liegt lokal unter vendor/.
                  "--host-resolver-rules=MAP fonts.googleapis.com ~NOTFOUND, MAP fonts.gstatic.com ~NOTFOUND",
-                 "--window-size=420,3000", "--virtual-time-budget=8000", "--dump-dom",
+                 "--window-size=420,3000", "--virtual-time-budget=8000", "--timeout=30000", "--dump-dom",
                  "file://" + os.path.abspath(html_path)],
-                capture_output=True, text=True, timeout=120).stdout
-        except Exception as e:
-            r.warn("page", f"Browser-Render fehlgeschlagen: {e}")
-            return
+                capture_output=True, text=True, timeout=60).stdout
+        except Exception:
+            return None
+    return out
+
+
+def _eval_selfcheck(r, out):
     m = re.search(r'<pre id="selfcheck"[^>]*>(.*?)</pre>', out, re.S)
     if not m or not m.group(1).strip():
         r.err("page", "Selbsttest der Seite lief nicht (Skriptfehler oder Chart.js nicht geladen).")

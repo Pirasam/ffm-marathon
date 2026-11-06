@@ -3508,7 +3508,10 @@ ist eine grobe Faustregel (~85 % der Schwellengeschwindigkeit) und setzt passend
     // nicht durch die 90-Tage-Regression geglaettet.
     var lr=D.ab_latest;
     if(lr && lr.pace_s){
-      var days=Math.round((Date.now()-Date.parse(lr.date))/864e5);
+      // Kalendertage in lokaler Zeit: Date.parse("YYYY-MM-DD") ist UTC-Mitternacht,
+      // abends in MEZ wurde ein Lauf von heute sonst als "gestern" angezeigt.
+      var lp=lr.date.split("-");
+      var days=Math.round((END-new Date(+lp[0],+lp[1]-1,+lp[2]).getTime())/864e5);
       var when=days<=0?"heute":days===1?"gestern":"vor "+days+" Tagen";
       c.querySelector(".ab-latest").innerHTML="Letzter Lauf ("+when+"): <b>"+fpace(lr.pace_s)+"/km</b> bei <b>"+Math.round(lr.hf)+" bpm</b> – unangepasst";
     }
