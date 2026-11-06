@@ -23,7 +23,8 @@ from garmin_client import (garmin_login, fetch_garmin_metrics,
                            backfill_vo2max_monthly,
                            compute_durability, compute_aerobic_base,
                            compute_economy, backfill_economy,
-                           fetch_threshold_pace, fetch_weekly_running)
+                           fetch_threshold_pace, fetch_weekly_running,
+                           update_perf_cond)
 from profiles import get_profile
 
 REPO_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -146,8 +147,11 @@ def main():
         # "aktueller Wert" UND "Trend" zeigen kann, nicht nur die Glaettung.
         latest_run = max(eff_runs, key=lambda r: r.get("date", ""), default=None) \
             if eff_runs else None
-        run_dyn_raw = sorted(history.get("run_dyn") or [], key=lambda x: x.get("d", ""))[-60:]
         cutoff_12mo = (today - timedelta(days=365)).isoformat()
+        # Einzelwerte fuer die Oekonomie-Charts: 12 Monate (frueher nur die letzten 60 Laeufe,
+        # dadurch fehlten die grauen Punkte vor ~Mai, obwohl die Trendlinie 12 Monate zeigte).
+        run_dyn_raw = sorted((x for x in history.get("run_dyn") or [] if x.get("d", "") >= cutoff_12mo),
+                             key=lambda x: x.get("d", ""))
         aerobic_base_raw = [
             {"date": r["date"], "pace_s": round(r["pace"] * 60), "hf": r["hf"]}
             for r in eff_runs
@@ -168,6 +172,13 @@ def main():
     except Exception as e:
         print(f"WARNUNG: Marathon-Indikatoren fehlgeschlagen ({e}).")
         metrics["marathon"] = (existing.get("metrics") or {}).get("marathon")
+
+    # Leistungszustand je Lauf (fuer Carinas "Letzte Laeufe" und als Verlauf)
+    try:
+        history = update_perf_cond(api, history, today)
+        print(f"Leistungszustand: {len(history.get('perf_cond') or [])} Läufe")
+    except Exception as e:
+        print(f"WARNUNG: Leistungszustand-Historie nicht aktualisiert ({e}).")
 
     # Laktatschwellen-Tempo (12 Monate) – Kennzahl fuer die "Schwelle"-Kachel
     try:

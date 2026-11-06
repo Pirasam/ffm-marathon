@@ -165,7 +165,33 @@ def get_plan_context(html_content):
 
 # ── Claude ────────────────────────────────────────────────────────────────────
 
-def _claude_json(prompt, max_tokens=4096):
+def _parse_json_reply(text):
+    """JSON aus der Modell-Antwort lesen; toleriert Code-Fences und Text um das Objekt."""
+    text = re.sub(r"^```(?:json)?\s*", "", text.strip())
+    text = re.sub(r"\s*```$", "", text)
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        m = re.search(r"\{.*\}", text, re.DOTALL)
+        if not m:
+            raise
+        return json.loads(m.group(0))
+
+
+def _claude_json(prompt, max_tokens=4096, attempts=2):
+    """Ein zweiter Versuch bei kaputtem JSON (z.B. 02.11.2026: JSONDecodeError),
+    statt gleich auf den Text vom Vortag zurueckzufallen."""
+    last = None
+    for i in range(attempts):
+        try:
+            return _claude_json_once(prompt, max_tokens)
+        except (json.JSONDecodeError, RuntimeError) as e:
+            last = e
+            print(f"Claude-Antwort unbrauchbar (Versuch {i + 1}/{attempts}): {e}")
+    raise last
+
+
+def _claude_json_once(prompt, max_tokens):
     import anthropic
     client = anthropic.Anthropic()
     response = client.messages.create(
@@ -180,10 +206,7 @@ def _claude_json(prompt, max_tokens=4096):
     if text_block is None:
         types = [getattr(b, "type", type(b).__name__) for b in response.content]
         raise RuntimeError(f"Keine Text-Antwort von Claude erhalten (Blocktypen: {types})")
-    text = text_block.text.strip()
-    text = re.sub(r"^```(?:json)?\s*", "", text)
-    text = re.sub(r"\s*```$", "", text)
-    return json.loads(text)
+    return _parse_json_reply(text_block.text)
 
 
 def call_claude_recovery(metrics, history):

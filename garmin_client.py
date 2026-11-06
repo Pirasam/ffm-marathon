@@ -664,6 +664,45 @@ def compute_durability(api, history, today, months=12, min_km=12):
     return history
 
 
+def _perf_cond(api, aid):
+    """Leistungszustand eines Laufs: (Wert zu Beginn ~nach 6-20 Min, Wert am Ende)."""
+    det = api.get_activity_details(aid, maxchart=400)
+    idx = {d.get("key"): d.get("metricsIndex") for d in det.get("metricDescriptors", [])}
+    i = idx.get("directPerformanceCondition")
+    if i is None:
+        return None, None
+    vals = [r["metrics"][i] for r in det.get("activityDetailMetrics", [])
+            if r.get("metrics") and len(r["metrics"]) > i and r["metrics"][i] is not None]
+    return (round(vals[0]), round(vals[-1])) if vals else (None, None)
+
+
+def update_perf_cond(api, history, today, days=90):
+    """Historie des Leistungszustands je Lauf ({d, start, end}), 12 Monate.
+    Holt die Laeufe der letzten `days` Tage, die noch fehlen (beim ersten Mal
+    also ein einmaliger Backfill, danach nur neue Laeufe)."""
+    hist = {x["d"] + "|" + str(x.get("km")): x for x in history.get("perf_cond") or []}
+    start = (today - timedelta(days=days)).isoformat()
+    for a in api.get_activities_by_date(start, today.isoformat(), "") or []:
+        t = (a.get("activityType") or {}).get("typeKey", "")
+        if "running" not in t and "trail" not in t:
+            continue
+        d = (a.get("startTimeLocal") or "")[:10]
+        km = round((a.get("distance") or 0) / 1000, 1)
+        if d + "|" + str(km) in hist:
+            continue
+        try:
+            st, en = _perf_cond(api, a.get("activityId"))
+        except Exception as e:
+            print(f"Leistungszustand {d} nicht abrufbar: {e}")
+            continue
+        if st is not None:
+            hist[d + "|" + str(km)] = {"d": d, "km": km, "start": st, "end": en}
+    cutoff = (today - timedelta(days=365)).isoformat()
+    history["perf_cond"] = sorted((x for x in hist.values() if x["d"] >= cutoff),
+                                  key=lambda x: x["d"], reverse=True)
+    return history
+
+
 def _iso_week(d):
     y, w, _ = d.isocalendar()
     return f"{y}-W{w:02d}"

@@ -202,6 +202,9 @@ def check_page(r, html_path):
         try:
             out = subprocess.run(
                 [chrome, "--headless=new", "--disable-gpu", "--no-sandbox", f"--user-data-dir={tmp}",
+                 # Schriften sind fuer die Pruefung egal; in der Cloud-Sandbox haengt der
+                 # Abruf sonst bis zum Timeout. Chart.js liegt lokal unter vendor/.
+                 "--host-resolver-rules=MAP fonts.googleapis.com ~NOTFOUND, MAP fonts.gstatic.com ~NOTFOUND",
                  "--window-size=420,3000", "--virtual-time-budget=8000", "--dump-dom",
                  "file://" + os.path.abspath(html_path)],
                 capture_output=True, text=True, timeout=120).stdout

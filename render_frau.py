@@ -159,7 +159,7 @@ def _barchart(pairs, color, w=300, h=70):
     n = len(pairs); slot = w / max(n, 1); bw = min(slot * 0.55, 46)
     bars = ""
     for i, (lab, v) in enumerate(pairs):
-        bh = (v / hi) * (h - 22)
+        bh = (v / hi) * (h - 30)   # oben Platz fuer die Zahl ueber dem hoechsten Balken
         bx = i * slot + (slot - bw) / 2
         by = h - 16 - bh
         bars += (f'<rect x="{bx:.1f}" y="{by:.1f}" width="{bw:.1f}" height="{bh:.1f}" '
@@ -259,12 +259,25 @@ def build_html(data):
     runs = [a for a in (m.get("recent_activities") or [])
             if "running" in (a.get("type") or "") or "trail" in (a.get("type") or "")][:6]
     if runs:
+        # Leistungszustand je Lauf (Wert nach ~10 Min): gleicher Tag, Distanz +-0,3 km
+        pcs = hist.get("perf_cond") or []
+        def form(a):
+            for x in pcs:
+                if x.get("d") == a.get("date") and abs((x.get("km") or 0) - (a.get("distance_km") or 0)) < 0.3:
+                    v = x.get("start")
+                    col = "#1f9d6b" if v >= 2 else "#d64d6e" if v <= -5 else "#8a8398"
+                    return f'<span style="color:{col};font-weight:700">{v:+d}</span>'
+            return "–"
         rows = "".join(
             f"<tr><td>{esc(a.get('date'))}</td><td>{_fmt(a.get('distance_km'),' km')}</td>"
-            f"<td>{_pace(a.get('pace_min_km'))}</td><td>{_fmt(a.get('avg_hr'),' bpm')}</td></tr>"
+            f"<td>{_pace(a.get('pace_min_km'))}</td><td>{_fmt(a.get('avg_hr'),' bpm')}</td>"
+            f"<td>{form(a)}</td></tr>"
             for a in runs)
         runs_table = f"""<table class="runs"><thead><tr><th>Datum</th><th>Distanz</th>
-          <th>Pace</th><th>Ø Puls</th></tr></thead><tbody>{rows}</tbody></table>"""
+          <th>Pace</th><th>Ø Puls</th><th>Form</th></tr></thead><tbody>{rows}</tbody></table>
+        <p class="c-hint" style="margin-top:8px">Form = Garmins Leistungszustand nach ~10 Minuten:
+          0 = wie erwartet, + besser, − schlechter. ±2 ist normale Tagesschwankung; in der
+          Lutealphase sind −2 bis −5 ganz normal.</p>"""
     else:
         runs_table = "<p>Noch keine Läufe erfasst.</p>"
 
@@ -806,7 +819,8 @@ ul.today-why li{{margin:2px 0}}
 .pcols li{{margin:6px 0}}
 ul.pgood li::marker{{color:#1f9d6b}} ul.ptodo li::marker{{color:#d9971a}}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="../vendor/chart.umd.min.js"></script>
+<script>window.Chart||document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"><\/script>')</script>
 </head>
 <body>
 <div class="wrap">
