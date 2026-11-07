@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-11-07T14:30:33+01:00",
+  "synced_at": "2026-11-07T16:00:45+01:00",
   "sync_date": "2026-11-07",
   "token_days_left": 28.9,
   "metrics": {
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
-    "stress": 19,
+    "stress": 22,
     "resting_hr": 58,
     "body_battery": 88,
     "training_readiness": 84,
     "recent_activities": [
+      {
+        "name": "Krafttraining",
+        "type": "strength_training",
+        "date": "2026-11-07",
+        "distance_km": 0.0,
+        "duration_min": 25,
+        "pace_min_km": null,
+        "avg_hr": 103.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -131,15 +140,6 @@
         "duration_min": 39,
         "pace_min_km": 3.0,
         "avg_hr": 106.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-10-27",
-        "distance_km": 14.7,
-        "duration_min": 47,
-        "pace_min_km": 3.19,
-        "avg_hr": 108.0
       }
     ],
     "last_run": {
@@ -220,27 +220,27 @@
     "challenges": [
       {
         "name": "Active November",
-        "current": 5,
+        "current": 6,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 23,
-        "pct": 25
+        "pct": 30
       },
       {
         "name": "November Gains",
-        "current": 0.7,
+        "current": 1.2,
         "goal": 4.0,
         "unit": "h",
         "days_remaining": 23,
-        "pct": 19
+        "pct": 29
       },
       {
         "name": "November Step Month",
-        "current": 51136,
+        "current": 53666,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 23,
-        "pct": 17
+        "pct": 18
       },
       {
         "name": "November Time to Run",
