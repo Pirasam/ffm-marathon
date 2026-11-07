@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-06T20:30:28+01:00",
-  "sync_date": "2026-11-06",
-  "token_days_left": 29.7,
+  "synced_at": "2026-11-07T06:58:44+01:00",
+  "sync_date": "2026-11-07",
+  "token_days_left": 29.3,
   "metrics": {
     "sleep_hours": 8.0,
     "sleep_score": 85,
@@ -11,9 +11,9 @@
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
     "stress": 19,
-    "resting_hr": 56,
-    "body_battery": 88,
-    "training_readiness": 75,
+    "resting_hr": 62,
+    "body_battery": 43,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -222,7 +222,7 @@
         "current": 5,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 25
       },
       {
@@ -230,15 +230,15 @@
         "current": 0.7,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 19
       },
       {
         "name": "November Step Month",
-        "current": 49793,
+        "current": 50272,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 17
       },
       {
@@ -246,7 +246,7 @@
         "current": 1.4,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 14
       },
       {
@@ -254,7 +254,7 @@
         "current": 11.4,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 14
       },
       {
@@ -262,7 +262,7 @@
         "current": 1.3,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 24,
+        "days_remaining": 23,
         "pct": 6
       },
       {
@@ -270,7 +270,7 @@
         "current": 168.1,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 55,
+        "days_remaining": 54,
         "pct": 56
       }
     ],
@@ -1435,7 +1435,7 @@
       "ref_dist": 9.0,
       "fit_a": 64.98,
       "fit_b": 0.5864,
-      "generated": "2026-11-06",
+      "generated": "2026-11-07",
       "vo2max": [
         {
           "m": "2025-09",
@@ -1654,11 +1654,6 @@
         "hf": 137.0
       },
       "aerobic_base_raw": [
-        {
-          "date": "2025-11-06",
-          "pace_s": 469,
-          "hf": 146.0
-        },
         {
           "date": "2025-11-09",
           "pace_s": 512,
@@ -2212,12 +2207,6 @@
       ],
       "economy_raw": [
         {
-          "d": "2025-11-06",
-          "cadence": 156,
-          "vertical_ratio": 9.4,
-          "gct": 300
-        },
-        {
           "d": "2025-11-09",
           "cadence": 153,
           "vertical_ratio": 10.0,
@@ -2770,13 +2759,9 @@
           "gct": 290.0
         }
       ],
-      "generated": "2026-11-06"
+      "generated": "2026-11-07"
     },
     "threshold": [
-      {
-        "d": "2025-11-06",
-        "pace_s": 343
-      },
       {
         "d": "2025-11-07",
         "pace_s": 343
@@ -2934,6 +2919,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-11-07",
+        "v": 42
+      },
+      {
         "d": "2026-11-06",
         "v": 42
       },
@@ -3048,13 +3037,13 @@
       {
         "d": "2026-10-09",
         "v": 38
-      },
-      {
-        "d": "2026-10-08",
-        "v": 38
       }
     ],
     "rhr": [
+      {
+        "d": "2026-11-07",
+        "v": 62
+      },
       {
         "d": "2026-11-06",
         "v": 56
@@ -3170,10 +3159,6 @@
       {
         "d": "2026-10-09",
         "v": 59
-      },
-      {
-        "d": "2026-10-08",
-        "v": 57
       }
     ],
     "weight": [
@@ -4078,6 +4063,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-07",
+        "v": 43.5
+      },
+      {
         "d": "2026-11-06",
         "v": 43.5
       },
@@ -4311,10 +4300,6 @@
       },
       {
         "d": "2026-09-07",
-        "v": 42.4
-      },
-      {
-        "d": "2026-09-06",
         "v": 42.4
       }
     ],
