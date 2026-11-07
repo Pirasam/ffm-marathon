@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-11-07T07:13:22+01:00",
+  "synced_at": "2026-11-07T08:45:25+01:00",
   "sync_date": "2026-11-07",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.5,
-    "sleep_score": 85,
-    "hrv_status": "UNBALANCED",
-    "hrv_value": 27,
-    "hrv_weekly_avg": 28,
+    "sleep_hours": 6.9,
+    "sleep_score": 76,
+    "hrv_status": "LOW",
+    "hrv_value": 26,
+    "hrv_weekly_avg": 27,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
     "stress": 21,
     "resting_hr": 59,
     "body_battery": 69,
-    "training_readiness": null,
+    "training_readiness": 70,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -100,8 +100,9 @@
         }
       }
     },
-    "weight_kg": 66.7,
+    "weight_kg": 66.5,
     "weight_history": {
+      "2026-11-07": 66.5,
       "2026-11-06": 66.7,
       "2026-10-27": 66.7,
       "2026-10-21": 66.6,
@@ -1215,7 +1216,7 @@
     "hrv": [
       {
         "d": "2026-11-07",
-        "v": 27
+        "v": 26
       },
       {
         "d": "2026-11-06",
@@ -1457,6 +1458,10 @@
       }
     ],
     "weight": [
+      {
+        "d": "2026-11-07",
+        "v": 66.5
+      },
       {
         "d": "2026-11-06",
         "v": 66.7
