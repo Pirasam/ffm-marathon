@@ -1,6 +1,12 @@
 {
   "profile": "samuel",
-  "checked_at": "2026-11-07T11:30:36+01:00",
+  "checked_at": "2026-11-07T13:01:29+01:00",
   "ok": true,
-  "issues": []
+  "issues": [
+    {
+      "sev": "warn",
+      "code": "page",
+      "msg": "Kein Browser lief durch (Chrome/Playwright) – Seitenprüfung übersprungen."
+    }
+  ]
 }
