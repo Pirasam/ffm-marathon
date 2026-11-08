@@ -1,6 +1,12 @@
 {
   "profile": "samuel",
-  "checked_at": "2026-11-08T08:30:35+01:00",
+  "checked_at": "2026-11-08T11:30:38+01:00",
   "ok": true,
-  "issues": []
+  "issues": [
+    {
+      "sev": "warn",
+      "code": "missing",
+      "msg": "Leistungszustand des letzten Laufs fehlt."
+    }
+  ]
 }
