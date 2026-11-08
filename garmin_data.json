@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-11-08T06:58:17+01:00",
+  "synced_at": "2026-11-08T08:30:29+01:00",
   "sync_date": "2026-11-08",
-  "token_days_left": 29.5,
+  "token_days_left": 29.4,
   "metrics": {
-    "sleep_hours": 7.8,
-    "sleep_score": 88,
+    "sleep_hours": 6.9,
+    "sleep_score": 81,
     "hrv_status": "BALANCED",
-    "hrv_value": 39,
-    "hrv_weekly_avg": 37,
+    "hrv_value": 34,
+    "hrv_weekly_avg": 36,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
-    "stress": 23,
-    "resting_hr": 63,
-    "body_battery": 43,
-    "training_readiness": null,
+    "stress": 19,
+    "resting_hr": 60,
+    "body_battery": 82,
+    "training_readiness": 82,
     "recent_activities": [
       {
         "name": "Krafttraining",
@@ -236,7 +236,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 59741,
+        "current": 59750,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 22,
@@ -2905,7 +2905,7 @@
     "hrv": [
       {
         "d": "2026-11-08",
-        "v": 39
+        "v": 34
       },
       {
         "d": "2026-11-07",
@@ -3027,7 +3027,7 @@
     "rhr": [
       {
         "d": "2026-11-08",
-        "v": 63
+        "v": 60
       },
       {
         "d": "2026-11-07",
