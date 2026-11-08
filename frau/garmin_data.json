@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-11-08T12:15:22+01:00",
+  "synced_at": "2026-11-08T17:15:25+01:00",
   "sync_date": "2026-11-08",
   "token_days_left": null,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 27,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": 21,
+    "stress": 27,
     "resting_hr": 59,
     "body_battery": 76,
     "training_readiness": 56,
