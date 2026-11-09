@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-09T10:00:29+01:00",
+  "synced_at": "2026-11-09T20:30:29+01:00",
   "sync_date": "2026-11-09",
-  "token_days_left": 29.9,
+  "token_days_left": 29.4,
   "metrics": {
     "sleep_hours": 7.7,
     "sleep_score": 92,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
-    "stress": 11,
+    "stress": 23,
     "resting_hr": 55,
     "body_battery": 100,
-    "training_readiness": 85,
+    "training_readiness": 76,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-11-09",
+        "distance_km": 15.1,
+        "duration_min": 41,
+        "pace_min_km": 2.71,
+        "avg_hr": 127.82764227642276
+      },
       {
         "name": "Frankfurt am Main Radfahren",
         "type": "cycling",
@@ -131,15 +140,6 @@
         "duration_min": 40,
         "pace_min_km": 2.78,
         "avg_hr": 114.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-10-28",
-        "distance_km": 15.2,
-        "duration_min": 48,
-        "pace_min_km": 3.14,
-        "avg_hr": 105.0
       }
     ],
     "last_run": {
@@ -220,11 +220,11 @@
     "challenges": [
       {
         "name": "Active November",
-        "current": 8,
+        "current": 9,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 21,
-        "pct": 40
+        "pct": 45
       },
       {
         "name": "November Time to Run",
@@ -252,7 +252,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 80097,
+        "current": 82200,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 21,
@@ -260,11 +260,11 @@
       },
       {
         "name": "November Time to Ride",
-        "current": 2.0,
+        "current": 2.7,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 21,
-        "pct": 10
+        "pct": 13
       },
       {
         "name": "2026 Running - Stage 4",
@@ -2920,6 +2920,10 @@
       },
       {
         "d": "2026-10-30",
+        "pace_s": 336
+      },
+      {
+        "d": "2026-11-09",
         "pace_s": 336
       }
     ]
