@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-09T20:30:29+01:00",
-  "sync_date": "2026-11-09",
-  "token_days_left": 29.4,
+  "synced_at": "2026-11-10T06:58:22+01:00",
+  "sync_date": "2026-11-10",
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 7.7,
     "sleep_score": 92,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
-    "stress": 23,
-    "resting_hr": 55,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 100,
-    "training_readiness": 76,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
@@ -213,8 +213,7 @@
       "2026-08-29": 90.1,
       "2026-08-24": 91.0,
       "2026-08-19": 90.4,
-      "2026-08-17": 90.0,
-      "2026-08-11": 90.1
+      "2026-08-17": 90.0
     },
     "vo2max": 43.5,
     "challenges": [
@@ -223,7 +222,7 @@
         "current": 9,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 45
       },
       {
@@ -231,7 +230,7 @@
         "current": 3.0,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 30
       },
       {
@@ -239,7 +238,7 @@
         "current": 1.2,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 29
       },
       {
@@ -247,7 +246,7 @@
         "current": 21.8,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 27
       },
       {
@@ -255,7 +254,7 @@
         "current": 82200,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 27
       },
       {
@@ -263,7 +262,7 @@
         "current": 2.7,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 21,
+        "days_remaining": 20,
         "pct": 13
       },
       {
@@ -271,7 +270,7 @@
         "current": 178.5,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 52,
+        "days_remaining": 51,
         "pct": 59
       }
     ],
@@ -1436,7 +1435,7 @@
       "ref_dist": 9.2,
       "fit_a": 63.83,
       "fit_b": 0.5942,
-      "generated": "2026-11-09",
+      "generated": "2026-11-10",
       "vo2max": [
         {
           "m": "2025-09",
@@ -1655,11 +1654,6 @@
         "hf": 121.0
       },
       "aerobic_base_raw": [
-        {
-          "date": "2025-11-09",
-          "pace_s": 512,
-          "hf": 137.0
-        },
         {
           "date": "2025-11-14",
           "pace_s": 471,
@@ -2213,12 +2207,6 @@
       ],
       "economy_raw": [
         {
-          "d": "2025-11-09",
-          "cadence": 153,
-          "vertical_ratio": 10.0,
-          "gct": 310
-        },
-        {
           "d": "2025-11-14",
           "cadence": 158,
           "vertical_ratio": 9.8,
@@ -2771,7 +2759,7 @@
           "gct": 304.0
         }
       ],
-      "generated": "2026-11-09"
+      "generated": "2026-11-10"
     },
     "threshold": [
       {
@@ -2931,6 +2919,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-11-10",
+        "v": 47
+      },
+      {
         "d": "2026-11-09",
         "v": 47
       },
@@ -3045,10 +3037,6 @@
       {
         "d": "2026-10-12",
         "v": 39
-      },
-      {
-        "d": "2026-10-11",
-        "v": 31
       }
     ],
     "rhr": [
@@ -4081,6 +4069,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-10",
+        "v": 43.5
+      },
+      {
         "d": "2026-11-09",
         "v": 43.5
       },
@@ -4314,10 +4306,6 @@
       },
       {
         "d": "2026-09-10",
-        "v": 42.5
-      },
-      {
-        "d": "2026-09-09",
         "v": 42.5
       }
     ],
