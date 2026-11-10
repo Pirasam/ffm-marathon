@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-11-10T17:15:24+01:00",
+  "synced_at": "2026-11-10T19:45:23+01:00",
   "sync_date": "2026-11-10",
   "token_days_left": null,
   "metrics": {
@@ -15,6 +15,15 @@
     "body_battery": 81,
     "training_readiness": 75,
     "recent_activities": [
+      {
+        "name": "Pilates",
+        "type": "pilates",
+        "date": "2026-11-10",
+        "distance_km": 0.0,
+        "duration_min": 49,
+        "pace_min_km": null,
+        "avg_hr": 85.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
