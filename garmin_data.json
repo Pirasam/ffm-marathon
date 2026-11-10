@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-11-10T13:00:24+01:00",
+  "synced_at": "2026-11-10T14:30:34+01:00",
   "sync_date": "2026-11-10",
   "token_days_left": 29.7,
   "metrics": {
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 37,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
-    "stress": 23,
+    "stress": 24,
     "resting_hr": 59,
     "body_battery": 94,
     "training_readiness": 75,
@@ -249,11 +249,11 @@
       },
       {
         "name": "November Step Month",
-        "current": 97167,
+        "current": 97729,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 20,
-        "pct": 32
+        "pct": 33
       },
       {
         "name": "November Gains",
