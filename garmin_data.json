@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-11T06:58:28+01:00",
+  "synced_at": "2026-11-11T10:00:32+01:00",
   "sync_date": "2026-11-11",
-  "token_days_left": 29.0,
+  "token_days_left": 28.9,
   "metrics": {
     "sleep_hours": 8.2,
     "sleep_score": 85,
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 38,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 44,
-    "stress": 13,
+    "stress": 15,
     "resting_hr": 56,
     "body_battery": 98,
-    "training_readiness": 96,
+    "training_readiness": 88,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Radfahren",
+        "type": "cycling",
+        "date": "2026-11-11",
+        "distance_km": 14.5,
+        "duration_min": 42,
+        "pace_min_km": 2.87,
+        "avg_hr": 123.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -131,15 +140,6 @@
         "duration_min": 40,
         "pace_min_km": 2.74,
         "avg_hr": 117.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-10-29",
-        "distance_km": 16.3,
-        "duration_min": 48,
-        "pace_min_km": 2.92,
-        "avg_hr": 111.0
       }
     ],
     "last_run": {
@@ -225,11 +225,11 @@
     "challenges": [
       {
         "name": "Active November",
-        "current": 10,
+        "current": 11,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 19,
-        "pct": 50
+        "pct": 55
       },
       {
         "name": "November Time to Run",
@@ -249,7 +249,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 100693,
+        "current": 102637,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 19,
@@ -265,11 +265,11 @@
       },
       {
         "name": "November Time to Ride",
-        "current": 2.7,
+        "current": 3.4,
         "goal": 20.0,
         "unit": "h",
         "days_remaining": 19,
-        "pct": 13
+        "pct": 17
       },
       {
         "name": "2026 Running - Stage 4",
