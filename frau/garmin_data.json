@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-11-12T07:13:23+01:00",
+  "synced_at": "2026-11-12T10:15:21+01:00",
   "sync_date": "2026-11-12",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.9,
-    "sleep_score": 83,
+    "sleep_hours": 8.3,
+    "sleep_score": 79,
     "hrv_status": "UNBALANCED",
-    "hrv_value": 31,
-    "hrv_weekly_avg": 28,
-    "hrv_balanced_low": 29,
+    "hrv_value": 30,
+    "hrv_weekly_avg": 29,
+    "hrv_balanced_low": 30,
     "hrv_balanced_high": 33,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 88,
-    "training_readiness": null,
+    "stress": 18,
+    "resting_hr": 57,
+    "body_battery": 86,
+    "training_readiness": 87,
     "recent_activities": [
       {
         "name": "Pilates",
@@ -1197,7 +1197,7 @@
     "hrv": [
       {
         "d": "2026-11-12",
-        "v": 31
+        "v": 30
       },
       {
         "d": "2026-11-11",
@@ -1318,6 +1318,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-11-12",
+        "v": 57
+      },
+      {
         "d": "2026-11-11",
         "v": 57
       },
@@ -1432,10 +1436,6 @@
       {
         "d": "2026-10-14",
         "v": 61
-      },
-      {
-        "d": "2026-10-13",
-        "v": 59
       }
     ],
     "weight": [
