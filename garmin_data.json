@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-12T11:30:25+01:00",
+  "synced_at": "2026-11-12T16:00:30+01:00",
   "sync_date": "2026-11-12",
-  "token_days_left": 29.0,
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 6.8,
     "sleep_score": 78,
@@ -13,7 +13,7 @@
     "stress": 23,
     "resting_hr": 59,
     "body_battery": 87,
-    "training_readiness": 70,
+    "training_readiness": 75,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Radfahren",
