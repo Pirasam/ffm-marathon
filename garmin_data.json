@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-13T14:30:29+01:00",
+  "synced_at": "2026-11-13T20:30:27+01:00",
   "sync_date": "2026-11-13",
-  "token_days_left": 29.9,
+  "token_days_left": 29.7,
   "metrics": {
     "sleep_hours": 8.1,
     "sleep_score": 90,
@@ -10,7 +10,7 @@
     "hrv_weekly_avg": 40,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 45,
-    "stress": 18,
+    "stress": 24,
     "resting_hr": 57,
     "body_battery": 92,
     "training_readiness": 84,
@@ -255,11 +255,11 @@
       },
       {
         "name": "November Step Month",
-        "current": 120711,
+        "current": 122143,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 17,
-        "pct": 40
+        "pct": 41
       },
       {
         "name": "November Gains",
