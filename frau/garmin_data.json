@@ -1,20 +1,29 @@
 {
-  "synced_at": "2026-11-13T07:13:23+01:00",
+  "synced_at": "2026-11-13T12:15:21+01:00",
   "sync_date": "2026-11-13",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.3,
-    "sleep_score": 79,
-    "hrv_status": "UNBALANCED",
-    "hrv_value": 30,
+    "sleep_hours": 8.6,
+    "sleep_score": 87,
+    "hrv_status": "BALANCED",
+    "hrv_value": 29,
     "hrv_weekly_avg": 29,
-    "hrv_balanced_low": 30,
+    "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 86,
-    "training_readiness": null,
+    "stress": 23,
+    "resting_hr": 60,
+    "body_battery": 79,
+    "training_readiness": 81,
     "recent_activities": [
+      {
+        "name": "Frankfurt am Main Laufen",
+        "type": "running",
+        "date": "2026-11-13",
+        "distance_km": 5.2,
+        "duration_min": 48,
+        "pace_min_km": 9.11,
+        "avg_hr": 144.0
+      },
       {
         "name": "Pilates",
         "type": "pilates",
@@ -55,28 +64,34 @@
     "last_run": {
       "name": "Frankfurt am Main Laufen",
       "type": "running",
-      "date": "2026-11-08",
-      "distance_km": 10.2,
-      "duration_min": 96,
-      "pace_min_km": 9.35,
+      "date": "2026-11-13",
+      "distance_km": 5.2,
+      "duration_min": 48,
+      "pace_min_km": 9.11,
       "avg_hr": 144.0
     },
     "weekly_running": {
+      "2026-W46": 5.2,
       "2026-W45": 14.5
     },
     "run_dynamics": {
-      "date": "2026-11-08",
-      "distance_km": 10.2,
-      "cadence": 157.0,
-      "stride_length": 68.0,
-      "vertical_oscillation": 7.6,
-      "vertical_ratio": 11.3,
-      "ground_contact_time": 307.0,
+      "date": "2026-11-13",
+      "distance_km": 5.2,
+      "cadence": 158.0,
+      "stride_length": 69.0,
+      "vertical_oscillation": 7.7,
+      "vertical_ratio": 11.2,
+      "ground_contact_time": 305.0,
       "ground_contact_balance": null,
-      "avg_power": 173.0,
-      "performance_condition": 1,
+      "avg_power": 204.0,
+      "performance_condition": 0,
       "step_speed_loss_pct": null,
       "history": {
+        "2026-11-13": {
+          "cadence": 158.0,
+          "vertical_ratio": 11.2,
+          "gct": 305.0
+        },
         "2026-11-08": {
           "cadence": 157.0,
           "vertical_ratio": 11.3,
@@ -107,15 +122,15 @@
       "2026-08-31": 67.1,
       "2026-08-22": 67.6
     },
-    "vo2max": 39.3,
+    "vo2max": 39.4,
     "challenges": [
       {
         "name": "2026 Running - Stage 4",
-        "current": 74.2,
+        "current": 79.5,
         "goal": 300.0,
         "unit": "km",
         "days_remaining": 48,
-        "pct": 25
+        "pct": 26
       },
       {
         "name": "2026 Walking - Stage 4",
@@ -129,14 +144,14 @@
     "hr_zones": {
       "sport": "RUNNING",
       "method": "HR_MAX",
-      "lthr": 190,
-      "max_hr": 209,
+      "lthr": 188,
+      "max_hr": 207,
       "resting_hr": 60,
-      "z1_floor": 105,
-      "z2_floor": 125,
-      "z3_floor": 146,
-      "z4_floor": 167,
-      "z5_floor": 188
+      "z1_floor": 104,
+      "z2_floor": 124,
+      "z3_floor": 145,
+      "z4_floor": 166,
+      "z5_floor": 186
     },
     "cycle": {
       "tracked": true,
@@ -263,7 +278,7 @@
           "maxhf": 179.0,
           "ei": 78.35,
           "ei_corr": 78.06,
-          "dev": -6.2
+          "dev": -6.3
         },
         {
           "date": "2026-06-29",
@@ -371,7 +386,7 @@
           "maxhf": 157.0,
           "ei": 71.29,
           "ei_corr": 71.1,
-          "dev": 1.0
+          "dev": 0.9
         },
         {
           "date": "2026-08-16",
@@ -455,7 +470,7 @@
           "maxhf": null,
           "ei": 71.1,
           "ei_corr": 71.21,
-          "dev": -2.5
+          "dev": -2.6
         },
         {
           "date": "2026-09-27",
@@ -467,7 +482,7 @@
           "maxhf": null,
           "ei": 67.11,
           "ei_corr": 67.15,
-          "dev": -7.9
+          "dev": -8.0
         },
         {
           "date": "2026-10-04",
@@ -539,7 +554,7 @@
           "maxhf": null,
           "ei": 78.18,
           "ei_corr": 78.6,
-          "dev": 7.3
+          "dev": 7.2
         },
         {
           "date": "2026-10-24",
@@ -551,7 +566,7 @@
           "maxhf": null,
           "ei": 75.07,
           "ei_corr": 75.1,
-          "dev": -1.9
+          "dev": -2.0
         },
         {
           "date": "2026-10-27",
@@ -563,7 +578,7 @@
           "maxhf": null,
           "ei": 77.55,
           "ei_corr": 77.55,
-          "dev": 0.4
+          "dev": 0.3
         },
         {
           "date": "2026-11-01",
@@ -598,14 +613,26 @@
           "hf": 144.0,
           "maxhf": null,
           "ei": 73.75,
-          "ei_corr": 74.28,
+          "ei_corr": 74.27,
           "dev": -0.2
+        },
+        {
+          "date": "2026-11-13",
+          "dist": 5.2,
+          "dur_min": 48,
+          "pace": 9.231,
+          "speed": 108.3,
+          "hf": 144.0,
+          "maxhf": null,
+          "ei": 75.21,
+          "ei_corr": 75.15,
+          "dev": 0.8
         }
       ],
       "drift": 0.226,
       "ref_dist": 5.7,
-      "fit_a": 96.02,
-      "fit_b": 0.4504,
+      "fit_a": 96.04,
+      "fit_b": 0.45,
       "generated": "2026-11-13",
       "vo2max": [
         {
@@ -645,22 +672,22 @@
         {
           "m": "2026-09",
           "pace_s": 565,
-          "ref": 145
+          "ref": 144
         },
         {
           "m": "2026-10",
-          "pace_s": 557,
-          "ref": 145
+          "pace_s": 567,
+          "ref": 144
         },
         {
           "m": "2026-11",
-          "pace_s": 562,
-          "ref": 145
+          "pace_s": 571,
+          "ref": 144
         }
       ],
       "aerobic_base_latest": {
-        "date": "2026-11-08",
-        "pace_s": 565,
+        "date": "2026-11-13",
+        "pace_s": 554,
         "hf": 144.0
       },
       "aerobic_base_raw": [
@@ -848,6 +875,11 @@
           "date": "2026-11-08",
           "pace_s": 565,
           "hf": 144.0
+        },
+        {
+          "date": "2026-11-13",
+          "pace_s": 554,
+          "hf": 144.0
         }
       ],
       "economy": [
@@ -919,9 +951,9 @@
         },
         {
           "m": "2026-11",
-          "vr": 11.3,
-          "gct": 312.3,
-          "cad": 154.3
+          "vr": 11.2,
+          "gct": 310.5,
+          "cad": 155.2
         }
       ],
       "economy_raw": [
@@ -1146,6 +1178,12 @@
           "cadence": 157.0,
           "vertical_ratio": 11.3,
           "gct": 307.0
+        },
+        {
+          "d": "2026-11-13",
+          "cadence": 158.0,
+          "vertical_ratio": 11.2,
+          "gct": 305.0
         }
       ],
       "generated": "2026-11-13"
@@ -1190,6 +1228,10 @@
       {
         "d": "2026-11-06",
         "pace_s": 379
+      },
+      {
+        "d": "2026-11-13",
+        "pace_s": 383
       }
     ]
   },
@@ -1197,7 +1239,7 @@
     "hrv": [
       {
         "d": "2026-11-13",
-        "v": 30
+        "v": 29
       },
       {
         "d": "2026-11-12",
@@ -1318,6 +1360,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-11-13",
+        "v": 60
+      },
+      {
         "d": "2026-11-12",
         "v": 57
       },
@@ -1432,10 +1478,6 @@
       {
         "d": "2026-10-15",
         "v": 59
-      },
-      {
-        "d": "2026-10-14",
-        "v": 61
       }
     ],
     "weight": [
@@ -1503,7 +1545,7 @@
     "weekly_km": [
       {
         "w": "2026-W46",
-        "v": 0.0
+        "v": 5.2
       },
       {
         "w": "2026-W45",
@@ -1551,6 +1593,12 @@
       }
     ],
     "run_dyn": [
+      {
+        "d": "2026-11-13",
+        "cadence": 158.0,
+        "vertical_ratio": 11.2,
+        "gct": 305.0
+      },
       {
         "d": "2026-11-08",
         "cadence": 157.0,
@@ -1807,7 +1855,7 @@
     "vo2max": [
       {
         "d": "2026-11-13",
-        "v": 39.3
+        "v": 39.4
       },
       {
         "d": "2026-11-12",
@@ -2047,6 +2095,12 @@
       }
     ],
     "efficiency": [
+      {
+        "d": "2026-11-13",
+        "dist": 5.2,
+        "dur": 48,
+        "hf": 144.0
+      },
       {
         "d": "2026-11-08",
         "dist": 10.2,
@@ -2362,6 +2416,12 @@
     ],
     "durability": [],
     "perf_cond": [
+      {
+        "d": "2026-11-13",
+        "km": 5.2,
+        "start": 0,
+        "end": 0
+      },
       {
         "d": "2026-11-08",
         "km": 10.2,
