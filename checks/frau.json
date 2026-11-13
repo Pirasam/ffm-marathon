@@ -1,6 +1,12 @@
 {
   "profile": "frau",
-  "checked_at": "2026-11-13T12:15:35+01:00",
+  "checked_at": "2026-11-13T14:46:25+01:00",
   "ok": true,
-  "issues": []
+  "issues": [
+    {
+      "sev": "warn",
+      "code": "page",
+      "msg": "Kein Browser lief durch (Chrome/Playwright) – Seitenprüfung übersprungen."
+    }
+  ]
 }
