@@ -218,7 +218,7 @@ _TEMPLATE = r"""<section class="mind">
   (function(){
     var c=root.querySelector('[data-card="ab"]');
     var trend=(D.ab||[]).slice().sort(function(a,b){return a.m<b.m?-1:1;})
-      .map(function(x){return {t:Date.parse(x.m+"-15"),v:x.pace_s,m:x.m,ref:x.ref};})
+      .map(function(x){return {t:Math.min(Date.parse(x.m+"-15"),END),v:x.pace_s,m:x.m,ref:x.ref};})
       .filter(function(p){return p.t>=START;});
     if(trend.length<2){c.style.display="none";return;}
     var vals=trend.map(function(p){return p.v;});
@@ -259,7 +259,7 @@ _TEMPLATE = r"""<section class="mind">
     var any=false;
     rows.forEach(function(r){
       var pts=raw.filter(function(x){return x[r.key]!=null;})
-        .map(function(x){return {t:Date.parse(x.m+"-15"),v:x[r.key],m:x.m};})
+        .map(function(x){return {t:Math.min(Date.parse(x.m+"-15"),END),v:x[r.key],m:x.m};})
         .filter(function(p){return p.t>=START;});
       if(pts.length<2)return;
       // Rohe Tageswerte fuer denselben Zeitraum - zeigt die Streuung hinter dem Monatsmittel.
