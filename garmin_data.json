@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-13T20:30:27+01:00",
-  "sync_date": "2026-11-13",
-  "token_days_left": 29.7,
+  "synced_at": "2026-11-14T06:58:31+01:00",
+  "sync_date": "2026-11-14",
+  "token_days_left": 29.3,
   "metrics": {
     "sleep_hours": 8.1,
     "sleep_score": 90,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 40,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 45,
-    "stress": 24,
-    "resting_hr": 57,
-    "body_battery": 92,
-    "training_readiness": 84,
+    "stress": 10,
+    "resting_hr": 59,
+    "body_battery": 40,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -234,7 +234,7 @@
         "current": 15,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 17,
+        "days_remaining": 16,
         "pct": 75
       },
       {
@@ -242,7 +242,7 @@
         "current": 5.1,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 17,
+        "days_remaining": 16,
         "pct": 51
       },
       {
@@ -250,15 +250,15 @@
         "current": 37.1,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 17,
+        "days_remaining": 16,
         "pct": 46
       },
       {
         "name": "November Step Month",
-        "current": 122143,
+        "current": 122826,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 17,
+        "days_remaining": 16,
         "pct": 41
       },
       {
@@ -266,7 +266,7 @@
         "current": 1.2,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 17,
+        "days_remaining": 16,
         "pct": 29
       },
       {
@@ -274,7 +274,7 @@
         "current": 5.3,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 17,
+        "days_remaining": 16,
         "pct": 26
       },
       {
@@ -282,7 +282,7 @@
         "current": 193.8,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 48,
+        "days_remaining": 47,
         "pct": 65
       }
     ],
@@ -1459,7 +1459,7 @@
       "ref_dist": 9.4,
       "fit_a": 63.38,
       "fit_b": 0.5972,
-      "generated": "2026-11-13",
+      "generated": "2026-11-14",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2800,7 +2800,7 @@
           "gct": 306.0
         }
       ],
-      "generated": "2026-11-13"
+      "generated": "2026-11-14"
     },
     "threshold": [
       {
@@ -2964,6 +2964,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-11-14",
+        "v": 41
+      },
+      {
         "d": "2026-11-13",
         "v": 41
       },
@@ -3078,13 +3082,13 @@
       {
         "d": "2026-10-16",
         "v": 34
-      },
-      {
-        "d": "2026-10-15",
-        "v": 35
       }
     ],
     "rhr": [
+      {
+        "d": "2026-11-14",
+        "v": 59
+      },
       {
         "d": "2026-11-13",
         "v": 57
@@ -3200,10 +3204,6 @@
       {
         "d": "2026-10-16",
         "v": 59
-      },
-      {
-        "d": "2026-10-15",
-        "v": 58
       }
     ],
     "weight": [
@@ -4126,6 +4126,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-14",
+        "v": 43.5
+      },
+      {
         "d": "2026-11-13",
         "v": 43.5
       },
@@ -4359,10 +4363,6 @@
       },
       {
         "d": "2026-09-14",
-        "v": 42.8
-      },
-      {
-        "d": "2026-09-13",
         "v": 42.8
       }
     ],
