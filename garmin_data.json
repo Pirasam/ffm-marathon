@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-14T14:30:31+01:00",
+  "synced_at": "2026-11-14T16:00:40+01:00",
   "sync_date": "2026-11-14",
-  "token_days_left": 29.9,
+  "token_days_left": 29.8,
   "metrics": {
     "sleep_hours": 7.5,
     "sleep_score": 92,
@@ -13,8 +13,17 @@
     "stress": 22,
     "resting_hr": 59,
     "body_battery": 94,
-    "training_readiness": 89,
+    "training_readiness": 81,
     "recent_activities": [
+      {
+        "name": "Spiez Gehen",
+        "type": "walking",
+        "date": "2026-11-14",
+        "distance_km": 2.8,
+        "duration_min": 62,
+        "pace_min_km": 21.87,
+        "avg_hr": 96.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
@@ -131,15 +140,6 @@
         "duration_min": 38,
         "pace_min_km": 3.42,
         "avg_hr": 121.0
-      },
-      {
-        "name": "Frankfurt am Main Laufen",
-        "type": "running",
-        "date": "2026-11-03",
-        "distance_km": 5.1,
-        "duration_min": 36,
-        "pace_min_km": 7.09,
-        "avg_hr": 144.0
       }
     ],
     "last_run": {
@@ -231,11 +231,11 @@
     "challenges": [
       {
         "name": "Active November",
-        "current": 15,
+        "current": 16,
         "goal": 20,
         "unit": "Aktivitäten",
         "days_remaining": 16,
-        "pct": 75
+        "pct": 80
       },
       {
         "name": "November Time to Run",
@@ -255,11 +255,11 @@
       },
       {
         "name": "November Step Month",
-        "current": 128507,
+        "current": 131232,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 16,
-        "pct": 43
+        "pct": 44
       },
       {
         "name": "November Gains",
