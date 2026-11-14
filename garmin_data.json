@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-11-14T06:58:31+01:00",
+  "synced_at": "2026-11-14T08:30:30+01:00",
   "sync_date": "2026-11-14",
-  "token_days_left": 29.3,
+  "token_days_left": 29.2,
   "metrics": {
-    "sleep_hours": 8.1,
-    "sleep_score": 90,
+    "sleep_hours": 7.5,
+    "sleep_score": 92,
     "hrv_status": "BALANCED",
-    "hrv_value": 41,
-    "hrv_weekly_avg": 40,
+    "hrv_value": 45,
+    "hrv_weekly_avg": 41,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 45,
-    "stress": 10,
+    "stress": 14,
     "resting_hr": 59,
-    "body_battery": 40,
-    "training_readiness": null,
+    "body_battery": 94,
+    "training_readiness": 89,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -255,7 +255,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 122826,
+        "current": 122837,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 16,
@@ -2965,7 +2965,7 @@
     "hrv": [
       {
         "d": "2026-11-14",
-        "v": 41
+        "v": 45
       },
       {
         "d": "2026-11-13",
