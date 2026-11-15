@@ -239,7 +239,11 @@ def check_page(r, html_path):
 
 
 def _dump_dom_chrome(chrome, html_path):
-    with tempfile.TemporaryDirectory() as tmp:
+    # Kein TemporaryDirectory: haengt Chrome bis zum Timeout, schreiben seine
+    # Kindprozesse nach dem Kill noch ins Profil und das Aufraeumen wirft
+    # OSError ("Directory not empty") – das brach die ganze Pruefung ab.
+    tmp = tempfile.mkdtemp()
+    try:
         try:
             out = subprocess.run(
                 [chrome, "--headless=new", "--disable-gpu", "--no-sandbox", f"--user-data-dir={tmp}",
@@ -251,6 +255,8 @@ def _dump_dom_chrome(chrome, html_path):
                 capture_output=True, text=True, timeout=60).stdout
         except Exception:
             return None
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
     return out
 
 
