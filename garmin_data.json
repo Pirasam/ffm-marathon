@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-14T19:00:28+01:00",
-  "sync_date": "2026-11-14",
-  "token_days_left": 29.7,
+  "synced_at": "2026-11-15T06:58:28+01:00",
+  "sync_date": "2026-11-15",
+  "token_days_left": 29.2,
   "metrics": {
     "sleep_hours": 7.5,
     "sleep_score": 92,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 41,
     "hrv_balanced_low": 35,
     "hrv_balanced_high": 45,
-    "stress": 24,
-    "resting_hr": 59,
-    "body_battery": 94,
-    "training_readiness": 81,
+    "stress": 15,
+    "resting_hr": 60,
+    "body_battery": 63,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Spiez Gehen",
@@ -230,11 +230,19 @@
     "vo2max": 43.5,
     "challenges": [
       {
+        "name": "November Ride to 100",
+        "current": 0.0,
+        "goal": 100.0,
+        "unit": "km",
+        "days_remaining": 6,
+        "pct": 0
+      },
+      {
         "name": "Active November",
         "current": 16,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 16,
+        "days_remaining": 15,
         "pct": 80
       },
       {
@@ -242,7 +250,7 @@
         "current": 5.1,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 16,
+        "days_remaining": 15,
         "pct": 51
       },
       {
@@ -250,23 +258,23 @@
         "current": 37.1,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 16,
+        "days_remaining": 15,
         "pct": 46
       },
       {
         "name": "November Step Month",
-        "current": 133499,
+        "current": 133951,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 16,
-        "pct": 44
+        "days_remaining": 15,
+        "pct": 45
       },
       {
         "name": "November Gains",
         "current": 1.2,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 16,
+        "days_remaining": 15,
         "pct": 29
       },
       {
@@ -274,7 +282,7 @@
         "current": 5.3,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 16,
+        "days_remaining": 15,
         "pct": 26
       },
       {
@@ -282,7 +290,7 @@
         "current": 193.8,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 47,
+        "days_remaining": 46,
         "pct": 65
       }
     ],
@@ -1459,7 +1467,7 @@
       "ref_dist": 9.4,
       "fit_a": 63.38,
       "fit_b": 0.5972,
-      "generated": "2026-11-14",
+      "generated": "2026-11-15",
       "vo2max": [
         {
           "m": "2025-09",
@@ -1663,7 +1671,7 @@
         },
         {
           "m": "2026-11",
-          "pace_s": 482,
+          "pace_s": 483,
           "ref": 136
         }
       ],
@@ -1673,11 +1681,6 @@
         "hf": 128.0
       },
       "aerobic_base_raw": [
-        {
-          "date": "2025-11-14",
-          "pace_s": 471,
-          "hf": 154.0
-        },
         {
           "date": "2025-11-16",
           "pace_s": 526,
@@ -2235,12 +2238,6 @@
         }
       ],
       "economy_raw": [
-        {
-          "d": "2025-11-14",
-          "cadence": 158,
-          "vertical_ratio": 9.8,
-          "gct": 305
-        },
         {
           "d": "2025-11-16",
           "cadence": 143,
@@ -2800,7 +2797,7 @@
           "gct": 306.0
         }
       ],
-      "generated": "2026-11-14"
+      "generated": "2026-11-15"
     },
     "threshold": [
       {
@@ -2964,6 +2961,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-11-15",
+        "v": 45
+      },
+      {
         "d": "2026-11-14",
         "v": 45
       },
@@ -3078,13 +3079,13 @@
       {
         "d": "2026-10-17",
         "v": 38
-      },
-      {
-        "d": "2026-10-16",
-        "v": 34
       }
     ],
     "rhr": [
+      {
+        "d": "2026-11-15",
+        "v": 60
+      },
       {
         "d": "2026-11-14",
         "v": 59
@@ -3200,10 +3201,6 @@
       {
         "d": "2026-10-17",
         "v": 57
-      },
-      {
-        "d": "2026-10-16",
-        "v": 59
       }
     ],
     "weight": [
@@ -4126,6 +4123,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-15",
+        "v": 43.5
+      },
+      {
         "d": "2026-11-14",
         "v": 43.5
       },
@@ -4360,10 +4361,6 @@
       {
         "d": "2026-09-16",
         "v": 42.9
-      },
-      {
-        "d": "2026-09-14",
-        "v": 42.8
       }
     ],
     "efficiency": [
