@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-11-14T07:13:24+01:00",
-  "sync_date": "2026-11-14",
+  "synced_at": "2026-11-15T08:45:24+01:00",
+  "sync_date": "2026-11-15",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.6,
-    "sleep_score": 87,
+    "sleep_hours": 7.6,
+    "sleep_score": 79,
     "hrv_status": "BALANCED",
-    "hrv_value": 29,
-    "hrv_weekly_avg": 29,
+    "hrv_value": 30,
+    "hrv_weekly_avg": 30,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
     "stress": null,
     "resting_hr": null,
-    "body_battery": 79,
+    "body_battery": null,
     "training_readiness": null,
     "recent_activities": [
       {
@@ -129,7 +129,7 @@
         "current": 79.5,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 47,
+        "days_remaining": 46,
         "pct": 26
       },
       {
@@ -137,7 +137,7 @@
         "current": 5.5,
         "goal": 148.1,
         "unit": "km",
-        "days_remaining": 47,
+        "days_remaining": 46,
         "pct": 4
       }
     ],
@@ -156,7 +156,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-10-21",
-      "day_in_cycle": 25,
+      "day_in_cycle": 26,
       "phase": "luteal",
       "phase_raw": 4,
       "period_length": 6,
@@ -164,10 +164,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 3,
-      "next_period_in_days": 3,
+      "days_until_next_phase": 2,
+      "next_period_in_days": 2,
       "next_period_date": "2026-11-17",
-      "next_follicular_in_days": 9
+      "next_follicular_in_days": 8
     },
     "_errors": [],
     "efficiency": {
@@ -633,7 +633,7 @@
       "ref_dist": 5.7,
       "fit_a": 96.04,
       "fit_b": 0.45,
-      "generated": "2026-11-14",
+      "generated": "2026-11-15",
       "vo2max": [
         {
           "m": "2025-11",
@@ -681,7 +681,7 @@
         },
         {
           "m": "2026-11",
-          "pace_s": 571,
+          "pace_s": 573,
           "ref": 144
         }
       ],
@@ -1186,7 +1186,7 @@
           "gct": 305.0
         }
       ],
-      "generated": "2026-11-14"
+      "generated": "2026-11-15"
     },
     "threshold": [
       {
@@ -1237,6 +1237,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-11-15",
+        "v": 30
+      },
       {
         "d": "2026-11-14",
         "v": 29
@@ -1351,10 +1355,6 @@
       },
       {
         "d": "2026-10-17",
-        "v": 29
-      },
-      {
-        "d": "2026-10-16",
         "v": 29
       }
     ],
@@ -1854,6 +1854,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-15",
+        "v": 39.4
+      },
+      {
         "d": "2026-11-14",
         "v": 39.4
       },
@@ -2087,10 +2091,6 @@
       },
       {
         "d": "2026-09-13",
-        "v": 39.2
-      },
-      {
-        "d": "2026-09-12",
         "v": 39.2
       }
     ],
