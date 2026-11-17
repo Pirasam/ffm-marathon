@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-11-17T07:13:24+01:00",
+  "synced_at": "2026-11-17T10:15:25+01:00",
   "sync_date": "2026-11-17",
   "token_days_left": null,
   "metrics": {
@@ -13,7 +13,7 @@
     "stress": null,
     "resting_hr": null,
     "body_battery": 86,
-    "training_readiness": null,
+    "training_readiness": 100,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
