@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-11-17T10:15:25+01:00",
+  "synced_at": "2026-11-17T14:45:25+01:00",
   "sync_date": "2026-11-17",
   "token_days_left": null,
   "metrics": {
-    "sleep_hours": 8.5,
-    "sleep_score": 89,
+    "sleep_hours": 7.5,
+    "sleep_score": 85,
     "hrv_status": "BALANCED",
-    "hrv_value": 31,
+    "hrv_value": 32,
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": null,
-    "resting_hr": null,
-    "body_battery": 86,
+    "stress": 24,
+    "resting_hr": 59,
+    "body_battery": 85,
     "training_readiness": 100,
     "recent_activities": [
       {
@@ -1213,7 +1213,7 @@
     "hrv": [
       {
         "d": "2026-11-17",
-        "v": 31
+        "v": 32
       },
       {
         "d": "2026-11-16",
@@ -1334,6 +1334,10 @@
     ],
     "rhr": [
       {
+        "d": "2026-11-17",
+        "v": 59
+      },
+      {
         "d": "2026-11-16",
         "v": 57
       },
@@ -1448,10 +1452,6 @@
       {
         "d": "2026-10-19",
         "v": 59
-      },
-      {
-        "d": "2026-10-18",
-        "v": 57
       }
     ],
     "weight": [
