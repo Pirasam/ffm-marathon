@@ -65,7 +65,7 @@ direkt mit dem geführten Schwellentest auf der Uhr.</p></section>"""
 .thr .delta{{font-size:.82rem;font-weight:700}}
 .thr .meta{{color:#7c736a;font-size:.78rem;font-variant-numeric:tabular-nums}}
 .thr .meta b{{color:#221f1c}}
-.thr .wrap{{position:relative;height:170px;margin:10px 0 4px}}
+.thr .wrap{{position:relative;height:170px;margin:10px 0 4px;padding:0;max-width:none}}
 .thr .wrap canvas{{width:100%!important;height:100%!important}}
 .thr .note{{color:#7c736a;font-size:.74rem;line-height:1.4}}
 </style>
