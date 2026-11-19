@@ -1,7 +1,7 @@
 {
-  "synced_at": "2026-11-19T17:30:29+01:00",
+  "synced_at": "2026-11-19T19:00:28+01:00",
   "sync_date": "2026-11-19",
-  "token_days_left": 28.9,
+  "token_days_left": 30.0,
   "metrics": {
     "sleep_hours": 8.0,
     "sleep_score": 84,
@@ -229,18 +229,18 @@
         "pct": 80
       },
       {
+        "name": "November Step Month",
+        "current": 155322,
+        "goal": 300000,
+        "unit": "Schritte",
+        "days_remaining": 11,
+        "pct": 52
+      },
+      {
         "name": "November Time to Run",
         "current": 5.1,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 11,
-        "pct": 51
-      },
-      {
-        "name": "November Step Month",
-        "current": 152236,
-        "goal": 300000,
-        "unit": "Schritte",
         "days_remaining": 11,
         "pct": 51
       },
