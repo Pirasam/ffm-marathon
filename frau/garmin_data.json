@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-11-18T19:45:25+01:00",
-  "sync_date": "2026-11-18",
+  "synced_at": "2026-11-19T07:13:25+01:00",
+  "sync_date": "2026-11-19",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 7.4,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 30,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": 24,
-    "resting_hr": 58,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 86,
-    "training_readiness": 100,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Frankfurt am Main Laufen",
@@ -114,7 +114,7 @@
         "current": 79.5,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 43,
+        "days_remaining": 42,
         "pct": 26
       },
       {
@@ -122,7 +122,7 @@
         "current": 5.5,
         "goal": 148.1,
         "unit": "km",
-        "days_remaining": 43,
+        "days_remaining": 42,
         "pct": 4
       }
     ],
@@ -141,7 +141,7 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-11-17",
-      "day_in_cycle": 2,
+      "day_in_cycle": 3,
       "phase": "menstruation",
       "phase_raw": 1,
       "period_length": 6,
@@ -149,10 +149,10 @@
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 5,
-      "next_period_in_days": 26,
+      "days_until_next_phase": 4,
+      "next_period_in_days": 25,
       "next_period_date": "2026-12-14",
-      "next_follicular_in_days": 32
+      "next_follicular_in_days": 31
     },
     "_errors": [],
     "efficiency": {
@@ -606,7 +606,7 @@
       "ref_dist": 5.3,
       "fit_a": 97.73,
       "fit_b": 0.4323,
-      "generated": "2026-11-18",
+      "generated": "2026-11-19",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1142,7 +1142,7 @@
           "gct": 305.0
         }
       ],
-      "generated": "2026-11-18"
+      "generated": "2026-11-19"
     },
     "threshold": [
       {
@@ -1193,6 +1193,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-11-19",
+        "v": 33
+      },
       {
         "d": "2026-11-18",
         "v": 33
@@ -1308,10 +1312,6 @@
       {
         "d": "2026-10-21",
         "v": 31
-      },
-      {
-        "d": "2026-10-20",
-        "v": 33
       }
     ],
     "rhr": [
@@ -1810,6 +1810,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-19",
+        "v": 39.4
+      },
+      {
         "d": "2026-11-18",
         "v": 39.4
       },
@@ -2043,10 +2047,6 @@
       },
       {
         "d": "2026-09-18",
-        "v": 39.2
-      },
-      {
-        "d": "2026-09-17",
         "v": 39.2
       }
     ],
