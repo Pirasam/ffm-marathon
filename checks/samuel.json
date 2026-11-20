@@ -1,17 +1,12 @@
 {
   "profile": "samuel",
-  "checked_at": "2026-11-20T16:01:31+01:00",
+  "checked_at": "2026-11-20T17:30:36+01:00",
   "ok": true,
   "issues": [
     {
       "sev": "warn",
       "code": "missing",
       "msg": "Leistungszustand des letzten Laufs fehlt."
-    },
-    {
-      "sev": "warn",
-      "code": "page",
-      "msg": "Kein Browser lief durch (Chrome/Playwright) – Seitenprüfung übersprungen."
     }
   ]
 }
