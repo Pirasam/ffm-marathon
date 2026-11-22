@@ -560,6 +560,10 @@ def merge_efficiency(history, recent_activities):
         if key in seen:
             continue
         seen.add(key)
+        # duration_min ist auf ganze Minuten gerundet (bis ~10 s/km Pace-Fehler);
+        # pace_min_km ist aus den exakten Garmin-Werten -> Dauer daraus ableiten.
+        if a.get("pace_min_km"):
+            dur = a["pace_min_km"] * dist
         lst.append({"d": d, "dist": round(dist, 2), "dur": round(dur, 1), "hf": hf})
     lst.sort(key=lambda e: e.get("d", ""), reverse=True)
     history["efficiency"] = lst[:400]
