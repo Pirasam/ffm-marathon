@@ -270,7 +270,7 @@ def build_html(data):
             return "–"
         rows = "".join(
             f"<tr><td>{esc(a.get('date'))}</td><td>{_fmt(a.get('distance_km'),' km')}</td>"
-            f"<td>{_pace(a.get('pace_min_km'))}</td><td>{_fmt(a.get('avg_hr'),' bpm')}</td>"
+            f"<td>{_pace(a.get('pace_min_km'))}</td><td>{_fmt(round(a['avg_hr']) if a.get('avg_hr') is not None else None,' bpm')}</td>"
             f"<td>{form(a)}</td></tr>"
             for a in runs)
         runs_table = f"""<table class="runs"><thead><tr><th>Datum</th><th>Distanz</th>
