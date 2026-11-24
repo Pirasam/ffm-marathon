@@ -1,5 +1,5 @@
 {
-  "synced_at": "2026-11-24T14:45:21+01:00",
+  "synced_at": "2026-11-24T19:45:20+01:00",
   "sync_date": "2026-11-24",
   "token_days_left": null,
   "metrics": {
@@ -10,11 +10,20 @@
     "hrv_weekly_avg": 29,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": 25,
+    "stress": 28,
     "resting_hr": 57,
     "body_battery": 80,
     "training_readiness": 96,
     "recent_activities": [
+      {
+        "name": "Pilates",
+        "type": "pilates",
+        "date": "2026-11-24",
+        "distance_km": 0.0,
+        "duration_min": 83,
+        "pace_min_km": null,
+        "avg_hr": 84.0
+      },
       {
         "name": "Frankfurt am Main Laufen",
         "type": "running",
