@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-11-23T20:30:29+01:00",
-  "sync_date": "2026-11-23",
-  "token_days_left": 29.6,
+  "synced_at": "2026-11-24T06:58:22+01:00",
+  "sync_date": "2026-11-24",
+  "token_days_left": 29.2,
   "metrics": {
-    "sleep_hours": 8.2,
+    "sleep_hours": 7.5,
     "sleep_score": 91,
     "hrv_status": "BALANCED",
-    "hrv_value": 42,
-    "hrv_weekly_avg": 39,
+    "hrv_value": 39,
+    "hrv_weekly_avg": 38,
     "hrv_balanced_low": 36,
-    "hrv_balanced_high": 45,
-    "stress": 21,
-    "resting_hr": 55,
-    "body_battery": 100,
+    "hrv_balanced_high": 46,
+    "stress": 16,
+    "resting_hr": 57,
+    "body_battery": 92,
     "training_readiness": 100,
     "recent_activities": [
       {
@@ -77,24 +77,6 @@
         "duration_min": 75,
         "pace_min_km": 7.48,
         "avg_hr": 142.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-11-09",
-        "distance_km": 15.1,
-        "duration_min": 41,
-        "pace_min_km": 2.71,
-        "avg_hr": 127.82764227642276
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-11-09",
-        "distance_km": 14.5,
-        "duration_min": 42,
-        "pace_min_km": 2.88,
-        "avg_hr": 123.0
       }
     ],
     "last_run": {
@@ -106,9 +88,7 @@
       "pace_min_km": 9.14,
       "avg_hr": 128.0
     },
-    "weekly_running": {
-      "2026-W46": 15.3
-    },
+    "weekly_running": {},
     "run_dynamics": {
       "date": "2026-11-13",
       "distance_km": 5.3,
@@ -170,15 +150,15 @@
         "current": 16,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 80
       },
       {
         "name": "November Step Month",
-        "current": 174842,
+        "current": 175268,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 58
       },
       {
@@ -186,7 +166,7 @@
         "current": 5.1,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 51
       },
       {
@@ -194,7 +174,7 @@
         "current": 37.1,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 46
       },
       {
@@ -202,7 +182,7 @@
         "current": 1.2,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 29
       },
       {
@@ -210,7 +190,7 @@
         "current": 5.3,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 7,
+        "days_remaining": 6,
         "pct": 26
       },
       {
@@ -218,7 +198,7 @@
         "current": 193.8,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 38,
+        "days_remaining": 37,
         "pct": 65
       }
     ],
@@ -1360,7 +1340,7 @@
       "ref_dist": 9.2,
       "fit_a": 62.53,
       "fit_b": 0.6016,
-      "generated": "2026-11-23",
+      "generated": "2026-11-24",
       "vo2max": [
         {
           "m": "2025-09",
@@ -2668,7 +2648,7 @@
           "gct": 306.0
         }
       ],
-      "generated": "2026-11-23"
+      "generated": "2026-11-24"
     },
     "threshold": [
       {
@@ -2828,6 +2808,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-11-24",
+        "v": 39
+      },
+      {
         "d": "2026-11-23",
         "v": 42
       },
@@ -2942,13 +2926,13 @@
       {
         "d": "2026-10-26",
         "v": 24
-      },
-      {
-        "d": "2026-10-25",
-        "v": 41
       }
     ],
     "rhr": [
+      {
+        "d": "2026-11-24",
+        "v": 57
+      },
       {
         "d": "2026-11-23",
         "v": 55
@@ -3064,10 +3048,6 @@
       {
         "d": "2026-10-26",
         "v": 65
-      },
-      {
-        "d": "2026-10-25",
-        "v": 58
       }
     ],
     "weight": [
@@ -3990,6 +3970,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-24",
+        "v": 43.5
+      },
+      {
         "d": "2026-11-23",
         "v": 43.5
       },
@@ -4223,10 +4207,6 @@
       },
       {
         "d": "2026-09-25",
-        "v": 43.3
-      },
-      {
-        "d": "2026-09-24",
         "v": 43.3
       }
     ],
