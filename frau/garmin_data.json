@@ -1,6 +1,6 @@
 {
-  "synced_at": "2026-11-25T17:15:21+01:00",
-  "sync_date": "2026-11-25",
+  "synced_at": "2026-11-26T07:13:20+01:00",
+  "sync_date": "2026-11-26",
   "token_days_left": null,
   "metrics": {
     "sleep_hours": 8.1,
@@ -10,10 +10,10 @@
     "hrv_weekly_avg": 28,
     "hrv_balanced_low": 29,
     "hrv_balanced_high": 33,
-    "stress": 28,
-    "resting_hr": 59,
+    "stress": null,
+    "resting_hr": null,
     "body_battery": 79,
-    "training_readiness": 89,
+    "training_readiness": null,
     "recent_activities": [
       {
         "name": "Pilates",
@@ -99,7 +99,7 @@
         "current": 83.3,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 36,
+        "days_remaining": 35,
         "pct": 28
       },
       {
@@ -107,7 +107,7 @@
         "current": 5.5,
         "goal": 148.1,
         "unit": "km",
-        "days_remaining": 36,
+        "days_remaining": 35,
         "pct": 4
       }
     ],
@@ -126,18 +126,18 @@
     "cycle": {
       "tracked": true,
       "start_date": "2026-11-17",
-      "day_in_cycle": 9,
-      "phase": "follikel",
-      "phase_raw": 2,
+      "day_in_cycle": 10,
+      "phase": "fruchtbar",
+      "phase_raw": 3,
       "period_length": 6,
       "predicted_cycle_length": 27,
       "cycle_type": "REGULAR",
       "fertile_window_start": 10,
       "fertile_window_length": 7,
-      "days_until_next_phase": 1,
-      "next_period_in_days": 19,
+      "days_until_next_phase": 7,
+      "next_period_in_days": 18,
       "next_period_date": "2026-12-14",
-      "next_follicular_in_days": 25
+      "next_follicular_in_days": 24
     },
     "_errors": [],
     "efficiency": {
@@ -603,7 +603,7 @@
       "ref_dist": 5.3,
       "fit_a": 97.77,
       "fit_b": 0.4323,
-      "generated": "2026-11-25",
+      "generated": "2026-11-26",
       "vo2max": [
         {
           "m": "2025-11",
@@ -1150,7 +1150,7 @@
           "gct": 306.0
         }
       ],
-      "generated": "2026-11-25"
+      "generated": "2026-11-26"
     },
     "threshold": [
       {
@@ -1201,6 +1201,10 @@
   },
   "history": {
     "hrv": [
+      {
+        "d": "2026-11-26",
+        "v": 29
+      },
       {
         "d": "2026-11-25",
         "v": 29
@@ -1316,10 +1320,6 @@
       {
         "d": "2026-10-28",
         "v": 30
-      },
-      {
-        "d": "2026-10-27",
-        "v": 29
       }
     ],
     "rhr": [
@@ -1824,6 +1824,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-26",
+        "v": 39.2
+      },
+      {
         "d": "2026-11-25",
         "v": 39.2
       },
@@ -2057,10 +2061,6 @@
       },
       {
         "d": "2026-09-24",
-        "v": 39.2
-      },
-      {
-        "d": "2026-09-23",
         "v": 39.2
       }
     ],
