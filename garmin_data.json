@@ -1,18 +1,18 @@
 {
-  "synced_at": "2026-11-25T16:00:28+01:00",
-  "sync_date": "2026-11-25",
-  "token_days_left": 30.0,
+  "synced_at": "2026-11-26T06:58:21+01:00",
+  "sync_date": "2026-11-26",
+  "token_days_left": 29.4,
   "metrics": {
-    "sleep_hours": 8.0,
-    "sleep_score": 87,
+    "sleep_hours": 7.8,
+    "sleep_score": 82,
     "hrv_status": "BALANCED",
-    "hrv_value": 36,
+    "hrv_value": 35,
     "hrv_weekly_avg": 39,
     "hrv_balanced_low": 36,
-    "hrv_balanced_high": 46,
-    "stress": 26,
-    "resting_hr": 58,
-    "body_battery": 84,
+    "hrv_balanced_high": 45,
+    "stress": 22,
+    "resting_hr": 60,
+    "body_battery": 73,
     "training_readiness": 100,
     "recent_activities": [
       {
@@ -50,24 +50,6 @@
         "duration_min": 40,
         "pace_min_km": 2.74,
         "avg_hr": 127.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-11-11",
-        "distance_km": 15.0,
-        "duration_min": 44,
-        "pace_min_km": 2.91,
-        "avg_hr": 118.0
-      },
-      {
-        "name": "Frankfurt am Main Radfahren",
-        "type": "cycling",
-        "date": "2026-11-11",
-        "distance_km": 14.5,
-        "duration_min": 42,
-        "pace_min_km": 2.87,
-        "avg_hr": 123.0
       }
     ],
     "last_run": {
@@ -136,23 +118,23 @@
         "current": 16,
         "goal": 20,
         "unit": "Aktivitäten",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 80
       },
       {
         "name": "November Step Month",
-        "current": 183696,
+        "current": 184511,
         "goal": 300000,
         "unit": "Schritte",
-        "days_remaining": 5,
-        "pct": 61
+        "days_remaining": 4,
+        "pct": 62
       },
       {
         "name": "November Time to Run",
         "current": 5.1,
         "goal": 10.0,
         "unit": "h",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 51
       },
       {
@@ -160,7 +142,7 @@
         "current": 37.1,
         "goal": 80.5,
         "unit": "km",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 46
       },
       {
@@ -168,7 +150,7 @@
         "current": 1.2,
         "goal": 4.0,
         "unit": "h",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 29
       },
       {
@@ -176,7 +158,7 @@
         "current": 5.3,
         "goal": 20.0,
         "unit": "h",
-        "days_remaining": 5,
+        "days_remaining": 4,
         "pct": 26
       },
       {
@@ -184,7 +166,7 @@
         "current": 193.8,
         "goal": 300.0,
         "unit": "km",
-        "days_remaining": 36,
+        "days_remaining": 35,
         "pct": 65
       }
     ],
@@ -193,7 +175,7 @@
       "method": "LACTATE_THRESHOLD",
       "lthr": 171,
       "max_hr": 197,
-      "resting_hr": 56,
+      "resting_hr": 57,
       "z1_floor": 97,
       "z2_floor": 115,
       "z3_floor": 137,
@@ -1326,7 +1308,7 @@
       "ref_dist": 9.2,
       "fit_a": 62.53,
       "fit_b": 0.6016,
-      "generated": "2026-11-25",
+      "generated": "2026-11-26",
       "vo2max": [
         {
           "m": "2025-09",
@@ -1530,7 +1512,7 @@
         },
         {
           "m": "2026-11",
-          "pace_s": 484,
+          "pace_s": 483,
           "ref": 136
         }
       ],
@@ -2634,7 +2616,7 @@
           "gct": 306.0
         }
       ],
-      "generated": "2026-11-25"
+      "generated": "2026-11-26"
     },
     "threshold": [
       {
@@ -2790,6 +2772,10 @@
   "history": {
     "hrv": [
       {
+        "d": "2026-11-26",
+        "v": 35
+      },
+      {
         "d": "2026-11-25",
         "v": 36
       },
@@ -2904,13 +2890,13 @@
       {
         "d": "2026-10-28",
         "v": 37
-      },
-      {
-        "d": "2026-10-27",
-        "v": 41
       }
     ],
     "rhr": [
+      {
+        "d": "2026-11-26",
+        "v": 60
+      },
       {
         "d": "2026-11-25",
         "v": 58
@@ -3026,10 +3012,6 @@
       {
         "d": "2026-10-28",
         "v": 57
-      },
-      {
-        "d": "2026-10-27",
-        "v": 58
       }
     ],
     "weight": [
@@ -3952,6 +3934,10 @@
     ],
     "vo2max": [
       {
+        "d": "2026-11-26",
+        "v": 43.5
+      },
+      {
         "d": "2026-11-25",
         "v": 43.5
       },
@@ -4185,10 +4171,6 @@
       },
       {
         "d": "2026-09-27",
-        "v": 43.3
-      },
-      {
-        "d": "2026-09-26",
         "v": 43.3
       }
     ],
