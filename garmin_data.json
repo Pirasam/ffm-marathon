@@ -1,19 +1,19 @@
 {
-  "synced_at": "2026-11-28T06:58:24+01:00",
+  "synced_at": "2026-11-28T08:30:19+01:00",
   "sync_date": "2026-11-28",
-  "token_days_left": 29.3,
+  "token_days_left": 29.2,
   "metrics": {
-    "sleep_hours": 7.5,
-    "sleep_score": 81,
+    "sleep_hours": 8.4,
+    "sleep_score": 88,
     "hrv_status": "BALANCED",
-    "hrv_value": 31,
-    "hrv_weekly_avg": 37,
+    "hrv_value": 35,
+    "hrv_weekly_avg": 36,
     "hrv_balanced_low": 36,
-    "hrv_balanced_high": 45,
-    "stress": 31,
-    "resting_hr": 62,
-    "body_battery": 37,
-    "training_readiness": null,
+    "hrv_balanced_high": 46,
+    "stress": 21,
+    "resting_hr": 58,
+    "body_battery": 77,
+    "training_readiness": 94,
     "recent_activities": [
       {
         "name": "Spiez Gehen",
@@ -68,7 +68,7 @@
       },
       {
         "name": "November Step Month",
-        "current": 192842,
+        "current": 192855,
         "goal": 300000,
         "unit": "Schritte",
         "days_remaining": 2,
@@ -2718,7 +2718,7 @@
     "hrv": [
       {
         "d": "2026-11-28",
-        "v": 31
+        "v": 35
       },
       {
         "d": "2026-11-27",
@@ -2840,7 +2840,7 @@
     "rhr": [
       {
         "d": "2026-11-28",
-        "v": 62
+        "v": 58
       },
       {
         "d": "2026-11-27",
