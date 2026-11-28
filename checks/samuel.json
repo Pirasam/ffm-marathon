@@ -1,12 +1,12 @@
 {
   "profile": "samuel",
-  "checked_at": "2026-11-27T19:00:33+01:00",
+  "checked_at": "2026-11-28T06:58:30+01:00",
   "ok": true,
   "issues": [
     {
       "sev": "warn",
       "code": "missing",
-      "msg": "Leistungszustand des letzten Laufs fehlt."
+      "msg": "Laufdynamik fehlt in den Daten."
     }
   ]
 }
